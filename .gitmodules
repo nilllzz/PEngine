@@ -1,0 +1,4 @@
+[submodule "lib/game-dev-common"]
+	path = lib/game-dev-common
+	url = git@github.com:nilllzz/Game-Dev-Common.git
+	branch = master

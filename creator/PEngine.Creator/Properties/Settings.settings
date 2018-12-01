@@ -17,5 +17,11 @@
     <Setting Name="Color_Highlight" Type="System.Drawing.Color" Scope="Application">
       <Value Profile="(Default)">0, 122, 204</Value>
     </Setting>
+    <Setting Name="Color_HighlightText" Type="System.Drawing.Color" Scope="Application">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
+    <Setting Name="Font_Status" Type="System.Drawing.Font" Scope="Application">
+      <Value Profile="(Default)">Segoe UI, 9pt</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

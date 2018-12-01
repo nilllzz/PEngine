@@ -67,5 +67,23 @@ namespace PEngine.Creator.Properties {
                 return ((global::System.Drawing.Color)(this["Color_Highlight"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color Color_HighlightText {
+            get {
+                return ((global::System.Drawing.Color)(this["Color_HighlightText"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 9pt")]
+        public global::System.Drawing.Font Font_Status {
+            get {
+                return ((global::System.Drawing.Font)(this["Font_Status"]));
+            }
+        }
     }
 }

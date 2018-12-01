@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace PEngine.Creator
+namespace PEngine.Creator.Forms
 {
     internal static class FormConsts
     {

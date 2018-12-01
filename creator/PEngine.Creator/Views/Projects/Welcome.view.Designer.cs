@@ -35,6 +35,7 @@
             this.col_main = new PEngine.Creator.Components.Layout.Column(this.components);
             this.row1 = new PEngine.Creator.Components.Layout.Row(this.components);
             this.logo1 = new PEngine.Creator.Components.Logo.Logo(this.components);
+            this.btn_create = new System.Windows.Forms.Button();
             this.col_main.SuspendLayout();
             this.row1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo1)).BeginInit();
@@ -67,6 +68,7 @@
             this.col_main.AutoSize = true;
             this.col_main.Controls.Add(this.row1);
             this.col_main.Controls.Add(this.heading_sub);
+            this.col_main.Controls.Add(this.btn_create);
             this.col_main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.col_main.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.col_main.Location = new System.Drawing.Point(0, 0);
@@ -98,6 +100,16 @@
             this.logo1.TabIndex = 1;
             this.logo1.TabStop = false;
             // 
+            // btn_create
+            // 
+            this.btn_create.Location = new System.Drawing.Point(3, 84);
+            this.btn_create.Name = "btn_create";
+            this.btn_create.Size = new System.Drawing.Size(144, 23);
+            this.btn_create.TabIndex = 3;
+            this.btn_create.Text = "Create new project";
+            this.btn_create.UseVisualStyleBackColor = true;
+            this.btn_create.Click += new System.EventHandler(this.btn_create_Click);
+            // 
             // WelcomeView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -123,5 +135,6 @@
         private Components.Layout.Column col_main;
         private Components.Layout.Row row1;
         private Components.Logo.Logo logo1;
+        private System.Windows.Forms.Button btn_create;
     }
 }

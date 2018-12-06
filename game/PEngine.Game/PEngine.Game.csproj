@@ -102,6 +102,7 @@
     <Compile Include="Components\World\Entities\NPC.cs" />
     <Compile Include="Components\World\Entities\PlayerEntity.cs" />
     <Compile Include="Components\World\Map.cs" />
+    <Compile Include="Components\World\SubtileInfo.cs" />
     <Compile Include="Components\World\Tileset.cs" />
     <Compile Include="Components\World\World.cs" />
     <Compile Include="Content\ContentLoader.cs" />

@@ -6,7 +6,11 @@ namespace PEngine.Game.Components.World.Entities
     class PlayerEntity : Character
     {
         private const float WALK_SPEED = 0.05f;
+        private const float BLOCKED_SPEED = 0.1f;
+
         private float _walkDistance = 0f;
+        private bool _isBlocked = false;
+        private float _blockedTime = 0f;
 
         public PlayerEntity(Map map)
             : base(map)
@@ -22,6 +26,20 @@ namespace PEngine.Game.Components.World.Entities
 
         public override void Update()
         {
+            if (_isBlocked)
+            {
+                _blockedTime -= BLOCKED_SPEED;
+                if (_blockedTime <= 0f)
+                {
+                    _blockedTime = 0f;
+                    _isBlocked = false;
+                }
+                else
+                {
+                    return;
+                }
+            }
+
             if (_walking)
             {
                 _walkDistance -= WALK_SPEED;
@@ -88,8 +106,16 @@ namespace PEngine.Game.Components.World.Entities
                     }
                     else
                     {
-                        _walking = true;
-                        _walkDistance = 1f;
+                        if (CanWalk())
+                        {
+                            _walking = true;
+                            _walkDistance = 1f;
+                        }
+                        else
+                        {
+                            _isBlocked = true;
+                            _blockedTime = 1f;
+                        }
                     }
                 }
             }

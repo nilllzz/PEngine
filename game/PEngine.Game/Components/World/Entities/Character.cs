@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using PEngine.Common.Data.Maps;
 using PEngine.Game.Content;
 using static Core;
 
@@ -53,6 +54,37 @@ namespace PEngine.Game.Components.World.Entities
             {
                 _walkCycleFrame = 0;
             }
+        }
+
+        protected bool CanWalk()
+        {
+            // TODO: check for entities
+            // TODO: multiple maps
+            var checkPos = Position;
+            switch (Facing)
+            {
+                case CharacterFacing.Up:
+                    checkPos += new Vector2(0, -1);
+                    break;
+                case CharacterFacing.Left:
+                    checkPos += new Vector2(-1, 0);
+                    break;
+                case CharacterFacing.Down:
+                    checkPos += new Vector2(0, 1);
+                    break;
+                case CharacterFacing.Right:
+                    checkPos += new Vector2(1, 0);
+                    break;
+            }
+            var tile = _map.GetSubtileInfo(checkPos);
+            if (tile.HasValue)
+            {
+                if (tile.Value.Behavior == SubtileBehavior.Floor)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

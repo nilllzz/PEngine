@@ -45,8 +45,8 @@ namespace PEngine.Game
             GameInstanceProvider.SetInstance(this);
             ComponentManager.LoadComponents();
 
-            DeviceManager.PreferredBackBufferWidth = RENDER_WIDTH * 2;
-            DeviceManager.PreferredBackBufferHeight = RENDER_HEIGHT * 2;
+            DeviceManager.PreferredBackBufferWidth = RENDER_WIDTH * 4;
+            DeviceManager.PreferredBackBufferHeight = RENDER_HEIGHT * 4;
             DeviceManager.ApplyChanges();
 
             base.Initialize();

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using PEngine.Common.Data;
 using PEngine.Common.Data.Maps;
 using PEngine.Game.Components.World.Entities;
 using PEngine.Game.Screens.World;
@@ -64,6 +65,38 @@ namespace PEngine.Game.Components.World
                     Entities[i].Update();
                 }
             }
+        }
+
+        public SubtileInfo? GetSubtileInfo(Vector2 position)
+        {
+            var x = (int)position.X;
+            var y = (int)position.Y;
+            foreach (var tile in _data.tiles)
+            {
+                var fromX = tile.pos[0] * 2;
+                var fromY = tile.pos[1] * 2;
+                var toX = fromX + tile.size[0] * 2 - 1;
+                var toY = fromY + tile.size[1] * 2 - 1;
+
+                if (fromX <= x && toX >= x &&
+                    fromY <= y && toY >= y)
+                {
+                    var tileData = _tileset.GetTile(tile.tileId);
+                    var normalX = (x - fromX) % 2;
+                    var normalY = (y - fromY) % 2;
+                    var subtileIndex = normalX + normalY * 2;
+                    var subtileData = _tileset.GetSubtile(tileData.subtiles[subtileIndex]);
+
+                    return new SubtileInfo
+                    {
+                        X = x,
+                        Y = y,
+                        Behavior = DataHelper.ParseEnum<SubtileBehavior>(subtileData.behavior),
+                    };
+                }
+            }
+
+            return null;
         }
 
         private void GenerateMapTexture()

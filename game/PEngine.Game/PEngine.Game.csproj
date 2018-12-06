@@ -95,8 +95,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\GameboyInputs.cs" />
+    <Compile Include="Components\World\Entities\Character.cs" />
+    <Compile Include="Components\World\Entities\CharacterFacing.cs" />
+    <Compile Include="Components\World\Entities\Entity.cs" />
+    <Compile Include="Components\World\Entities\NPC.cs" />
+    <Compile Include="Components\World\Entities\PlayerEntity.cs" />
+    <Compile Include="Components\World\Map.cs" />
+    <Compile Include="Components\World\Tileset.cs" />
+    <Compile Include="Components\World\World.cs" />
+    <Compile Include="Content\ContentLoader.cs" />
     <Compile Include="Core.cs" />
+    <Compile Include="Double2D.cs" />
     <Compile Include="GameController.cs" />
+    <Compile Include="ProjectHelper.cs" />
     <Compile Include="Screens\Screen.cs" />
     <Compile Include="Screens\ScreenManager.cs" />
     <Compile Include="Screens\World\WorldScreen.cs" />

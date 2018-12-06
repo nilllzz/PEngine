@@ -1,7 +1,11 @@
 ﻿using GameDevCommon;
 using GameDevCommon.Input;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using PEngine.Common;
+using PEngine.Common.Data.Maps;
+using PEngine.Game.Components;
 using PEngine.Game.Screens;
 using static Core;
 
@@ -19,6 +23,7 @@ namespace PEngine.Game
         public Microsoft.Xna.Framework.Game GetGame() => this;
         public ComponentManager GetComponentManager() => ComponentManager;
         internal Rectangle ClientRectangle => new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+        internal ContentManager ProjectContent { get; private set; }
 
         public GameController()
         {
@@ -32,6 +37,11 @@ namespace PEngine.Game
 
         protected override void Initialize()
         {
+            // TODO: remove this
+            ProjectHelper.LoadTestProject();
+            // TODO: set this to the correct project
+            ProjectContent = new ContentManager(Services, "test/content");
+
             GameInstanceProvider.SetInstance(this);
             ComponentManager.LoadComponents();
 
@@ -40,6 +50,8 @@ namespace PEngine.Game
             DeviceManager.ApplyChanges();
 
             base.Initialize();
+
+            GameboyInputs.Initialize();
 
             System.Console.WriteLine("Started successfully");
         }

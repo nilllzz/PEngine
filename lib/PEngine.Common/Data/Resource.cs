@@ -126,6 +126,21 @@ namespace PEngine.Common.Data
             return identifiers.Select(id => FetchOne(id)).ToArray();
         }
 
+        public static string[] GetAllSourceFiles()
+        {
+            var resource = GetResourceInstance();
+            if (resource.IsSingleFileSource)
+            {
+                return new[] { GetSourceFilePath(resource, null) };
+            }
+            else
+            {
+                var directory = GetResourceRootDirectory(resource);
+                var files = Directory.GetFiles(directory, "*.json", SearchOption.TopDirectoryOnly);
+                return files;
+            }
+        }
+
         public static T[] FetchAll()
         {
             var resource = GetResourceInstance();
@@ -150,8 +165,7 @@ namespace PEngine.Common.Data
             else
             {
                 // enumrate all files in the folder
-                var directory = GetResourceRootDirectory(resource);
-                var files = Directory.GetFiles(directory, "*.json", SearchOption.TopDirectoryOnly);
+                var files = GetAllSourceFiles();
                 var cache = GetCache();
                 foreach (var file in files)
                 {

@@ -85,5 +85,14 @@ namespace PEngine.Creator.Properties {
                 return ((global::System.Drawing.Font)(this["Font_Status"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("WhiteSmoke")]
+        public global::System.Drawing.Color Color_LightGray {
+            get {
+                return ((global::System.Drawing.Color)(this["Color_LightGray"]));
+            }
+        }
     }
 }

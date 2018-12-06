@@ -33,10 +33,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Game\GameProcess.cs" />
     <Compile Include="Components\Layout\Row.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -56,6 +59,12 @@
       <DependentUpon>Logo.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\Projects\Project.service.cs" />
+    <Compile Include="Components\Projects\ProjectTree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Projects\ProjectTree.Designer.cs">
+      <DependentUpon>ProjectTree.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\Text\Heading.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -76,6 +85,12 @@
     </Compile>
     <Compile Include="Views\Base.view.Designer.cs">
       <DependentUpon>Base.view.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Projects\MainProject.view.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Projects\MainProject.view.Designer.cs">
+      <DependentUpon>MainProject.view.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Projects\NewProject.view.cs">
       <SubType>UserControl</SubType>
@@ -98,6 +113,9 @@
     <EmbeddedResource Include="Components\Logo\Logo.resx">
       <DependentUpon>Logo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Components\Projects\ProjectTree.resx">
+      <DependentUpon>ProjectTree.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -113,6 +131,9 @@
     </Compile>
     <EmbeddedResource Include="Views\Base.view.resx">
       <DependentUpon>Base.view.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Projects\MainProject.view.resx">
+      <DependentUpon>MainProject.view.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Projects\NewProject.view.resx">
       <DependentUpon>NewProject.view.cs</DependentUpon>
@@ -148,6 +169,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Collapse_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_run_16xMD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_run_16xLG.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

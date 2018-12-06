@@ -23,5 +23,8 @@
     <Setting Name="Font_Status" Type="System.Drawing.Font" Scope="Application">
       <Value Profile="(Default)">Segoe UI, 9pt</Value>
     </Setting>
+    <Setting Name="Color_LightGray" Type="System.Drawing.Color" Scope="Application">
+      <Value Profile="(Default)">WhiteSmoke</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

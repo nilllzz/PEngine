@@ -2,6 +2,7 @@
 using PEngine.Creator.Views;
 using PEngine.Creator.Views.Projects;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace PEngine.Creator.Forms
@@ -37,14 +38,17 @@ namespace PEngine.Creator.Forms
             {
                 ActiveView.StatusChanged -= OnStatusChanged;
                 ActiveView.TitleChanged -= OnTitleChanged;
+                view.StatusColorChanged -= OnStatusColorChanged;
                 ActiveView.Dispose();
             }
             panel_main.Controls.Clear();
             panel_main.Controls.Add(view);
             view.StatusChanged += OnStatusChanged;
             view.TitleChanged += OnTitleChanged;
+            view.StatusColorChanged += OnStatusColorChanged;
             OnStatusChanged(view.Status);
             OnTitleChanged(view.Title);
+            OnStatusColorChanged(view.StatusColor);
         }
 
         private void OnStatusChanged(string status)
@@ -62,9 +66,17 @@ namespace PEngine.Creator.Forms
             Text = newTitle;
         }
 
+        private void OnStatusColorChanged(Color color)
+        {
+            status_main.BackColor = color;
+        }
+
         private void menu_file_openproject_Click(object sender, EventArgs e)
         {
             ProjectService.OpenProject(this);
+
+            var view = new MainProjectView();
+            SetView(view);
         }
 
         //private void button1_Click(object sender, EventArgs e)

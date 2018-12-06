@@ -29,16 +29,18 @@ namespace PEngine.Common.Data
 
         private static string GetResourceRootDirectory(T resource)
         {
-            string path;
             if (resource.IsGameModeResource)
             {
-                path = "gamemodes/mymode";
+                if (Project.ActiveProject == null)
+                {
+                    throw new Exception("No active project configured");
+                }
+                return Path.Combine(Project.ActiveProject.BaseDirectory, resource.DataSource);
             }
             else
             {
-                path = "Content";
+                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content", resource.DataSource);
             }
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path, resource.DataSource);
         }
 
         private static string GetSourceFilePath(T resource, string identifier)

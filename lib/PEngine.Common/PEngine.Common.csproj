@@ -36,9 +36,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Maps\Map.cs" />
-    <Compile Include="Data\Maps\Subtile.cs" />
-    <Compile Include="Data\Maps\Tile.cs" />
+    <Compile Include="Data\Maps\MapData.cs" />
+    <Compile Include="Data\Maps\MapTileData.cs" />
+    <Compile Include="Data\Maps\SubtileData.cs" />
+    <Compile Include="Data\Maps\TileData.cs" />
+    <Compile Include="Data\Maps\TilesetData.cs" />
     <Compile Include="Data\ProjectData.cs" />
     <Compile Include="Data\Resource.cs" />
     <Compile Include="Project.cs" />

@@ -7,6 +7,10 @@ It includes two main components:
 
 It's also easy to share any created game with others by packaging your project with the game as a portable executable.
 
+## Current status
+![](https://i.imgur.com/gu49QuR.png)  
+>The game is able to display basic maps and allows for player movement.
+
 ## Technical side of things
 
 The game runs on MonoGame 3.7 and currently only on the DirectX platform (=> Windows). I might port this to Linux later.

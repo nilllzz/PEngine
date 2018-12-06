@@ -64,22 +64,23 @@ namespace PEngine.Game.Components.World.Entities
             switch (Facing)
             {
                 case CharacterFacing.Up:
-                    checkPos += new Vector2(0, -1);
+                    checkPos += new Double2D(0, -1);
                     break;
                 case CharacterFacing.Left:
-                    checkPos += new Vector2(-1, 0);
+                    checkPos += new Double2D(-1, 0);
                     break;
                 case CharacterFacing.Down:
-                    checkPos += new Vector2(0, 1);
+                    checkPos += new Double2D(0, 1);
                     break;
                 case CharacterFacing.Right:
-                    checkPos += new Vector2(1, 0);
+                    checkPos += new Double2D(1, 0);
                     break;
             }
             var tile = _map.GetSubtileInfo(checkPos);
             if (tile.HasValue)
             {
-                if (tile.Value.Behavior == SubtileBehavior.Floor)
+                if (tile.Value.Behavior == SubtileBehavior.Floor ||
+                    tile.Value.Behavior == SubtileBehavior.Grass)
                 {
                     return true;
                 }

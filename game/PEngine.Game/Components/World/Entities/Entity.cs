@@ -14,7 +14,7 @@ namespace PEngine.Game.Components.World.Entities
         protected Texture2D _texture;
         protected float _spriteLayer = WorldScreen.SPRITE_LAYER_ENTITY;
 
-        public Vector2 Position;
+        public Double2D Position;
 
         public int Id { get; }
         public bool CanBeRemoved { get; protected set; }

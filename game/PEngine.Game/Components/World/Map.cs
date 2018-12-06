@@ -67,7 +67,7 @@ namespace PEngine.Game.Components.World
             }
         }
 
-        public SubtileInfo? GetSubtileInfo(Vector2 position)
+        public SubtileInfo? GetSubtileInfo(Double2D position)
         {
             var x = (int)position.X;
             var y = (int)position.Y;

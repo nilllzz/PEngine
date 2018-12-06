@@ -7,5 +7,6 @@
         LedgeLeft,
         LedgeDown,
         LedgeRight,
+        Grass,
     }
 }

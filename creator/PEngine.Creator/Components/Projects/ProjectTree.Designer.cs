@@ -53,6 +53,7 @@
             this.tree_main.SelectedImageIndex = 0;
             this.tree_main.Size = new System.Drawing.Size(326, 568);
             this.tree_main.TabIndex = 0;
+            this.tree_main.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tree_main_NodeMouseDoubleClick);
             // 
             // tree_images
             // 

@@ -8,46 +8,16 @@ namespace PEngine.Creator.Components.Projects
 {
     public partial class ProjectTree : UserControl
     {
-        private const int ICON_FOLDER_CLOSED = 1;
-        private const int ICON_FOLDER_OPEN = 2;
-
-        private class ProjectTreeNode : TreeNode
-        {
-            private readonly int _collapsedIconIndex;
-            private readonly int _expandedIconIndex;
-
-            public ProjectTreeNode(string text, int collapsedIconIndex, int expandedIconIndex = -1)
-                : base(text)
-            {
-                _collapsedIconIndex = collapsedIconIndex;
-                if (expandedIconIndex == -1)
-                {
-                    _expandedIconIndex = collapsedIconIndex;
-                }
-                else
-                {
-                    _expandedIconIndex = expandedIconIndex;
-                }
-                ImageIndex = _collapsedIconIndex;
-                SelectedImageIndex = ImageIndex;
-            }
-
-            public void OnExpanded()
-            {
-                ImageIndex = _expandedIconIndex;
-                SelectedImageIndex = ImageIndex;
-            }
-
-            public void OnCollapsed()
-            {
-                ImageIndex = _collapsedIconIndex;
-                SelectedImageIndex = ImageIndex;
-            }
-        }
+        private ProjectEventBus _eventBus;
 
         public ProjectTree()
         {
             InitializeComponent();
+        }
+
+        public void SetEventBus(ProjectEventBus eventBus)
+        {
+            _eventBus = eventBus;
         }
 
         protected override void OnLoad(EventArgs e)
@@ -66,17 +36,17 @@ namespace PEngine.Creator.Components.Projects
 
             var project = Project.ActiveProject;
 
-            var root = new ProjectTreeNode($"Project '{project.Name}'", ICON_FOLDER_CLOSED, ICON_FOLDER_OPEN);
+            var root = new ProjectTreeNode($"Project '{project.Name}'", ProjectItemType.Folder, null);
 
-            var maps = new ProjectTreeNode("Maps", ICON_FOLDER_CLOSED, ICON_FOLDER_OPEN);
+            var maps = new ProjectTreeNode("Maps", ProjectItemType.Folder, null);
             CreateMapsTree(maps);
             root.Nodes.Add(maps);
 
-            var tilesets = new ProjectTreeNode("Tilesets", ICON_FOLDER_CLOSED, ICON_FOLDER_OPEN);
+            var tilesets = new ProjectTreeNode("Tilesets", ProjectItemType.Folder, null);
             CreateTilesetsTree(tilesets);
             root.Nodes.Add(tilesets);
 
-            var scripts = new ProjectTreeNode("Scripts", ICON_FOLDER_CLOSED, ICON_FOLDER_OPEN);
+            var scripts = new ProjectTreeNode("Scripts", ProjectItemType.Folder, null);
             root.Nodes.Add(scripts);
 
             tree_main.Nodes.Add(root);
@@ -88,12 +58,10 @@ namespace PEngine.Creator.Components.Projects
             var mapFiles = MapData.GetAllSourceFiles();
             foreach (var mapFile in mapFiles)
             {
-                parent.Nodes.Add(new TreeNode
-                {
-                    Text = Path.GetFileName(mapFile),
-                    ImageKey = "file_map",
-                    SelectedImageKey = "file_map",
-                });
+                parent.Nodes.Add(new ProjectTreeNode(
+                    Path.GetFileName(mapFile),
+                    ProjectItemType.Map,
+                    mapFile));
             }
         }
 
@@ -102,10 +70,10 @@ namespace PEngine.Creator.Components.Projects
             var tilesetFiles = TilesetData.GetAllSourceFiles();
             foreach (var tilesetFile in tilesetFiles)
             {
-                parent.Nodes.Add(new TreeNode
-                {
-                    Text = Path.GetFileName(tilesetFile)
-                });
+                parent.Nodes.Add(new ProjectTreeNode(
+                    Path.GetFileName(tilesetFile),
+                    ProjectItemType.Tileset,
+                    tilesetFile));
             }
         }
 
@@ -117,6 +85,21 @@ namespace PEngine.Creator.Components.Projects
         private void Tree_main_AfterExpand(object sender, TreeViewEventArgs e)
         {
             ((ProjectTreeNode)e.Node).OnExpanded();
+        }
+
+        private void tree_main_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Node is ProjectTreeNode projectNode)
+            {
+                if (projectNode.ItemType != ProjectItemType.Folder)
+                {
+                    _eventBus.RequestItemOpen(new ProjectItem
+                    {
+                        ItemType = projectNode.ItemType,
+                        FilePath = projectNode.FilePath,
+                    });
+                }
+            }
         }
     }
 }

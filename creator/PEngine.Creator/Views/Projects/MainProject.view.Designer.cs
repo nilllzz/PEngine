@@ -30,6 +30,7 @@
         {
             this.split_main = new System.Windows.Forms.SplitContainer();
             this.projectTree = new PEngine.Creator.Components.Projects.ProjectTree();
+            this.tabs_main = new System.Windows.Forms.TabControl();
             this.tool_project = new System.Windows.Forms.ToolStrip();
             this.tool_project_start = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.split_main)).BeginInit();
@@ -53,9 +54,10 @@
             // 
             // split_main.Panel2
             // 
+            this.split_main.Panel2.Controls.Add(this.tabs_main);
             this.split_main.Panel2.Controls.Add(this.tool_project);
             this.split_main.Panel2MinSize = 100;
-            this.split_main.Size = new System.Drawing.Size(1174, 796);
+            this.split_main.Size = new System.Drawing.Size(1183, 796);
             this.split_main.SplitterDistance = 300;
             this.split_main.TabIndex = 0;
             // 
@@ -67,6 +69,15 @@
             this.projectTree.Size = new System.Drawing.Size(300, 796);
             this.projectTree.TabIndex = 0;
             // 
+            // tabs_main
+            // 
+            this.tabs_main.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabs_main.Location = new System.Drawing.Point(0, 25);
+            this.tabs_main.Name = "tabs_main";
+            this.tabs_main.SelectedIndex = 0;
+            this.tabs_main.Size = new System.Drawing.Size(879, 771);
+            this.tabs_main.TabIndex = 1;
+            // 
             // tool_project
             // 
             this.tool_project.BackColor = global::PEngine.Creator.Properties.Settings.Default.Color_MainGray;
@@ -75,7 +86,7 @@
             this.tool_project_start});
             this.tool_project.Location = new System.Drawing.Point(0, 0);
             this.tool_project.Name = "tool_project";
-            this.tool_project.Size = new System.Drawing.Size(870, 25);
+            this.tool_project.Size = new System.Drawing.Size(879, 25);
             this.tool_project.TabIndex = 0;
             this.tool_project.Text = "toolStrip1";
             // 
@@ -94,7 +105,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.split_main);
             this.Name = "MainProjectView";
-            this.Size = new System.Drawing.Size(1174, 796);
+            this.Size = new System.Drawing.Size(1183, 796);
             this.split_main.Panel1.ResumeLayout(false);
             this.split_main.Panel2.ResumeLayout(false);
             this.split_main.Panel2.PerformLayout();
@@ -112,5 +123,6 @@
         private Components.Projects.ProjectTree projectTree;
         private System.Windows.Forms.ToolStrip tool_project;
         private System.Windows.Forms.ToolStripButton tool_project_start;
+        private System.Windows.Forms.TabControl tabs_main;
     }
 }

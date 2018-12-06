@@ -40,6 +40,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Game\GameProcess.cs" />
+    <Compile Include="Components\Game\ResourceManager.cs" />
+    <Compile Include="Components\Game\SubtileComponent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Game\SubtileComponent.Designer.cs">
+      <DependentUpon>SubtileComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Game\TileComponent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Game\TileComponent.Designer.cs">
+      <DependentUpon>TileComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Game\TilesetEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Game\TilesetEditor.Designer.cs">
+      <DependentUpon>TilesetEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\Layout\Row.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -58,13 +77,18 @@
     <Compile Include="Components\Logo\Logo.Designer.cs">
       <DependentUpon>Logo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\Projects\IEventBusComponent.cs" />
     <Compile Include="Components\Projects\Project.service.cs" />
+    <Compile Include="Components\Projects\ProjectEventBus.cs" />
+    <Compile Include="Components\Projects\ProjectItem.cs" />
+    <Compile Include="Components\Projects\ProjectItemType.cs" />
     <Compile Include="Components\Projects\ProjectTree.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Components\Projects\ProjectTree.Designer.cs">
       <DependentUpon>ProjectTree.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\Projects\ProjectTreeNode.cs" />
     <Compile Include="Components\Text\Heading.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -98,12 +122,27 @@
     <Compile Include="Views\Projects\NewProject.view.Designer.cs">
       <DependentUpon>NewProject.view.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Projects\ProjectTabComponent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Projects\ProjectTabComponent.Designer.cs">
+      <DependentUpon>ProjectTabComponent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Projects\Welcome.view.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\Projects\Welcome.view.Designer.cs">
       <DependentUpon>Welcome.view.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Components\Game\SubtileComponent.resx">
+      <DependentUpon>SubtileComponent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Game\TileComponent.resx">
+      <DependentUpon>TileComponent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Game\TilesetEditor.resx">
+      <DependentUpon>TilesetEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\Layout\Row.resx">
       <DependentUpon>Row.cs</DependentUpon>
     </EmbeddedResource>
@@ -137,6 +176,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Projects\NewProject.view.resx">
       <DependentUpon>NewProject.view.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Projects\ProjectTabComponent.resx">
+      <DependentUpon>ProjectTabComponent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Projects\Welcome.view.resx">
       <DependentUpon>Welcome.view.cs</DependentUpon>
@@ -181,6 +223,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\arrow_run_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\action_add_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ColorSelectionTool_202.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\document_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Clearallrequests_8816.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

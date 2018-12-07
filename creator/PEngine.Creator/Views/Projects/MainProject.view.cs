@@ -87,6 +87,7 @@ namespace PEngine.Creator.Views.Projects
                     tabPage.Controls[0] is ProjectTabComponent projComp &&
                     projComp.Identifier == item.Identifier)
                 {
+                    // select an already existing tab instead of creating a new one
                     tabs_main.SelectTab(tabPage);
                     return;
                 }
@@ -160,7 +161,7 @@ namespace PEngine.Creator.Views.Projects
         {
             var comp = ActiveComponent;
 
-            tool_save.Enabled = comp != null;
+            tool_save.Enabled = comp != null && comp.CanSave;
             tool_saveall.Enabled = comp != null;
 
             MainForm.Instance.UpdateMenus();

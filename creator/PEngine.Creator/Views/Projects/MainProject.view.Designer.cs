@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainProjectView));
             this.split_main = new System.Windows.Forms.SplitContainer();
             this.projectTree = new PEngine.Creator.Components.Projects.ProjectTree();
             this.tabs_main = new System.Windows.Forms.TabControl();
             this.tool_project = new System.Windows.Forms.ToolStrip();
             this.tool_project_start = new System.Windows.Forms.ToolStripButton();
+            this.imagelist_tabs = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.split_main)).BeginInit();
             this.split_main.Panel1.SuspendLayout();
             this.split_main.Panel2.SuspendLayout();
@@ -72,6 +75,7 @@
             // tabs_main
             // 
             this.tabs_main.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabs_main.ImageList = this.imagelist_tabs;
             this.tabs_main.Location = new System.Drawing.Point(0, 25);
             this.tabs_main.Name = "tabs_main";
             this.tabs_main.SelectedIndex = 0;
@@ -99,6 +103,13 @@
             this.tool_project_start.Text = "Start";
             this.tool_project_start.Click += new System.EventHandler(this.tool_project_start_Click);
             // 
+            // imagelist_tabs
+            // 
+            this.imagelist_tabs.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imagelist_tabs.ImageStream")));
+            this.imagelist_tabs.TransparentColor = System.Drawing.Color.Transparent;
+            this.imagelist_tabs.Images.SetKeyName(0, "icon_document");
+            this.imagelist_tabs.Images.SetKeyName(1, "icon_map");
+            // 
             // MainProjectView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -124,5 +135,6 @@
         private System.Windows.Forms.ToolStrip tool_project;
         private System.Windows.Forms.ToolStripButton tool_project_start;
         private System.Windows.Forms.TabControl tabs_main;
+        private System.Windows.Forms.ImageList imagelist_tabs;
     }
 }

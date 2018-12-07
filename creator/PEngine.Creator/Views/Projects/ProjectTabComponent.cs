@@ -5,6 +5,9 @@ namespace PEngine.Creator.Views.Projects
 {
     public partial class ProjectTabComponent : UserControl
     {
+        protected const int ICON_DOCUMENT = 0;
+        protected const int ICON_MAP = 1;
+
         private bool _isUnsaved;
         private string _title;
 
@@ -35,6 +38,8 @@ namespace PEngine.Creator.Views.Projects
                 TitleChanged?.Invoke(Title);
             }
         }
+
+        public int IconIndex { get; protected set; } = ICON_DOCUMENT;
 
         public string Identifier { get; protected set; }
 

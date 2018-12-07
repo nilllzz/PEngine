@@ -154,7 +154,7 @@ namespace PEngine.Creator.Components.Game
 
         private void SetTileset()
         {
-            Title = _data.id;
+            Title = _data.id + ".json";
 
             foreach (var subtile in _data.subtiles)
             {

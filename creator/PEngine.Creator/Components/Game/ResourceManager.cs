@@ -19,13 +19,19 @@ namespace PEngine.Creator.Components.Game
             _textureCache.Clear();
         }
 
-        internal static Bitmap GetTilesetTexture(TilesetData tileset)
+        internal static string GetTilesetTexturePath(TilesetData tileset)
         {
             var path = Path.Combine(
                 Project.ActiveProject.BaseDirectory,
                 "content/textures/tiles",
                 tileset.texture + ".png"
             );
+            return path;
+        }
+
+        internal static Bitmap GetTilesetTexture(TilesetData tileset)
+        {
+            var path = GetTilesetTexturePath(tileset);
             var key = "TILESET|" + path.ToUpper();
             if (!_textureCache.TryGetValue(key, out var texture))
             {

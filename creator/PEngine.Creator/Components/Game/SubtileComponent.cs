@@ -1,8 +1,10 @@
 ﻿using PEngine.Common.Data;
 using PEngine.Common.Data.Maps;
 using PEngine.Creator.Components.Projects;
+using PEngine.Creator.Forms;
 using PEngine.Creator.Properties;
 using System;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -37,11 +39,21 @@ namespace PEngine.Creator.Components.Game
         private void RegisterEvents()
         {
             _eventBus.SubtileSelected += _eventBus_SubtileSelected;
+            _eventBus.SubtileUpdated += _eventBus_SubtileUpdated;
         }
 
         public void UnregisterEvents()
         {
             _eventBus.SubtileSelected -= _eventBus_SubtileSelected;
+            _eventBus.SubtileUpdated -= _eventBus_SubtileUpdated;
+        }
+
+        private void _eventBus_SubtileUpdated(TilesetData tileset, SubtileData subtile)
+        {
+            if (tileset.id == _parent.id)
+            {
+                SetSubtile();
+            }
         }
 
         private void _eventBus_SubtileSelected(TilesetData tileset, SubtileData subtile)
@@ -72,7 +84,12 @@ namespace PEngine.Creator.Components.Game
         private void SetSubtile()
         {
             pic_texture.Image = ResourceManager.GetSubtileTexture(_parent, _data);
-            combo_behavior.SelectedItem = DataHelper.ParseEnum<SubtileBehavior>(_data.behavior).ToString();
+            var comboValue = DataHelper.ParseEnum<SubtileBehavior>(_data.behavior).ToString();
+            if (combo_behavior.SelectedItem == null ||
+                comboValue != combo_behavior.SelectedItem.ToString())
+            {
+                combo_behavior.SelectedItem = comboValue;
+            }
         }
 
         private void LoadBehaviors()
@@ -150,7 +167,19 @@ namespace PEngine.Creator.Components.Game
 
         private void pic_pick_texture_Click(object sender, EventArgs e)
         {
+            var texturePicker = new TexturePickerForm
+            {
+                TexturePath = ResourceManager.GetTilesetTexturePath(_parent),
+                SelectedTextureRectangle = new Rectangle(_data.texture[0] * 16, _data.texture[1] * 16, 16, 16),
+            };
 
+            var result = texturePicker.ShowDialog(MainForm.Instance);
+            if (result == DialogResult.OK)
+            {
+                var textureRect = texturePicker.SelectedTextureRectangle;
+                _data.texture = new[] { textureRect.X / 16, textureRect.Y / 16 };
+                _eventBus.UpdatedSubtile(_parent, _data);
+            }
         }
 
         #endregion

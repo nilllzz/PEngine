@@ -72,14 +72,19 @@ namespace PEngine.Creator.Views.Projects
 
         public void OpenTab(ProjectTabComponent component)
         {
-            var tab = new TabPage();
-            tab.Text = component.Title;
+            var tab = new TabPage
+            {
+                Text = component.Title,
+                ImageIndex = component.IconIndex
+            };
+
             component.Dock = DockStyle.Fill;
-            tab.Controls.Add(component);
             component.TitleChanged += (string title) =>
             {
                 tab.Text = title;
             };
+            tab.Controls.Add(component);
+
             tabs_main.TabPages.Add(tab);
             tabs_main.SelectTab(tab);
         }

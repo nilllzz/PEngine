@@ -47,6 +47,12 @@
     <Compile Include="Components\Game\SubtileComponent.Designer.cs">
       <DependentUpon>SubtileComponent.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\Game\TextureViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Game\TextureViewer.Designer.cs">
+      <DependentUpon>TextureViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\Game\TileComponent.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -108,6 +114,7 @@
     <Compile Include="Forms\TexturePickerForm.Designer.cs">
       <DependentUpon>TexturePickerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ExplorerHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Base.view.cs">
@@ -128,10 +135,10 @@
     <Compile Include="Views\Projects\NewProject.view.Designer.cs">
       <DependentUpon>NewProject.view.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Projects\ProjectTabComponent.cs">
+    <Compile Include="Components\Projects\ProjectTabComponent.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\Projects\ProjectTabComponent.Designer.cs">
+    <Compile Include="Components\Projects\ProjectTabComponent.Designer.cs">
       <DependentUpon>ProjectTabComponent.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Projects\Welcome.view.cs">
@@ -142,6 +149,9 @@
     </Compile>
     <EmbeddedResource Include="Components\Game\SubtileComponent.resx">
       <DependentUpon>SubtileComponent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Game\TextureViewer.resx">
+      <DependentUpon>TextureViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Components\Game\TileComponent.resx">
       <DependentUpon>TileComponent.cs</DependentUpon>
@@ -186,7 +196,7 @@
     <EmbeddedResource Include="Views\Projects\NewProject.view.resx">
       <DependentUpon>NewProject.view.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Projects\ProjectTabComponent.resx">
+    <EmbeddedResource Include="Components\Projects\ProjectTabComponent.resx">
       <DependentUpon>ProjectTabComponent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Projects\Welcome.view.resx">
@@ -247,6 +257,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\folder_Open_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Saveall_6518.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NewSolutionFolder_6289.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\properties_16xLG.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

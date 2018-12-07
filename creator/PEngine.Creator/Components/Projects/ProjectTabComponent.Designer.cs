@@ -1,4 +1,4 @@
-﻿namespace PEngine.Creator.Views.Projects
+﻿namespace PEngine.Creator.Components.Projects
 {
     partial class ProjectTabComponent
     {

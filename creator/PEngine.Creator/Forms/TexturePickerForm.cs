@@ -1,6 +1,6 @@
-﻿using PEngine.Creator.Properties;
+﻿using PEngine.Creator.Helpers;
+using PEngine.Creator.Properties;
 using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -105,11 +105,9 @@ namespace PEngine.Creator.Forms
             return true;
         }
 
-
-
         private void btn_reveal_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", $"/select, \"{TexturePath}\"");
+            ExplorerHelper.OpenWithFileSelected(TexturePath);
         }
     }
 }

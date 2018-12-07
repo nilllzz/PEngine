@@ -2,7 +2,7 @@
 using PEngine.Common.Data.Maps;
 using PEngine.Creator.Components.Projects;
 using PEngine.Creator.Properties;
-using PEngine.Creator.Views.Projects;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -11,15 +11,20 @@ namespace PEngine.Creator.Components.Game
     public partial class TilesetEditor : ProjectTabComponent, IEventBusComponent
     {
         private readonly ProjectEventBus _eventBus;
-        private TilesetData _data;
+        private readonly ProjectItem _item;
+        private readonly TilesetData _data;
 
         private TileData _selectedTile;
         private SubtileData _selectedSubtile;
 
-        public TilesetEditor(ProjectEventBus eventBus, TilesetData data)
+        public override string FilePath => _item.FilePath;
+        public override string Identifier => _item.Identifier;
+
+        public TilesetEditor(ProjectEventBus eventBus, TilesetData data, ProjectItem item)
         {
             InitializeComponent();
 
+            _item = item;
             _data = data;
 
             _eventBus = eventBus;
@@ -62,74 +67,7 @@ namespace PEngine.Creator.Components.Game
                 panel_tiles_container.Controls.Add(tileComp);
 
                 lbl_tiles.Text = $"Tiles ({_data.tiles.Length})";
-            }
-        }
-
-        private void _eventBus_SubtileUpdated(TilesetData tileset, SubtileData subtile)
-        {
-            if (tileset.id == _data.id && _selectedSubtile != null && subtile.id == _selectedSubtile.id)
-            {
-                _selectedSubtile = subtile;
-                UpdateSelectedSubtile();
-            }
-        }
-
-        private void _eventBus_SubtileRemoved(TilesetData tileset, SubtileData subtile)
-        {
-            if (tileset.id == _data.id)
-            {
-                foreach (var control in panel_subtile_container.Controls)
-                {
-                    if (control is SubtileComponent comp && comp.SubtileId == subtile.id)
-                    {
-                        comp.UnregisterEvents();
-                        panel_subtile_container.Controls.Remove(comp);
-                    }
-                }
-
-                lbl_subtiles_title.Text = $"Subtiles ({_data.subtiles.Length})";
-
-                if (_selectedSubtile.id == subtile.id)
-                {
-                    _eventBus.SelectedSubtile(_data, null);
-                }
-            }
-        }
-
-        private void _eventBus_SubtileAdded(TilesetData tileset, SubtileData subtile)
-        {
-            if (tileset.id == _data.id)
-            {
-                var subtileComp = new SubtileComponent(_eventBus, _data, subtile);
-                panel_subtile_container.Controls.Add(subtileComp);
-
-                lbl_subtiles_title.Text = $"Subtiles ({_data.subtiles.Length})";
-            }
-        }
-
-        private void _eventBus_TileUpdated(TilesetData tileset, TileData tile)
-        {
-            if (tileset.id == _data.id && _selectedTile != null && tile.id == _selectedTile.id)
-            {
-                UpdateSelectedTile();
-            }
-        }
-
-        private void _eventBus_SubtileSelected(TilesetData tileset, SubtileData subtile)
-        {
-            if (tileset.id == _data.id)
-            {
-                _selectedSubtile = subtile;
-                UpdateSelectedSubtile();
-            }
-        }
-
-        private void _eventBus_TileSelected(TilesetData tileset, TileData tile)
-        {
-            if (tileset.id == _data.id)
-            {
-                _selectedTile = tile;
-                UpdateSelectedTile();
+                HasChanges = true;
             }
         }
 
@@ -147,14 +85,182 @@ namespace PEngine.Creator.Components.Game
                 }
 
                 lbl_tiles.Text = $"Tiles ({_data.tiles.Length})";
+                HasChanges = true;
             }
+        }
+
+        private void _eventBus_TileUpdated(TilesetData tileset, TileData tile)
+        {
+            if (tileset.id == _data.id && _selectedTile != null && tile.id == _selectedTile.id)
+            {
+                UpdateSelectedTile();
+                HasChanges = true;
+            }
+        }
+
+        private void _eventBus_TileSelected(TilesetData tileset, TileData tile)
+        {
+            if (tileset.id == _data.id)
+            {
+                _selectedTile = tile;
+                UpdateSelectedTile();
+            }
+        }
+
+        private void _eventBus_SubtileAdded(TilesetData tileset, SubtileData subtile)
+        {
+            if (tileset.id == _data.id)
+            {
+                var subtileComp = new SubtileComponent(_eventBus, _data, subtile);
+                panel_subtile_container.Controls.Add(subtileComp);
+
+                lbl_subtiles_title.Text = $"Subtiles ({_data.subtiles.Length})";
+                HasChanges = true;
+            }
+        }
+
+        private void _eventBus_SubtileRemoved(TilesetData tileset, SubtileData subtile)
+        {
+            if (tileset.id == _data.id)
+            {
+                foreach (var control in panel_subtile_container.Controls)
+                {
+                    if (control is SubtileComponent comp && comp.SubtileId == subtile.id)
+                    {
+                        comp.UnregisterEvents();
+                        panel_subtile_container.Controls.Remove(comp);
+                    }
+                }
+
+                if (_selectedSubtile.id == subtile.id)
+                {
+                    _eventBus.SelectedSubtile(_data, null);
+                }
+
+                lbl_subtiles_title.Text = $"Subtiles ({_data.subtiles.Length})";
+                HasChanges = true;
+            }
+        }
+
+        private void _eventBus_SubtileSelected(TilesetData tileset, SubtileData subtile)
+        {
+            if (tileset.id == _data.id)
+            {
+                _selectedSubtile = subtile;
+                UpdateSelectedSubtile();
+            }
+        }
+
+        private void _eventBus_SubtileUpdated(TilesetData tileset, SubtileData subtile)
+        {
+            if (tileset.id == _data.id && _selectedSubtile != null && subtile.id == _selectedSubtile.id)
+            {
+                _selectedSubtile = subtile;
+                UpdateSelectedSubtile();
+
+                HasChanges = true;
+            }
+        }
+
+        #endregion
+
+        #region ui
+
+        private void pic_tile_1_Click(object sender, System.EventArgs e)
+        {
+            PlaceSubtile(0);
+        }
+
+        private void pic_tile_2_Click(object sender, System.EventArgs e)
+        {
+            PlaceSubtile(1);
+        }
+
+        private void pic_tile_3_Click(object sender, System.EventArgs e)
+        {
+            PlaceSubtile(2);
+        }
+
+        private void pic_tile_4_Click(object sender, System.EventArgs e)
+        {
+            PlaceSubtile(3);
+        }
+
+        private void btn_add_subtile_Click(object sender, System.EventArgs e)
+        {
+            if (_data.subtiles.Length >= ProjectService.MAX_SUBTILES_IN_SET)
+            {
+                MessageBox.Show($"One tileset can only contain up to {ProjectService.MAX_SUBTILES_IN_SET} subtiles.\n\nRemove an existing subtile to add a new one.",
+                    "Tileset", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            var subtile = new SubtileData
+            {
+                behavior = DataHelper.UnparseEnum(SubtileBehavior.Wall),
+                id = DataHelper.GetFirstFreeInRange(_data.subtiles.Select(t => t.id)),
+                texture = new[] { 0, 0 },
+            };
+
+            var subtiles = _data.subtiles.ToList();
+            subtiles.Add(subtile);
+            _data.subtiles = subtiles.ToArray();
+
+            _eventBus.AddedSubtile(_data, subtile);
+        }
+
+        private void btn_add_tile_Click(object sender, System.EventArgs e)
+        {
+            if (_data.tiles.Length >= ProjectService.MAX_TILES_IN_SET)
+            {
+                MessageBox.Show($"One tileset can only contain up to {ProjectService.MAX_TILES_IN_SET} tiles.\n\nRemove an existing tile to add a new one.",
+                    "Tileset", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            var firstSubtileId = _data.subtiles[0].id;
+            var tile = new TileData
+            {
+                id = DataHelper.GetFirstFreeInRange(_data.tiles.Select(t => t.id)),
+                subtiles = new[] { firstSubtileId, firstSubtileId, firstSubtileId, firstSubtileId },
+            };
+
+            var tiles = _data.tiles.ToList();
+            tiles.Add(tile);
+            _data.tiles = tiles.ToArray();
+
+            _eventBus.AddedTile(_data, tile);
+        }
+
+        private void btn_remove_tile_Click(object sender, System.EventArgs e)
+        {
+            if (_data.tiles.Length == 1)
+            {
+                MessageBox.Show("The last tile in a tileset cannot be removed.", "Tileset",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            var result = MessageBox.Show("If this tile is used in any maps referencing this tileset, it gets replaced by either the first tile in this tileset or whichever tile takes its place once you add new ones.\n\nDo you want to proceed?",
+                "Tileset", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if (result == DialogResult.No)
+            {
+                return;
+            }
+
+            var tiles = _data.tiles.ToList();
+            tiles.Remove(_selectedTile);
+            _data.tiles = tiles.ToArray();
+
+            _eventBus.RemovedTile(_data, _selectedTile);
+            _eventBus.SelectedTile(_data, null);
         }
 
         #endregion
 
         private void SetTileset()
         {
-            Title = _data.id + ".json";
+            Title = Path.GetFileName(_item.FilePath);
 
             foreach (var subtile in _data.subtiles)
             {
@@ -235,84 +341,10 @@ namespace PEngine.Creator.Components.Game
             }
         }
 
-        #region ui
-
-        private void pic_tile_1_Click(object sender, System.EventArgs e)
+        public override void Save()
         {
-            PlaceSubtile(0);
+            _data.Save();
+            HasChanges = false;
         }
-
-        private void pic_tile_2_Click(object sender, System.EventArgs e)
-        {
-            PlaceSubtile(1);
-        }
-
-        private void pic_tile_3_Click(object sender, System.EventArgs e)
-        {
-            PlaceSubtile(2);
-        }
-
-        private void pic_tile_4_Click(object sender, System.EventArgs e)
-        {
-            PlaceSubtile(3);
-        }
-
-        private void btn_add_subtile_Click(object sender, System.EventArgs e)
-        {
-            var subtile = new SubtileData
-            {
-                behavior = DataHelper.UnparseEnum(SubtileBehavior.Wall),
-                id = DataHelper.GetFirstFreeInRange(_data.subtiles.Select(t => t.id)),
-                texture = new[] { 0, 0 },
-            };
-
-            var subtiles = _data.subtiles.ToList();
-            subtiles.Add(subtile);
-            _data.subtiles = subtiles.ToArray();
-
-            _eventBus.AddedSubtile(_data, subtile);
-        }
-
-        private void btn_add_tile_Click(object sender, System.EventArgs e)
-        {
-            var firstSubtileId = _data.subtiles[0].id;
-            var tile = new TileData
-            {
-                id = DataHelper.GetFirstFreeInRange(_data.tiles.Select(t => t.id)),
-                subtiles = new[] { firstSubtileId, firstSubtileId, firstSubtileId, firstSubtileId },
-            };
-
-            var tiles = _data.tiles.ToList();
-            tiles.Add(tile);
-            _data.tiles = tiles.ToArray();
-
-            _eventBus.AddedTile(_data, tile);
-        }
-
-        private void btn_remove_tile_Click(object sender, System.EventArgs e)
-        {
-            if (_data.tiles.Length == 1)
-            {
-                MessageBox.Show("The last tile in a tileset cannot be removed.", "Tileset",
-                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-
-            var result = MessageBox.Show("If this tile is used in any maps referencing this tileset, it gets replaced by either the first tile in this tileset or whichever tile takes its place once you add new ones.\n\nDo you want to proceed?",
-                "Tileset", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            if (result == DialogResult.No)
-            {
-                return;
-            }
-
-            var tiles = _data.tiles.ToList();
-            tiles.Remove(_selectedTile);
-            _data.tiles = tiles.ToArray();
-
-            _eventBus.RemovedTile(_data, _selectedTile);
-            _eventBus.SelectedTile(_data, null);
-        }
-
-        #endregion
     }
 }

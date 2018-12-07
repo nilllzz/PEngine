@@ -5,5 +5,6 @@
         Folder,
         Map,
         Tileset,
+        Texture,
     }
 }

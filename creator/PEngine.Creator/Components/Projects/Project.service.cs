@@ -7,6 +7,9 @@ namespace PEngine.Creator.Components.Projects
 {
     static class ProjectService
     {
+        public const int MAX_TILES_IN_SET = 64;
+        public const int MAX_SUBTILES_IN_SET = 64;
+
         public static string ProjectsDirectory => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "projects");
 
         private static void CheckCreateProjectsDirectory()

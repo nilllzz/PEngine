@@ -4,5 +4,7 @@
     {
         public ProjectItemType ItemType;
         public string FilePath;
+
+        public string Identifier => ItemType.ToString() + "|" + FilePath;
     }
 }

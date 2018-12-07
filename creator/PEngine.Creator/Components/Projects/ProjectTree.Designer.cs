@@ -51,6 +51,7 @@
             this.tree_main.Location = new System.Drawing.Point(0, 28);
             this.tree_main.Name = "tree_main";
             this.tree_main.SelectedImageIndex = 0;
+            this.tree_main.ShowLines = false;
             this.tree_main.Size = new System.Drawing.Size(326, 568);
             this.tree_main.TabIndex = 0;
             this.tree_main.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tree_main_NodeMouseDoubleClick);
@@ -63,6 +64,7 @@
             this.tree_images.Images.SetKeyName(1, "folder_closed");
             this.tree_images.Images.SetKeyName(2, "folder_open");
             this.tree_images.Images.SetKeyName(3, "file_map");
+            this.tree_images.Images.SetKeyName(4, "file_image");
             // 
             // tool_main
             // 

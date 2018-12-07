@@ -8,6 +8,7 @@ namespace PEngine.Creator.Components.Projects
         private const int ICON_FOLDER_CLOSED = 1;
         private const int ICON_FOLDER_OPEN = 2;
         private const int ICON_MAP = 3;
+        private const int ICON_IMAGE = 4;
 
         private readonly int _collapsedIconIndex;
         private readonly int _expandedIconIndex;
@@ -34,6 +35,9 @@ namespace PEngine.Creator.Components.Projects
                     break;
                 case ProjectItemType.Tileset:
                     collapsedIconIndex = ICON_DOCUMENT;
+                    break;
+                case ProjectItemType.Texture:
+                    collapsedIconIndex = ICON_IMAGE;
                     break;
             }
 

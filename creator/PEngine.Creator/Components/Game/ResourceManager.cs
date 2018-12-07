@@ -57,5 +57,14 @@ namespace PEngine.Creator.Components.Game
             }
             return texture;
         }
+
+        internal static string[] GetTextureFiles(string subfolder)
+        {
+            var directoryPath = Path.Combine(
+                Project.ActiveProject.BaseDirectory,
+                "content/textures",
+                subfolder);
+            return Directory.GetFiles(directoryPath, "*.png", SearchOption.TopDirectoryOnly);
+        }
     }
 }

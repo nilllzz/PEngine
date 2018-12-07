@@ -1,5 +1,6 @@
 ﻿using PEngine.Common;
 using PEngine.Common.Data.Maps;
+using PEngine.Creator.Components.Game;
 using System;
 using System.IO;
 using System.Windows.Forms;
@@ -49,6 +50,12 @@ namespace PEngine.Creator.Components.Projects
             var scripts = new ProjectTreeNode("Scripts", ProjectItemType.Folder, null);
             root.Nodes.Add(scripts);
 
+            var content = new ProjectTreeNode("Content", ProjectItemType.Folder, null);
+            var textures = new ProjectTreeNode("Textures", ProjectItemType.Folder, null);
+            CreateTexturesTree(textures);
+            content.Nodes.Add(textures);
+            root.Nodes.Add(content);
+
             tree_main.Nodes.Add(root);
             root.Expand();
         }
@@ -74,6 +81,24 @@ namespace PEngine.Creator.Components.Projects
                     Path.GetFileName(tilesetFile),
                     ProjectItemType.Tileset,
                     tilesetFile));
+            }
+        }
+
+        private void CreateTexturesTree(TreeNode parent)
+        {
+            foreach (var subfolder in new[] { "Characters", "Tiles" })
+            {
+                var subNode = new ProjectTreeNode(subfolder, ProjectItemType.Folder, null);
+                var subfolderPath = subfolder.ToLower();
+                var files = ResourceManager.GetTextureFiles(subfolderPath);
+                foreach (var file in files)
+                {
+                    subNode.Nodes.Add(new ProjectTreeNode(
+                        Path.GetFileName(file),
+                        ProjectItemType.Texture,
+                        file));
+                }
+                parent.Nodes.Add(subNode);
             }
         }
 

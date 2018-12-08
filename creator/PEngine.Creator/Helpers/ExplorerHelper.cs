@@ -10,5 +10,11 @@ namespace PEngine.Creator.Helpers
             var path = Path.GetFullPath(filePath); // normalize path
             Process.Start("explorer.exe", $"/select, \"{path}\"");
         }
+
+        public static void OpenInFolder(string folderPath)
+        {
+            var path = Path.GetFullPath(folderPath); // normalize path
+            Process.Start("explorer.exe", $"\"{path}\"");
+        }
     }
 }

@@ -33,9 +33,18 @@
             this.tree_main = new System.Windows.Forms.TreeView();
             this.tree_images = new System.Windows.Forms.ImageList(this.components);
             this.tool_main = new System.Windows.Forms.ToolStrip();
+            this.context_containers = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.context_items = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.context_items_open = new System.Windows.Forms.ToolStripMenuItem();
             this.tool_refresh = new System.Windows.Forms.ToolStripButton();
             this.tool_collapse = new System.Windows.Forms.ToolStripButton();
+            this.context_containers_reveal = new System.Windows.Forms.ToolStripMenuItem();
+            this.context_items_reveal = new System.Windows.Forms.ToolStripMenuItem();
+            this.context_items_exclude = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tool_main.SuspendLayout();
+            this.context_containers.SuspendLayout();
+            this.context_items.SuspendLayout();
             this.SuspendLayout();
             // 
             // tree_main
@@ -46,6 +55,7 @@
             this.tree_main.BackColor = global::PEngine.Creator.Properties.Settings.Default.Color_LightGray;
             this.tree_main.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tree_main.FullRowSelect = true;
+            this.tree_main.HideSelection = false;
             this.tree_main.ImageIndex = 0;
             this.tree_main.ImageList = this.tree_images;
             this.tree_main.Location = new System.Drawing.Point(0, 28);
@@ -54,6 +64,7 @@
             this.tree_main.ShowLines = false;
             this.tree_main.Size = new System.Drawing.Size(326, 568);
             this.tree_main.TabIndex = 0;
+            this.tree_main.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tree_main_NodeMouseClick);
             this.tree_main.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tree_main_NodeMouseDoubleClick);
             // 
             // tree_images
@@ -79,6 +90,30 @@
             this.tool_main.Size = new System.Drawing.Size(326, 25);
             this.tool_main.TabIndex = 1;
             // 
+            // context_containers
+            // 
+            this.context_containers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.context_containers_reveal});
+            this.context_containers.Name = "context_containers";
+            this.context_containers.Size = new System.Drawing.Size(167, 26);
+            // 
+            // context_items
+            // 
+            this.context_items.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.context_items_open,
+            this.context_items_reveal,
+            this.toolStripSeparator1,
+            this.context_items_exclude});
+            this.context_items.Name = "context_items";
+            this.context_items.Size = new System.Drawing.Size(184, 76);
+            // 
+            // context_items_open
+            // 
+            this.context_items_open.Name = "context_items_open";
+            this.context_items_open.Size = new System.Drawing.Size(183, 22);
+            this.context_items_open.Text = "Open";
+            this.context_items_open.Click += new System.EventHandler(this.context_items_open_Click);
+            // 
             // tool_refresh
             // 
             this.tool_refresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -97,6 +132,35 @@
             this.tool_collapse.Size = new System.Drawing.Size(23, 22);
             this.tool_collapse.Text = "Collapse All";
             // 
+            // context_containers_reveal
+            // 
+            this.context_containers_reveal.Image = global::PEngine.Creator.Properties.Resources.folder_Open_16xLG;
+            this.context_containers_reveal.Name = "context_containers_reveal";
+            this.context_containers_reveal.Size = new System.Drawing.Size(180, 22);
+            this.context_containers_reveal.Text = "Reveal in Explorer";
+            this.context_containers_reveal.Click += new System.EventHandler(this.context_containers_reveal_Click);
+            // 
+            // context_items_reveal
+            // 
+            this.context_items_reveal.Image = global::PEngine.Creator.Properties.Resources.folder_Open_16xLG;
+            this.context_items_reveal.Name = "context_items_reveal";
+            this.context_items_reveal.Size = new System.Drawing.Size(183, 22);
+            this.context_items_reveal.Text = "Reveal in Explorer";
+            this.context_items_reveal.Click += new System.EventHandler(this.context_items_reveal_Click);
+            // 
+            // context_items_exclude
+            // 
+            this.context_items_exclude.Image = global::PEngine.Creator.Properties.Resources.HiddenFolder_427;
+            this.context_items_exclude.Name = "context_items_exclude";
+            this.context_items_exclude.Size = new System.Drawing.Size(183, 22);
+            this.context_items_exclude.Text = "Exclude from Project";
+            this.context_items_exclude.Click += new System.EventHandler(this.context_items_exclude_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(180, 6);
+            // 
             // ProjectTree
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -107,6 +171,8 @@
             this.Size = new System.Drawing.Size(326, 596);
             this.tool_main.ResumeLayout(false);
             this.tool_main.PerformLayout();
+            this.context_containers.ResumeLayout(false);
+            this.context_items.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -119,5 +185,12 @@
         private System.Windows.Forms.ToolStripButton tool_refresh;
         private System.Windows.Forms.ToolStripButton tool_collapse;
         private System.Windows.Forms.ImageList tree_images;
+        private System.Windows.Forms.ContextMenuStrip context_containers;
+        private System.Windows.Forms.ToolStripMenuItem context_containers_reveal;
+        private System.Windows.Forms.ContextMenuStrip context_items;
+        private System.Windows.Forms.ToolStripMenuItem context_items_open;
+        private System.Windows.Forms.ToolStripMenuItem context_items_reveal;
+        private System.Windows.Forms.ToolStripMenuItem context_items_exclude;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

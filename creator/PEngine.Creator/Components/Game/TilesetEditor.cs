@@ -393,6 +393,7 @@ namespace PEngine.Creator.Components.Game
                 {
                     Text = "<No Subtile selected>",
                     Location = new Point(16, 32),
+                    AutoSize = true,
                 };
                 group_selected_subtile.Controls.Add(lbl_no_selection);
             }

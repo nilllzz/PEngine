@@ -342,5 +342,8 @@
   <ItemGroup>
     <None Include="Resources\StatusAnnotations_Information_16xLG_color.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HiddenFolder_427.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

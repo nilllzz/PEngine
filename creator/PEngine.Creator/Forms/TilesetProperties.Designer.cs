@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.group_main = new System.Windows.Forms.GroupBox();
+            this.pic_info_id = new System.Windows.Forms.PictureBox();
             this.combo_texture = new System.Windows.Forms.ComboBox();
             this.txt_id = new System.Windows.Forms.TextBox();
             this.lbl_texture = new System.Windows.Forms.Label();
@@ -37,11 +38,10 @@
             this.btn_ok = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pic_info_id = new System.Windows.Forms.PictureBox();
             this.tooltip_main = new System.Windows.Forms.ToolTip(this.components);
             this.group_main.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_info_id)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // group_main
@@ -61,6 +61,18 @@
             this.group_main.TabStop = false;
             this.group_main.Text = "      Properties";
             // 
+            // pic_info_id
+            // 
+            this.pic_info_id.Cursor = System.Windows.Forms.Cursors.Help;
+            this.pic_info_id.Image = global::PEngine.Creator.Properties.Resources.StatusAnnotations_Information_16xLG_color;
+            this.pic_info_id.Location = new System.Drawing.Point(252, 41);
+            this.pic_info_id.Name = "pic_info_id";
+            this.pic_info_id.Size = new System.Drawing.Size(16, 16);
+            this.pic_info_id.TabIndex = 4;
+            this.pic_info_id.TabStop = false;
+            this.tooltip_main.SetToolTip(this.pic_info_id, "Changing the tileset id requires you to save the entire project.\r\nYou also need t" +
+        "o update all maps that used this tileset with its old id.");
+            // 
             // combo_texture
             // 
             this.combo_texture.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -77,6 +89,7 @@
             this.txt_id.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_id.Location = new System.Drawing.Point(60, 38);
+            this.txt_id.MaxLength = 64;
             this.txt_id.Name = "txt_id";
             this.txt_id.Size = new System.Drawing.Size(188, 23);
             this.txt_id.TabIndex = 2;
@@ -130,18 +143,6 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // pic_info_id
-            // 
-            this.pic_info_id.Cursor = System.Windows.Forms.Cursors.Help;
-            this.pic_info_id.Image = global::PEngine.Creator.Properties.Resources.StatusAnnotations_Information_16xLG_color;
-            this.pic_info_id.Location = new System.Drawing.Point(252, 41);
-            this.pic_info_id.Name = "pic_info_id";
-            this.pic_info_id.Size = new System.Drawing.Size(16, 16);
-            this.pic_info_id.TabIndex = 4;
-            this.pic_info_id.TabStop = false;
-            this.tooltip_main.SetToolTip(this.pic_info_id, "Changing the tileset id requires you to save the entire project.\r\nYou also need t" +
-        "o update all maps that used this tileset with its old id.");
-            // 
             // tooltip_main
             // 
             this.tooltip_main.AutoPopDelay = 5000;
@@ -165,8 +166,8 @@
             this.Text = "Edit Tileset";
             this.group_main.ResumeLayout(false);
             this.group_main.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_info_id)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

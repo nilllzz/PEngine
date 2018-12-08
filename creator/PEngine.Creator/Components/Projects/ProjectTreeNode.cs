@@ -14,19 +14,34 @@ namespace PEngine.Creator.Components.Projects
         private const int ICON_IMAGE = 4;
         private const int ICON_TILESET = 5;
 
+        private readonly string _folderPath = null;
         private readonly int _collapsedIconIndex;
         private readonly int _expandedIconIndex;
 
         public ProjectItemType ItemType { get; }
         public ProjectFileData FileData { get; }
-        public string FilePath => Path.Combine(Project.ActiveProject.BaseDirectory, FileData.path);
+        public string FilePath
+        {
+            get
+            {
+                if (ItemType == ProjectItemType.Folder)
+                {
+                    return _folderPath;
+                }
+                else
+                {
+                    return Path.Combine(Project.ActiveProject.BaseDirectory, FileData.path);
+                }
+            }
+        }
 
-        public ProjectTreeNode(string folderText)
+        public ProjectTreeNode(string folderText, string path)
             : base(folderText)
         {
             ItemType = ProjectItemType.Folder;
             FileData = null;
 
+            _folderPath = path;
             _collapsedIconIndex = ICON_FOLDER_CLOSED;
             _expandedIconIndex = ICON_FOLDER_OPEN;
 

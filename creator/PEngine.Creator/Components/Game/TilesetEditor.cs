@@ -1,8 +1,10 @@
-﻿using PEngine.Common.Data;
+﻿using PEngine.Common;
+using PEngine.Common.Data;
 using PEngine.Common.Data.Maps;
 using PEngine.Creator.Components.Projects;
+using PEngine.Creator.Forms;
 using PEngine.Creator.Properties;
-using System.IO;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -16,9 +18,12 @@ namespace PEngine.Creator.Components.Game
 
         private TileData _selectedTile;
         private SubtileData _selectedSubtile;
+        private bool _tileAddMode = true;
 
         public override string FilePath => _item.FilePath;
         public override string Identifier => _item.Identifier;
+        public override int IconIndex => ICON_TILESET;
+        public override ProjectItem ProjectItem => _item;
 
         public TilesetEditor(ProjectEventBus eventBus, TilesetData data, ProjectItem item)
         {
@@ -30,7 +35,7 @@ namespace PEngine.Creator.Components.Game
             _eventBus = eventBus;
             RegisterEvents();
 
-            SetTileset();
+            InitData();
         }
 
         #region events
@@ -57,6 +62,22 @@ namespace PEngine.Creator.Components.Game
             _eventBus.SubtileUpdated -= _eventBus_SubtileUpdated;
             _eventBus.TileAdded -= _eventBus_TileAdded;
             _eventBus.TileRemoved -= _eventBus_TileRemoved;
+
+            // unregister children
+            foreach (var control in panel_tiles_container.Controls)
+            {
+                if (control is TileComponent tileComp)
+                {
+                    tileComp.UnregisterEvents();
+                }
+            }
+            foreach (var control in panel_subtile_container.Controls)
+            {
+                if (control is SubtileComponent subtileComp)
+                {
+                    subtileComp.UnregisterEvents();
+                }
+            }
         }
 
         private void _eventBus_TileAdded(TilesetData tileset, TileData tile)
@@ -66,7 +87,7 @@ namespace PEngine.Creator.Components.Game
                 var tileComp = new TileComponent(_eventBus, _data, tile);
                 panel_tiles_container.Controls.Add(tileComp);
 
-                lbl_tiles.Text = $"Tiles ({_data.tiles.Length})";
+                tool_editor_lbl_tiles.Text = $"Tiles ({_data.tiles.Length})";
                 HasChanges = true;
             }
         }
@@ -84,7 +105,7 @@ namespace PEngine.Creator.Components.Game
                     }
                 }
 
-                lbl_tiles.Text = $"Tiles ({_data.tiles.Length})";
+                tool_editor_lbl_tiles.Text = $"Tiles ({_data.tiles.Length})";
                 HasChanges = true;
             }
         }
@@ -114,7 +135,7 @@ namespace PEngine.Creator.Components.Game
                 var subtileComp = new SubtileComponent(_eventBus, _data, subtile);
                 panel_subtile_container.Controls.Add(subtileComp);
 
-                lbl_subtiles_title.Text = $"Subtiles ({_data.subtiles.Length})";
+                tool_subtiles_lbl_title.Text = $"Subtiles ({_data.subtiles.Length})";
                 HasChanges = true;
             }
         }
@@ -137,7 +158,7 @@ namespace PEngine.Creator.Components.Game
                     _eventBus.SelectedSubtile(_data, null);
                 }
 
-                lbl_subtiles_title.Text = $"Subtiles ({_data.subtiles.Length})";
+                tool_subtiles_lbl_title.Text = $"Subtiles ({_data.subtiles.Length})";
                 HasChanges = true;
             }
         }
@@ -153,12 +174,20 @@ namespace PEngine.Creator.Components.Game
 
         private void _eventBus_SubtileUpdated(TilesetData tileset, SubtileData subtile)
         {
-            if (tileset.id == _data.id && _selectedSubtile != null && subtile.id == _selectedSubtile.id)
+            if (tileset.id == _data.id)
             {
-                _selectedSubtile = subtile;
-                UpdateSelectedSubtile();
+                if (_selectedSubtile != null && subtile.id == _selectedSubtile.id)
+                {
+                    _selectedSubtile = subtile;
+                    UpdateSelectedSubtile();
 
-                HasChanges = true;
+                    HasChanges = true;
+                }
+
+                if (_selectedTile != null && _selectedTile.subtiles.Any(s => s == subtile.id))
+                {
+                    UpdateSelectedTile();
+                }
             }
         }
 
@@ -168,25 +197,53 @@ namespace PEngine.Creator.Components.Game
 
         private void pic_tile_1_Click(object sender, System.EventArgs e)
         {
-            PlaceSubtile(0);
+            if (_tileAddMode)
+            {
+                PlaceSubtile(0);
+            }
+            else
+            {
+                PickSubtile(0);
+            }
         }
 
         private void pic_tile_2_Click(object sender, System.EventArgs e)
         {
-            PlaceSubtile(1);
+            if (_tileAddMode)
+            {
+                PlaceSubtile(1);
+            }
+            else
+            {
+                PickSubtile(1);
+            }
         }
 
         private void pic_tile_3_Click(object sender, System.EventArgs e)
         {
-            PlaceSubtile(2);
+            if (_tileAddMode)
+            {
+                PlaceSubtile(2);
+            }
+            else
+            {
+                PickSubtile(2);
+            }
         }
 
         private void pic_tile_4_Click(object sender, System.EventArgs e)
         {
-            PlaceSubtile(3);
+            if (_tileAddMode)
+            {
+                PlaceSubtile(3);
+            }
+            else
+            {
+                PickSubtile(3);
+            }
         }
 
-        private void btn_add_subtile_Click(object sender, System.EventArgs e)
+        private void tool_subtiles_add_Click(object sender, System.EventArgs e)
         {
             if (_data.subtiles.Length >= ProjectService.MAX_SUBTILES_IN_SET)
             {
@@ -209,7 +266,7 @@ namespace PEngine.Creator.Components.Game
             _eventBus.AddedSubtile(_data, subtile);
         }
 
-        private void btn_add_tile_Click(object sender, System.EventArgs e)
+        private void tool_editor_add_tile_Click(object sender, System.EventArgs e)
         {
             if (_data.tiles.Length >= ProjectService.MAX_TILES_IN_SET)
             {
@@ -256,60 +313,112 @@ namespace PEngine.Creator.Components.Game
             _eventBus.SelectedTile(_data, null);
         }
 
+        private void pic_edit_mode_Click(object sender, System.EventArgs e)
+        {
+            _tileAddMode = !_tileAddMode;
+            if (_tileAddMode)
+            {
+                pic_edit_mode.Image = Resources.arrow_previous_16xLG;
+            }
+            else
+            {
+                pic_edit_mode.Image = Resources.arrow_Next_16xLG;
+            }
+        }
+
+        private void tool_editor_properties_Click(object sender, System.EventArgs e)
+        {
+            var tilesetProperties = new TilesetProperties(_eventBus, _data);
+            var result = tilesetProperties.ShowDialog(MainForm.Instance);
+            if (result == DialogResult.OK)
+            {
+                if (tilesetProperties.MadeFileChanges)
+                {
+                    HasChanges = true;
+                    InitData();
+                }
+                if (tilesetProperties.MadeProjectChanges)
+                {
+                    HasProjectChanges = true;
+                }
+            }
+        }
+
+        private void tool_editor_texture_Click(object sender, System.EventArgs e)
+        {
+            var textureFile = Project.ActiveProject.GetFile(_data.texture, ProjectFileType.TextureTileset);
+
+            _eventBus.RequestItemOpen(new ProjectItem
+            {
+                FileData = textureFile,
+                ItemType = ProjectItemType.Texture,
+            });
+        }
+
         #endregion
 
-        private void SetTileset()
+        private void InitData()
         {
-            Title = Path.GetFileName(_item.FilePath);
+            Title = _data.id;
 
+            panel_subtile_container.Controls.Clear();
             foreach (var subtile in _data.subtiles)
             {
                 var subtileComp = new SubtileComponent(_eventBus, _data, subtile);
                 panel_subtile_container.Controls.Add(subtileComp);
             }
 
+            panel_tiles_container.Controls.Clear();
             foreach (var tile in _data.tiles)
             {
                 var tileComp = new TileComponent(_eventBus, _data, tile);
                 panel_tiles_container.Controls.Add(tileComp);
             }
 
-            lbl_subtiles_title.Text = $"Subtiles ({_data.subtiles.Length})";
-            lbl_tiles.Text = $"Tiles ({_data.tiles.Length})";
+            tool_subtiles_lbl_title.Text = $"Subtiles ({_data.subtiles.Length})";
+            tool_editor_lbl_tiles.Text = $"Tiles ({_data.tiles.Length})";
+
+            _selectedSubtile = null;
+            _selectedTile = null;
+            UpdateSelectedSubtile();
+            UpdateSelectedTile();
         }
 
         private void UpdateSelectedSubtile()
         {
+            group_selected_subtile.Controls.Clear();
             if (_selectedSubtile == null)
             {
-                lbl_selected_subtile.Text = "No subtile selected";
-                pic_selected_subtile.Image = Resources.document_16xLG;
-                return;
+                var lbl_no_selection = new Label()
+                {
+                    Text = "<No Subtile selected>",
+                    Location = new Point(16, 32),
+                };
+                group_selected_subtile.Controls.Add(lbl_no_selection);
             }
-
-            var subtileTexture = ResourceManager.GetSubtileTexture(_data, _selectedSubtile);
-            pic_selected_subtile.Image = subtileTexture;
-
-            lbl_selected_subtile.Text = $"<{DataHelper.ParseEnum<SubtileBehavior>(_selectedSubtile.behavior).ToString()}>";
+            else
+            {
+                var subtileEditor = new SubtileEditComponent(_eventBus, _data, _selectedSubtile)
+                {
+                    Location = new Point(12, 20),
+                };
+                group_selected_subtile.Controls.Add(subtileEditor);
+            }
         }
 
         private void UpdateSelectedTile()
         {
             if (_selectedTile == null)
             {
-                lbl_tile_title.Text = "(no tile selected)";
-                pic_tile_1.Image = Resources.document_16xLG;
-                pic_tile_2.Image = Resources.document_16xLG;
-                pic_tile_3.Image = Resources.document_16xLG;
-                pic_tile_4.Image = Resources.document_16xLG;
-                btn_remove_tile.Enabled = false;
+                pic_tile_1.Image = Resources.subtile;
+                pic_tile_2.Image = Resources.subtile;
+                pic_tile_3.Image = Resources.subtile;
+                pic_tile_4.Image = Resources.subtile;
                 return;
             }
 
             for (var i = 0; i < _selectedTile.subtiles.Length; i++)
             {
-                lbl_tile_title.Text = "Edit selected tile";
-                btn_remove_tile.Enabled = true;
                 var subtileId = _selectedTile.subtiles[i];
                 var subtileData = _data.subtiles.First(s => s.id == subtileId);
                 var subtileTexture = ResourceManager.GetSubtileTexture(_data, subtileData);
@@ -341,9 +450,28 @@ namespace PEngine.Creator.Components.Game
             }
         }
 
+        private void PickSubtile(int position)
+        {
+            if (_selectedTile != null)
+            {
+                var subtileId = _selectedTile.subtiles[position];
+                var subtileData = _data.subtiles.FirstOrDefault(s => s.id == subtileId);
+                if (subtileData != null)
+                {
+                    _eventBus.SelectedSubtile(_data, subtileData);
+                }
+            }
+        }
+
         public override void Save()
         {
+            base.Save();
+
             _data.Save();
+
+            // update id if it changed
+            _item.FileData.id = _data.id;
+
             HasChanges = false;
         }
     }

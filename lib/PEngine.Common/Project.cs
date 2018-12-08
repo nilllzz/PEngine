@@ -2,6 +2,7 @@
 using PEngine.Common.Data;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace PEngine.Common
 {
@@ -40,6 +41,16 @@ namespace PEngine.Common
                 createdOn = DateTime.UtcNow,
                 changedOn = DateTime.UtcNow,
             };
+        }
+
+        public ProjectFileData[] GetFiles(ProjectFileType type)
+        {
+            return _data.files.Where(f => f.GetFileType() == type).ToArray();
+        }
+
+        public ProjectFileData GetFile(string id, ProjectFileType type)
+        {
+            return _data.files.FirstOrDefault(f => f.id == id && f.GetFileType() == type);
         }
 
         public void Load()

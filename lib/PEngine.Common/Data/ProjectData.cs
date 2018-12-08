@@ -8,5 +8,6 @@ namespace PEngine.Common.Data
         public string author;
         public DateTime createdOn;
         public DateTime changedOn;
+        public ProjectFileData[] files;
     }
 }

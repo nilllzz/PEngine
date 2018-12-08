@@ -1,7 +1,6 @@
 ﻿using PEngine.Creator.Components.Projects;
 using PEngine.Creator.Helpers;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 
 namespace PEngine.Creator.Components.Game
@@ -22,7 +21,7 @@ namespace PEngine.Creator.Components.Game
             _item = item;
             LoadTexture();
 
-            Title = Path.GetFileName(_item.FilePath);
+            Title = _item.FileData.id;
         }
 
         private void LoadTexture()

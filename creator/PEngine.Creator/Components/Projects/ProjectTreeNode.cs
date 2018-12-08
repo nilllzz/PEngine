@@ -1,4 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using PEngine.Common;
+using PEngine.Common.Data;
+using System.IO;
+using System.Windows.Forms;
 
 namespace PEngine.Creator.Components.Projects
 {
@@ -9,47 +12,51 @@ namespace PEngine.Creator.Components.Projects
         private const int ICON_FOLDER_OPEN = 2;
         private const int ICON_MAP = 3;
         private const int ICON_IMAGE = 4;
+        private const int ICON_TILESET = 5;
 
         private readonly int _collapsedIconIndex;
         private readonly int _expandedIconIndex;
 
         public ProjectItemType ItemType { get; }
-        public string FilePath { get; }
+        public ProjectFileData FileData { get; }
+        public string FilePath => Path.Combine(Project.ActiveProject.BaseDirectory, FileData.path);
 
-        public ProjectTreeNode(string text, ProjectItemType itemType, string filePath)
-            : base(text)
+        public ProjectTreeNode(string folderText)
+            : base(folderText)
         {
-            ItemType = itemType;
-            FilePath = filePath;
+            ItemType = ProjectItemType.Folder;
+            FileData = null;
 
-            var collapsedIconIndex = ICON_DOCUMENT;
-            var expandedIconIndex = -1;
-            switch (ItemType)
+            _collapsedIconIndex = ICON_FOLDER_CLOSED;
+            _expandedIconIndex = ICON_FOLDER_OPEN;
+
+            ImageIndex = _collapsedIconIndex;
+            SelectedImageIndex = ImageIndex;
+        }
+
+        public ProjectTreeNode(ProjectFileData fileData)
+            : base(fileData.id)
+        {
+            FileData = fileData;
+
+            switch (fileData.GetFileType())
             {
-                case ProjectItemType.Folder:
-                    collapsedIconIndex = ICON_FOLDER_CLOSED;
-                    expandedIconIndex = ICON_FOLDER_OPEN;
+                case ProjectFileType.Map:
+                    _collapsedIconIndex = ICON_MAP;
+                    ItemType = ProjectItemType.Map;
                     break;
-                case ProjectItemType.Map:
-                    collapsedIconIndex = ICON_MAP;
+                case ProjectFileType.Tileset:
+                    _collapsedIconIndex = ICON_TILESET;
+                    ItemType = ProjectItemType.Tileset;
                     break;
-                case ProjectItemType.Tileset:
-                    collapsedIconIndex = ICON_DOCUMENT;
-                    break;
-                case ProjectItemType.Texture:
-                    collapsedIconIndex = ICON_IMAGE;
+                case ProjectFileType.TextureTileset:
+                case ProjectFileType.TextureCharacter:
+                    _collapsedIconIndex = ICON_IMAGE;
+                    ItemType = ProjectItemType.Texture;
                     break;
             }
 
-            _collapsedIconIndex = collapsedIconIndex;
-            if (expandedIconIndex == -1)
-            {
-                _expandedIconIndex = collapsedIconIndex;
-            }
-            else
-            {
-                _expandedIconIndex = expandedIconIndex;
-            }
+            _expandedIconIndex = _collapsedIconIndex;
             ImageIndex = _collapsedIconIndex;
             SelectedImageIndex = ImageIndex;
         }

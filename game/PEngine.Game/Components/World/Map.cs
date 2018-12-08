@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using PEngine.Common;
 using PEngine.Common.Data;
 using PEngine.Common.Data.Maps;
 using PEngine.Game.Components.World.Entities;
@@ -28,7 +29,8 @@ namespace PEngine.Game.Components.World
 
         public void LoadContent()
         {
-            _data = MapData.FetchOne(_id);
+            var file = Project.ActiveProject.GetFile(_id, ProjectFileType.Map);
+            _data = MapData.Load(file.path);
 
             _tileset = new Tileset(_data.tileset);
             _tileset.LoadContent();

@@ -1,13 +1,11 @@
 ﻿using PEngine.Common;
-using PEngine.Common.Data.Maps;
-using PEngine.Creator.Components.Game;
+using PEngine.Common.Data;
 using System;
-using System.IO;
 using System.Windows.Forms;
 
 namespace PEngine.Creator.Components.Projects
 {
-    public partial class ProjectTree : UserControl
+    public partial class ProjectTree : UserControl, IEventBusComponent
     {
         private ProjectEventBus _eventBus;
 
@@ -16,10 +14,33 @@ namespace PEngine.Creator.Components.Projects
             InitializeComponent();
         }
 
+        #region events
+
         public void SetEventBus(ProjectEventBus eventBus)
         {
             _eventBus = eventBus;
+            UnregisterEvents();
+            RegisterEvents();
         }
+
+        private void RegisterEvents()
+        {
+            _eventBus.FileUpdated += _eventBus_FileUpdated;
+        }
+
+        public void UnregisterEvents()
+        {
+            _eventBus.FileUpdated -= _eventBus_FileUpdated;
+        }
+
+        private void _eventBus_FileUpdated(ProjectFileData file)
+        {
+            // update text
+            var node = FindTreeNode(file.id, file.GetFileType(), tree_main.Nodes[0] as ProjectTreeNode);
+            node.Text = file.id;
+        }
+
+        #endregion
 
         protected override void OnLoad(EventArgs e)
         {
@@ -37,21 +58,21 @@ namespace PEngine.Creator.Components.Projects
 
             var project = Project.ActiveProject;
 
-            var root = new ProjectTreeNode($"Project '{project.Name}'", ProjectItemType.Folder, null);
+            var root = new ProjectTreeNode($"Project '{project.Name}'");
 
-            var maps = new ProjectTreeNode("Maps", ProjectItemType.Folder, null);
+            var maps = new ProjectTreeNode("Maps");
             CreateMapsTree(maps);
             root.Nodes.Add(maps);
 
-            var tilesets = new ProjectTreeNode("Tilesets", ProjectItemType.Folder, null);
+            var tilesets = new ProjectTreeNode("Tilesets");
             CreateTilesetsTree(tilesets);
             root.Nodes.Add(tilesets);
 
-            var scripts = new ProjectTreeNode("Scripts", ProjectItemType.Folder, null);
+            var scripts = new ProjectTreeNode("Scripts");
             root.Nodes.Add(scripts);
 
-            var content = new ProjectTreeNode("Content", ProjectItemType.Folder, null);
-            var textures = new ProjectTreeNode("Textures", ProjectItemType.Folder, null);
+            var content = new ProjectTreeNode("Content");
+            var textures = new ProjectTreeNode("Textures");
             CreateTexturesTree(textures);
             content.Nodes.Add(textures);
             root.Nodes.Add(content);
@@ -62,44 +83,39 @@ namespace PEngine.Creator.Components.Projects
 
         private void CreateMapsTree(TreeNode parent)
         {
-            var mapFiles = MapData.GetAllSourceFiles();
+            var mapFiles = Project.ActiveProject.GetFiles(ProjectFileType.Map);
             foreach (var mapFile in mapFiles)
             {
-                parent.Nodes.Add(new ProjectTreeNode(
-                    Path.GetFileName(mapFile),
-                    ProjectItemType.Map,
-                    mapFile));
+                parent.Nodes.Add(new ProjectTreeNode(mapFile));
             }
         }
 
         private void CreateTilesetsTree(TreeNode parent)
         {
-            var tilesetFiles = TilesetData.GetAllSourceFiles();
+            var tilesetFiles = Project.ActiveProject.GetFiles(ProjectFileType.Tileset);
             foreach (var tilesetFile in tilesetFiles)
             {
-                parent.Nodes.Add(new ProjectTreeNode(
-                    Path.GetFileName(tilesetFile),
-                    ProjectItemType.Tileset,
-                    tilesetFile));
+                parent.Nodes.Add(new ProjectTreeNode(tilesetFile));
             }
         }
 
         private void CreateTexturesTree(TreeNode parent)
         {
-            foreach (var subfolder in new[] { "Characters", "Tiles" })
+            var tileTextureNode = new ProjectTreeNode("Tiles");
+            var tileTextures = Project.ActiveProject.GetFiles(ProjectFileType.TextureTileset);
+            foreach (var tileTextureFile in tileTextures)
             {
-                var subNode = new ProjectTreeNode(subfolder, ProjectItemType.Folder, null);
-                var subfolderPath = subfolder.ToLower();
-                var files = ResourceManager.GetTextureFiles(subfolderPath);
-                foreach (var file in files)
-                {
-                    subNode.Nodes.Add(new ProjectTreeNode(
-                        Path.GetFileName(file),
-                        ProjectItemType.Texture,
-                        file));
-                }
-                parent.Nodes.Add(subNode);
+                tileTextureNode.Nodes.Add(new ProjectTreeNode(tileTextureFile));
             }
+            parent.Nodes.Add(tileTextureNode);
+
+            var characterTextureNode = new ProjectTreeNode("Characters");
+            var characterTextures = Project.ActiveProject.GetFiles(ProjectFileType.TextureCharacter);
+            foreach (var characterTextureFile in characterTextures)
+            {
+                characterTextureNode.Nodes.Add(new ProjectTreeNode(characterTextureFile));
+            }
+            parent.Nodes.Add(characterTextureNode);
         }
 
         private void Tree_main_AfterCollapse(object sender, TreeViewEventArgs e)
@@ -121,10 +137,30 @@ namespace PEngine.Creator.Components.Projects
                     _eventBus.RequestItemOpen(new ProjectItem
                     {
                         ItemType = projectNode.ItemType,
-                        FilePath = projectNode.FilePath,
+                        FileData = projectNode.FileData,
                     });
                 }
             }
+        }
+
+        private ProjectTreeNode FindTreeNode(string id, ProjectFileType filetype, ProjectTreeNode node)
+        {
+            if (node.FileData != null && node.FileData.id == id && node.FileData.GetFileType() == filetype)
+            {
+                return node;
+            }
+            foreach (var subnode in node.Nodes)
+            {
+                if (subnode is ProjectTreeNode projNode)
+                {
+                    var result = FindTreeNode(id, filetype, projNode);
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            return null;
         }
     }
 }

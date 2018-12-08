@@ -29,76 +29,86 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.combo_behavior = new System.Windows.Forms.ComboBox();
-            this.btn_remove = new System.Windows.Forms.Button();
-            this.pic_pick_texture = new System.Windows.Forms.PictureBox();
             this.pic_texture = new System.Windows.Forms.PictureBox();
-            this.tooltip_main = new System.Windows.Forms.ToolTip(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.pic_pick_texture)).BeginInit();
+            this.lbl_behavior = new System.Windows.Forms.Label();
+            this.context_subtile = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.context_subtile_duplicate = new System.Windows.Forms.ToolStripMenuItem();
+            this.context_subtile_delete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.pic_texture)).BeginInit();
+            this.context_subtile.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // combo_behavior
-            // 
-            this.combo_behavior.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.combo_behavior.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.combo_behavior.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
-            this.combo_behavior.FormattingEnabled = true;
-            this.combo_behavior.Location = new System.Drawing.Point(52, 5);
-            this.combo_behavior.Name = "combo_behavior";
-            this.combo_behavior.Size = new System.Drawing.Size(100, 23);
-            this.combo_behavior.TabIndex = 1;
-            this.combo_behavior.SelectedIndexChanged += new System.EventHandler(this.combo_behavior_SelectedIndexChanged);
-            // 
-            // btn_remove
-            // 
-            this.btn_remove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_remove.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
-            this.btn_remove.Image = global::PEngine.Creator.Properties.Resources.Clearallrequests_8816;
-            this.btn_remove.Location = new System.Drawing.Point(157, 4);
-            this.btn_remove.Name = "btn_remove";
-            this.btn_remove.Size = new System.Drawing.Size(25, 23);
-            this.btn_remove.TabIndex = 2;
-            this.btn_remove.UseVisualStyleBackColor = true;
-            this.btn_remove.Click += new System.EventHandler(this.btn_remove_Click);
-            // 
-            // pic_pick_texture
-            // 
-            this.pic_pick_texture.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pic_pick_texture.Image = global::PEngine.Creator.Properties.Resources.ColorSelectionTool_202;
-            this.pic_pick_texture.Location = new System.Drawing.Point(32, 16);
-            this.pic_pick_texture.Name = "pic_pick_texture";
-            this.pic_pick_texture.Size = new System.Drawing.Size(16, 16);
-            this.pic_pick_texture.TabIndex = 3;
-            this.pic_pick_texture.TabStop = false;
-            this.tooltip_main.SetToolTip(this.pic_pick_texture, "Pick Texture");
-            this.pic_pick_texture.Click += new System.EventHandler(this.pic_pick_texture_Click);
             // 
             // pic_texture
             // 
-            this.pic_texture.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pic_texture.ContextMenuStrip = this.context_subtile;
             this.pic_texture.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pic_texture.Location = new System.Drawing.Point(0, 0);
+            this.pic_texture.Location = new System.Drawing.Point(27, 3);
             this.pic_texture.Name = "pic_texture";
             this.pic_texture.Size = new System.Drawing.Size(32, 32);
-            this.pic_texture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pic_texture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pic_texture.TabIndex = 0;
             this.pic_texture.TabStop = false;
             this.pic_texture.Click += new System.EventHandler(this.pic_texture_Click);
+            // 
+            // lbl_behavior
+            // 
+            this.lbl_behavior.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_behavior.ContextMenuStrip = this.context_subtile;
+            this.lbl_behavior.Location = new System.Drawing.Point(-1, 38);
+            this.lbl_behavior.Name = "lbl_behavior";
+            this.lbl_behavior.Size = new System.Drawing.Size(91, 22);
+            this.lbl_behavior.TabIndex = 1;
+            this.lbl_behavior.Text = "<behavior>";
+            this.lbl_behavior.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_behavior.Click += new System.EventHandler(this.lbl_behavior_Click);
+            // 
+            // context_subtile
+            // 
+            this.context_subtile.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.context_subtile_duplicate,
+            this.toolStripSeparator1,
+            this.context_subtile_delete});
+            this.context_subtile.Name = "context_subtile";
+            this.context_subtile.Size = new System.Drawing.Size(181, 76);
+            this.context_subtile.Opening += new System.ComponentModel.CancelEventHandler(this.context_subtile_Opening);
+            // 
+            // context_subtile_duplicate
+            // 
+            this.context_subtile_duplicate.Image = global::PEngine.Creator.Properties.Resources.Copy_6524;
+            this.context_subtile_duplicate.Name = "context_subtile_duplicate";
+            this.context_subtile_duplicate.Size = new System.Drawing.Size(180, 22);
+            this.context_subtile_duplicate.Text = "Duplicate";
+            this.context_subtile_duplicate.Click += new System.EventHandler(this.context_subtile_duplicate_Click);
+            // 
+            // context_subtile_delete
+            // 
+            this.context_subtile_delete.Image = global::PEngine.Creator.Properties.Resources.Clearallrequests_8816;
+            this.context_subtile_delete.Name = "context_subtile_delete";
+            this.context_subtile_delete.Size = new System.Drawing.Size(180, 22);
+            this.context_subtile_delete.Text = "Delete";
+            this.context_subtile_delete.Click += new System.EventHandler(this.context_subtile_delete_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // SubtileComponent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.pic_pick_texture);
-            this.Controls.Add(this.btn_remove);
-            this.Controls.Add(this.combo_behavior);
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ContextMenuStrip = this.context_subtile;
+            this.Controls.Add(this.lbl_behavior);
             this.Controls.Add(this.pic_texture);
+            this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Name = "SubtileComponent";
-            this.Size = new System.Drawing.Size(187, 34);
-            ((System.ComponentModel.ISupportInitialize)(this.pic_pick_texture)).EndInit();
+            this.Size = new System.Drawing.Size(89, 60);
+            this.Click += new System.EventHandler(this.SubtileComponent_Click);
             ((System.ComponentModel.ISupportInitialize)(this.pic_texture)).EndInit();
+            this.context_subtile.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -106,9 +116,10 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pic_texture;
-        private System.Windows.Forms.ComboBox combo_behavior;
-        private System.Windows.Forms.Button btn_remove;
-        private System.Windows.Forms.PictureBox pic_pick_texture;
-        private System.Windows.Forms.ToolTip tooltip_main;
+        private System.Windows.Forms.Label lbl_behavior;
+        private System.Windows.Forms.ContextMenuStrip context_subtile;
+        private System.Windows.Forms.ToolStripMenuItem context_subtile_duplicate;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem context_subtile_delete;
     }
 }

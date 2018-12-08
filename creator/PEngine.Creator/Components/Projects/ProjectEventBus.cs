@@ -1,4 +1,5 @@
-﻿using PEngine.Common.Data.Maps;
+﻿using PEngine.Common.Data;
+using PEngine.Common.Data.Maps;
 using System;
 
 namespace PEngine.Creator.Components.Projects
@@ -8,10 +9,16 @@ namespace PEngine.Creator.Components.Projects
         #region Files
 
         public event Action<ProjectItem> ItemOpenRequested;
+        public event Action<ProjectFileData> FileUpdated;
 
         public void RequestItemOpen(ProjectItem item)
         {
             ItemOpenRequested?.Invoke(item);
+        }
+
+        public void UpdatedFile(ProjectFileData file)
+        {
+            FileUpdated?.Invoke(file);
         }
 
         #endregion

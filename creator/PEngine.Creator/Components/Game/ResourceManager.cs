@@ -1,4 +1,5 @@
 ﻿using PEngine.Common;
+using PEngine.Common.Data;
 using PEngine.Common.Data.Maps;
 using PEngine.Creator.Components.Projects;
 using System.Collections.Generic;
@@ -21,12 +22,8 @@ namespace PEngine.Creator.Components.Game
 
         internal static string GetTilesetTexturePath(TilesetData tileset)
         {
-            var path = Path.Combine(
-                Project.ActiveProject.BaseDirectory,
-                "content/textures/tiles",
-                tileset.texture + ".png"
-            );
-            return path;
+            var file = Project.ActiveProject.GetFile(tileset.texture, ProjectFileType.TextureTileset);
+            return GetFilePath(file);
         }
 
         internal static Bitmap GetTilesetTexture(TilesetData tileset)
@@ -43,7 +40,7 @@ namespace PEngine.Creator.Components.Game
 
         internal static Bitmap GetSubtileTexture(TilesetData tileset, SubtileData subtile)
         {
-            var key = $"SUBTILE|{tileset.id}|{subtile.texture[0]}|{subtile.texture[1]}";
+            var key = $"SUBTILE|{tileset.texture}|{subtile.texture[0]}|{subtile.texture[1]}";
             if (!_textureCache.TryGetValue(key, out var texture))
             {
                 var tilesetTexture = GetTilesetTexture(tileset);
@@ -58,13 +55,9 @@ namespace PEngine.Creator.Components.Game
             return texture;
         }
 
-        internal static string[] GetTextureFiles(string subfolder)
+        internal static string GetFilePath(ProjectFileData fileData)
         {
-            var directoryPath = Path.Combine(
-                Project.ActiveProject.BaseDirectory,
-                "content/textures",
-                subfolder);
-            return Directory.GetFiles(directoryPath, "*.png", SearchOption.TopDirectoryOnly);
+            return Path.Combine(Project.ActiveProject.BaseDirectory, fileData.path);
         }
     }
 }

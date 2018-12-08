@@ -44,6 +44,8 @@
     <Compile Include="Data\Maps\TileData.cs" />
     <Compile Include="Data\Maps\TilesetData.cs" />
     <Compile Include="Data\ProjectData.cs" />
+    <Compile Include="Data\ProjectFileData.cs" />
+    <Compile Include="Data\ProjectFileType.cs" />
     <Compile Include="Data\Resource.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

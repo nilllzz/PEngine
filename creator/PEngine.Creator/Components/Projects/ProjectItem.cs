@@ -1,10 +1,14 @@
-﻿namespace PEngine.Creator.Components.Projects
+﻿using PEngine.Common.Data;
+using PEngine.Creator.Components.Game;
+
+namespace PEngine.Creator.Components.Projects
 {
     public struct ProjectItem
     {
+        public ProjectFileData FileData;
         public ProjectItemType ItemType;
-        public string FilePath;
 
-        public string Identifier => ItemType.ToString() + "|" + FilePath;
+        public string FilePath => ResourceManager.GetFilePath(FileData);
+        public string Identifier => FileData.type + "|" + FileData.path;
     }
 }

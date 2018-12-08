@@ -65,6 +65,7 @@
             this.tree_images.Images.SetKeyName(2, "folder_open");
             this.tree_images.Images.SetKeyName(3, "file_map");
             this.tree_images.Images.SetKeyName(4, "file_image");
+            this.tree_images.Images.SetKeyName(5, "file_tileset");
             // 
             // tool_main
             // 

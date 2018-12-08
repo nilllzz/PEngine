@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using PEngine.Common;
+using PEngine.Common.Data;
 using PEngine.Common.Data.Maps;
 using PEngine.Game.Content;
 using System.Collections.Generic;
@@ -35,7 +37,8 @@ namespace PEngine.Game.Components.World
 
         public void LoadContent()
         {
-            _data = TilesetData.FetchOne(_id);
+            var file = Project.ActiveProject.GetFile(_id, ProjectFileType.Tileset);
+            _data = TilesetData.Load(file.path);
             _tileIndex = _data.tiles.ToDictionary(t => t.id, t => t);
             _subtileIndex = _data.subtiles.ToDictionary(t => t.id, t => t);
         }

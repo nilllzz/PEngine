@@ -29,50 +29,91 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TilesetEditor));
             this.panel_subtiles = new System.Windows.Forms.Panel();
+            this.tool_subtiles = new System.Windows.Forms.ToolStrip();
+            this.tool_subtiles_lbl_title = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tool_subtiles_add = new System.Windows.Forms.ToolStripButton();
             this.panel_subtile_container = new System.Windows.Forms.FlowLayoutPanel();
-            this.btn_add_subtile = new System.Windows.Forms.Button();
-            this.lbl_subtiles_title = new System.Windows.Forms.Label();
             this.panel_tiles = new System.Windows.Forms.Panel();
-            this.btn_add_tile = new System.Windows.Forms.Button();
-            this.lbl_tiles = new System.Windows.Forms.Label();
+            this.tool_editor = new System.Windows.Forms.ToolStrip();
+            this.tool_editor_lbl_tiles = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tool_editor_add_tile = new System.Windows.Forms.ToolStripButton();
+            this.tool_editor_properties = new System.Windows.Forms.ToolStripButton();
             this.panel_tiles_container = new System.Windows.Forms.FlowLayoutPanel();
             this.panel_main = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btn_remove_tile = new System.Windows.Forms.Button();
-            this.lbl_tile_title = new System.Windows.Forms.Label();
-            this.pic_tile_4 = new System.Windows.Forms.PictureBox();
-            this.pic_tile_3 = new System.Windows.Forms.PictureBox();
-            this.pic_tile_2 = new System.Windows.Forms.PictureBox();
+            this.group_edit_tile = new System.Windows.Forms.GroupBox();
             this.pic_tile_1 = new System.Windows.Forms.PictureBox();
+            this.pic_edit_mode = new System.Windows.Forms.PictureBox();
+            this.pic_tile_4 = new System.Windows.Forms.PictureBox();
             this.group_selected_subtile = new System.Windows.Forms.GroupBox();
-            this.lbl_selected_subtile = new System.Windows.Forms.Label();
-            this.pic_selected_subtile = new System.Windows.Forms.PictureBox();
+            this.lbl_no_subtile = new System.Windows.Forms.Label();
+            this.pic_tile_2 = new System.Windows.Forms.PictureBox();
+            this.pic_tile_3 = new System.Windows.Forms.PictureBox();
             this.tooltip_main = new System.Windows.Forms.ToolTip(this.components);
+            this.tool_editor_texture = new System.Windows.Forms.ToolStripButton();
             this.panel_subtiles.SuspendLayout();
+            this.tool_subtiles.SuspendLayout();
             this.panel_tiles.SuspendLayout();
+            this.tool_editor.SuspendLayout();
             this.panel_main.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_tile_4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_tile_3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_tile_2)).BeginInit();
+            this.group_edit_tile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_tile_1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_edit_mode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_tile_4)).BeginInit();
             this.group_selected_subtile.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_selected_subtile)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_tile_2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_tile_3)).BeginInit();
             this.SuspendLayout();
             // 
             // panel_subtiles
             // 
             this.panel_subtiles.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_subtiles.Controls.Add(this.tool_subtiles);
             this.panel_subtiles.Controls.Add(this.panel_subtile_container);
-            this.panel_subtiles.Controls.Add(this.btn_add_subtile);
-            this.panel_subtiles.Controls.Add(this.lbl_subtiles_title);
             this.panel_subtiles.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel_subtiles.Location = new System.Drawing.Point(607, 0);
             this.panel_subtiles.Name = "panel_subtiles";
             this.panel_subtiles.Size = new System.Drawing.Size(215, 644);
             this.panel_subtiles.TabIndex = 3;
+            // 
+            // tool_subtiles
+            // 
+            this.tool_subtiles.BackColor = global::PEngine.Creator.Properties.Settings.Default.Color_MainGray;
+            this.tool_subtiles.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tool_subtiles.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tool_subtiles_lbl_title,
+            this.toolStripSeparator2,
+            this.tool_subtiles_add});
+            this.tool_subtiles.Location = new System.Drawing.Point(0, 0);
+            this.tool_subtiles.Name = "tool_subtiles";
+            this.tool_subtiles.Size = new System.Drawing.Size(213, 25);
+            this.tool_subtiles.TabIndex = 3;
+            this.tool_subtiles.Text = "toolStrip1";
+            // 
+            // tool_subtiles_lbl_title
+            // 
+            this.tool_subtiles_lbl_title.Name = "tool_subtiles_lbl_title";
+            this.tool_subtiles_lbl_title.Size = new System.Drawing.Size(65, 22);
+            this.tool_subtiles_lbl_title.Text = "Subtiles (0)";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tool_subtiles_add
+            // 
+            this.tool_subtiles_add.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tool_subtiles_add.Image = global::PEngine.Creator.Properties.Resources.new_subtile;
+            this.tool_subtiles_add.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tool_subtiles_add.Name = "tool_subtiles_add";
+            this.tool_subtiles_add.Size = new System.Drawing.Size(23, 22);
+            this.tool_subtiles_add.Text = "Add New Subtile";
+            this.tool_subtiles_add.Click += new System.EventHandler(this.tool_subtiles_add_Click);
             // 
             // panel_subtile_container
             // 
@@ -80,67 +121,69 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_subtile_container.AutoScroll = true;
-            this.panel_subtile_container.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.panel_subtile_container.Location = new System.Drawing.Point(-1, 32);
+            this.panel_subtile_container.Location = new System.Drawing.Point(-1, 27);
             this.panel_subtile_container.Name = "panel_subtile_container";
-            this.panel_subtile_container.Size = new System.Drawing.Size(215, 611);
+            this.panel_subtile_container.Size = new System.Drawing.Size(215, 616);
             this.panel_subtile_container.TabIndex = 2;
-            this.panel_subtile_container.WrapContents = false;
-            // 
-            // btn_add_subtile
-            // 
-            this.btn_add_subtile.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
-            this.btn_add_subtile.Image = global::PEngine.Creator.Properties.Resources.action_add_16xLG;
-            this.btn_add_subtile.Location = new System.Drawing.Point(80, 3);
-            this.btn_add_subtile.Name = "btn_add_subtile";
-            this.btn_add_subtile.Size = new System.Drawing.Size(26, 23);
-            this.btn_add_subtile.TabIndex = 1;
-            this.tooltip_main.SetToolTip(this.btn_add_subtile, "Add new subtile");
-            this.btn_add_subtile.UseVisualStyleBackColor = true;
-            this.btn_add_subtile.Click += new System.EventHandler(this.btn_add_subtile_Click);
-            // 
-            // lbl_subtiles_title
-            // 
-            this.lbl_subtiles_title.AutoSize = true;
-            this.lbl_subtiles_title.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
-            this.lbl_subtiles_title.Location = new System.Drawing.Point(5, 7);
-            this.lbl_subtiles_title.Name = "lbl_subtiles_title";
-            this.lbl_subtiles_title.Size = new System.Drawing.Size(65, 15);
-            this.lbl_subtiles_title.TabIndex = 0;
-            this.lbl_subtiles_title.Text = "Subtiles (0)";
             // 
             // panel_tiles
             // 
             this.panel_tiles.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel_tiles.Controls.Add(this.btn_add_tile);
-            this.panel_tiles.Controls.Add(this.lbl_tiles);
+            this.panel_tiles.Controls.Add(this.tool_editor);
             this.panel_tiles.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel_tiles.Location = new System.Drawing.Point(0, 0);
             this.panel_tiles.Name = "panel_tiles";
-            this.panel_tiles.Size = new System.Drawing.Size(607, 33);
+            this.panel_tiles.Size = new System.Drawing.Size(607, 26);
             this.panel_tiles.TabIndex = 4;
             // 
-            // btn_add_tile
+            // tool_editor
             // 
-            this.btn_add_tile.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
-            this.btn_add_tile.Image = global::PEngine.Creator.Properties.Resources.action_add_16xLG;
-            this.btn_add_tile.Location = new System.Drawing.Point(65, 4);
-            this.btn_add_tile.Name = "btn_add_tile";
-            this.btn_add_tile.Size = new System.Drawing.Size(26, 23);
-            this.btn_add_tile.TabIndex = 3;
-            this.tooltip_main.SetToolTip(this.btn_add_tile, "Add new tile");
-            this.btn_add_tile.UseVisualStyleBackColor = true;
-            this.btn_add_tile.Click += new System.EventHandler(this.btn_add_tile_Click);
+            this.tool_editor.BackColor = global::PEngine.Creator.Properties.Settings.Default.Color_MainGray;
+            this.tool_editor.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
+            this.tool_editor.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tool_editor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tool_editor_lbl_tiles,
+            this.toolStripSeparator1,
+            this.tool_editor_add_tile,
+            this.tool_editor_properties,
+            this.tool_editor_texture});
+            this.tool_editor.Location = new System.Drawing.Point(0, 0);
+            this.tool_editor.Name = "tool_editor";
+            this.tool_editor.Size = new System.Drawing.Size(607, 25);
+            this.tool_editor.TabIndex = 0;
+            this.tool_editor.Text = "toolStrip1";
             // 
-            // lbl_tiles
+            // tool_editor_lbl_tiles
             // 
-            this.lbl_tiles.AutoSize = true;
-            this.lbl_tiles.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
-            this.lbl_tiles.Location = new System.Drawing.Point(3, 8);
-            this.lbl_tiles.Name = "lbl_tiles";
-            this.lbl_tiles.Size = new System.Drawing.Size(48, 15);
-            this.lbl_tiles.TabIndex = 3;
-            this.lbl_tiles.Text = "Tiles (0)";
+            this.tool_editor_lbl_tiles.Name = "tool_editor_lbl_tiles";
+            this.tool_editor_lbl_tiles.Size = new System.Drawing.Size(48, 22);
+            this.tool_editor_lbl_tiles.Text = "Tiles (0)";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tool_editor_add_tile
+            // 
+            this.tool_editor_add_tile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tool_editor_add_tile.Image = global::PEngine.Creator.Properties.Resources.new_tile;
+            this.tool_editor_add_tile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tool_editor_add_tile.Name = "tool_editor_add_tile";
+            this.tool_editor_add_tile.Size = new System.Drawing.Size(23, 22);
+            this.tool_editor_add_tile.Text = "Add New Tile";
+            this.tool_editor_add_tile.Click += new System.EventHandler(this.tool_editor_add_tile_Click);
+            // 
+            // tool_editor_properties
+            // 
+            this.tool_editor_properties.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tool_editor_properties.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tool_editor_properties.Image = global::PEngine.Creator.Properties.Resources.properties_16xLG;
+            this.tool_editor_properties.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tool_editor_properties.Name = "tool_editor_properties";
+            this.tool_editor_properties.Size = new System.Drawing.Size(23, 22);
+            this.tool_editor_properties.Text = "Properties";
+            this.tool_editor_properties.Click += new System.EventHandler(this.tool_editor_properties_Click);
             // 
             // panel_tiles_container
             // 
@@ -149,9 +192,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_tiles_container.AutoScroll = true;
             this.panel_tiles_container.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel_tiles_container.Location = new System.Drawing.Point(6, 39);
+            this.panel_tiles_container.Location = new System.Drawing.Point(6, 28);
             this.panel_tiles_container.Name = "panel_tiles_container";
-            this.panel_tiles_container.Size = new System.Drawing.Size(595, 475);
+            this.panel_tiles_container.Size = new System.Drawing.Size(595, 486);
             this.panel_tiles_container.TabIndex = 1;
             // 
             // panel_main
@@ -168,88 +211,38 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.btn_remove_tile);
-            this.panel1.Controls.Add(this.lbl_tile_title);
-            this.panel1.Controls.Add(this.pic_tile_4);
-            this.panel1.Controls.Add(this.pic_tile_3);
-            this.panel1.Controls.Add(this.pic_tile_2);
-            this.panel1.Controls.Add(this.pic_tile_1);
-            this.panel1.Controls.Add(this.group_selected_subtile);
+            this.panel1.Controls.Add(this.group_edit_tile);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 520);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(607, 124);
             this.panel1.TabIndex = 5;
             // 
-            // btn_remove_tile
+            // group_edit_tile
             // 
-            this.btn_remove_tile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_remove_tile.Enabled = false;
-            this.btn_remove_tile.Image = global::PEngine.Creator.Properties.Resources.Clearallrequests_8816;
-            this.btn_remove_tile.Location = new System.Drawing.Point(506, 77);
-            this.btn_remove_tile.Name = "btn_remove_tile";
-            this.btn_remove_tile.Size = new System.Drawing.Size(94, 23);
-            this.btn_remove_tile.TabIndex = 6;
-            this.btn_remove_tile.Text = "Delete Tile";
-            this.btn_remove_tile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_remove_tile.UseVisualStyleBackColor = true;
-            this.btn_remove_tile.Click += new System.EventHandler(this.btn_remove_tile_Click);
-            // 
-            // lbl_tile_title
-            // 
-            this.lbl_tile_title.AutoSize = true;
-            this.lbl_tile_title.Location = new System.Drawing.Point(17, 14);
-            this.lbl_tile_title.Name = "lbl_tile_title";
-            this.lbl_tile_title.Size = new System.Drawing.Size(84, 13);
-            this.lbl_tile_title.TabIndex = 5;
-            this.lbl_tile_title.Text = "(no tile selected)";
-            // 
-            // pic_tile_4
-            // 
-            this.pic_tile_4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pic_tile_4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pic_tile_4.Image = ((System.Drawing.Image)(resources.GetObject("pic_tile_4.Image")));
-            this.pic_tile_4.Location = new System.Drawing.Point(49, 68);
-            this.pic_tile_4.Name = "pic_tile_4";
-            this.pic_tile_4.Size = new System.Drawing.Size(32, 32);
-            this.pic_tile_4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pic_tile_4.TabIndex = 4;
-            this.pic_tile_4.TabStop = false;
-            this.pic_tile_4.Click += new System.EventHandler(this.pic_tile_4_Click);
-            // 
-            // pic_tile_3
-            // 
-            this.pic_tile_3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pic_tile_3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pic_tile_3.Image = ((System.Drawing.Image)(resources.GetObject("pic_tile_3.Image")));
-            this.pic_tile_3.Location = new System.Drawing.Point(17, 68);
-            this.pic_tile_3.Name = "pic_tile_3";
-            this.pic_tile_3.Size = new System.Drawing.Size(32, 32);
-            this.pic_tile_3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pic_tile_3.TabIndex = 3;
-            this.pic_tile_3.TabStop = false;
-            this.pic_tile_3.Click += new System.EventHandler(this.pic_tile_3_Click);
-            // 
-            // pic_tile_2
-            // 
-            this.pic_tile_2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pic_tile_2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pic_tile_2.Image = ((System.Drawing.Image)(resources.GetObject("pic_tile_2.Image")));
-            this.pic_tile_2.Location = new System.Drawing.Point(49, 36);
-            this.pic_tile_2.Name = "pic_tile_2";
-            this.pic_tile_2.Size = new System.Drawing.Size(32, 32);
-            this.pic_tile_2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pic_tile_2.TabIndex = 2;
-            this.pic_tile_2.TabStop = false;
-            this.pic_tile_2.Click += new System.EventHandler(this.pic_tile_2_Click);
+            this.group_edit_tile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.group_edit_tile.Controls.Add(this.pic_tile_1);
+            this.group_edit_tile.Controls.Add(this.pic_edit_mode);
+            this.group_edit_tile.Controls.Add(this.pic_tile_4);
+            this.group_edit_tile.Controls.Add(this.group_selected_subtile);
+            this.group_edit_tile.Controls.Add(this.pic_tile_2);
+            this.group_edit_tile.Controls.Add(this.pic_tile_3);
+            this.group_edit_tile.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
+            this.group_edit_tile.Location = new System.Drawing.Point(6, 3);
+            this.group_edit_tile.Name = "group_edit_tile";
+            this.group_edit_tile.Size = new System.Drawing.Size(595, 118);
+            this.group_edit_tile.TabIndex = 7;
+            this.group_edit_tile.TabStop = false;
+            this.group_edit_tile.Text = "Edit tile";
             // 
             // pic_tile_1
             // 
             this.pic_tile_1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pic_tile_1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pic_tile_1.Image = global::PEngine.Creator.Properties.Resources.document_16xLG;
-            this.pic_tile_1.Location = new System.Drawing.Point(17, 36);
+            this.pic_tile_1.Image = global::PEngine.Creator.Properties.Resources.subtile;
+            this.pic_tile_1.Location = new System.Drawing.Point(13, 31);
             this.pic_tile_1.Name = "pic_tile_1";
             this.pic_tile_1.Size = new System.Drawing.Size(32, 32);
             this.pic_tile_1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -257,35 +250,84 @@
             this.pic_tile_1.TabStop = false;
             this.pic_tile_1.Click += new System.EventHandler(this.pic_tile_1_Click);
             // 
+            // pic_edit_mode
+            // 
+            this.pic_edit_mode.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pic_edit_mode.Image = global::PEngine.Creator.Properties.Resources.arrow_previous_16xLG;
+            this.pic_edit_mode.Location = new System.Drawing.Point(88, 54);
+            this.pic_edit_mode.Name = "pic_edit_mode";
+            this.pic_edit_mode.Size = new System.Drawing.Size(16, 16);
+            this.pic_edit_mode.TabIndex = 5;
+            this.pic_edit_mode.TabStop = false;
+            this.pic_edit_mode.Click += new System.EventHandler(this.pic_edit_mode_Click);
+            // 
+            // pic_tile_4
+            // 
+            this.pic_tile_4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pic_tile_4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pic_tile_4.Image = global::PEngine.Creator.Properties.Resources.subtile;
+            this.pic_tile_4.Location = new System.Drawing.Point(45, 63);
+            this.pic_tile_4.Name = "pic_tile_4";
+            this.pic_tile_4.Size = new System.Drawing.Size(32, 32);
+            this.pic_tile_4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pic_tile_4.TabIndex = 4;
+            this.pic_tile_4.TabStop = false;
+            this.pic_tile_4.Click += new System.EventHandler(this.pic_tile_4_Click);
+            // 
             // group_selected_subtile
             // 
-            this.group_selected_subtile.Controls.Add(this.lbl_selected_subtile);
-            this.group_selected_subtile.Controls.Add(this.pic_selected_subtile);
-            this.group_selected_subtile.Location = new System.Drawing.Point(108, 35);
+            this.group_selected_subtile.Controls.Add(this.lbl_no_subtile);
+            this.group_selected_subtile.Location = new System.Drawing.Point(116, 22);
             this.group_selected_subtile.Name = "group_selected_subtile";
-            this.group_selected_subtile.Size = new System.Drawing.Size(153, 65);
+            this.group_selected_subtile.Size = new System.Drawing.Size(256, 77);
             this.group_selected_subtile.TabIndex = 0;
             this.group_selected_subtile.TabStop = false;
             this.group_selected_subtile.Text = "Selected Subtile";
             // 
-            // lbl_selected_subtile
+            // lbl_no_subtile
             // 
-            this.lbl_selected_subtile.AutoSize = true;
-            this.lbl_selected_subtile.Location = new System.Drawing.Point(47, 31);
-            this.lbl_selected_subtile.Name = "lbl_selected_subtile";
-            this.lbl_selected_subtile.Size = new System.Drawing.Size(97, 13);
-            this.lbl_selected_subtile.TabIndex = 1;
-            this.lbl_selected_subtile.Text = "No subtile selected";
+            this.lbl_no_subtile.AutoSize = true;
+            this.lbl_no_subtile.Location = new System.Drawing.Point(16, 32);
+            this.lbl_no_subtile.Name = "lbl_no_subtile";
+            this.lbl_no_subtile.Size = new System.Drawing.Size(124, 15);
+            this.lbl_no_subtile.TabIndex = 0;
+            this.lbl_no_subtile.Text = "<No Subtile selected>";
             // 
-            // pic_selected_subtile
+            // pic_tile_2
             // 
-            this.pic_selected_subtile.Image = global::PEngine.Creator.Properties.Resources.document_16xLG;
-            this.pic_selected_subtile.Location = new System.Drawing.Point(9, 22);
-            this.pic_selected_subtile.Name = "pic_selected_subtile";
-            this.pic_selected_subtile.Size = new System.Drawing.Size(32, 32);
-            this.pic_selected_subtile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pic_selected_subtile.TabIndex = 0;
-            this.pic_selected_subtile.TabStop = false;
+            this.pic_tile_2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pic_tile_2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pic_tile_2.Image = global::PEngine.Creator.Properties.Resources.subtile;
+            this.pic_tile_2.Location = new System.Drawing.Point(45, 31);
+            this.pic_tile_2.Name = "pic_tile_2";
+            this.pic_tile_2.Size = new System.Drawing.Size(32, 32);
+            this.pic_tile_2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pic_tile_2.TabIndex = 2;
+            this.pic_tile_2.TabStop = false;
+            this.pic_tile_2.Click += new System.EventHandler(this.pic_tile_2_Click);
+            // 
+            // pic_tile_3
+            // 
+            this.pic_tile_3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pic_tile_3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pic_tile_3.Image = global::PEngine.Creator.Properties.Resources.subtile;
+            this.pic_tile_3.Location = new System.Drawing.Point(13, 63);
+            this.pic_tile_3.Name = "pic_tile_3";
+            this.pic_tile_3.Size = new System.Drawing.Size(32, 32);
+            this.pic_tile_3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pic_tile_3.TabIndex = 3;
+            this.pic_tile_3.TabStop = false;
+            this.pic_tile_3.Click += new System.EventHandler(this.pic_tile_3_Click);
+            // 
+            // tool_editor_texture
+            // 
+            this.tool_editor_texture.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tool_editor_texture.Image = global::PEngine.Creator.Properties.Resources.Image_12x;
+            this.tool_editor_texture.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tool_editor_texture.Name = "tool_editor_texture";
+            this.tool_editor_texture.Size = new System.Drawing.Size(93, 22);
+            this.tool_editor_texture.Text = "View Texture";
+            this.tool_editor_texture.Click += new System.EventHandler(this.tool_editor_texture_Click);
             // 
             // TilesetEditor
             // 
@@ -298,42 +340,51 @@
             this.Size = new System.Drawing.Size(822, 644);
             this.panel_subtiles.ResumeLayout(false);
             this.panel_subtiles.PerformLayout();
+            this.tool_subtiles.ResumeLayout(false);
+            this.tool_subtiles.PerformLayout();
             this.panel_tiles.ResumeLayout(false);
             this.panel_tiles.PerformLayout();
+            this.tool_editor.ResumeLayout(false);
+            this.tool_editor.PerformLayout();
             this.panel_main.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_tile_4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_tile_3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_tile_2)).EndInit();
+            this.group_edit_tile.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pic_tile_1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_edit_mode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_tile_4)).EndInit();
             this.group_selected_subtile.ResumeLayout(false);
             this.group_selected_subtile.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_selected_subtile)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_tile_2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_tile_3)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private System.Windows.Forms.Panel panel_subtiles;
-        private System.Windows.Forms.Button btn_add_subtile;
-        private System.Windows.Forms.Label lbl_subtiles_title;
         private System.Windows.Forms.FlowLayoutPanel panel_subtile_container;
-        private System.Windows.Forms.Label lbl_tiles;
         private System.Windows.Forms.FlowLayoutPanel panel_tiles_container;
         private System.Windows.Forms.Panel panel_tiles;
         private System.Windows.Forms.Panel panel_main;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label lbl_tile_title;
         private System.Windows.Forms.PictureBox pic_tile_4;
         private System.Windows.Forms.PictureBox pic_tile_3;
         private System.Windows.Forms.PictureBox pic_tile_2;
         private System.Windows.Forms.PictureBox pic_tile_1;
         private System.Windows.Forms.GroupBox group_selected_subtile;
-        private System.Windows.Forms.Label lbl_selected_subtile;
-        private System.Windows.Forms.PictureBox pic_selected_subtile;
         private System.Windows.Forms.ToolTip tooltip_main;
-        private System.Windows.Forms.Button btn_remove_tile;
-        private System.Windows.Forms.Button btn_add_tile;
+        private System.Windows.Forms.ToolStrip tool_editor;
+        private System.Windows.Forms.ToolStripLabel tool_editor_lbl_tiles;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton tool_editor_add_tile;
+        private System.Windows.Forms.ToolStrip tool_subtiles;
+        private System.Windows.Forms.ToolStripLabel tool_subtiles_lbl_title;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton tool_subtiles_add;
+        private System.Windows.Forms.GroupBox group_edit_tile;
+        private System.Windows.Forms.PictureBox pic_edit_mode;
+        private System.Windows.Forms.Label lbl_no_subtile;
+        private System.Windows.Forms.ToolStripButton tool_editor_properties;
+        private System.Windows.Forms.ToolStripButton tool_editor_texture;
     }
 }

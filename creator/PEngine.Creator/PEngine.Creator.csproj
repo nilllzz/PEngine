@@ -40,7 +40,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Game\GameProcess.cs" />
+    <Compile Include="Components\Game\MapEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Game\MapEditor.Designer.cs">
+      <DependentUpon>MapEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\Game\ResourceManager.cs" />
+    <Compile Include="Components\Game\SubtileEditComponent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Game\SubtileEditComponent.Designer.cs">
+      <DependentUpon>SubtileEditComponent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\Game\SubtileComponent.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -114,6 +126,12 @@
     <Compile Include="Forms\TexturePickerForm.Designer.cs">
       <DependentUpon>TexturePickerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\TilesetProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TilesetProperties.Designer.cs">
+      <DependentUpon>TilesetProperties.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\ExplorerHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -147,8 +165,14 @@
     <Compile Include="Views\Projects\Welcome.view.Designer.cs">
       <DependentUpon>Welcome.view.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Components\Game\MapEditor.resx">
+      <DependentUpon>MapEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\Game\SubtileComponent.resx">
       <DependentUpon>SubtileComponent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Game\SubtileEditComponent.resx">
+      <DependentUpon>SubtileEditComponent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Components\Game\TextureViewer.resx">
       <DependentUpon>TextureViewer.cs</DependentUpon>
@@ -176,6 +200,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TexturePickerForm.resx">
       <DependentUpon>TexturePickerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TilesetProperties.resx">
+      <DependentUpon>TilesetProperties.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -269,6 +296,51 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\properties_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close_6519.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\list_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NewRequest_8796.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NewBuildDefinition_8952.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Copy_6524.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_previous_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\new_subtile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\new_tile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\new_tileset.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\subtile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tileset.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_Next_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image_12x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StatusAnnotations_Information_16xLG_color.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

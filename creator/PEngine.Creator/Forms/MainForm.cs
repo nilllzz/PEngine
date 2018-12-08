@@ -113,7 +113,10 @@ namespace PEngine.Creator.Forms
 
         private void menu_file_save_Click(object sender, EventArgs e)
         {
-            SaveActiveFile();
+            if (ActiveView is MainProjectView projView)
+            {
+                projView.SaveActiveFile();
+            }
         }
 
         public void UpdateMenus()
@@ -195,19 +198,6 @@ namespace PEngine.Creator.Forms
             OnTitleChanged(view.Title);
             OnStatusColorChanged(view.StatusColor);
             UpdateMenus();
-        }
-
-        public void SaveActiveFile()
-        {
-            ActiveComponent?.Save();
-        }
-
-        public void SaveAllFiles()
-        {
-            foreach (var comp in Components)
-            {
-                comp.Save();
-            }
         }
     }
 }

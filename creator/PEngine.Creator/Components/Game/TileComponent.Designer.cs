@@ -28,78 +28,78 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pic_subtile1 = new System.Windows.Forms.PictureBox();
-            this.pic_subtile2 = new System.Windows.Forms.PictureBox();
-            this.pic_subtile4 = new System.Windows.Forms.PictureBox();
-            this.pic_subtile3 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_subtile1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_subtile2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_subtile4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_subtile3)).BeginInit();
+            this.components = new System.ComponentModel.Container();
+            this.context_tile = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.context_tile_duplicate = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.context_tile_delete = new System.Windows.Forms.ToolStripMenuItem();
+            this.pic_texture = new System.Windows.Forms.PictureBox();
+            this.context_tile.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_texture)).BeginInit();
             this.SuspendLayout();
             // 
-            // pic_subtile1
+            // context_tile
             // 
-            this.pic_subtile1.Location = new System.Drawing.Point(14, 14);
-            this.pic_subtile1.Name = "pic_subtile1";
-            this.pic_subtile1.Size = new System.Drawing.Size(16, 16);
-            this.pic_subtile1.TabIndex = 0;
-            this.pic_subtile1.TabStop = false;
-            this.pic_subtile1.Click += new System.EventHandler(this.TileComponent_Click);
+            this.context_tile.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.context_tile_duplicate,
+            this.toolStripSeparator1,
+            this.context_tile_delete});
+            this.context_tile.Name = "context_tile";
+            this.context_tile.Size = new System.Drawing.Size(181, 76);
+            this.context_tile.Opening += new System.ComponentModel.CancelEventHandler(this.context_tile_Opening);
             // 
-            // pic_subtile2
+            // context_tile_duplicate
             // 
-            this.pic_subtile2.Location = new System.Drawing.Point(30, 14);
-            this.pic_subtile2.Name = "pic_subtile2";
-            this.pic_subtile2.Size = new System.Drawing.Size(16, 16);
-            this.pic_subtile2.TabIndex = 1;
-            this.pic_subtile2.TabStop = false;
-            this.pic_subtile2.Click += new System.EventHandler(this.TileComponent_Click);
+            this.context_tile_duplicate.Image = global::PEngine.Creator.Properties.Resources.Copy_6524;
+            this.context_tile_duplicate.Name = "context_tile_duplicate";
+            this.context_tile_duplicate.Size = new System.Drawing.Size(180, 22);
+            this.context_tile_duplicate.Text = "Duplicate";
+            this.context_tile_duplicate.Click += new System.EventHandler(this.context_tile_duplicate_Click);
             // 
-            // pic_subtile4
+            // toolStripSeparator1
             // 
-            this.pic_subtile4.Location = new System.Drawing.Point(30, 30);
-            this.pic_subtile4.Name = "pic_subtile4";
-            this.pic_subtile4.Size = new System.Drawing.Size(16, 16);
-            this.pic_subtile4.TabIndex = 3;
-            this.pic_subtile4.TabStop = false;
-            this.pic_subtile4.Click += new System.EventHandler(this.TileComponent_Click);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
-            // pic_subtile3
+            // context_tile_delete
             // 
-            this.pic_subtile3.Location = new System.Drawing.Point(14, 30);
-            this.pic_subtile3.Name = "pic_subtile3";
-            this.pic_subtile3.Size = new System.Drawing.Size(16, 16);
-            this.pic_subtile3.TabIndex = 2;
-            this.pic_subtile3.TabStop = false;
-            this.pic_subtile3.Click += new System.EventHandler(this.TileComponent_Click);
+            this.context_tile_delete.Image = global::PEngine.Creator.Properties.Resources.Clearallrequests_8816;
+            this.context_tile_delete.Name = "context_tile_delete";
+            this.context_tile_delete.Size = new System.Drawing.Size(180, 22);
+            this.context_tile_delete.Text = "Delete";
+            this.context_tile_delete.Click += new System.EventHandler(this.context_tile_delete_Click);
+            // 
+            // pic_texture
+            // 
+            this.pic_texture.Location = new System.Drawing.Point(14, 14);
+            this.pic_texture.Name = "pic_texture";
+            this.pic_texture.Size = new System.Drawing.Size(32, 32);
+            this.pic_texture.TabIndex = 4;
+            this.pic_texture.TabStop = false;
+            this.pic_texture.Click += new System.EventHandler(this.pic_texture_Click);
             // 
             // TileComponent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.pic_subtile4);
-            this.Controls.Add(this.pic_subtile3);
-            this.Controls.Add(this.pic_subtile2);
-            this.Controls.Add(this.pic_subtile1);
+            this.ContextMenuStrip = this.context_tile;
+            this.Controls.Add(this.pic_texture);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Name = "TileComponent";
             this.Size = new System.Drawing.Size(62, 62);
             this.Click += new System.EventHandler(this.TileComponent_Click);
-            ((System.ComponentModel.ISupportInitialize)(this.pic_subtile1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_subtile2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_subtile4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_subtile3)).EndInit();
+            this.context_tile.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pic_texture)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pic_subtile1;
-        private System.Windows.Forms.PictureBox pic_subtile2;
-        private System.Windows.Forms.PictureBox pic_subtile4;
-        private System.Windows.Forms.PictureBox pic_subtile3;
+        private System.Windows.Forms.ContextMenuStrip context_tile;
+        private System.Windows.Forms.ToolStripMenuItem context_tile_duplicate;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem context_tile_delete;
+        private System.Windows.Forms.PictureBox pic_texture;
     }
 }

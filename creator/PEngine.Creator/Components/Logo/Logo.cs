@@ -1,9 +1,9 @@
-﻿using System.ComponentModel;
-using System.Windows.Forms;
+﻿using PEngine.Creator.Components.Game;
+using System.ComponentModel;
 
 namespace PEngine.Creator.Components.Logo
 {
-    public partial class Logo : PictureBox
+    public partial class Logo : CrispPictureBox
     {
         public Logo()
         {

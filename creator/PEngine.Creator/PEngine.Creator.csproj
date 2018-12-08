@@ -39,6 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Game\CrispPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Game\CrispPictureBox.Designer.cs">
+      <DependentUpon>CrispPictureBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\Game\GameProcess.cs" />
     <Compile Include="Components\Game\MapEditor.cs">
       <SubType>UserControl</SubType>
@@ -165,6 +171,9 @@
     <Compile Include="Views\Projects\Welcome.view.Designer.cs">
       <DependentUpon>Welcome.view.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Components\Game\CrispPictureBox.resx">
+      <DependentUpon>CrispPictureBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\Game\MapEditor.resx">
       <DependentUpon>MapEditor.cs</DependentUpon>
     </EmbeddedResource>

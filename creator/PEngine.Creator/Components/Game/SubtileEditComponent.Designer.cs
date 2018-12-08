@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.combo_behavior = new System.Windows.Forms.ComboBox();
             this.pic_pick_texture = new System.Windows.Forms.PictureBox();
-            this.pic_texture = new System.Windows.Forms.PictureBox();
+            this.pic_texture = new PEngine.Creator.Components.Game.CrispPictureBox();
             this.tooltip_main = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pic_pick_texture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_texture)).BeginInit();
@@ -64,7 +64,6 @@
             // 
             // pic_texture
             // 
-            this.pic_texture.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pic_texture.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.pic_texture.Location = new System.Drawing.Point(0, 0);
             this.pic_texture.Name = "pic_texture";
@@ -90,7 +89,7 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pic_texture;
+        private CrispPictureBox pic_texture;
         private System.Windows.Forms.ComboBox combo_behavior;
         private System.Windows.Forms.PictureBox pic_pick_texture;
         private System.Windows.Forms.ToolTip tooltip_main;

@@ -33,7 +33,7 @@
             this.context_tile_duplicate = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.context_tile_delete = new System.Windows.Forms.ToolStripMenuItem();
-            this.pic_texture = new System.Windows.Forms.PictureBox();
+            this.pic_texture = new CrispPictureBox();
             this.context_tile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_texture)).BeginInit();
             this.SuspendLayout();
@@ -100,6 +100,6 @@
         private System.Windows.Forms.ToolStripMenuItem context_tile_duplicate;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem context_tile_delete;
-        private System.Windows.Forms.PictureBox pic_texture;
+        private CrispPictureBox pic_texture;
     }
 }

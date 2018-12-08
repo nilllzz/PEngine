@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.chk_stretch = new System.Windows.Forms.CheckBox();
             this.btn_reveal = new System.Windows.Forms.Button();
-            this.pic_texture = new System.Windows.Forms.PictureBox();
+            this.pic_texture = new PEngine.Creator.Components.Game.CrispPictureBox();
             this.tooltip_main = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pic_texture)).BeginInit();
             this.SuspendLayout();
@@ -90,7 +90,7 @@
 
         private System.Windows.Forms.CheckBox chk_stretch;
         private System.Windows.Forms.Button btn_reveal;
-        private System.Windows.Forms.PictureBox pic_texture;
+        private CrispPictureBox pic_texture;
         private System.Windows.Forms.ToolTip tooltip_main;
     }
 }

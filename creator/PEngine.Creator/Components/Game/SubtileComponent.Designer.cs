@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.pic_texture = new System.Windows.Forms.PictureBox();
+            this.pic_texture = new CrispPictureBox();
             this.lbl_behavior = new System.Windows.Forms.Label();
             this.context_subtile = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.context_subtile_duplicate = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,7 +53,7 @@
             // 
             // lbl_behavior
             // 
-            this.lbl_behavior.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.lbl_behavior.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_behavior.ContextMenuStrip = this.context_subtile;
             this.lbl_behavior.Location = new System.Drawing.Point(-1, 38);
@@ -115,7 +115,7 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pic_texture;
+        private CrispPictureBox pic_texture;
         private System.Windows.Forms.Label lbl_behavior;
         private System.Windows.Forms.ContextMenuStrip context_subtile;
         private System.Windows.Forms.ToolStripMenuItem context_subtile_duplicate;

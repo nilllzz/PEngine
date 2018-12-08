@@ -45,13 +45,13 @@
             this.panel_main = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.group_edit_tile = new System.Windows.Forms.GroupBox();
-            this.pic_tile_1 = new System.Windows.Forms.PictureBox();
+            this.pic_tile_1 = new CrispPictureBox();
             this.pic_edit_mode = new System.Windows.Forms.PictureBox();
-            this.pic_tile_4 = new System.Windows.Forms.PictureBox();
+            this.pic_tile_4 = new CrispPictureBox();
             this.group_selected_subtile = new System.Windows.Forms.GroupBox();
             this.lbl_no_subtile = new System.Windows.Forms.Label();
-            this.pic_tile_2 = new System.Windows.Forms.PictureBox();
-            this.pic_tile_3 = new System.Windows.Forms.PictureBox();
+            this.pic_tile_2 = new CrispPictureBox();
+            this.pic_tile_3 = new CrispPictureBox();
             this.tooltip_main = new System.Windows.Forms.ToolTip(this.components);
             this.tool_editor_texture = new System.Windows.Forms.ToolStripButton();
             this.panel_subtiles.SuspendLayout();
@@ -117,8 +117,8 @@
             // 
             // panel_subtile_container
             // 
-            this.panel_subtile_container.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.panel_subtile_container.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_subtile_container.AutoScroll = true;
             this.panel_subtile_container.Location = new System.Drawing.Point(-1, 27);
@@ -187,8 +187,8 @@
             // 
             // panel_tiles_container
             // 
-            this.panel_tiles_container.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.panel_tiles_container.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_tiles_container.AutoScroll = true;
             this.panel_tiles_container.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -220,8 +220,8 @@
             // 
             // group_edit_tile
             // 
-            this.group_edit_tile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.group_edit_tile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.group_edit_tile.Controls.Add(this.pic_tile_1);
             this.group_edit_tile.Controls.Add(this.pic_edit_mode);
@@ -367,10 +367,10 @@
         private System.Windows.Forms.Panel panel_tiles;
         private System.Windows.Forms.Panel panel_main;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox pic_tile_4;
-        private System.Windows.Forms.PictureBox pic_tile_3;
-        private System.Windows.Forms.PictureBox pic_tile_2;
-        private System.Windows.Forms.PictureBox pic_tile_1;
+        private CrispPictureBox pic_tile_4;
+        private CrispPictureBox pic_tile_3;
+        private CrispPictureBox pic_tile_2;
+        private CrispPictureBox pic_tile_1;
         private System.Windows.Forms.GroupBox group_selected_subtile;
         private System.Windows.Forms.ToolTip tooltip_main;
         private System.Windows.Forms.ToolStrip tool_editor;

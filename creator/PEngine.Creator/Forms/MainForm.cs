@@ -178,11 +178,20 @@ namespace PEngine.Creator.Forms
             }
         }
 
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var result = ActiveView?.FormClosing();
+            if (result.HasValue && !result.Value)
+            {
+                e.Cancel = true;
+            }
+        }
+
         #endregion
 
-        public void SetView(BaseView view)
+        public void SetView(BaseView view, bool destroyCurrent = true)
         {
-            if (ActiveView != null)
+            if (ActiveView != null && destroyCurrent)
             {
                 ActiveView.StatusChanged -= OnStatusChanged;
                 ActiveView.TitleChanged -= OnTitleChanged;

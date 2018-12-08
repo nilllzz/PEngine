@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using PEngine.Common;
 using PEngine.Common.Data;
 using PEngine.Common.Data.Maps;
+using PEngine.Common.Interop;
 using PEngine.Game.Components.World.Entities;
 using PEngine.Game.Screens.World;
 using System.Collections.Generic;
@@ -31,6 +32,7 @@ namespace PEngine.Game.Components.World
         {
             var file = Project.ActiveProject.GetFile(_id, ProjectFileType.Map);
             _data = MapData.Load(file.path);
+            Controller.Pipeline.Write(Pipeline.EVENT_LOAD_MAP, _id);
 
             _tileset = new Tileset(_data.tileset);
             _tileset.LoadContent();

@@ -47,6 +47,8 @@
     <Compile Include="Data\ProjectFileData.cs" />
     <Compile Include="Data\ProjectFileType.cs" />
     <Compile Include="Data\Resource.cs" />
+    <Compile Include="Interop\Pipeline.cs" />
+    <Compile Include="Interop\LogType.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

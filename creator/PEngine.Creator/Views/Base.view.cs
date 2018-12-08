@@ -59,5 +59,10 @@ namespace PEngine.Creator.Views
 
             Dock = DockStyle.Fill;
         }
+
+        public virtual bool FormClosing()
+        {
+            return true;
+        }
     }
 }

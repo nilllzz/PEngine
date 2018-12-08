@@ -4,10 +4,10 @@ using PEngine.Creator.Components.Game;
 using PEngine.Creator.Components.Projects;
 using PEngine.Creator.Forms;
 using PEngine.Creator.Helpers;
+using PEngine.Creator.Views.Game;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -365,6 +365,7 @@ namespace PEngine.Creator.Views.Projects
 
         public void SaveAllFiles()
         {
+            SaveProjectFiles();
             foreach (var comp in Components)
             {
                 comp.Save();
@@ -413,30 +414,13 @@ namespace PEngine.Creator.Views.Projects
 
         public void RunGame()
         {
-            var process = new GameProcess();
-            process.ProcessStopped += Process_ProcessStopped;
-            process.OutputReceived += Process_Output;
+            SaveAllFiles();
 
-            process.Start();
+            var view = new DebugView();
+            view.SetPreviousView(this);
 
-            Title = Project.ActiveProject.Name + " (Running)";
-            Status = "Running";
-            StatusColor = Color.FromArgb(202, 81, 0);
-        }
-
-        private void Process_Output(string log)
-        {
-            Console.WriteLine(log);
-        }
-
-        private void Process_ProcessStopped()
-        {
-            Dispatch(() =>
-            {
-                Title = Project.ActiveProject.Name;
-                Status = "Ready";
-                SetDefaultStatusColor();
-            });
+            MainForm.Instance.SetView(view, false);
+            view.StartDebug();
         }
     }
 }

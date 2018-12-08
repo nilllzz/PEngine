@@ -3,10 +3,10 @@ using GameDevCommon.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using PEngine.Common;
-using PEngine.Common.Data.Maps;
+using PEngine.Common.Interop;
 using PEngine.Game.Components;
 using PEngine.Game.Screens;
+using System;
 using static Core;
 
 namespace PEngine.Game
@@ -24,6 +24,8 @@ namespace PEngine.Game
         public ComponentManager GetComponentManager() => ComponentManager;
         internal Rectangle ClientRectangle => new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
         internal ContentManager ProjectContent { get; private set; }
+        internal Pipeline Pipeline { get; }
+        internal StdInReader StdIn { get; }
 
         public GameController()
         {
@@ -33,6 +35,10 @@ namespace PEngine.Game
             ComponentManager = new ComponentManager();
             IsMouseVisible = true;
             Window.AllowUserResizing = true;
+
+            Pipeline = new Pipeline(Console.Out);
+            StdIn = new StdInReader();
+            StdIn.StartListening();
         }
 
         protected override void Initialize()
@@ -53,7 +59,8 @@ namespace PEngine.Game
 
             GameboyInputs.Initialize();
 
-            System.Console.WriteLine("Started successfully");
+            Pipeline.Write(Pipeline.EVENT_STARTUP);
+            Pipeline.Log(LogType.Info, "Hello Pipeline");
         }
 
         protected override void LoadContent()
@@ -68,6 +75,8 @@ namespace PEngine.Game
         protected override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            StdIn.HandleBuffer();
 
             GetComponent<ControlsHandler>().Update();
             GetComponent<ScreenManager>().ActiveScreen.Update(gameTime);
@@ -87,6 +96,12 @@ namespace PEngine.Game
             _batch.End();
 
             base.Draw(gameTime);
+        }
+
+        protected override void OnExiting(object sender, EventArgs args)
+        {
+            Pipeline.Write(Pipeline.EVENT_STOP);
+            base.OnExiting(sender, args);
         }
     }
 }

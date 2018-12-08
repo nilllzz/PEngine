@@ -1,5 +1,8 @@
-﻿using PEngine.Game.Screens.World;
+﻿using PEngine.Common.Interop;
+using PEngine.Game.Screens.World;
 using System;
+using System.Linq;
+using static Core;
 
 namespace PEngine.Game.Components.World.Entities
 {
@@ -17,6 +20,19 @@ namespace PEngine.Game.Components.World.Entities
         {
             Facing = CharacterFacing.Down;
             _spriteLayer = WorldScreen.SPRITE_LAYER_PLAYER;
+
+            Controller.StdIn.PipelineItemArrived += StdIn_PipelineItemArrived;
+        }
+
+        private void StdIn_PipelineItemArrived(PipelineMessage message)
+        {
+            if (message.Event == Pipeline.EVENT_PLAYER_MOVED)
+            {
+                var coordinates = message.Content.Split(',').Select(c => int.Parse(c)).ToArray();
+                Position = new Double2D(coordinates[0], coordinates[1]);
+                Facing = CharacterFacing.Down;
+                Controller.Pipeline.Write(Pipeline.EVENT_PLAYER_MOVED, (int)Position.X + "," + (int)Position.Y);
+            }
         }
 
         public override void LoadContent()
@@ -58,6 +74,8 @@ namespace PEngine.Game.Components.World.Entities
                             Position.X = (float)Math.Round(Position.X);
                             break;
                     }
+
+                    Controller.Pipeline.Write(Pipeline.EVENT_PLAYER_MOVED, (int)Position.X + "," + (int)Position.Y);
                 }
                 else
                 {

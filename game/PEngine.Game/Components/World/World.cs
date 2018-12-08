@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using PEngine.Common.Interop;
 using PEngine.Game.Components.World.Entities;
+using static Core;
 
 namespace PEngine.Game.Components.World
 {
@@ -23,6 +25,8 @@ namespace PEngine.Game.Components.World
             ActiveMap.Entities.Add(npc);
 
             ActiveMap.LoadContent();
+
+            Controller.Pipeline.Write(Pipeline.EVENT_SET_MAP, mapId);
         }
 
         public void Draw(SpriteBatch batch)

@@ -77,7 +77,7 @@
             this.split_main.Panel2.Controls.Add(this.tabs_main);
             this.split_main.Panel2.Controls.Add(this.tool_project);
             this.split_main.Panel2MinSize = 100;
-            this.split_main.Size = new System.Drawing.Size(1206, 796);
+            this.split_main.Size = new System.Drawing.Size(1158, 796);
             this.split_main.SplitterDistance = 240;
             this.split_main.TabIndex = 0;
             // 
@@ -97,7 +97,7 @@
             this.tabs_main.Location = new System.Drawing.Point(0, 25);
             this.tabs_main.Name = "tabs_main";
             this.tabs_main.SelectedIndex = 0;
-            this.tabs_main.Size = new System.Drawing.Size(962, 771);
+            this.tabs_main.Size = new System.Drawing.Size(914, 771);
             this.tabs_main.TabIndex = 1;
             this.tabs_main.SelectedIndexChanged += new System.EventHandler(this.tabs_main_SelectedIndexChanged);
             this.tabs_main.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabs_main_MouseClick);
@@ -124,7 +124,7 @@
             this.tool_project_list});
             this.tool_project.Location = new System.Drawing.Point(0, 0);
             this.tool_project.Name = "tool_project";
-            this.tool_project.Size = new System.Drawing.Size(962, 25);
+            this.tool_project.Size = new System.Drawing.Size(914, 25);
             this.tool_project.TabIndex = 0;
             this.tool_project.Text = "toolStrip1";
             // 
@@ -279,7 +279,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.split_main);
             this.Name = "MainProjectView";
-            this.Size = new System.Drawing.Size(1206, 796);
+            this.Size = new System.Drawing.Size(1158, 796);
             this.split_main.Panel1.ResumeLayout(false);
             this.split_main.Panel2.ResumeLayout(false);
             this.split_main.Panel2.PerformLayout();

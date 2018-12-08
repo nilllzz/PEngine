@@ -1,14 +1,32 @@
-﻿using System;
+﻿using PEngine.Common.Interop;
+using System;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace PEngine.Creator.Components.Game
 {
     class GameProcess
     {
+        struct WindowRect
+        {
+            public int Left { get; set; }
+            public int Top { get; set; }
+            public int Right { get; set; }
+            public int Bottom { get; set; }
+
+            public Rectangle ToRectangle()
+            {
+                return new Rectangle(Left, Top, Right - Left, Bottom - Top);
+            }
+        }
+
         internal event Action<string> OutputReceived;
         internal event Action ProcessStopped;
 
         private Process _processHandle;
+
+        internal int ProcessId => _processHandle.Id;
+        internal Pipeline Pipeline { get; private set; }
 
         internal void Start()
         {
@@ -16,6 +34,7 @@ namespace PEngine.Creator.Components.Game
             {
                 FileName = "PEngine.Game.exe",
                 RedirectStandardOutput = true,
+                RedirectStandardInput = true,
                 UseShellExecute = false,
             };
             _processHandle = Process.Start(startInfo);
@@ -24,6 +43,8 @@ namespace PEngine.Creator.Components.Game
 
             _processHandle.OutputDataReceived += _processHandle_OutputDataReceived;
             _processHandle.Exited += _processHandle_Exited;
+
+            Pipeline = new Pipeline(_processHandle.StandardInput);
         }
 
         private void _processHandle_Exited(object sender, EventArgs e)
@@ -39,7 +60,10 @@ namespace PEngine.Creator.Components.Game
 
         internal void Stop()
         {
-            _processHandle.Close();
+            if (!_processHandle.HasExited)
+            {
+                _processHandle.Kill();
+            }
             _processHandle.OutputDataReceived -= _processHandle_OutputDataReceived;
             _processHandle.Exited -= _processHandle_Exited;
             _processHandle = null;

@@ -13,6 +13,8 @@ namespace PEngine.Creator.Components.Projects
         private const int ICON_MAP = 3;
         private const int ICON_IMAGE = 4;
         private const int ICON_TILESET = 5;
+        private const int ICON_PROJECT_CLOSED = 6;
+        private const int ICON_PROJECT_OPEN = 7;
 
         private readonly string _folderPath = null;
         private readonly int _collapsedIconIndex;
@@ -35,15 +37,23 @@ namespace PEngine.Creator.Components.Projects
             }
         }
 
-        public ProjectTreeNode(string folderText, string path)
+        public ProjectTreeNode(string folderText, string path, bool isProject = false)
             : base(folderText)
         {
             ItemType = ProjectItemType.Folder;
             FileData = null;
 
             _folderPath = path;
-            _collapsedIconIndex = ICON_FOLDER_CLOSED;
-            _expandedIconIndex = ICON_FOLDER_OPEN;
+            if (isProject)
+            {
+                _collapsedIconIndex = ICON_PROJECT_CLOSED;
+                _expandedIconIndex = ICON_PROJECT_OPEN;
+            }
+            else
+            {
+                _collapsedIconIndex = ICON_FOLDER_CLOSED;
+                _expandedIconIndex = ICON_FOLDER_OPEN;
+            }
 
             ImageIndex = _collapsedIconIndex;
             SelectedImageIndex = ImageIndex;

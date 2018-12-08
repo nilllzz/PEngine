@@ -133,7 +133,7 @@ namespace PEngine.Creator.Components.Projects
             var project = Project.ActiveProject;
 
             var root = new ProjectTreeNode($"Project '{project.Name}'",
-                Project.ActiveProject.BaseDirectory);
+                Project.ActiveProject.BaseDirectory, true);
 
             var maps = new ProjectTreeNode("Maps",
                 Path.Combine(Project.ActiveProject.BaseDirectory, "data/maps"));

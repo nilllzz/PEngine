@@ -39,6 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Debug\MapPreview.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Debug\MapPreview.Designer.cs">
+      <DependentUpon>MapPreview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Debug\TransparentControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Components\Game\CrispPictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -147,6 +156,12 @@
     <Compile Include="Views\Base.view.Designer.cs">
       <DependentUpon>Base.view.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Game\Debug.view.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Game\Debug.view.Designer.cs">
+      <DependentUpon>Debug.view.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Projects\MainProject.view.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -171,6 +186,9 @@
     <Compile Include="Views\Projects\Welcome.view.Designer.cs">
       <DependentUpon>Welcome.view.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Components\Debug\MapPreview.resx">
+      <DependentUpon>MapPreview.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\Game\CrispPictureBox.resx">
       <DependentUpon>CrispPictureBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -225,6 +243,9 @@
     </Compile>
     <EmbeddedResource Include="Views\Base.view.resx">
       <DependentUpon>Base.view.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Game\Debug.view.resx">
+      <DependentUpon>Debug.view.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Projects\MainProject.view.resx">
       <DependentUpon>MainProject.view.cs</DependentUpon>
@@ -353,6 +374,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\HiddenFolder_427.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stopDebug.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Event_594.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EventLog_5735.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Select.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

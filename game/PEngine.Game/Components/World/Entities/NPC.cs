@@ -1,14 +1,14 @@
 ﻿namespace PEngine.Game.Components.World.Entities
 {
-    class NPC : Character
+    internal class NPC : Character
     {
-        public NPC(Map map)
+        internal NPC(Map map)
             : base(map)
         {
             Facing = CharacterFacing.Down;
         }
 
-        public override void LoadContent()
+        internal override void LoadContent()
         {
             LoadTexture("npc01");
         }

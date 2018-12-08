@@ -8,7 +8,7 @@ using System.IO;
 
 namespace PEngine.Creator.Components.Game
 {
-    static class ResourceManager
+    internal static class ResourceManager
     {
         private const int SUBTILE_TEXTURE_SIZE = 16;
 

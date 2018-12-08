@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace PEngine.Creator.Components.Game
 {
-    public partial class SubtileEditComponent : UserControl, IEventBusComponent
+    internal partial class SubtileEditComponent : UserControl, IEventBusComponent
     {
         private readonly ProjectEventBus _eventBus;
         private readonly TilesetData _parent;
@@ -17,7 +17,7 @@ namespace PEngine.Creator.Components.Game
 
         private bool _stopEvents = false;
 
-        public SubtileEditComponent(ProjectEventBus eventBus, TilesetData parent, SubtileData data)
+        internal SubtileEditComponent(ProjectEventBus eventBus, TilesetData parent, SubtileData data)
         {
             InitializeComponent();
 

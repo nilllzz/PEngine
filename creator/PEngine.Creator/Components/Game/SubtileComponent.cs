@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace PEngine.Creator.Components.Game
 {
-    public partial class SubtileComponent : UserControl, IEventBusComponent
+    internal partial class SubtileComponent : UserControl, IEventBusComponent
     {
         private readonly ProjectEventBus _eventBus;
         private readonly TilesetData _parent;
@@ -15,9 +15,9 @@ namespace PEngine.Creator.Components.Game
 
         private bool _isSelected = false;
 
-        public int SubtileId => _data.id;
+        internal int SubtileId => _data.id;
 
-        public SubtileComponent(ProjectEventBus eventBus, TilesetData parent, SubtileData data)
+        internal SubtileComponent(ProjectEventBus eventBus, TilesetData parent, SubtileData data)
         {
             InitializeComponent();
 

@@ -13,12 +13,12 @@ namespace PEngine.Game.Content
         private static Dictionary<string, object> _resourceBuffer = new Dictionary<string, object>();
         private static Dictionary<Type, Func<string, object>> _loaders;
 
-        public static void Clear()
+        internal static void Clear()
         {
             _resourceBuffer.Clear();
         }
 
-        public static void ClearBuffer(string objKey = null)
+        internal static void ClearBuffer(string objKey = null)
         {
             if (objKey == null)
             {
@@ -47,7 +47,7 @@ namespace PEngine.Game.Content
         }
 
         [DebuggerStepThrough]
-        public static T LoadDirect<T>(this ContentManager content, string file)
+        internal static T LoadDirect<T>(this ContentManager content, string file)
         {
             if (_loaders == null)
             {

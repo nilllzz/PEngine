@@ -1,6 +1,6 @@
 ﻿namespace PEngine.Game.Components.World.Entities
 {
-    enum CharacterFacing
+    internal enum CharacterFacing
     {
         Up = 0,
         Left = 1,

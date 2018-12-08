@@ -5,13 +5,13 @@ using System.Windows.Forms;
 
 namespace PEngine.Creator.Views
 {
-    public partial class BaseView : UserControl
+    internal partial class BaseView : UserControl
     {
         private string _status = "Ready";
         private string _title = null;
         private Color _statusColor = Settings.Default.Color_Highlight;
 
-        public string Status
+        internal string Status
         {
             get => _status;
             set
@@ -20,7 +20,7 @@ namespace PEngine.Creator.Views
                 StatusChanged?.Invoke(_status);
             }
         }
-        public string Title
+        internal string Title
         {
             get => _title;
             set
@@ -29,7 +29,7 @@ namespace PEngine.Creator.Views
                 TitleChanged?.Invoke(_title);
             }
         }
-        public Color StatusColor
+        internal Color StatusColor
         {
             get => _statusColor;
             set
@@ -39,9 +39,9 @@ namespace PEngine.Creator.Views
             }
         }
 
-        public event Action<string> StatusChanged;
-        public event Action<string> TitleChanged;
-        public event Action<Color> StatusColorChanged;
+        internal event Action<string> StatusChanged;
+        internal event Action<string> TitleChanged;
+        internal event Action<Color> StatusColorChanged;
 
         protected void Dispatch(Action action)
         {
@@ -53,14 +53,14 @@ namespace PEngine.Creator.Views
             StatusColor = Settings.Default.Color_Highlight;
         }
 
-        public BaseView()
+        internal BaseView()
         {
             InitializeComponent();
 
             Dock = DockStyle.Fill;
         }
 
-        public virtual bool FormClosing()
+        internal virtual bool FormClosing()
         {
             return true;
         }

@@ -2,9 +2,9 @@
 
 namespace PEngine.Game.Components.World
 {
-    struct SubtileInfo
+    internal struct SubtileInfo
     {
-        public int X, Y;
-        public SubtileBehavior Behavior;
+        internal int X, Y;
+        internal SubtileBehavior Behavior;
     }
 }

@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace PEngine.Creator.Components.Game
 {
-    public partial class CrispPictureBox : PictureBox
+    internal partial class CrispPictureBox : PictureBox
     {
-        public CrispPictureBox()
+        internal CrispPictureBox()
         {
             InitializeComponent();
         }

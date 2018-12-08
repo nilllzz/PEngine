@@ -5,21 +5,8 @@ using System.Drawing;
 
 namespace PEngine.Creator.Components.Game
 {
-    class GameProcess
+    internal class GameProcess
     {
-        struct WindowRect
-        {
-            public int Left { get; set; }
-            public int Top { get; set; }
-            public int Right { get; set; }
-            public int Bottom { get; set; }
-
-            public Rectangle ToRectangle()
-            {
-                return new Rectangle(Left, Top, Right - Left, Bottom - Top);
-            }
-        }
-
         internal event Action<string> OutputReceived;
         internal event Action ProcessStopped;
 

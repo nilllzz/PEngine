@@ -2,21 +2,21 @@
 {
     struct Double2D
     {
-        public double X, Y;
+        internal double X, Y;
 
-        public Double2D(double value)
+        internal Double2D(double value)
         {
             X = value;
             Y = value;
         }
 
-        public Double2D(double x, double y)
+        internal Double2D(double x, double y)
         {
             X = x;
             Y = y;
         }
 
-        public static Double2D Zero()
+        internal static Double2D Zero()
         {
             return new Double2D(0, 0);
         }

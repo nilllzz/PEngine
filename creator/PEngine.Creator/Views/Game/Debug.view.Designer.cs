@@ -77,8 +77,8 @@
             this.tool_debug_stop.Image = global::PEngine.Creator.Properties.Resources.stopDebug;
             this.tool_debug_stop.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tool_debug_stop.Name = "tool_debug_stop";
-            this.tool_debug_stop.Size = new System.Drawing.Size(113, 22);
-            this.tool_debug_stop.Text = "Stop Debugging";
+            this.tool_debug_stop.Size = new System.Drawing.Size(51, 22);
+            this.tool_debug_stop.Text = "Stop";
             this.tool_debug_stop.Click += new System.EventHandler(this.tool_debug_stop_Click);
             // 
             // tool_debug_restart
@@ -86,8 +86,9 @@
             this.tool_debug_restart.Image = global::PEngine.Creator.Properties.Resources.refresh_16xLG;
             this.tool_debug_restart.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tool_debug_restart.Name = "tool_debug_restart";
-            this.tool_debug_restart.Size = new System.Drawing.Size(125, 22);
-            this.tool_debug_restart.Text = "Restart Debugging";
+            this.tool_debug_restart.Size = new System.Drawing.Size(63, 22);
+            this.tool_debug_restart.Text = "Restart";
+            this.tool_debug_restart.Click += new System.EventHandler(this.tool_debug_restart_Click);
             // 
             // tool_debug_close
             // 

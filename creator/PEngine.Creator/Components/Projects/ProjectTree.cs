@@ -7,18 +7,18 @@ using System.Windows.Forms;
 
 namespace PEngine.Creator.Components.Projects
 {
-    public partial class ProjectTree : UserControl, IEventBusComponent
+    internal partial class ProjectTree : UserControl, IEventBusComponent
     {
         private ProjectEventBus _eventBus;
 
-        public ProjectTree()
+        internal ProjectTree()
         {
             InitializeComponent();
         }
 
         #region events
 
-        public void SetEventBus(ProjectEventBus eventBus)
+        internal void SetEventBus(ProjectEventBus eventBus)
         {
             _eventBus = eventBus;
             UnregisterEvents();

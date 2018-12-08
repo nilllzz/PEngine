@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace PEngine.Creator.Components.Projects
 {
-    public partial class ProjectTabComponent : UserControl
+    internal partial class ProjectTabComponent : UserControl
     {
         protected const int ICON_DOCUMENT = 0;
         protected const int ICON_MAP = 1;
@@ -16,9 +16,9 @@ namespace PEngine.Creator.Components.Projects
         private string _title;
 
         // if this file gets saved, the project also has to be saved
-        public bool HasProjectChanges { get; set; }
+        internal bool HasProjectChanges { get; set; }
 
-        public bool HasChanges
+        internal bool HasChanges
         {
             get => _hasChanges;
             set
@@ -28,7 +28,7 @@ namespace PEngine.Creator.Components.Projects
             }
         }
 
-        public string Title
+        internal string Title
         {
             get
             {
@@ -46,21 +46,21 @@ namespace PEngine.Creator.Components.Projects
             }
         }
 
-        public virtual string FilePath => null;
-        public virtual int IconIndex => ICON_DOCUMENT;
-        public virtual string Identifier => null;
-        public virtual bool CanSave => true;
-        public virtual bool CanSaveAs => true;
-        public virtual ProjectItem ProjectItem => throw new NotImplementedException();
+        internal virtual string FilePath => null;
+        internal virtual int IconIndex => ICON_DOCUMENT;
+        internal virtual string Identifier => null;
+        internal virtual bool CanSave => true;
+        internal virtual bool CanSaveAs => true;
+        internal virtual ProjectItem ProjectItem => throw new NotImplementedException();
 
-        public event Action<string> TitleChanged;
+        internal event Action<string> TitleChanged;
 
-        public ProjectTabComponent()
+        internal ProjectTabComponent()
         {
             InitializeComponent();
         }
 
-        public virtual void Save()
+        internal virtual void Save()
         {
             if (HasProjectChanges)
             {
@@ -71,9 +71,9 @@ namespace PEngine.Creator.Components.Projects
             }
         }
 
-        public virtual void Discard() { }
+        internal virtual void Discard() { }
 
-        public virtual bool Close()
+        internal virtual bool Close()
         {
             if (CanSave && HasChanges)
             {

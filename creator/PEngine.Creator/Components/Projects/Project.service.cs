@@ -5,12 +5,12 @@ using System.Windows.Forms;
 
 namespace PEngine.Creator.Components.Projects
 {
-    static class ProjectService
+    internal static class ProjectService
     {
-        public const int MAX_TILES_IN_SET = 64;
-        public const int MAX_SUBTILES_IN_SET = 64;
+        internal const int MAX_TILES_IN_SET = 64;
+        internal const int MAX_SUBTILES_IN_SET = 64;
 
-        public static string ProjectsDirectory => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "projects");
+        internal static string ProjectsDirectory => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "projects");
 
         private static void CheckCreateProjectsDirectory()
         {
@@ -21,7 +21,7 @@ namespace PEngine.Creator.Components.Projects
         }
 
         // generates a path for a project name
-        public static string GetNewProjectPath(string name)
+        internal static string GetNewProjectPath(string name)
         {
             var path = Path.Combine(ProjectsDirectory, name);
             while (Directory.Exists(path))
@@ -31,7 +31,7 @@ namespace PEngine.Creator.Components.Projects
             return path;
         }
 
-        public static void OpenProject(Form caller)
+        internal static void OpenProject(Form caller)
         {
             CheckCreateProjectsDirectory();
 

@@ -6,7 +6,7 @@ using static Core;
 
 namespace PEngine.Game.Components.World.Entities
 {
-    class PlayerEntity : Character
+    internal class PlayerEntity : Character
     {
         private const float WALK_SPEED = 0.05f;
         private const float BLOCKED_SPEED = 0.1f;
@@ -15,7 +15,7 @@ namespace PEngine.Game.Components.World.Entities
         private bool _isBlocked = false;
         private float _blockedTime = 0f;
 
-        public PlayerEntity(Map map)
+        internal PlayerEntity(Map map)
             : base(map)
         {
             Facing = CharacterFacing.Down;
@@ -35,12 +35,12 @@ namespace PEngine.Game.Components.World.Entities
             }
         }
 
-        public override void LoadContent()
+        internal override void LoadContent()
         {
             LoadTexture("player");
         }
 
-        public override void Update()
+        internal override void Update()
         {
             if (_isBlocked)
             {

@@ -6,7 +6,7 @@ using static Core;
 
 namespace PEngine.Game.Components.World.Entities
 {
-    abstract class Character : Entity
+    internal abstract class Character : Entity
     {
         private const int WALK_CYCLE_DELAY = 9;
         private static int[] WALK_CYCLE_FRAMES = new[] { 0, 1, 0, 2 };
@@ -15,7 +15,7 @@ namespace PEngine.Game.Components.World.Entities
         protected int _walkCycleFrame = 0;
         private int _walkCycleDelay = WALK_CYCLE_DELAY;
 
-        public CharacterFacing Facing { get; set; }
+        internal CharacterFacing Facing { get; set; }
 
         protected Character(Map map)
             : base(map)
@@ -35,7 +35,7 @@ namespace PEngine.Game.Components.World.Entities
                 ENTITY_SIZE);
         }
 
-        public override void Update()
+        internal override void Update()
         {
             if (_walking)
             {

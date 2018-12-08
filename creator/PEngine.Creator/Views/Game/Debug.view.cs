@@ -3,6 +3,7 @@ using PEngine.Common.Interop;
 using PEngine.Creator.Components.Game;
 using PEngine.Creator.Components.Projects;
 using PEngine.Creator.Forms;
+using PEngine.Creator.Properties;
 using PEngine.Creator.Views.Projects;
 using System;
 using System.Drawing;
@@ -11,7 +12,7 @@ using System.Windows.Forms;
 
 namespace PEngine.Creator.Views.Game
 {
-    public partial class DebugView : BaseView
+    internal partial class DebugView : BaseView
     {
         private MainProjectView _previousView;
         private GameProcess _process;
@@ -32,35 +33,30 @@ namespace PEngine.Creator.Views.Game
                 {
                     tree_resources.Nodes[0].Text = $"Game ({_process.ProcessId})";
                     map_preview.GameProcess = _process;
+
                     Status = $"Connected (PID: {_process.ProcessId})";
+                    Title = Project.ActiveProject.Name + " (Running)";
+                    StatusColor = Color.FromArgb(202, 81, 0);
                 }
                 else
                 {
                     Status = $"Disconnected";
+                    Title = Project.ActiveProject.Name;
+                    StatusColor = Settings.Default.Color_Highlight;
                 }
             }
         }
 
-        public DebugView()
+        internal DebugView()
         {
             InitializeComponent();
-
-            Title = Project.ActiveProject.Name + " (Running)";
-            Status = "Waiting for process";
-            StatusColor = Color.FromArgb(202, 81, 0);
         }
 
         #region ui
 
         private void tool_debug_stop_Click(object sender, System.EventArgs e)
         {
-            _process.Stop();
-            AddLogEntry(new LogEntry
-            {
-                Type = LogType.Debug,
-                Message = "Debugging aborted"
-            });
-            IsConnected = false;
+            StopDebug();
         }
 
         private void tool_debug_close_Click(object sender, System.EventArgs e)
@@ -84,9 +80,19 @@ namespace PEngine.Creator.Views.Game
             tool_log_chk_events.Checked = !tool_log_chk_events.Checked;
         }
 
+        private void tool_debug_restart_Click(object sender, EventArgs e)
+        {
+            if (_isConnected)
+            {
+                StopDebug();
+            }
+
+            StartDebug();
+        }
+
         #endregion
 
-        public override bool FormClosing()
+        internal override bool FormClosing()
         {
             if (IsConnected)
             {
@@ -95,13 +101,16 @@ namespace PEngine.Creator.Views.Game
             return base.FormClosing();
         }
 
-        public void SetPreviousView(MainProjectView view)
+        internal void SetPreviousView(MainProjectView view)
         {
             _previousView = view;
         }
 
-        public void StartDebug()
+        internal void StartDebug()
         {
+            txt_log.Text = "";
+            Status = "Waiting for process...";
+
             tree_resources.Nodes.Clear();
             tree_resources.Nodes.Add("Game");
             tree_resources.Nodes[0].Expand();
@@ -111,6 +120,17 @@ namespace PEngine.Creator.Views.Game
             _process.OutputReceived += Process_Output;
 
             _process.Start();
+        }
+
+        private void StopDebug()
+        {
+            _process.Stop();
+            AddLogEntry(new LogEntry
+            {
+                Type = LogType.Debug,
+                Message = "Debugging aborted"
+            });
+            IsConnected = false;
         }
 
         private void Process_Output(string log)

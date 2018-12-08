@@ -5,16 +5,16 @@ using System.Windows.Forms;
 
 namespace PEngine.Creator.Components.Game
 {
-    public partial class TextureViewer : ProjectTabComponent
+    internal partial class TextureViewer : ProjectTabComponent
     {
         private readonly ProjectItem _item;
 
-        public override bool CanSave => false;
-        public override string FilePath => _item.FilePath;
-        public override string Identifier => _item.Identifier;
-        public override int IconIndex => ICON_IMAGE;
+        internal override bool CanSave => false;
+        internal override string FilePath => _item.FilePath;
+        internal override string Identifier => _item.Identifier;
+        internal override int IconIndex => ICON_IMAGE;
 
-        public TextureViewer(ProjectItem item)
+        internal TextureViewer(ProjectItem item)
         {
             InitializeComponent();
 

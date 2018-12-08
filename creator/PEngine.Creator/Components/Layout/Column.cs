@@ -3,14 +3,14 @@ using System.Windows.Forms;
 
 namespace PEngine.Creator.Components.Layout
 {
-    public partial class Column : FlowLayoutPanel
+    internal partial class Column : FlowLayoutPanel
     {
-        public Column()
+        internal Column()
         {
             InitializeComponent();
         }
 
-        public Column(IContainer container)
+        internal Column(IContainer container)
         {
             container.Add(this);
 

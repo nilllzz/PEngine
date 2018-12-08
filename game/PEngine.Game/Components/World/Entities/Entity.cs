@@ -4,7 +4,7 @@ using PEngine.Game.Screens.World;
 
 namespace PEngine.Game.Components.World.Entities
 {
-    abstract class Entity
+    internal abstract class Entity
     {
         // app lifetime counter
         private static int _idCounter = 0;
@@ -14,10 +14,10 @@ namespace PEngine.Game.Components.World.Entities
         protected Texture2D _texture;
         protected float _spriteLayer = WorldScreen.SPRITE_LAYER_ENTITY;
 
-        public Double2D Position;
+        internal Double2D Position;
 
-        public int Id { get; }
-        public bool CanBeRemoved { get; protected set; }
+        internal int Id { get; }
+        protected internal bool CanBeRemoved { internal get; set; }
 
         protected Entity(Map map)
         {
@@ -27,7 +27,7 @@ namespace PEngine.Game.Components.World.Entities
             _idCounter++;
         }
 
-        public abstract void LoadContent();
+        internal abstract void LoadContent();
 
         protected virtual Rectangle GetTextureRectangle()
         {
@@ -45,7 +45,7 @@ namespace PEngine.Game.Components.World.Entities
                 ENTITY_SIZE);
         }
 
-        public void Draw(SpriteBatch batch, Double2D offset)
+        internal void Draw(SpriteBatch batch, Double2D offset)
         {
             var bounds = GetBoundingRectangle(offset);
             var textureRectangle = GetTextureRectangle();
@@ -53,6 +53,6 @@ namespace PEngine.Game.Components.World.Entities
                 0f, Vector2.Zero, SpriteEffects.None, _spriteLayer);
         }
 
-        public abstract void Update();
+        internal abstract void Update();
     }
 }

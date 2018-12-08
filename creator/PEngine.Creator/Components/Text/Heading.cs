@@ -4,11 +4,11 @@ using System.Windows.Forms;
 
 namespace PEngine.Creator.Components.Text
 {
-    public partial class Heading : Label
+    internal partial class Heading : Label
     {
         private int _level;
 
-        public int Level
+        internal int Level
         {
             get => _level;
             set
@@ -38,13 +38,13 @@ namespace PEngine.Creator.Components.Text
             }
         }
 
-        public Heading()
+        internal Heading()
         {
             InitializeComponent();
             Initialize();
         }
 
-        public Heading(IContainer container)
+        internal Heading(IContainer container)
         {
             container.Add(this);
 

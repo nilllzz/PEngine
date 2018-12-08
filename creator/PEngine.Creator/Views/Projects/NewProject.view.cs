@@ -3,9 +3,9 @@ using PEngine.Creator.Components.Projects;
 
 namespace PEngine.Creator.Views.Projects
 {
-    public partial class NewProjectView : BaseView
+    internal partial class NewProjectView : BaseView
     {
-        public NewProjectView()
+        internal NewProjectView()
         {
             InitializeComponent();
         }

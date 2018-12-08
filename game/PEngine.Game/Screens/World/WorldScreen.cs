@@ -5,7 +5,7 @@ using static Core;
 
 namespace PEngine.Game.Screens.World
 {
-    class WorldScreen : Screen
+    internal class WorldScreen : Screen
     {
         internal const float SPRITE_LAYER_MAP = 0;
         internal const float SPRITE_LAYER_ANIMATIONS = 0.1f;

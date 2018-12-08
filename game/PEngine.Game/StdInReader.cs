@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace PEngine.Game
 {
-    class StdInReader
+    internal class StdInReader
     {
         private readonly List<string> _buffer = new List<string>();
 
-        public event Action<PipelineMessage> PipelineItemArrived;
+        internal event Action<PipelineMessage> PipelineItemArrived;
 
-        public void HandleBuffer()
+        internal void HandleBuffer()
         {
             foreach (var item in _buffer)
             {
@@ -21,7 +21,7 @@ namespace PEngine.Game
             _buffer.Clear();
         }
 
-        public void StartListening()
+        internal void StartListening()
         {
             _buffer.Clear();
             Task.Run(() =>

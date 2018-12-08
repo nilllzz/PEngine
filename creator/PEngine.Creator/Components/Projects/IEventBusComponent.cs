@@ -1,6 +1,6 @@
 ﻿namespace PEngine.Creator.Components.Projects
 {
-    interface IEventBusComponent
+    internal interface IEventBusComponent
     {
         void UnregisterEvents();
     }

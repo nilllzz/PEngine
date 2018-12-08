@@ -1,6 +1,6 @@
 ﻿namespace PEngine.Creator.Components.Projects
 {
-    public enum ProjectItemType
+    internal enum ProjectItemType
     {
         Folder,
         Map,

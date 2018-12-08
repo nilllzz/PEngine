@@ -2,9 +2,9 @@
 
 namespace PEngine.Creator.Views.Projects
 {
-    public partial class WelcomeView : BaseView
+    internal partial class WelcomeView : BaseView
     {
-        public WelcomeView()
+        internal WelcomeView()
         {
             InitializeComponent();
         }

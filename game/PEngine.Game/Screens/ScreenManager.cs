@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using PEngine.Common.Interop;
+using static Core;
 
 namespace PEngine.Game.Screens
 {
@@ -6,16 +8,17 @@ namespace PEngine.Game.Screens
     {
         internal Screen ActiveScreen { get; private set; }
 
-        public void Initialize()
+        void IGameComponent.Initialize()
         {
             var worldScreen = new World.WorldScreen();
             SetScreen(worldScreen);
         }
 
-        public void SetScreen(Screen screen)
+        internal void SetScreen(Screen screen)
         {
             ActiveScreen?.UnloadContent();
             ActiveScreen = screen;
+            Controller.Pipeline.Write(Pipeline.EVENT_SCENE_CHANGED, screen.GetType().Name);
         }
     }
 }

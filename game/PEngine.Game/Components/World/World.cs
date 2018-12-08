@@ -5,13 +5,13 @@ using static Core;
 
 namespace PEngine.Game.Components.World
 {
-    class World
+    internal class World
     {
-        public Map ActiveMap { get; private set; }
+        internal Map ActiveMap { get; private set; }
 
         private PlayerEntity _playerEntity;
 
-        public void LoadMap(string mapId)
+        internal void LoadMap(string mapId)
         {
             ActiveMap = new Map(mapId);
             _playerEntity = new PlayerEntity(ActiveMap);
@@ -29,13 +29,13 @@ namespace PEngine.Game.Components.World
             Controller.Pipeline.Write(Pipeline.EVENT_SET_MAP, mapId);
         }
 
-        public void Draw(SpriteBatch batch)
+        internal void Draw(SpriteBatch batch)
         {
             var offset = new Double2D(Map.TILE_SIZE * 4) - _playerEntity.Position * Map.TILE_SIZE;
             ActiveMap.Draw(batch, offset);
         }
 
-        public void Update()
+        internal void Update()
         {
             ActiveMap.Update();
         }

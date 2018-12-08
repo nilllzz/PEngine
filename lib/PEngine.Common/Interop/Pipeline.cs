@@ -39,6 +39,7 @@ namespace PEngine.Common.Interop
 
     public class Pipeline
     {
+        // normal log message
         public const string EVENT_MESSAGE = "MESSAGE";
         // general
         public const string EVENT_STARTUP = "STARTUP";
@@ -49,6 +50,7 @@ namespace PEngine.Common.Interop
         public const string EVENT_SET_MAP = "SET_MAP"; // changes the active map
         // gameplay
         public const string EVENT_PLAYER_MOVED = "PLAYER_MOVED";
+        public const string EVENT_SCENE_CHANGED = "SCENE_CHANGED";
 
         private readonly TextWriter _stdout;
 

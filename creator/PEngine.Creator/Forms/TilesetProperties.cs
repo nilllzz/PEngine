@@ -7,19 +7,19 @@ using System.Windows.Forms;
 
 namespace PEngine.Creator.Forms
 {
-    public partial class TilesetProperties : Form
+    internal partial class TilesetProperties : Form
     {
         private readonly ProjectEventBus _eventBus;
         private readonly TilesetData _data;
         private readonly ProjectFileData _file;
         private ProjectFileData[] _textureFiles;
 
-        public string Id => _data.id;
+        internal string Id => _data.id;
 
-        public bool MadeFileChanges { get; private set; }
-        public bool MadeProjectChanges { get; private set; }
+        internal bool MadeFileChanges { get; private set; }
+        internal bool MadeProjectChanges { get; private set; }
 
-        public TilesetProperties(ProjectEventBus eventBus, TilesetData data)
+        internal TilesetProperties(ProjectEventBus eventBus, TilesetData data)
         {
             InitializeComponent();
 

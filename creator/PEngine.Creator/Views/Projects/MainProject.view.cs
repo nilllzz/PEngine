@@ -14,11 +14,11 @@ using System.Windows.Forms;
 
 namespace PEngine.Creator.Views.Projects
 {
-    public partial class MainProjectView : BaseView, IEventBusComponent
+    internal partial class MainProjectView : BaseView, IEventBusComponent
     {
         private ProjectEventBus _eventBus;
 
-        public ProjectTabComponent ActiveComponent
+        internal ProjectTabComponent ActiveComponent
         {
             get
             {
@@ -39,7 +39,7 @@ namespace PEngine.Creator.Views.Projects
             }
         }
 
-        public ProjectTabComponent[] Components
+        internal ProjectTabComponent[] Components
         {
             get
             {
@@ -57,7 +57,7 @@ namespace PEngine.Creator.Views.Projects
             }
         }
 
-        public MainProjectView()
+        internal MainProjectView()
         {
             InitializeComponent();
 
@@ -262,7 +262,7 @@ namespace PEngine.Creator.Views.Projects
 
         #endregion
 
-        public void OpenTab(ProjectTabComponent component)
+        internal void OpenTab(ProjectTabComponent component)
         {
             // check if the component is already opened in a tab
             foreach (var tab in tabs_main.TabPages)
@@ -309,7 +309,7 @@ namespace PEngine.Creator.Views.Projects
             MainForm.Instance.UpdateMenus();
         }
 
-        public void SaveProjectFiles()
+        internal void SaveProjectFiles()
         {
             // saves the project and all files that depend on saving the project
             var affected = new List<ProjectTabComponent>();
@@ -358,12 +358,12 @@ namespace PEngine.Creator.Views.Projects
             }
         }
 
-        public void SaveActiveFile()
+        internal void SaveActiveFile()
         {
             ActiveComponent?.Save();
         }
 
-        public void SaveAllFiles()
+        internal void SaveAllFiles()
         {
             SaveProjectFiles();
             foreach (var comp in Components)
@@ -372,7 +372,7 @@ namespace PEngine.Creator.Views.Projects
             }
         }
 
-        public void CloseActiveFile()
+        internal void CloseActiveFile()
         {
             if (ActiveComponent != null)
             {
@@ -388,7 +388,7 @@ namespace PEngine.Creator.Views.Projects
             }
         }
 
-        public void CloseAllFiles(string except = null)
+        internal void CloseAllFiles(string except = null)
         {
             foreach (var tab in tabs_main.TabPages)
             {
@@ -412,7 +412,7 @@ namespace PEngine.Creator.Views.Projects
             }
         }
 
-        public void RunGame()
+        internal void RunGame()
         {
             SaveAllFiles();
 

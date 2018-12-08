@@ -12,23 +12,23 @@ using static Core;
 
 namespace PEngine.Game.Components.World
 {
-    class Map
+    internal class Map
     {
-        public const int TILE_SIZE = 16;
+        internal const int TILE_SIZE = 16;
 
         private readonly string _id;
         private MapData _data;
         private Tileset _tileset;
         private Texture2D _texture;
 
-        public readonly List<Entity> Entities = new List<Entity>();
+        internal readonly List<Entity> Entities = new List<Entity>();
 
-        public Map(string id)
+        internal Map(string id)
         {
             _id = id;
         }
 
-        public void LoadContent()
+        internal void LoadContent()
         {
             var file = Project.ActiveProject.GetFile(_id, ProjectFileType.Map);
             _data = MapData.Load(file.path);
@@ -45,7 +45,7 @@ namespace PEngine.Game.Components.World
             }
         }
 
-        public void Draw(SpriteBatch batch, Double2D offset)
+        internal void Draw(SpriteBatch batch, Double2D offset)
         {
             batch.Draw(_texture, new Rectangle((int)offset.X, (int)offset.Y, _texture.Width, _texture.Height),
                 null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, WorldScreen.SPRITE_LAYER_MAP);
@@ -55,7 +55,7 @@ namespace PEngine.Game.Components.World
             }
         }
 
-        public void Update()
+        internal void Update()
         {
             for (var i = 0; i < Entities.Count; i++)
             {
@@ -71,7 +71,7 @@ namespace PEngine.Game.Components.World
             }
         }
 
-        public SubtileInfo? GetSubtileInfo(Double2D position)
+        internal SubtileInfo? GetSubtileInfo(Double2D position)
         {
             var x = (int)position.X;
             var y = (int)position.Y;

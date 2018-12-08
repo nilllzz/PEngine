@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace PEngine.Creator.Components.Game
 {
-    public partial class TilesetEditor : ProjectTabComponent, IEventBusComponent
+    internal partial class TilesetEditor : ProjectTabComponent, IEventBusComponent
     {
         private readonly ProjectEventBus _eventBus;
         private readonly ProjectItem _item;
@@ -20,12 +20,12 @@ namespace PEngine.Creator.Components.Game
         private SubtileData _selectedSubtile;
         private bool _tileAddMode = true;
 
-        public override string FilePath => _item.FilePath;
-        public override string Identifier => _item.Identifier;
-        public override int IconIndex => ICON_TILESET;
-        public override ProjectItem ProjectItem => _item;
+        internal override string FilePath => _item.FilePath;
+        internal override string Identifier => _item.Identifier;
+        internal override int IconIndex => ICON_TILESET;
+        internal override ProjectItem ProjectItem => _item;
 
-        public TilesetEditor(ProjectEventBus eventBus, TilesetData data, ProjectItem item)
+        internal TilesetEditor(ProjectEventBus eventBus, TilesetData data, ProjectItem item)
         {
             InitializeComponent();
 
@@ -464,7 +464,7 @@ namespace PEngine.Creator.Components.Game
             }
         }
 
-        public override void Save()
+        internal override void Save()
         {
             base.Save();
 

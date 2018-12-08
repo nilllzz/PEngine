@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace PEngine.Creator.Components.Projects
 {
-    class ProjectTreeNode : TreeNode
+    internal class ProjectTreeNode : TreeNode
     {
         private const int ICON_DOCUMENT = 0;
         private const int ICON_FOLDER_CLOSED = 1;
@@ -20,9 +20,9 @@ namespace PEngine.Creator.Components.Projects
         private readonly int _collapsedIconIndex;
         private readonly int _expandedIconIndex;
 
-        public ProjectItemType ItemType { get; }
-        public ProjectFileData FileData { get; }
-        public string FilePath
+        internal ProjectItemType ItemType { get; }
+        internal ProjectFileData FileData { get; }
+        internal string FilePath
         {
             get
             {
@@ -37,7 +37,7 @@ namespace PEngine.Creator.Components.Projects
             }
         }
 
-        public ProjectTreeNode(string folderText, string path, bool isProject = false)
+        internal ProjectTreeNode(string folderText, string path, bool isProject = false)
             : base(folderText)
         {
             ItemType = ProjectItemType.Folder;
@@ -59,7 +59,7 @@ namespace PEngine.Creator.Components.Projects
             SelectedImageIndex = ImageIndex;
         }
 
-        public ProjectTreeNode(ProjectFileData fileData)
+        internal ProjectTreeNode(ProjectFileData fileData)
             : base(fileData.id)
         {
             FileData = fileData;
@@ -86,13 +86,13 @@ namespace PEngine.Creator.Components.Projects
             SelectedImageIndex = ImageIndex;
         }
 
-        public void OnExpanded()
+        internal void OnExpanded()
         {
             ImageIndex = _expandedIconIndex;
             SelectedImageIndex = ImageIndex;
         }
 
-        public void OnCollapsed()
+        internal void OnCollapsed()
         {
             ImageIndex = _collapsedIconIndex;
             SelectedImageIndex = ImageIndex;

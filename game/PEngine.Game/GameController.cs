@@ -27,7 +27,7 @@ namespace PEngine.Game
         internal Pipeline Pipeline { get; }
         internal StdInReader StdIn { get; }
 
-        public GameController()
+        internal GameController()
         {
             DeviceManager = new GraphicsDeviceManager(this);
             DeviceManager.GraphicsProfile = GraphicsProfile.HiDef;

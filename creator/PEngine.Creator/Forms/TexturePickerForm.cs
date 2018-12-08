@@ -6,17 +6,17 @@ using System.Windows.Forms;
 
 namespace PEngine.Creator.Forms
 {
-    public partial class TexturePickerForm : Form
+    internal partial class TexturePickerForm : Form
     {
         // input
-        public int TextureSize { get; set; } = 16;
-        public bool SkipEmpty { get; set; } = true;
-        public string TexturePath { get; set; }
+        internal int TextureSize { get; set; } = 16;
+        internal bool SkipEmpty { get; set; } = true;
+        internal string TexturePath { get; set; }
 
         // output
-        public Rectangle SelectedTextureRectangle { get; set; }
+        internal Rectangle SelectedTextureRectangle { get; set; }
 
-        public TexturePickerForm()
+        internal TexturePickerForm()
         {
             InitializeComponent();
         }

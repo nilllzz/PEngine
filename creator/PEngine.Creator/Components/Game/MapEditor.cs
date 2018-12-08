@@ -4,17 +4,17 @@ using System.IO;
 
 namespace PEngine.Creator.Components.Game
 {
-    public partial class MapEditor : ProjectTabComponent, IEventBusComponent
+    internal partial class MapEditor : ProjectTabComponent, IEventBusComponent
     {
         private readonly ProjectEventBus _eventBus;
         private readonly MapData _data;
         private readonly ProjectItem _item;
 
-        public override string FilePath => _item.FilePath;
-        public override string Identifier => _item.Identifier;
-        public override int IconIndex => ICON_MAP;
+        internal override string FilePath => _item.FilePath;
+        internal override string Identifier => _item.Identifier;
+        internal override int IconIndex => ICON_MAP;
 
-        public MapEditor(ProjectEventBus eventBus, MapData data, ProjectItem item)
+        internal MapEditor(ProjectEventBus eventBus, MapData data, ProjectItem item)
         {
             InitializeComponent();
 

@@ -4,19 +4,19 @@ using System;
 
 namespace PEngine.Creator.Components.Projects
 {
-    public class ProjectEventBus
+    internal class ProjectEventBus
     {
         #region Files
 
-        public event Action<ProjectItem> ItemOpenRequested;
-        public event Action<ProjectFileData> FileUpdated;
+        internal event Action<ProjectItem> ItemOpenRequested;
+        internal event Action<ProjectFileData> FileUpdated;
 
-        public void RequestItemOpen(ProjectItem item)
+        internal void RequestItemOpen(ProjectItem item)
         {
             ItemOpenRequested?.Invoke(item);
         }
 
-        public void UpdatedFile(ProjectFileData file)
+        internal void UpdatedFile(ProjectFileData file)
         {
             FileUpdated?.Invoke(file);
         }
@@ -25,52 +25,52 @@ namespace PEngine.Creator.Components.Projects
 
         #region Tiles
 
-        public event Action<TilesetData, TileData> TileSelected;
-        public event Action<TilesetData, TileData> TileUpdated;
-        public event Action<TilesetData, TileData> TileAdded;
-        public event Action<TilesetData, TileData> TileRemoved;
+        internal event Action<TilesetData, TileData> TileSelected;
+        internal event Action<TilesetData, TileData> TileUpdated;
+        internal event Action<TilesetData, TileData> TileAdded;
+        internal event Action<TilesetData, TileData> TileRemoved;
 
-        public event Action<TilesetData, SubtileData> SubtileSelected;
-        public event Action<TilesetData, SubtileData> SubtileUpdated;
-        public event Action<TilesetData, SubtileData> SubtileAdded;
-        public event Action<TilesetData, SubtileData> SubtileRemoved;
+        internal event Action<TilesetData, SubtileData> SubtileSelected;
+        internal event Action<TilesetData, SubtileData> SubtileUpdated;
+        internal event Action<TilesetData, SubtileData> SubtileAdded;
+        internal event Action<TilesetData, SubtileData> SubtileRemoved;
 
-        public void SelectedTile(TilesetData parent, TileData data)
+        internal void SelectedTile(TilesetData parent, TileData data)
         {
             TileSelected?.Invoke(parent, data);
         }
 
-        public void UpdatedTile(TilesetData parent, TileData data)
+        internal void UpdatedTile(TilesetData parent, TileData data)
         {
             TileUpdated?.Invoke(parent, data);
         }
 
-        public void AddedTile(TilesetData parent, TileData data)
+        internal void AddedTile(TilesetData parent, TileData data)
         {
             TileAdded?.Invoke(parent, data);
         }
 
-        public void RemovedTile(TilesetData parent, TileData data)
+        internal void RemovedTile(TilesetData parent, TileData data)
         {
             TileRemoved?.Invoke(parent, data);
         }
 
-        public void SelectedSubtile(TilesetData parent, SubtileData data)
+        internal void SelectedSubtile(TilesetData parent, SubtileData data)
         {
             SubtileSelected?.Invoke(parent, data);
         }
 
-        public void UpdatedSubtile(TilesetData parent, SubtileData data)
+        internal void UpdatedSubtile(TilesetData parent, SubtileData data)
         {
             SubtileUpdated?.Invoke(parent, data);
         }
 
-        public void AddedSubtile(TilesetData parent, SubtileData data)
+        internal void AddedSubtile(TilesetData parent, SubtileData data)
         {
             SubtileAdded?.Invoke(parent, data);
         }
 
-        public void RemovedSubtile(TilesetData parent, SubtileData data)
+        internal void RemovedSubtile(TilesetData parent, SubtileData data)
         {
             SubtileRemoved?.Invoke(parent, data);
         }

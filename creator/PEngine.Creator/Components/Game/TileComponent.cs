@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace PEngine.Creator.Components.Game
 {
-    public partial class TileComponent : UserControl, IEventBusComponent
+    internal partial class TileComponent : UserControl, IEventBusComponent
     {
         private readonly ProjectEventBus _eventBus;
         private readonly TileData _data;
@@ -16,9 +16,9 @@ namespace PEngine.Creator.Components.Game
 
         private bool _isSelected = false;
 
-        public int TileId => _data.id;
+        internal int TileId => _data.id;
 
-        public TileComponent(ProjectEventBus eventBus, TilesetData parent, TileData data)
+        internal TileComponent(ProjectEventBus eventBus, TilesetData parent, TileData data)
         {
             InitializeComponent();
 

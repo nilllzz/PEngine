@@ -3,12 +3,12 @@ using PEngine.Creator.Components.Game;
 
 namespace PEngine.Creator.Components.Projects
 {
-    public struct ProjectItem
+    internal struct ProjectItem
     {
-        public ProjectFileData FileData;
-        public ProjectItemType ItemType;
+        internal ProjectFileData FileData;
+        internal ProjectItemType ItemType;
 
-        public string FilePath => ResourceManager.GetFilePath(FileData);
-        public string Identifier => FileData.type + "|" + FileData.path;
+        internal string FilePath => ResourceManager.GetFilePath(FileData);
+        internal string Identifier => FileData.type + "|" + FileData.path;
     }
 }

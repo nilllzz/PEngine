@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace PEngine.Creator.Forms
 {
-    public partial class MainForm : Form
+    internal partial class MainForm : Form
     {
-        public static MainForm Instance => (MainForm)ActiveForm;
+        internal static MainForm Instance => (MainForm)ActiveForm;
 
-        public BaseView ActiveView
+        internal BaseView ActiveView
         {
             get
             {
@@ -26,7 +26,7 @@ namespace PEngine.Creator.Forms
             }
         }
 
-        public ProjectTabComponent ActiveComponent
+        internal ProjectTabComponent ActiveComponent
         {
             get
             {
@@ -38,7 +38,7 @@ namespace PEngine.Creator.Forms
             }
         }
 
-        public ProjectTabComponent[] Components
+        internal ProjectTabComponent[] Components
         {
             get
             {
@@ -50,7 +50,7 @@ namespace PEngine.Creator.Forms
             }
         }
 
-        public MainForm()
+        internal MainForm()
         {
             InitializeComponent();
 
@@ -119,7 +119,7 @@ namespace PEngine.Creator.Forms
             }
         }
 
-        public void UpdateMenus()
+        internal void UpdateMenus()
         {
             UpdateFileMenu();
             UpdateProjectMenu();
@@ -189,7 +189,7 @@ namespace PEngine.Creator.Forms
 
         #endregion
 
-        public void SetView(BaseView view, bool destroyCurrent = true)
+        internal void SetView(BaseView view, bool destroyCurrent = true)
         {
             if (ActiveView != null && destroyCurrent)
             {

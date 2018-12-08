@@ -10,7 +10,7 @@ using static Core;
 
 namespace PEngine.Game.Components.World
 {
-    class Tileset
+    internal class Tileset
     {
         private readonly string _id;
         private TilesetData _data;
@@ -18,7 +18,7 @@ namespace PEngine.Game.Components.World
         private Dictionary<int, SubtileData> _subtileIndex;
 
         private Texture2D _texture;
-        public Texture2D Texture
+        internal Texture2D Texture
         {
             get
             {
@@ -31,12 +31,12 @@ namespace PEngine.Game.Components.World
             }
         }
 
-        public Tileset(string id)
+        internal Tileset(string id)
         {
             _id = id;
         }
 
-        public void LoadContent()
+        internal void LoadContent()
         {
             var file = Project.ActiveProject.GetFile(_id, ProjectFileType.Tileset);
             _data = TilesetData.Load(file.path);
@@ -45,12 +45,12 @@ namespace PEngine.Game.Components.World
             _subtileIndex = _data.subtiles.ToDictionary(t => t.id, t => t);
         }
 
-        public TileData GetTile(int id)
+        internal TileData GetTile(int id)
         {
             return _tileIndex[id];
         }
 
-        public SubtileData GetSubtile(int id)
+        internal SubtileData GetSubtile(int id)
         {
             return _subtileIndex[id];
         }

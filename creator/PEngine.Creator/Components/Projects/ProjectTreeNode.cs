@@ -1,5 +1,6 @@
 ﻿using PEngine.Common;
 using PEngine.Common.Data;
+using PEngine.Creator.Components.Game;
 using System.IO;
 using System.Windows.Forms;
 
@@ -32,7 +33,7 @@ namespace PEngine.Creator.Components.Projects
                 }
                 else
                 {
-                    return Path.Combine(Project.ActiveProject.BaseDirectory, FileData.path);
+                    return ResourceManager.GetFilePath(FileData);
                 }
             }
         }

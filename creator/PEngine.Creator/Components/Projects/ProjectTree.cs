@@ -7,11 +7,11 @@ using System.Windows.Forms;
 
 namespace PEngine.Creator.Components.Projects
 {
-    internal partial class ProjectTree : UserControl, IEventBusComponent
+    public partial class ProjectTree : UserControl, IEventBusComponent
     {
         private ProjectEventBus _eventBus;
 
-        internal ProjectTree()
+        public ProjectTree()
         {
             InitializeComponent();
         }

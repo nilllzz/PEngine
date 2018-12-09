@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainProjectView));
-            this.split_main = new System.Windows.Forms.SplitContainer();
             this.projectTree = new PEngine.Creator.Components.Projects.ProjectTree();
+            this.split_main = new System.Windows.Forms.SplitContainer();
             this.tabs_main = new System.Windows.Forms.TabControl();
             this.imagelist_tabs = new System.Windows.Forms.ImageList(this.components);
             this.tool_project = new System.Windows.Forms.ToolStrip();
@@ -41,8 +41,8 @@
             this.tool_save = new System.Windows.Forms.ToolStripButton();
             this.tool_saveall = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tool_project_start = new System.Windows.Forms.ToolStripButton();
             this.tool_project_list = new System.Windows.Forms.ToolStripDropDownButton();
+            this.tool_project_start = new System.Windows.Forms.ToolStripButton();
             this.context_tabs = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.context_tabs_save = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -59,6 +59,15 @@
             this.tool_project.SuspendLayout();
             this.context_tabs.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // projectTree
+            // 
+            this.projectTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.projectTree.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
+            this.projectTree.Location = new System.Drawing.Point(0, 0);
+            this.projectTree.Name = "projectTree";
+            this.projectTree.Size = new System.Drawing.Size(240, 796);
+            this.projectTree.TabIndex = 0;
             // 
             // split_main
             // 
@@ -80,15 +89,6 @@
             this.split_main.Size = new System.Drawing.Size(1158, 796);
             this.split_main.SplitterDistance = 240;
             this.split_main.TabIndex = 0;
-            // 
-            // projectTree
-            // 
-            this.projectTree.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.projectTree.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
-            this.projectTree.Location = new System.Drawing.Point(0, 0);
-            this.projectTree.Name = "projectTree";
-            this.projectTree.Size = new System.Drawing.Size(240, 796);
-            this.projectTree.TabIndex = 0;
             // 
             // tabs_main
             // 
@@ -120,8 +120,8 @@
             this.tool_save,
             this.tool_saveall,
             this.toolStripSeparator1,
-            this.tool_project_start,
-            this.tool_project_list});
+            this.tool_project_list,
+            this.tool_project_start});
             this.tool_project.Location = new System.Drawing.Point(0, 0);
             this.tool_project.Name = "tool_project";
             this.tool_project.Size = new System.Drawing.Size(914, 25);
@@ -181,16 +181,6 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // tool_project_start
-            // 
-            this.tool_project_start.Image = global::PEngine.Creator.Properties.Resources.arrow_run_16xLG;
-            this.tool_project_start.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tool_project_start.Name = "tool_project_start";
-            this.tool_project_start.Size = new System.Drawing.Size(51, 22);
-            this.tool_project_start.Text = "Start";
-            this.tool_project_start.ToolTipText = "Play current project (F5)";
-            this.tool_project_start.Click += new System.EventHandler(this.tool_project_start_Click);
-            // 
             // tool_project_list
             // 
             this.tool_project_list.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -201,6 +191,16 @@
             this.tool_project_list.Size = new System.Drawing.Size(29, 22);
             this.tool_project_list.Text = "List open files";
             this.tool_project_list.DropDownOpening += new System.EventHandler(this.tool_project_list_DropDownOpening);
+            // 
+            // tool_project_start
+            // 
+            this.tool_project_start.Image = global::PEngine.Creator.Properties.Resources.arrow_run_16xLG;
+            this.tool_project_start.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tool_project_start.Name = "tool_project_start";
+            this.tool_project_start.Size = new System.Drawing.Size(51, 22);
+            this.tool_project_start.Text = "Start";
+            this.tool_project_start.ToolTipText = "Play current project (F5)";
+            this.tool_project_start.Click += new System.EventHandler(this.tool_project_start_Click);
             // 
             // context_tabs
             // 

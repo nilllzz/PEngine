@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.group_main = new System.Windows.Forms.GroupBox();
+            this.pic_texture_preview = new PEngine.Creator.Components.Game.CrispPictureBox();
             this.pic_info_id = new System.Windows.Forms.PictureBox();
             this.combo_texture = new System.Windows.Forms.ComboBox();
             this.txt_id = new System.Windows.Forms.TextBox();
@@ -40,6 +41,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tooltip_main = new System.Windows.Forms.ToolTip(this.components);
             this.group_main.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_texture_preview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_info_id)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -49,6 +51,7 @@
             this.group_main.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.group_main.Controls.Add(this.pic_texture_preview);
             this.group_main.Controls.Add(this.pic_info_id);
             this.group_main.Controls.Add(this.combo_texture);
             this.group_main.Controls.Add(this.txt_id);
@@ -56,10 +59,20 @@
             this.group_main.Controls.Add(this.lbl_id);
             this.group_main.Location = new System.Drawing.Point(12, 12);
             this.group_main.Name = "group_main";
-            this.group_main.Size = new System.Drawing.Size(283, 126);
+            this.group_main.Size = new System.Drawing.Size(283, 371);
             this.group_main.TabIndex = 0;
             this.group_main.TabStop = false;
             this.group_main.Text = "      Properties";
+            // 
+            // pic_texture_preview
+            // 
+            this.pic_texture_preview.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(52)))));
+            this.pic_texture_preview.Location = new System.Drawing.Point(12, 105);
+            this.pic_texture_preview.Name = "pic_texture_preview";
+            this.pic_texture_preview.Size = new System.Drawing.Size(256, 256);
+            this.pic_texture_preview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pic_texture_preview.TabIndex = 5;
+            this.pic_texture_preview.TabStop = false;
             // 
             // pic_info_id
             // 
@@ -83,6 +96,7 @@
             this.combo_texture.Name = "combo_texture";
             this.combo_texture.Size = new System.Drawing.Size(208, 23);
             this.combo_texture.TabIndex = 3;
+            this.combo_texture.SelectedIndexChanged += new System.EventHandler(this.combo_texture_SelectedIndexChanged);
             // 
             // txt_id
             // 
@@ -115,7 +129,7 @@
             // btn_ok
             // 
             this.btn_ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_ok.Location = new System.Drawing.Point(139, 144);
+            this.btn_ok.Location = new System.Drawing.Point(139, 389);
             this.btn_ok.Name = "btn_ok";
             this.btn_ok.Size = new System.Drawing.Size(75, 23);
             this.btn_ok.TabIndex = 1;
@@ -127,7 +141,7 @@
             // 
             this.btn_cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_cancel.Location = new System.Drawing.Point(220, 144);
+            this.btn_cancel.Location = new System.Drawing.Point(220, 389);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(75, 23);
             this.btn_cancel.TabIndex = 2;
@@ -154,7 +168,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = global::PEngine.Creator.Properties.Settings.Default.Color_MainGray;
-            this.ClientSize = new System.Drawing.Size(309, 179);
+            this.ClientSize = new System.Drawing.Size(309, 424);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_ok);
             this.Controls.Add(this.pictureBox1);
@@ -166,6 +180,7 @@
             this.Text = "Edit Tileset";
             this.group_main.ResumeLayout(false);
             this.group_main.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_texture_preview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_info_id)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -184,5 +199,6 @@
         private System.Windows.Forms.Label lbl_id;
         private System.Windows.Forms.PictureBox pic_info_id;
         private System.Windows.Forms.ToolTip tooltip_main;
+        private Components.Game.CrispPictureBox pic_texture_preview;
     }
 }

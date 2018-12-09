@@ -1,8 +1,10 @@
 ﻿using PEngine.Common;
 using PEngine.Common.Data;
 using PEngine.Common.Data.Maps;
+using PEngine.Creator.Components.Game;
 using PEngine.Creator.Components.Projects;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace PEngine.Creator.Forms
@@ -45,6 +47,17 @@ namespace PEngine.Creator.Forms
                 {
                     combo_texture.SelectedItem = file.id;
                 }
+            }
+        }
+
+        private void combo_texture_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            var file = _textureFiles.FirstOrDefault(f => f.id == combo_texture.SelectedItem.ToString());
+            if (file != null)
+            {
+                var path = ResourceManager.GetFilePath(file);
+                var texture = ResourceManager.BitmapFromFile(path);
+                pic_texture_preview.Image = texture;
             }
         }
 

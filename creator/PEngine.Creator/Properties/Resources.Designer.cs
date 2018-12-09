@@ -213,6 +213,16 @@ namespace PEngine.Creator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Folder_special__5843_32x {
+            get {
+                object obj = ResourceManager.GetObject("Folder(special)_5843_32x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap HiddenFolder_427 {
             get {
                 object obj = ResourceManager.GetObject("HiddenFolder_427", resourceCulture);

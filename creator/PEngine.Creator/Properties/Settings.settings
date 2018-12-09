@@ -26,5 +26,8 @@
     <Setting Name="Color_LightGray" Type="System.Drawing.Color" Scope="Application">
       <Value Profile="(Default)">WhiteSmoke</Value>
     </Setting>
+    <Setting Name="RecentProjects" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

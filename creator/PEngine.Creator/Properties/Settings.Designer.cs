@@ -94,5 +94,16 @@ namespace PEngine.Creator.Properties {
                 return ((global::System.Drawing.Color)(this["Color_LightGray"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection RecentProjects {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["RecentProjects"]));
+            }
+            set {
+                this["RecentProjects"] = value;
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using PEngine.Common;
 using PEngine.Common.Interop;
+using PEngine.Creator.Components.Debug;
 using PEngine.Creator.Components.Game;
 using PEngine.Creator.Components.Projects;
 using PEngine.Creator.Forms;
@@ -16,8 +17,32 @@ namespace PEngine.Creator.Views.Game
     {
         private MainProjectView _previousView;
         private GameProcess _process;
-
         private bool _isConnected = false;
+
+        private BaseDebugComponent ActiveComponent
+        {
+            get
+            {
+                var container = split_game.Panel2;
+                if (container.Controls.Count == 1 &&
+                    container.Controls[0] is BaseDebugComponent debugComp)
+                {
+                    return debugComp;
+                }
+                return null;
+            }
+            set
+            {
+                var container = split_game.Panel2;
+                container.Controls.Clear();
+                if (value != null)
+                {
+                    value.Dock = DockStyle.Fill;
+                    container.Controls.Add(value);
+                }
+            }
+        }
+
         private bool IsConnected
         {
             get
@@ -32,7 +57,7 @@ namespace PEngine.Creator.Views.Game
                 if (_isConnected)
                 {
                     tree_resources.Nodes[0].Text = $"Game ({_process.ProcessId})";
-                    map_preview.GameProcess = _process;
+                    ActiveComponent?.SetGameProcess(_process);
 
                     Status = $"Connected (PID: {_process.ProcessId})";
                     Title = Project.ActiveProject.Name + " (Running)";
@@ -63,9 +88,13 @@ namespace PEngine.Creator.Views.Game
         {
             if (IsConnected)
             {
-                MessageBox.Show("You have to stop debugging first to close the debugging overlay.",
-                    "Debugging", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                var result = MessageBox.Show("The game is still running, do you want to close it to close this overlay?",
+                    "Debugging", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (result == DialogResult.No)
+                {
+                    return;
+                }
+                StopDebug();
             }
             CloseView();
         }
@@ -108,6 +137,7 @@ namespace PEngine.Creator.Views.Game
 
         internal void StartDebug()
         {
+            ActiveComponent = null;
             txt_log.Text = "";
             Status = "Waiting for process...";
 
@@ -160,7 +190,7 @@ namespace PEngine.Creator.Views.Game
             {
                 txt_log.Text += Environment.NewLine;
             }
-            txt_log.Text += message;
+            txt_log.AppendText(message);
         }
 
         private void ProcessEvent(PipelineMessage message)
@@ -176,14 +206,12 @@ namespace PEngine.Creator.Views.Game
                 case Pipeline.EVENT_LOAD_TILESET:
                     AddLoadedResource(ProjectItemType.Tileset, message.Content);
                     break;
-                case Pipeline.EVENT_SET_MAP:
-                    map_preview.LoadMap(message.Content);
-                    break;
-                case Pipeline.EVENT_PLAYER_MOVED:
-                    var coordinates = message.Content.Split(',').Select(c => int.Parse(c)).ToArray();
-                    map_preview.SetPlayerPosition(new Point(coordinates[0], coordinates[1]));
+                case Pipeline.EVENT_SCENE_CHANGED:
+                    SceneChanged(message);
                     break;
             }
+
+            ActiveComponent?.HandlePipelineEvent(message);
 
             if (tool_log_chk_events.Checked && message.Event != Pipeline.EVENT_PLAYER_MOVED)
             {
@@ -199,6 +227,7 @@ namespace PEngine.Creator.Views.Game
         {
             Dispatch(() =>
             {
+                ActiveComponent?.DebuggingStopped();
                 IsConnected = false;
             });
         }
@@ -230,6 +259,28 @@ namespace PEngine.Creator.Views.Game
             tree_resources.Nodes[0].Nodes.Add(newNode);
             newNode.Expand();
             return newNode;
+        }
+
+        private void SceneChanged(PipelineMessage message)
+        {
+            BaseDebugComponent comp = null;
+            switch (message.Content)
+            {
+                case "WorldScreen":
+                    comp = new MapPreview();
+                    comp.SetGameProcess(_process);
+                    break;
+            }
+            ActiveComponent = comp;
+        }
+
+        private void txt_command_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // execute command
+                txt_command.Text = "";
+            }
         }
     }
 }

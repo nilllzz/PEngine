@@ -27,6 +27,7 @@ namespace PEngine.Game.Components.World
             ActiveMap.LoadContent();
 
             Controller.Pipeline.Write(Pipeline.EVENT_SET_MAP, mapId);
+            _playerEntity.WritePlayerPosition();
         }
 
         internal void Draw(SpriteBatch batch)

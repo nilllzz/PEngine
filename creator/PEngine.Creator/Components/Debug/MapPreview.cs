@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace PEngine.Creator.Components.Debug
 {
-    public partial class MapPreview : UserControl
+    internal partial class MapPreview : BaseDebugComponent
     {
         private string _id;
         private ProjectFileData _file;
@@ -19,14 +19,31 @@ namespace PEngine.Creator.Components.Debug
         private PictureBox _mapControl;
         private bool _isPlayerPositionMode = false;
 
-        internal GameProcess GameProcess { get; set; }
-
-        public MapPreview()
+        internal MapPreview()
         {
             InitializeComponent();
         }
 
-        public void LoadMap(string id)
+        internal override void HandlePipelineEvent(PipelineMessage message)
+        {
+            switch (message.Event)
+            {
+                case Pipeline.EVENT_SET_MAP:
+                    LoadMap(message.Content);
+                    break;
+                case Pipeline.EVENT_PLAYER_MOVED:
+                    var coordinates = message.Content.Split(',').Select(c => int.Parse(c)).ToArray();
+                    SetPlayerPosition(new Point(coordinates[0], coordinates[1]));
+                    break;
+            }
+        }
+
+        internal override void DebuggingStopped()
+        {
+            tool_map_pick_player_pos.Enabled = false;
+        }
+
+        private void LoadMap(string id)
         {
             _id = id;
             _file = Project.ActiveProject.GetFile(id, ProjectFileType.Map);
@@ -45,7 +62,7 @@ namespace PEngine.Creator.Components.Debug
             panel_container.Controls.Add(_mapControl);
         }
 
-        public void SetPlayerPosition(Point p)
+        private void SetPlayerPosition(Point p)
         {
             if (_playerControl == null)
             {
@@ -125,7 +142,7 @@ namespace PEngine.Creator.Components.Debug
                 var posX = (int)Math.Floor(e.Location.X / 16d);
                 var posY = (int)Math.Floor(e.Location.Y / 16d);
 
-                GameProcess.Pipeline.Write(Pipeline.EVENT_PLAYER_MOVED, posX + "," + posY);
+                _process.Pipeline.Write(Pipeline.EVENT_PLAYER_MOVED, posX + "," + posY);
             }
         }
 

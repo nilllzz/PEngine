@@ -1,4 +1,5 @@
 ﻿using PEngine.Common;
+using PEngine.Creator.Properties;
 using System;
 using System.IO;
 using System.Windows.Forms;
@@ -31,7 +32,7 @@ namespace PEngine.Creator.Components.Projects
             return path;
         }
 
-        internal static void OpenProject(Form caller)
+        internal static bool OpenProject(Form caller)
         {
             CheckCreateProjectsDirectory();
 
@@ -46,8 +47,26 @@ namespace PEngine.Creator.Components.Projects
             dialog.CustomPlaces.Add(ProjectsDirectory);
             dialog.ShowDialog(caller);
 
-            var project = new Project(Path.GetDirectoryName(dialog.FileName));
-            project.Load();
+            if (dialog.FileName != null && dialog.FileName.Length > 0)
+            {
+                var filename = dialog.FileName.ToLower();
+                if (Settings.Default.RecentProjects == null)
+                {
+                    Settings.Default.RecentProjects = new System.Collections.Specialized.StringCollection();
+                }
+                var recentProject = Settings.Default.RecentProjects;
+                if (!recentProject.Contains(filename))
+                {
+                    recentProject.Add(filename);
+                }
+                Settings.Default.Save();
+
+                var project = new Project(Path.GetDirectoryName(dialog.FileName));
+                project.Load();
+
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -3,14 +3,14 @@ using System.ComponentModel;
 
 namespace PEngine.Creator.Components.Logo
 {
-    internal partial class Logo : CrispPictureBox
+    public partial class Logo : CrispPictureBox
     {
-        internal Logo()
+        public Logo()
         {
             InitializeComponent();
         }
 
-        internal Logo(IContainer container)
+        public Logo(IContainer container)
         {
             container.Add(this);
 

@@ -101,6 +101,7 @@ namespace PEngine.Game
         protected override void OnExiting(object sender, EventArgs args)
         {
             Pipeline.Write(Pipeline.EVENT_STOP);
+            Pipeline.Log(LogType.Info, "Thank you for playing Wing Commander!");
             base.OnExiting(sender, args);
         }
     }

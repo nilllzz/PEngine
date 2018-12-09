@@ -87,10 +87,11 @@ namespace PEngine.Creator.Forms
 
         private void menu_file_openproject_Click(object sender, EventArgs e)
         {
-            ProjectService.OpenProject(this);
-
-            var view = new MainProjectView();
-            SetView(view);
+            var result = ProjectService.OpenProject(this);
+            if (result)
+            {
+                LoadedProject();
+            }
         }
 
         private void menu_project_DropDownOpening(object sender, EventArgs e)
@@ -188,6 +189,12 @@ namespace PEngine.Creator.Forms
         }
 
         #endregion
+
+        internal void LoadedProject()
+        {
+            var view = new MainProjectView();
+            SetView(view);
+        }
 
         internal void SetView(BaseView view, bool destroyCurrent = true)
         {

@@ -31,7 +31,7 @@ namespace PEngine.Game.Components.World.Entities
                 var coordinates = message.Content.Split(',').Select(c => int.Parse(c)).ToArray();
                 Position = new Double2D(coordinates[0], coordinates[1]);
                 Facing = CharacterFacing.Down;
-                Controller.Pipeline.Write(Pipeline.EVENT_PLAYER_MOVED, (int)Position.X + "," + (int)Position.Y);
+                WritePlayerPosition();
             }
         }
 
@@ -75,7 +75,7 @@ namespace PEngine.Game.Components.World.Entities
                             break;
                     }
 
-                    Controller.Pipeline.Write(Pipeline.EVENT_PLAYER_MOVED, (int)Position.X + "," + (int)Position.Y);
+                    WritePlayerPosition();
                 }
                 else
                 {
@@ -139,6 +139,11 @@ namespace PEngine.Game.Components.World.Entities
             }
 
             base.Update();
+        }
+
+        internal void WritePlayerPosition()
+        {
+            Controller.Pipeline.Write(Pipeline.EVENT_PLAYER_MOVED, (int)Position.X + "," + (int)Position.Y);
         }
     }
 }

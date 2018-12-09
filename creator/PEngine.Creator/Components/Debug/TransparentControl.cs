@@ -4,12 +4,12 @@ using System.Windows.Forms;
 
 namespace PEngine.Creator.Components.Debug
 {
-    class TransparentControl : Control
+    internal class TransparentControl : Control
     {
         private readonly Timer refresher;
         private Image _image;
 
-        public TransparentControl()
+        internal TransparentControl()
         {
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             BackColor = Color.Transparent;
@@ -50,7 +50,7 @@ namespace PEngine.Creator.Components.Debug
         }
 
         //Hack
-        public void Redraw()
+        internal void Redraw()
         {
             RecreateHandle();
         }
@@ -61,7 +61,7 @@ namespace PEngine.Creator.Components.Debug
             refresher.Stop();
         }
 
-        public Image Image
+        internal Image Image
         {
             get => _image;
             set

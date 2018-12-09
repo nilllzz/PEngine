@@ -124,11 +124,11 @@
   <data name="arrow_run_16xMD" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrow_run_16xMD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Event_594" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Event_594.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="player" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\player.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="StatusAnnotations_Information_16xLG_color" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\StatusAnnotations_Information_16xLG_color.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Close_6519" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Close_6519.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="arrow_previous_16xLG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrow_previous_16xLG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -138,9 +138,6 @@
   </data>
   <data name="Image_12x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Image_12x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="list_16xLG" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\list_16xLG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -154,14 +151,17 @@
   <data name="EventLog_5735" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EventLog_5735.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Collapse_16xLG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Collapse_16xLG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="tile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NewRequest_8796" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NewRequest_8796.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Close_6519" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Close_6519.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="properties_16xLG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\properties_16xLG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tileset" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tileset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -178,26 +178,26 @@
   <data name="Clearallrequests_8816" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Clearallrequests_8816.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="player" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\player.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="folder_Open_16xLG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\folder_Open_16xLG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="stopDebug" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\stopDebug.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="properties_16xLG" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\properties_16xLG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="new_subtile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\new_subtile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Event_594" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Event_594.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="save_16xLG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\save_16xLG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="action_add_16xLG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\action_add_16xLG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Select" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Select.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Copy_6524" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Copy_6524.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -208,6 +208,9 @@
   <data name="HiddenFolder_427" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\HiddenFolder_427.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="list_16xLG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\list_16xLG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="document_16xLG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\document_16xLG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -217,13 +220,13 @@
   <data name="arrow_Next_16xLG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrow_Next_16xLG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Collapse_16xLG" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Collapse_16xLG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="StatusAnnotations_Information_16xLG_color" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\StatusAnnotations_Information_16xLG_color.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="subtile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\subtile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Select" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Select.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Folder(special)_5843_32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Folder(special)_5843_32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

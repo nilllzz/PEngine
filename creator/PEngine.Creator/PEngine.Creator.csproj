@@ -39,6 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Debug\BaseDebugComponent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Debug\BaseDebugComponent.Designer.cs">
+      <DependentUpon>BaseDebugComponent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\Debug\MapPreview.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -92,18 +98,6 @@
     <Compile Include="Components\Game\TilesetEditor.Designer.cs">
       <DependentUpon>TilesetEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\Layout\Row.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Components\Layout\Row.Designer.cs">
-      <DependentUpon>Row.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Components\Layout\Column.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Components\Layout\Column.Designer.cs">
-      <DependentUpon>Column.cs</DependentUpon>
-    </Compile>
     <Compile Include="Components\Logo\Logo.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -115,6 +109,12 @@
     <Compile Include="Components\Projects\ProjectEventBus.cs" />
     <Compile Include="Components\Projects\ProjectItem.cs" />
     <Compile Include="Components\Projects\ProjectItemType.cs" />
+    <Compile Include="Components\Projects\ProjectLoadButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Projects\ProjectLoadButton.Designer.cs">
+      <DependentUpon>ProjectLoadButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\Projects\ProjectTree.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -122,12 +122,6 @@
       <DependentUpon>ProjectTree.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\Projects\ProjectTreeNode.cs" />
-    <Compile Include="Components\Text\Heading.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Components\Text\Heading.Designer.cs">
-      <DependentUpon>Heading.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FormConsts.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -210,14 +204,11 @@
     <EmbeddedResource Include="Components\Game\TilesetEditor.resx">
       <DependentUpon>TilesetEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\Layout\Row.resx">
-      <DependentUpon>Row.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Components\Layout\Column.resx">
-      <DependentUpon>Column.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Components\Logo\Logo.resx">
       <DependentUpon>Logo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Projects\ProjectLoadButton.resx">
+      <DependentUpon>ProjectLoadButton.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Components\Projects\ProjectTree.resx">
       <DependentUpon>ProjectTree.cs</DependentUpon>
@@ -392,6 +383,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Select.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Folder%28special%29_5843_32x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

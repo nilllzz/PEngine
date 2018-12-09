@@ -18,7 +18,7 @@ namespace PEngine.Creator.Components.Projects
 
         internal static string ProjectsDirectory => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "projects");
 
-        private static void CheckCreateProjectsDirectory()
+        internal static void CheckCreateProjectsDirectory()
         {
             if (!Directory.Exists(ProjectsDirectory))
             {
@@ -27,9 +27,9 @@ namespace PEngine.Creator.Components.Projects
         }
 
         // generates a path for a project name
-        internal static string GetNewProjectPath(string name)
+        internal static string GetNewProjectPath(string targetDir, string name)
         {
-            var path = Path.Combine(ProjectsDirectory, name);
+            var path = Path.Combine(targetDir, name);
             while (Directory.Exists(path))
             {
                 path += "_";
@@ -110,9 +110,9 @@ namespace PEngine.Creator.Components.Projects
             });
         }
 
-        internal static Project CreateNew(string name, string author)
+        internal static Project CreateNew(string targetDir, string name, string author)
         {
-            var path = GetNewProjectPath(name);
+            var path = GetNewProjectPath(targetDir, name);
             var project = new Project(path);
             project.Create(name, author);
             project.Save();

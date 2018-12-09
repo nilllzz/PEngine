@@ -68,6 +68,7 @@ namespace PEngine.Creator.Views.Game
                     Status = $"Disconnected";
                     Title = Project.ActiveProject.Name;
                     StatusColor = Settings.Default.Color_Highlight;
+                    ActiveComponent?.DebuggingStopped();
                 }
             }
         }
@@ -148,6 +149,7 @@ namespace PEngine.Creator.Views.Game
             _process = new GameProcess();
             _process.ProcessStopped += Process_ProcessStopped;
             _process.OutputReceived += Process_Output;
+            _process.ErrorReceived += Process_Error;
 
             _process.Start();
         }
@@ -183,14 +185,31 @@ namespace PEngine.Creator.Views.Game
             });
         }
 
+        private void Process_Error(string message)
+        {
+            Dispatch(() =>
+            {
+                AddLogEntry(new LogEntry
+                {
+                    Type = LogType.Error,
+                    Message = message,
+                });
+            });
+        }
+
         private void AddLogEntry(LogEntry entry)
         {
-            var message = $"[{entry.Type.ToString().PadRight(10)}] {entry.Message}";
+            var message = $"[{entry.Type.ToString().PadRight(7)}] {entry.Message}";
+            AddLogEntry(message);
+        }
+
+        private void AddLogEntry(string entry)
+        {
             if (txt_log.Text.Length > 0)
             {
                 txt_log.Text += Environment.NewLine;
             }
-            txt_log.AppendText(message);
+            txt_log.AppendText(entry);
         }
 
         private void ProcessEvent(PipelineMessage message)
@@ -218,16 +237,20 @@ namespace PEngine.Creator.Views.Game
                 AddLogEntry(new LogEntry
                 {
                     Type = LogType.Debug,
-                    Message = "[Event: " + message.Event + "] Content: \"" + message.Content + "\""
+                    Message = "[Event: " + message.Event + "] " + message.Content
                 });
             }
         }
 
         private void Process_ProcessStopped()
         {
+            _process.ProcessStopped -= Process_ProcessStopped;
+            _process.OutputReceived -= Process_Output;
+            _process.ErrorReceived -= Process_Error;
+
             Dispatch(() =>
             {
-                ActiveComponent?.DebuggingStopped();
+                AddLogEntry($"Process {_process.ProcessId} exited with code {_process.ExitCode}");
                 IsConnected = false;
             });
         }

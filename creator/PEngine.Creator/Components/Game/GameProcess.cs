@@ -10,11 +10,13 @@ namespace PEngine.Creator.Components.Game
     internal class GameProcess
     {
         internal event Action<string> OutputReceived;
+        internal event Action<string> ErrorReceived;
         internal event Action ProcessStopped;
 
         private Process _processHandle;
 
         internal int ProcessId => _processHandle.Id;
+        internal int ExitCode => _processHandle.ExitCode;
         internal Pipeline Pipeline { get; private set; }
 
         internal void Start()
@@ -42,14 +44,17 @@ namespace PEngine.Creator.Components.Game
                 FileName = "PEngine.Game.exe",
                 RedirectStandardOutput = true,
                 RedirectStandardInput = true,
+                RedirectStandardError = true,
                 UseShellExecute = false,
                 Arguments = args,
             };
             _processHandle = Process.Start(startInfo);
             _processHandle.EnableRaisingEvents = true;
             _processHandle.BeginOutputReadLine();
+            _processHandle.BeginErrorReadLine();
 
             _processHandle.OutputDataReceived += _processHandle_OutputDataReceived;
+            _processHandle.ErrorDataReceived += _processHandle_ErrorDataReceived;
             _processHandle.Exited += _processHandle_Exited;
 
             Pipeline = new Pipeline(_processHandle.StandardInput);
@@ -66,6 +71,14 @@ namespace PEngine.Creator.Components.Game
             OutputReceived?.Invoke(e.Data);
         }
 
+        private void _processHandle_ErrorDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            if (e.Data != null && e.Data.Length > 0)
+            {
+                ErrorReceived?.Invoke(e.Data);
+            }
+        }
+
         internal void Stop()
         {
             if (!_processHandle.HasExited)
@@ -73,6 +86,7 @@ namespace PEngine.Creator.Components.Game
                 _processHandle.Kill();
             }
             _processHandle.OutputDataReceived -= _processHandle_OutputDataReceived;
+            _processHandle.ErrorDataReceived -= _processHandle_ErrorDataReceived;
             _processHandle.Exited -= _processHandle_Exited;
             _processHandle = null;
         }

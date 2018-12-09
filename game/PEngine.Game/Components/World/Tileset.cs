@@ -39,6 +39,11 @@ namespace PEngine.Game.Components.World
         internal void LoadContent()
         {
             var file = Project.ActiveProject.GetFile(_id, ProjectFileType.Tileset);
+            if (file == null)
+            {
+                GamePipeline.Log(LogType.Error, $"File requested for tileset with id {_id} does not exist.");
+                throw new DataLoadException(_id, ProjectFileType.Tileset);
+            }
             _data = TilesetData.Load(file.path);
             GamePipeline.Write(Pipeline.EVENT_LOAD_TILESET, _id);
             _tileIndex = _data.tiles.ToDictionary(t => t.id, t => t);

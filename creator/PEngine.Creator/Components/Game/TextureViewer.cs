@@ -1,6 +1,5 @@
 ﻿using PEngine.Creator.Components.Projects;
 using PEngine.Creator.Helpers;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace PEngine.Creator.Components.Game
@@ -27,6 +26,7 @@ namespace PEngine.Creator.Components.Game
         private void LoadTexture()
         {
             pic_texture.Image = ResourceManager.BitmapFromFile(_item.FilePath);
+            pic_texture.SizeMode = PictureBoxSizeMode.Normal;
         }
 
         #region ui

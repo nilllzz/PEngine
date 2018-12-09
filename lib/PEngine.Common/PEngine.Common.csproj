@@ -37,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\DataHelper.cs" />
+    <Compile Include="Data\DataLoadException.cs" />
     <Compile Include="Data\Maps\MapData.cs" />
     <Compile Include="Data\Maps\MapTileData.cs" />
     <Compile Include="Data\Maps\SubtileData.cs" />

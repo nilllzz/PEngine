@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbl_name = new System.Windows.Forms.Label();
             this.txt_name = new System.Windows.Forms.TextBox();
             this.lbl_author = new System.Windows.Forms.Label();
@@ -39,6 +40,9 @@
             this.group_main = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_cancel = new System.Windows.Forms.Button();
+            this.txt_dest_folder = new System.Windows.Forms.TextBox();
+            this.btn_select_dest_folder = new System.Windows.Forms.Button();
+            this.tooltip_main = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.crispPictureBox1)).BeginInit();
             this.group_main.SuspendLayout();
             this.SuspendLayout();
@@ -159,10 +163,35 @@
             this.btn_cancel.UseVisualStyleBackColor = true;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
+            // txt_dest_folder
+            // 
+            this.txt_dest_folder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txt_dest_folder.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
+            this.txt_dest_folder.Location = new System.Drawing.Point(84, 272);
+            this.txt_dest_folder.Name = "txt_dest_folder";
+            this.txt_dest_folder.Size = new System.Drawing.Size(774, 23);
+            this.txt_dest_folder.TabIndex = 12;
+            // 
+            // btn_select_dest_folder
+            // 
+            this.btn_select_dest_folder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_select_dest_folder.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
+            this.btn_select_dest_folder.Location = new System.Drawing.Point(864, 272);
+            this.btn_select_dest_folder.Name = "btn_select_dest_folder";
+            this.btn_select_dest_folder.Size = new System.Drawing.Size(28, 24);
+            this.btn_select_dest_folder.TabIndex = 13;
+            this.btn_select_dest_folder.Text = "...";
+            this.tooltip_main.SetToolTip(this.btn_select_dest_folder, "Select Project Directory");
+            this.btn_select_dest_folder.UseVisualStyleBackColor = true;
+            this.btn_select_dest_folder.Click += new System.EventHandler(this.btn_select_dest_folder_Click);
+            // 
             // NewProjectView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btn_select_dest_folder);
+            this.Controls.Add(this.txt_dest_folder);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.group_main);
@@ -171,7 +200,7 @@
             this.Controls.Add(this.crispPictureBox1);
             this.Controls.Add(this.btn_confirm);
             this.Name = "NewProjectView";
-            this.Size = new System.Drawing.Size(1158, 879);
+            this.Size = new System.Drawing.Size(1158, 796);
             ((System.ComponentModel.ISupportInitialize)(this.crispPictureBox1)).EndInit();
             this.group_main.ResumeLayout(false);
             this.group_main.PerformLayout();
@@ -192,5 +221,8 @@
         private System.Windows.Forms.GroupBox group_main;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btn_cancel;
+        private System.Windows.Forms.TextBox txt_dest_folder;
+        private System.Windows.Forms.Button btn_select_dest_folder;
+        private System.Windows.Forms.ToolTip tooltip_main;
     }
 }

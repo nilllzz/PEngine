@@ -25,7 +25,10 @@ namespace PEngine.Creator.Views.Projects
         private void btn_load_Click(object sender, System.EventArgs e)
         {
             var project = ProjectService.SelectProject(MainForm.Instance);
-            ProjectService.LoadProject(project);
+            if (project != null)
+            {
+                ProjectService.LoadProject(project);
+            }
         }
 
         private void btn_reload_recent_Click(object sender, System.EventArgs e)

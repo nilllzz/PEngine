@@ -31,6 +31,11 @@ namespace PEngine.Game.Components.World
         internal void LoadContent()
         {
             var file = Project.ActiveProject.GetFile(_id, ProjectFileType.Map);
+            if (file == null)
+            {
+                GamePipeline.Log(LogType.Error, $"File requested for map with id {_id} does not exist.");
+                throw new DataLoadException(_id, ProjectFileType.Map);
+            }
             _data = MapData.Load(file.path);
             GamePipeline.Write(Pipeline.EVENT_LOAD_MAP, _id);
 

@@ -7,6 +7,7 @@ using PEngine.Common.Interop;
 using PEngine.Game.Components;
 using PEngine.Game.Screens;
 using System;
+using System.IO;
 using static Core;
 
 namespace PEngine.Game
@@ -24,7 +25,6 @@ namespace PEngine.Game
         public ComponentManager GetComponentManager() => ComponentManager;
         internal Rectangle ClientRectangle => new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
         internal ContentManager ProjectContent { get; private set; }
-        internal Pipeline Pipeline { get; }
         internal StdInReader StdIn { get; }
 
         internal GameController()
@@ -36,31 +36,33 @@ namespace PEngine.Game
             IsMouseVisible = true;
             Window.AllowUserResizing = true;
 
-            Pipeline = new Pipeline(Console.Out);
             StdIn = new StdInReader();
             StdIn.StartListening();
         }
 
         protected override void Initialize()
         {
-            // TODO: remove this
-            ProjectHelper.LoadTestProject();
-            // TODO: set this to the correct project
-            ProjectContent = new ContentManager(Services, "test/content");
+            var result = ProjectHelper.LoadProject();
+            if (!result)
+            {
+                Exit();
+            }
+            ProjectContent = new ContentManager(Services,
+                Path.Combine(ProjectHelper.ProjectPath, "Content"));
 
             GameInstanceProvider.SetInstance(this);
             ComponentManager.LoadComponents();
 
-            DeviceManager.PreferredBackBufferWidth = RENDER_WIDTH * 4;
-            DeviceManager.PreferredBackBufferHeight = RENDER_HEIGHT * 4;
+            DeviceManager.PreferredBackBufferWidth = RENDER_WIDTH * CommandLineArgParser.Scale;
+            DeviceManager.PreferredBackBufferHeight = RENDER_HEIGHT * CommandLineArgParser.Scale;
             DeviceManager.ApplyChanges();
 
             base.Initialize();
 
             GameboyInputs.Initialize();
 
-            Pipeline.Write(Pipeline.EVENT_STARTUP);
-            Pipeline.Log(LogType.Info, "Hello Pipeline");
+            GamePipeline.Write(Pipeline.EVENT_STARTUP);
+            GamePipeline.Log(LogType.Info, "Hello Pipeline");
         }
 
         protected override void LoadContent()
@@ -100,8 +102,8 @@ namespace PEngine.Game
 
         protected override void OnExiting(object sender, EventArgs args)
         {
-            Pipeline.Write(Pipeline.EVENT_STOP);
-            Pipeline.Log(LogType.Info, "Thank you for playing Wing Commander!");
+            GamePipeline.Write(Pipeline.EVENT_STOP);
+            GamePipeline.Log(LogType.Info, "Thank you for playing Wing Commander!");
             base.OnExiting(sender, args);
         }
     }

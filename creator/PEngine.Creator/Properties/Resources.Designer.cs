@@ -123,6 +123,16 @@ namespace PEngine.Creator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Clearwindowcontent_6304 {
+            get {
+                object obj = ResourceManager.GetObject("Clearwindowcontent_6304", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Close_16xLG {
             get {
                 object obj = ResourceManager.GetObject("Close_16xLG", resourceCulture);

@@ -13,7 +13,7 @@ namespace PEngine.Common
         private ProjectData _data;
 
         public string BaseDirectory { get; private set; }
-        private string ProjectFile => Path.Combine(BaseDirectory, "project.json");
+        public string ProjectFile => Path.Combine(BaseDirectory, "project.json");
 
         public string Name
         {
@@ -40,6 +40,7 @@ namespace PEngine.Common
                 author = author,
                 createdOn = DateTime.UtcNow,
                 changedOn = DateTime.UtcNow,
+                files = new ProjectFileData[0],
             };
         }
 
@@ -51,6 +52,17 @@ namespace PEngine.Common
         public ProjectFileData GetFile(string id, ProjectFileType type)
         {
             return _data.files.FirstOrDefault(f => f.id == id && f.GetFileType() == type);
+        }
+
+        public void IncludeFile(ProjectFileData file)
+        {
+            if (_data.files.Any(f => f.id == file.id && f.type == file.type))
+            {
+                throw new Exception($"A file with the id \"{file.id}\" and type {file.type} is already in the project.");
+            }
+            var files = _data.files.ToList();
+            files.Add(file);
+            _data.files = files.ToArray();
         }
 
         public void Load()
@@ -66,6 +78,11 @@ namespace PEngine.Common
             {
                 throw new Exception($"The project file does not exist. '{ProjectFile}'");
             }
+        }
+
+        public void Unload()
+        {
+            ActiveProject = null;
         }
 
         public void Save()

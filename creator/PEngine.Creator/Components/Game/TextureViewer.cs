@@ -26,7 +26,7 @@ namespace PEngine.Creator.Components.Game
 
         private void LoadTexture()
         {
-            pic_texture.Image = new Bitmap(_item.FilePath);
+            pic_texture.Image = ResourceManager.BitmapFromFile(_item.FilePath);
         }
 
         #region ui

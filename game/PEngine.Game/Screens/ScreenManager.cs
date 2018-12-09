@@ -18,7 +18,7 @@ namespace PEngine.Game.Screens
         {
             ActiveScreen?.UnloadContent();
             ActiveScreen = screen;
-            Controller.Pipeline.Write(Pipeline.EVENT_SCENE_CHANGED, screen.GetType().Name);
+            GamePipeline.Write(Pipeline.EVENT_SCENE_CHANGED, screen.GetType().Name);
         }
     }
 }

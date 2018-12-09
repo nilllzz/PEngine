@@ -1,4 +1,5 @@
-﻿using PEngine.Creator.Helpers;
+﻿using PEngine.Creator.Components.Game;
+using PEngine.Creator.Helpers;
 using PEngine.Creator.Properties;
 using System;
 using System.Drawing;
@@ -35,7 +36,7 @@ namespace PEngine.Creator.Forms
             }
 
             // load texture
-            var img = new Bitmap(TexturePath);
+            var img = ResourceManager.BitmapFromFile(TexturePath);
             // generate textures and show them
             for (var y = 0; y < img.Height; y += TextureSize)
             {

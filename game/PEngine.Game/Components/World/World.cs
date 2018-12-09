@@ -15,18 +15,18 @@ namespace PEngine.Game.Components.World
         {
             ActiveMap = new Map(mapId);
             _playerEntity = new PlayerEntity(ActiveMap);
-            _playerEntity.Position = new Double2D(4, 5);
+            _playerEntity.Position = new Double2D(0, 0);
             ActiveMap.Entities.Add(_playerEntity);
 
-            var npc = new NPC(ActiveMap)
-            {
-                Position = new Double2D(3, 6)
-            };
-            ActiveMap.Entities.Add(npc);
+            //var npc = new NPC(ActiveMap)
+            //{
+            //    Position = new Double2D(3, 6)
+            //};
+            //ActiveMap.Entities.Add(npc);
 
             ActiveMap.LoadContent();
 
-            Controller.Pipeline.Write(Pipeline.EVENT_SET_MAP, mapId);
+            GamePipeline.Write(Pipeline.EVENT_SET_MAP, mapId);
             _playerEntity.WritePlayerPosition();
         }
 

@@ -87,10 +87,10 @@ namespace PEngine.Creator.Forms
 
         private void menu_file_openproject_Click(object sender, EventArgs e)
         {
-            var result = ProjectService.OpenProject(this);
-            if (result)
+            var project = ProjectService.SelectProject(this);
+            if (project != null)
             {
-                LoadedProject();
+                ProjectService.LoadProject(project);
             }
         }
 
@@ -133,6 +133,7 @@ namespace PEngine.Creator.Forms
                 menu_file_saveall.Enabled = true;
                 menu_file_new_map.Enabled = true;
                 menu_file_new_tileset.Enabled = true;
+                menu_file_closeproject.Enabled = true;
 
                 var comp = projView.ActiveComponent;
                 if (comp != null)
@@ -155,6 +156,7 @@ namespace PEngine.Creator.Forms
                 menu_file_new_tileset.Enabled = false;
                 menu_file_close.Enabled = false;
                 menu_file_closeall.Enabled = false;
+                menu_file_closeproject.Enabled = false;
 
                 menu_file_save.Text = "Save";
                 menu_file_saveas.Text = "Save As...";
@@ -186,6 +188,13 @@ namespace PEngine.Creator.Forms
             {
                 e.Cancel = true;
             }
+        }
+
+        private void menu_file_closeproject_Click(object sender, EventArgs e)
+        {
+            ProjectService.CloseProject();
+            var view = new WelcomeView();
+            SetView(view);
         }
 
         #endregion

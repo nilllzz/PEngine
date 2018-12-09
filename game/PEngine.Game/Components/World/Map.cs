@@ -32,7 +32,7 @@ namespace PEngine.Game.Components.World
         {
             var file = Project.ActiveProject.GetFile(_id, ProjectFileType.Map);
             _data = MapData.Load(file.path);
-            Controller.Pipeline.Write(Pipeline.EVENT_LOAD_MAP, _id);
+            GamePipeline.Write(Pipeline.EVENT_LOAD_MAP, _id);
 
             _tileset = new Tileset(_data.tileset);
             _tileset.LoadContent();

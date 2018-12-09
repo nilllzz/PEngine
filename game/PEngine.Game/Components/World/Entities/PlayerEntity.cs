@@ -143,7 +143,7 @@ namespace PEngine.Game.Components.World.Entities
 
         internal void WritePlayerPosition()
         {
-            Controller.Pipeline.Write(Pipeline.EVENT_PLAYER_MOVED, (int)Position.X + "," + (int)Position.Y);
+            GamePipeline.Write(Pipeline.EVENT_PLAYER_MOVED, (int)Position.X + "," + (int)Position.Y);
         }
     }
 }

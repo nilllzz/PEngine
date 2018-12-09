@@ -141,6 +141,7 @@
     <Compile Include="Forms\TilesetProperties.Designer.cs">
       <DependentUpon>TilesetProperties.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CommandLineArgsHelper.cs" />
     <Compile Include="Helpers\ExplorerHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -386,6 +387,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Folder%28special%29_5843_32x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Clearwindowcontent_6304.png" />
+    <Content Include="Resources\DefaultProject\content\textures\characters\player.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\DefaultProject\content\textures\tiles\routes.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

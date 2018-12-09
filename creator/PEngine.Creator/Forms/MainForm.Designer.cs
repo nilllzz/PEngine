@@ -50,6 +50,7 @@
             this.menu_project_start = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.menu_project_properties = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu_file_closeproject = new System.Windows.Forms.ToolStripMenuItem();
             this.status_main.SuspendLayout();
             this.menu_main.SuspendLayout();
             this.SuspendLayout();
@@ -105,7 +106,8 @@
             this.menu_file_saveall,
             this.toolStripSeparator4,
             this.menu_file_close,
-            this.menu_file_closeall});
+            this.menu_file_closeall,
+            this.menu_file_closeproject});
             this.menu_file.Name = "menu_file";
             this.menu_file.Size = new System.Drawing.Size(37, 20);
             this.menu_file.Text = "File";
@@ -233,6 +235,13 @@
             this.menu_project_properties.Size = new System.Drawing.Size(136, 22);
             this.menu_project_properties.Text = "Properties...";
             // 
+            // menu_file_closeproject
+            // 
+            this.menu_file_closeproject.Name = "menu_file_closeproject";
+            this.menu_file_closeproject.Size = new System.Drawing.Size(187, 22);
+            this.menu_file_closeproject.Text = "Close Project";
+            this.menu_file_closeproject.Click += new System.EventHandler(this.menu_file_closeproject_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -279,5 +288,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem menu_file_close;
         private System.Windows.Forms.ToolStripMenuItem menu_file_closeall;
+        private System.Windows.Forms.ToolStripMenuItem menu_file_closeproject;
     }
 }

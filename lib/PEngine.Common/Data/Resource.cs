@@ -13,7 +13,7 @@ namespace PEngine.Common.Data
         [JsonIgnore]
         protected virtual bool IsProjectResource => true;
         [JsonIgnore]
-        private string _filename;
+        public string FileName { get; private set; }
 
         private static T GetResourceInstance()
         {
@@ -49,14 +49,28 @@ namespace PEngine.Common.Data
             var filePath = Path.Combine(dir, filename);
             var content = File.ReadAllText(filePath);
             var loadedResource = JsonConvert.DeserializeObject<T>(content);
-            loadedResource._filename = filename;
+            loadedResource.FileName = filename;
             return loadedResource;
+        }
+
+        public static T Create(string filename)
+        {
+            var resource = Activator.CreateInstance<T>();
+            resource.FileName = filename;
+            return resource;
         }
 
         public void Save()
         {
             var dir = GetResourceRootDirectory((T)this);
-            var filePath = Path.Combine(dir, _filename);
+            var filePath = Path.Combine(dir, FileName);
+
+            var folder = Path.GetDirectoryName(filePath);
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+
             var content = JsonConvert.SerializeObject(this);
             File.WriteAllText(filePath, content);
         }

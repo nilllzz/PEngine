@@ -20,7 +20,7 @@ namespace PEngine.Game.Screens.World
             _batch = new SpriteBatch(Controller.GraphicsDevice);
 
             _world = new Components.World.World();
-            _world.LoadMap("route29");
+            _world.LoadMap(CommandLineArgParser.StartMap ?? "default");
         }
 
         internal override void UnloadContent()

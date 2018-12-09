@@ -89,8 +89,8 @@ namespace PEngine.Creator.Components.Debug
             var texture = ResourceManager.GetTilesetTexture(tileset);
 
             // generate map
-            var maxX = data.tiles.Max(t => t.pos[0] + t.size[0] - 1);
-            var maxY = data.tiles.Max(t => t.pos[1] + t.size[1] - 1);
+            var maxX = data.tiles.Max(t => t.pos[0] + t.size[0]);
+            var maxY = data.tiles.Max(t => t.pos[1] + t.size[1]);
 
             var map = new Bitmap(maxX * 32, maxY * 32);
             var g = Graphics.FromImage(map);

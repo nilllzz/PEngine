@@ -40,7 +40,7 @@ namespace PEngine.Game.Components.World
         {
             var file = Project.ActiveProject.GetFile(_id, ProjectFileType.Tileset);
             _data = TilesetData.Load(file.path);
-            Controller.Pipeline.Write(Pipeline.EVENT_LOAD_TILESET, _id);
+            GamePipeline.Write(Pipeline.EVENT_LOAD_TILESET, _id);
             _tileIndex = _data.tiles.ToDictionary(t => t.id, t => t);
             _subtileIndex = _data.subtiles.ToDictionary(t => t.id, t => t);
         }

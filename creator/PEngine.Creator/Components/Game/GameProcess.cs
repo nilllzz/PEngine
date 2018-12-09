@@ -1,7 +1,9 @@
-﻿using PEngine.Common.Interop;
+﻿using PEngine.Common;
+using PEngine.Common.Interop;
+using PEngine.Creator.Helpers;
+using PEngine.Creator.Properties;
 using System;
 using System.Diagnostics;
-using System.Drawing;
 
 namespace PEngine.Creator.Components.Game
 {
@@ -17,12 +19,31 @@ namespace PEngine.Creator.Components.Game
 
         internal void Start()
         {
+            var args = CommandLineArgsHelper.CreateArgs(new[]
+            {
+                new CommandLineArg
+                {
+                    Name = "debug",
+                    Value = "true",
+                },
+                new CommandLineArg
+                {
+                    Name = "project",
+                    Value = Project.ActiveProject.BaseDirectory,
+                },
+                new CommandLineArg
+                {
+                    Name = "scale",
+                    Value = Settings.Default.GameScale.ToString(),
+                },
+            });
             var startInfo = new ProcessStartInfo
             {
                 FileName = "PEngine.Game.exe",
                 RedirectStandardOutput = true,
                 RedirectStandardInput = true,
                 UseShellExecute = false,
+                Arguments = args,
             };
             _processHandle = Process.Start(startInfo);
             _processHandle.EnableRaisingEvents = true;

@@ -1,7 +1,6 @@
 ﻿using PEngine.Common;
 using PEngine.Common.Data;
 using PEngine.Common.Data.Maps;
-using PEngine.Creator.Components.Projects;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -15,7 +14,16 @@ namespace PEngine.Creator.Components.Game
         private static readonly Dictionary<string, Bitmap> _textureCache =
             new Dictionary<string, Bitmap>();
 
-        internal static void Initialize(ProjectEventBus eventBus)
+        internal static Bitmap BitmapFromFile(string filepath)
+        {
+            var bytes = File.ReadAllBytes(filepath);
+            using (var ms = new MemoryStream(bytes))
+            {
+                return new Bitmap(ms);
+            }
+        }
+
+        internal static void Unload()
         {
             _textureCache.Clear();
         }
@@ -32,7 +40,7 @@ namespace PEngine.Creator.Components.Game
             var key = "TILESET|" + path.ToUpper();
             if (!_textureCache.TryGetValue(key, out var texture))
             {
-                texture = new Bitmap(path);
+                texture = BitmapFromFile(path);
                 _textureCache.Add(key, texture);
             }
             return texture;

@@ -422,5 +422,19 @@ namespace PEngine.Creator.Views.Projects
             MainForm.Instance.SetView(view, false);
             view.StartDebug();
         }
+
+        internal void GotoFile()
+        {
+            var form = new GotoForm();
+            var result = form.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                _eventBus.RequestItemOpen(new ProjectItem
+                {
+                    ItemType = ProjectService.GetItemFromFileType(form.SelectedFile.GetFileType()),
+                    FileData = form.SelectedFile,
+                });
+            }
+        }
     }
 }

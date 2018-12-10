@@ -44,6 +44,11 @@ namespace PEngine.Common
             };
         }
 
+        public ProjectFileData[] GetFiles()
+        {
+            return _data.files;
+        }
+
         public ProjectFileData[] GetFiles(ProjectFileType type)
         {
             return _data.files.Where(f => f.GetFileType() == type).ToArray();

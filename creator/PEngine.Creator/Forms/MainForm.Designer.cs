@@ -46,11 +46,13 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.menu_file_close = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_file_closeall = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu_file_closeproject = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_project = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_project_start = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.menu_project_properties = new System.Windows.Forms.ToolStripMenuItem();
-            this.menu_file_closeproject = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu_main_edit = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu_main_edit_goto = new System.Windows.Forms.ToolStripMenuItem();
             this.status_main.SuspendLayout();
             this.menu_main.SuspendLayout();
             this.SuspendLayout();
@@ -88,6 +90,7 @@
             this.menu_main.BackColor = global::PEngine.Creator.Properties.Settings.Default.Color_MainGray;
             this.menu_main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menu_file,
+            this.menu_main_edit,
             this.menu_project});
             this.menu_main.Location = new System.Drawing.Point(0, 0);
             this.menu_main.Name = "menu_main";
@@ -203,6 +206,13 @@
             this.menu_file_closeall.Size = new System.Drawing.Size(187, 22);
             this.menu_file_closeall.Text = "Close All";
             // 
+            // menu_file_closeproject
+            // 
+            this.menu_file_closeproject.Name = "menu_file_closeproject";
+            this.menu_file_closeproject.Size = new System.Drawing.Size(187, 22);
+            this.menu_file_closeproject.Text = "Close Project";
+            this.menu_file_closeproject.Click += new System.EventHandler(this.menu_file_closeproject_Click);
+            // 
             // menu_project
             // 
             this.menu_project.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -235,12 +245,21 @@
             this.menu_project_properties.Size = new System.Drawing.Size(136, 22);
             this.menu_project_properties.Text = "Properties...";
             // 
-            // menu_file_closeproject
+            // menu_main_edit
             // 
-            this.menu_file_closeproject.Name = "menu_file_closeproject";
-            this.menu_file_closeproject.Size = new System.Drawing.Size(187, 22);
-            this.menu_file_closeproject.Text = "Close Project";
-            this.menu_file_closeproject.Click += new System.EventHandler(this.menu_file_closeproject_Click);
+            this.menu_main_edit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menu_main_edit_goto});
+            this.menu_main_edit.Name = "menu_main_edit";
+            this.menu_main_edit.Size = new System.Drawing.Size(39, 20);
+            this.menu_main_edit.Text = "Edit";
+            // 
+            // menu_main_edit_goto
+            // 
+            this.menu_main_edit_goto.Name = "menu_main_edit_goto";
+            this.menu_main_edit_goto.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.menu_main_edit_goto.Size = new System.Drawing.Size(180, 22);
+            this.menu_main_edit_goto.Text = "Go To...";
+            this.menu_main_edit_goto.Click += new System.EventHandler(this.menu_main_edit_goto_Click);
             // 
             // MainForm
             // 
@@ -289,5 +308,7 @@
         private System.Windows.Forms.ToolStripMenuItem menu_file_close;
         private System.Windows.Forms.ToolStripMenuItem menu_file_closeall;
         private System.Windows.Forms.ToolStripMenuItem menu_file_closeproject;
+        private System.Windows.Forms.ToolStripMenuItem menu_main_edit;
+        private System.Windows.Forms.ToolStripMenuItem menu_main_edit_goto;
     }
 }

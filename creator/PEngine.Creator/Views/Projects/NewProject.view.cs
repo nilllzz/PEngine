@@ -12,7 +12,7 @@ namespace PEngine.Creator.Views.Projects
         internal NewProjectView()
         {
             InitializeComponent();
-            txt_name.Select();
+            txt_name.Focus();
 
             ProjectService.CheckCreateProjectsDirectory();
             txt_dest_folder.Text = ProjectService.ProjectsDirectory;

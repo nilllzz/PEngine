@@ -41,19 +41,20 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tool_editor_add_tile = new System.Windows.Forms.ToolStripButton();
             this.tool_editor_properties = new System.Windows.Forms.ToolStripButton();
+            this.tool_editor_texture = new System.Windows.Forms.ToolStripButton();
             this.panel_tiles_container = new System.Windows.Forms.FlowLayoutPanel();
             this.panel_main = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.group_edit_tile = new System.Windows.Forms.GroupBox();
-            this.pic_tile_1 = new CrispPictureBox();
+            this.pic_tile_1 = new PEngine.Creator.Components.Game.CrispPictureBox();
             this.pic_edit_mode = new System.Windows.Forms.PictureBox();
-            this.pic_tile_4 = new CrispPictureBox();
+            this.pic_tile_4 = new PEngine.Creator.Components.Game.CrispPictureBox();
             this.group_selected_subtile = new System.Windows.Forms.GroupBox();
             this.lbl_no_subtile = new System.Windows.Forms.Label();
-            this.pic_tile_2 = new CrispPictureBox();
-            this.pic_tile_3 = new CrispPictureBox();
+            this.pic_tile_2 = new PEngine.Creator.Components.Game.CrispPictureBox();
+            this.pic_tile_3 = new PEngine.Creator.Components.Game.CrispPictureBox();
             this.tooltip_main = new System.Windows.Forms.ToolTip(this.components);
-            this.tool_editor_texture = new System.Windows.Forms.ToolStripButton();
+            this.split_main = new System.Windows.Forms.SplitContainer();
             this.panel_subtiles.SuspendLayout();
             this.tool_subtiles.SuspendLayout();
             this.panel_tiles.SuspendLayout();
@@ -67,17 +68,20 @@
             this.group_selected_subtile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_tile_2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_tile_3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.split_main)).BeginInit();
+            this.split_main.Panel1.SuspendLayout();
+            this.split_main.Panel2.SuspendLayout();
+            this.split_main.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel_subtiles
             // 
-            this.panel_subtiles.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel_subtiles.Controls.Add(this.tool_subtiles);
             this.panel_subtiles.Controls.Add(this.panel_subtile_container);
-            this.panel_subtiles.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel_subtiles.Location = new System.Drawing.Point(607, 0);
+            this.panel_subtiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel_subtiles.Location = new System.Drawing.Point(0, 0);
             this.panel_subtiles.Name = "panel_subtiles";
-            this.panel_subtiles.Size = new System.Drawing.Size(215, 644);
+            this.panel_subtiles.Size = new System.Drawing.Size(252, 644);
             this.panel_subtiles.TabIndex = 3;
             // 
             // tool_subtiles
@@ -90,7 +94,7 @@
             this.tool_subtiles_add});
             this.tool_subtiles.Location = new System.Drawing.Point(0, 0);
             this.tool_subtiles.Name = "tool_subtiles";
-            this.tool_subtiles.Size = new System.Drawing.Size(213, 25);
+            this.tool_subtiles.Size = new System.Drawing.Size(252, 25);
             this.tool_subtiles.TabIndex = 3;
             this.tool_subtiles.Text = "toolStrip1";
             // 
@@ -117,13 +121,13 @@
             // 
             // panel_subtile_container
             // 
-            this.panel_subtile_container.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.panel_subtile_container.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_subtile_container.AutoScroll = true;
             this.panel_subtile_container.Location = new System.Drawing.Point(-1, 27);
             this.panel_subtile_container.Name = "panel_subtile_container";
-            this.panel_subtile_container.Size = new System.Drawing.Size(215, 616);
+            this.panel_subtile_container.Size = new System.Drawing.Size(254, 618);
             this.panel_subtile_container.TabIndex = 2;
             // 
             // panel_tiles
@@ -133,7 +137,7 @@
             this.panel_tiles.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel_tiles.Location = new System.Drawing.Point(0, 0);
             this.panel_tiles.Name = "panel_tiles";
-            this.panel_tiles.Size = new System.Drawing.Size(607, 26);
+            this.panel_tiles.Size = new System.Drawing.Size(566, 26);
             this.panel_tiles.TabIndex = 4;
             // 
             // tool_editor
@@ -149,7 +153,7 @@
             this.tool_editor_texture});
             this.tool_editor.Location = new System.Drawing.Point(0, 0);
             this.tool_editor.Name = "tool_editor";
-            this.tool_editor.Size = new System.Drawing.Size(607, 25);
+            this.tool_editor.Size = new System.Drawing.Size(566, 25);
             this.tool_editor.TabIndex = 0;
             this.tool_editor.Text = "toolStrip1";
             // 
@@ -185,16 +189,26 @@
             this.tool_editor_properties.Text = "Properties";
             this.tool_editor_properties.Click += new System.EventHandler(this.tool_editor_properties_Click);
             // 
+            // tool_editor_texture
+            // 
+            this.tool_editor_texture.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tool_editor_texture.Image = global::PEngine.Creator.Properties.Resources.Image_12x;
+            this.tool_editor_texture.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tool_editor_texture.Name = "tool_editor_texture";
+            this.tool_editor_texture.Size = new System.Drawing.Size(93, 22);
+            this.tool_editor_texture.Text = "View Texture";
+            this.tool_editor_texture.Click += new System.EventHandler(this.tool_editor_texture_Click);
+            // 
             // panel_tiles_container
             // 
-            this.panel_tiles_container.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.panel_tiles_container.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_tiles_container.AutoScroll = true;
             this.panel_tiles_container.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel_tiles_container.Location = new System.Drawing.Point(6, 28);
             this.panel_tiles_container.Name = "panel_tiles_container";
-            this.panel_tiles_container.Size = new System.Drawing.Size(595, 486);
+            this.panel_tiles_container.Size = new System.Drawing.Size(554, 486);
             this.panel_tiles_container.TabIndex = 1;
             // 
             // panel_main
@@ -205,7 +219,7 @@
             this.panel_main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel_main.Location = new System.Drawing.Point(0, 0);
             this.panel_main.Name = "panel_main";
-            this.panel_main.Size = new System.Drawing.Size(607, 644);
+            this.panel_main.Size = new System.Drawing.Size(566, 644);
             this.panel_main.TabIndex = 6;
             // 
             // panel1
@@ -215,13 +229,13 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 520);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(607, 124);
+            this.panel1.Size = new System.Drawing.Size(566, 124);
             this.panel1.TabIndex = 5;
             // 
             // group_edit_tile
             // 
-            this.group_edit_tile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.group_edit_tile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.group_edit_tile.Controls.Add(this.pic_tile_1);
             this.group_edit_tile.Controls.Add(this.pic_edit_mode);
@@ -232,7 +246,7 @@
             this.group_edit_tile.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
             this.group_edit_tile.Location = new System.Drawing.Point(6, 3);
             this.group_edit_tile.Name = "group_edit_tile";
-            this.group_edit_tile.Size = new System.Drawing.Size(595, 118);
+            this.group_edit_tile.Size = new System.Drawing.Size(554, 118);
             this.group_edit_tile.TabIndex = 7;
             this.group_edit_tile.TabStop = false;
             this.group_edit_tile.Text = "Edit tile";
@@ -319,23 +333,29 @@
             this.pic_tile_3.TabStop = false;
             this.pic_tile_3.Click += new System.EventHandler(this.pic_tile_3_Click);
             // 
-            // tool_editor_texture
+            // split_main
             // 
-            this.tool_editor_texture.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tool_editor_texture.Image = global::PEngine.Creator.Properties.Resources.Image_12x;
-            this.tool_editor_texture.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tool_editor_texture.Name = "tool_editor_texture";
-            this.tool_editor_texture.Size = new System.Drawing.Size(93, 22);
-            this.tool_editor_texture.Text = "View Texture";
-            this.tool_editor_texture.Click += new System.EventHandler(this.tool_editor_texture_Click);
+            this.split_main.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.split_main.Location = new System.Drawing.Point(0, 0);
+            this.split_main.Name = "split_main";
+            // 
+            // split_main.Panel1
+            // 
+            this.split_main.Panel1.Controls.Add(this.panel_main);
+            // 
+            // split_main.Panel2
+            // 
+            this.split_main.Panel2.Controls.Add(this.panel_subtiles);
+            this.split_main.Size = new System.Drawing.Size(822, 644);
+            this.split_main.SplitterDistance = 566;
+            this.split_main.TabIndex = 7;
             // 
             // TilesetEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = global::PEngine.Creator.Properties.Settings.Default.Color_LightGray;
-            this.Controls.Add(this.panel_main);
-            this.Controls.Add(this.panel_subtiles);
+            this.Controls.Add(this.split_main);
             this.Name = "TilesetEditor";
             this.Size = new System.Drawing.Size(822, 644);
             this.panel_subtiles.ResumeLayout(false);
@@ -356,6 +376,10 @@
             this.group_selected_subtile.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_tile_2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_tile_3)).EndInit();
+            this.split_main.Panel1.ResumeLayout(false);
+            this.split_main.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.split_main)).EndInit();
+            this.split_main.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -386,5 +410,6 @@
         private System.Windows.Forms.Label lbl_no_subtile;
         private System.Windows.Forms.ToolStripButton tool_editor_properties;
         private System.Windows.Forms.ToolStripButton tool_editor_texture;
+        private System.Windows.Forms.SplitContainer split_main;
     }
 }

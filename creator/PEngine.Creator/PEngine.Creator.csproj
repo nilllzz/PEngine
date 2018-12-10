@@ -61,12 +61,27 @@
       <DependentUpon>CrispPictureBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\Game\GameProcess.cs" />
+    <Compile Include="Components\Game\Map.service.cs" />
     <Compile Include="Components\Game\MapEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Components\Game\MapEditor.Designer.cs">
       <DependentUpon>MapEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\Game\MapEditorTiles.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Game\MapEditorTiles.Designer.cs">
+      <DependentUpon>MapEditorTiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Game\MapHealthStatus.cs" />
+    <Compile Include="Components\Game\MapPainter.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Game\MapPainter.Designer.cs">
+      <DependentUpon>MapPainter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Game\MapPainterMode.cs" />
     <Compile Include="Components\Game\ResourceManager.cs" />
     <Compile Include="Components\Game\SubtileEditComponent.cs">
       <SubType>UserControl</SubType>
@@ -105,6 +120,7 @@
       <DependentUpon>Logo.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\Projects\IEventBusComponent.cs" />
+    <Compile Include="Components\Projects\Optimizer.cs" />
     <Compile Include="Components\Projects\Project.service.cs" />
     <Compile Include="Components\Projects\ProjectEventBus.cs" />
     <Compile Include="Components\Projects\ProjectItem.cs" />
@@ -123,11 +139,23 @@
     </Compile>
     <Compile Include="Components\Projects\ProjectTreeNode.cs" />
     <Compile Include="Forms\FormConsts.cs" />
+    <Compile Include="Forms\GotoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GotoForm.Designer.cs">
+      <DependentUpon>GotoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ResizeMapForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ResizeMapForm.Designer.cs">
+      <DependentUpon>ResizeMapForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\TexturePickerForm.cs">
       <SubType>Form</SubType>
@@ -190,6 +218,12 @@
     <EmbeddedResource Include="Components\Game\MapEditor.resx">
       <DependentUpon>MapEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Components\Game\MapEditorTiles.resx">
+      <DependentUpon>MapEditorTiles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Game\MapPainter.resx">
+      <DependentUpon>MapPainter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\Game\SubtileComponent.resx">
       <DependentUpon>SubtileComponent.cs</DependentUpon>
     </EmbeddedResource>
@@ -214,8 +248,14 @@
     <EmbeddedResource Include="Components\Projects\ProjectTree.resx">
       <DependentUpon>ProjectTree.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GotoForm.resx">
+      <DependentUpon>GotoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ResizeMapForm.resx">
+      <DependentUpon>ResizeMapForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TexturePickerForm.resx">
       <DependentUpon>TexturePickerForm.cs</DependentUpon>
@@ -389,7 +429,19 @@
     <None Include="Resources\Folder%28special%29_5843_32x.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\mapGrid.png" />
+    <None Include="Resources\GridDark_epx.png" />
+    <None Include="Resources\Dimension_16xLG.png" />
+    <None Include="Resources\Diamond_16xLG.png" />
+    <None Include="Resources\method_16xLG.png" />
+    <None Include="Resources\FillTool_204.png" />
+    <None Include="Resources\EraseTool_203.png" />
+    <None Include="Resources\outdatedOverlay.png" />
+    <None Include="Resources\grid_Web_16xLG.png" />
     <None Include="Resources\Clearwindowcontent_6304.png" />
+    <None Include="Resources\Class_489.png" />
+    <None Include="Resources\animation_16xLG.png" />
+    <None Include="Resources\ClassIcon.png" />
     <Content Include="Resources\DefaultProject\content\textures\characters\player.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

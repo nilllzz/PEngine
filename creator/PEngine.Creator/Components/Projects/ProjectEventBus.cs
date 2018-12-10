@@ -76,5 +76,16 @@ namespace PEngine.Creator.Components.Projects
         }
 
         #endregion
+
+        #region Maps
+
+        internal event Action<MapData> MapUpdated;
+
+        internal void UpdatedMap(MapData data)
+        {
+            MapUpdated?.Invoke(data);
+        }
+
+        #endregion
     }
 }

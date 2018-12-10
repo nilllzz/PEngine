@@ -120,6 +120,14 @@ namespace PEngine.Creator.Forms
             }
         }
 
+        private void menu_main_edit_goto_Click(object sender, EventArgs e)
+        {
+            if (ActiveView is MainProjectView projView)
+            {
+                projView.GotoFile();
+            }
+        }
+
         internal void UpdateMenus()
         {
             UpdateFileMenu();
@@ -160,6 +168,18 @@ namespace PEngine.Creator.Forms
 
                 menu_file_save.Text = "Save";
                 menu_file_saveas.Text = "Save As...";
+            }
+        }
+
+        private void UpdateEditMenu()
+        {
+            if (ActiveView is MainProjectView projView)
+            {
+                menu_main_edit_goto.Enabled = true;
+            }
+            else
+            {
+                menu_main_edit_goto.Enabled = false;
             }
         }
 

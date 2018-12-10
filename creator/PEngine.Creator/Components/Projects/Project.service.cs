@@ -179,5 +179,20 @@ namespace PEngine.Creator.Components.Projects
 
             return project;
         }
+
+        internal static ProjectItemType GetItemFromFileType(ProjectFileType type)
+        {
+            switch (type)
+            {
+                case ProjectFileType.Map:
+                    return ProjectItemType.Map;
+                case ProjectFileType.Tileset:
+                    return ProjectItemType.Tileset;
+                case ProjectFileType.TextureTileset:
+                case ProjectFileType.TextureCharacter:
+                    return ProjectItemType.Texture;
+            }
+            throw new Exception("File type not mapped to item type");
+        }
     }
 }

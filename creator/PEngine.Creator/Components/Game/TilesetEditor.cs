@@ -264,6 +264,7 @@ namespace PEngine.Creator.Components.Game
             _data.subtiles = subtiles.ToArray();
 
             _eventBus.AddedSubtile(_data, subtile);
+            _eventBus.SelectedSubtile(_data, subtile);
         }
 
         private void tool_editor_add_tile_Click(object sender, System.EventArgs e)
@@ -287,6 +288,7 @@ namespace PEngine.Creator.Components.Game
             _data.tiles = tiles.ToArray();
 
             _eventBus.AddedTile(_data, tile);
+            _eventBus.SelectedTile(_data, tile);
         }
 
         private void btn_remove_tile_Click(object sender, System.EventArgs e)

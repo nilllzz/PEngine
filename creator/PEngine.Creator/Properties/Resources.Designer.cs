@@ -73,6 +73,16 @@ namespace PEngine.Creator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap animation_16xLG {
+            get {
+                object obj = ResourceManager.GetObject("animation_16xLG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap arrow_Next_16xLG {
             get {
                 object obj = ResourceManager.GetObject("arrow_Next_16xLG", resourceCulture);
@@ -106,6 +116,26 @@ namespace PEngine.Creator.Properties {
         internal static System.Drawing.Bitmap arrow_run_16xMD {
             get {
                 object obj = ResourceManager.GetObject("arrow_run_16xMD", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Class_489 {
+            get {
+                object obj = ResourceManager.GetObject("Class_489", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ClassIcon {
+            get {
+                object obj = ResourceManager.GetObject("ClassIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -183,9 +213,39 @@ namespace PEngine.Creator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Diamond_16xLG {
+            get {
+                object obj = ResourceManager.GetObject("Diamond_16xLG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Dimension_16xLG {
+            get {
+                object obj = ResourceManager.GetObject("Dimension_16xLG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap document_16xLG {
             get {
                 object obj = ResourceManager.GetObject("document_16xLG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EraseTool_203 {
+            get {
+                object obj = ResourceManager.GetObject("EraseTool_203", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -213,6 +273,16 @@ namespace PEngine.Creator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap FillTool_204 {
+            get {
+                object obj = ResourceManager.GetObject("FillTool_204", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap folder_Open_16xLG {
             get {
                 object obj = ResourceManager.GetObject("folder_Open_16xLG", resourceCulture);
@@ -226,6 +296,26 @@ namespace PEngine.Creator.Properties {
         internal static System.Drawing.Bitmap Folder_special__5843_32x {
             get {
                 object obj = ResourceManager.GetObject("Folder(special)_5843_32x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap grid_Web_16xLG {
+            get {
+                object obj = ResourceManager.GetObject("grid_Web_16xLG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GridDark_epx {
+            get {
+                object obj = ResourceManager.GetObject("GridDark_epx", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -266,6 +356,26 @@ namespace PEngine.Creator.Properties {
         internal static System.Drawing.Bitmap logo {
             get {
                 object obj = ResourceManager.GetObject("logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mapGrid {
+            get {
+                object obj = ResourceManager.GetObject("mapGrid", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap method_16xLG {
+            get {
+                object obj = ResourceManager.GetObject("method_16xLG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -326,6 +436,16 @@ namespace PEngine.Creator.Properties {
         internal static System.Drawing.Bitmap NewSolutionFolder_6289 {
             get {
                 object obj = ResourceManager.GetObject("NewSolutionFolder_6289", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap outdatedOverlay {
+            get {
+                object obj = ResourceManager.GetObject("outdatedOverlay", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

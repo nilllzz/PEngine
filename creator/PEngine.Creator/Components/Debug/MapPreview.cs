@@ -50,7 +50,8 @@ namespace PEngine.Creator.Components.Debug
 
             panel_container.Controls.Clear();
             _playerControl = null;
-            var map = GenerateMapBitmap();
+            var data = MapData.Load(_file.path);
+            var map = MapService.GenerateTexture(data);
             _mapControl = new PictureBox
             {
                 Image = map,
@@ -78,54 +79,6 @@ namespace PEngine.Creator.Components.Debug
                 p.Y * 16 + panel_container.AutoScrollPosition.Y);
             _playerControl.BringToFront();
             tool_map_player_pos.Text = "{" + p.X.ToString() + ", " + p.Y.ToString() + "}";
-        }
-
-        private Bitmap GenerateMapBitmap()
-        {
-            // load resources
-            var data = MapData.Load(_file.path);
-            var tilesetFile = Project.ActiveProject.GetFile(data.tileset, ProjectFileType.Tileset);
-            var tileset = TilesetData.Load(tilesetFile.path);
-            var texture = ResourceManager.GetTilesetTexture(tileset);
-
-            // generate map
-            var maxX = data.tiles.Max(t => t.pos[0] + t.size[0]);
-            var maxY = data.tiles.Max(t => t.pos[1] + t.size[1]);
-
-            var map = new Bitmap(maxX * 32, maxY * 32);
-            var g = Graphics.FromImage(map);
-
-            foreach (var tile in data.tiles)
-            {
-                var tileData = tileset.tiles.First(t => t.id == tile.tileId);
-                for (var y = 0; y < tile.size[1]; y++)
-                {
-                    for (var x = 0; x < tile.size[0]; x++)
-                    {
-                        var tilePosX = (tile.pos[0] + x) * 32;
-                        var tilePosY = (tile.pos[1] + y) * 32;
-
-                        for (var i = 0; i < tileData.subtiles.Length; i++)
-                        {
-                            var subtileId = tileData.subtiles[i];
-                            var subtileData = tileset.subtiles.First(t => t.id == subtileId);
-
-                            var subtileOffsetX = i % 2 * 16;
-                            var subtileOffsetY = i > 1 ? 16 : 0;
-
-                            g.DrawImage(texture, new Rectangle(
-                                tilePosX + subtileOffsetX,
-                                tilePosY + subtileOffsetY,
-                                16, 16), new Rectangle(
-                                subtileData.texture[0] * 16,
-                                subtileData.texture[1] * 16,
-                                16, 16), GraphicsUnit.Pixel);
-                        }
-                    }
-                }
-            }
-
-            return map;
         }
 
         private void Map_MouseClick(object sender, MouseEventArgs e)

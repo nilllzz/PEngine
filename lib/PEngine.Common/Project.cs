@@ -27,6 +27,9 @@ namespace PEngine.Common
             set => _data.author = value;
         }
 
+        public ProjectFolderData[] Folders => _data.folders;
+        public ProjectFileData[] Files => _data.files;
+
         public Project(string projectPath)
         {
             BaseDirectory = projectPath;
@@ -41,22 +44,23 @@ namespace PEngine.Common
                 createdOn = DateTime.UtcNow,
                 changedOn = DateTime.UtcNow,
                 files = new ProjectFileData[0],
+                folders = new ProjectFolderData[0],
             };
-        }
-
-        public ProjectFileData[] GetFiles()
-        {
-            return _data.files;
         }
 
         public ProjectFileData[] GetFiles(ProjectFileType type)
         {
-            return _data.files.Where(f => f.GetFileType() == type).ToArray();
+            return _data.files.Where(f => f.FileType == type).ToArray();
         }
 
         public ProjectFileData GetFile(string id, ProjectFileType type)
         {
-            return _data.files.FirstOrDefault(f => f.id == id && f.GetFileType() == type);
+            return _data.files.FirstOrDefault(f => f.id == id && f.FileType == type);
+        }
+
+        public ProjectFolderData GetFolder(string id)
+        {
+            return _data.folders.FirstOrDefault(f => f.id == id);
         }
 
         public void IncludeFile(ProjectFileData file)
@@ -67,6 +71,23 @@ namespace PEngine.Common
             }
             var files = _data.files.ToList();
             files.Add(file);
+            _data.files = files.ToArray();
+        }
+
+        public void IncludeFolder(ProjectFolderData folder)
+        {
+            if (_data.folders.Any(f => f.id == folder.id))
+            {
+                throw new Exception($"A folder with the id \"{folder.id}\" is already in the project.");
+            }
+            var folders = _data.folders.ToList();
+            folders.Add(folder);
+            _data.folders = folders.ToArray();
+        }
+
+        public void ExcludeFile(ProjectFileData file)
+        {
+            var files = _data.files.Where(f => f.id != file.id || f.type != file.type);
             _data.files = files.ToArray();
         }
 
@@ -96,21 +117,6 @@ namespace PEngine.Common
             if (!Directory.Exists(BaseDirectory))
             {
                 Directory.CreateDirectory(BaseDirectory);
-            }
-
-            // create basic directories for the project
-            foreach (var dir in new[] {
-                "content",
-                "content/textures",
-                "data",
-                "data/maps",
-                "data/scripts" })
-            {
-                var dirPath = Path.Combine(BaseDirectory, dir);
-                if (!Directory.Exists(dirPath))
-                {
-                    Directory.CreateDirectory(dirPath);
-                }
             }
 
             _data.changedOn = DateTime.UtcNow;

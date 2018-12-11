@@ -123,5 +123,28 @@ namespace PEngine.Creator.Components.Game
 
             return MapHealthStatus.Healthy;
         }
+
+        internal static MapData CreateNew(string id, TilesetData tileset, string name)
+        {
+            var map = MapData.Create(id);
+            map.tileset = tileset.id;
+            map.name = name;
+
+            // generate a single starting tile
+            if (tileset.tiles.Length > 0)
+            {
+                var tile = tileset.tiles[0];
+                map.tiles = new[] {
+                    new MapTileData
+                    {
+                        tileId = tile.id,
+                        pos = new[] { 0, 0 },
+                        size = new[] { 1, 1 },
+                    }
+                };
+            }
+
+            return map;
+        }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using PEngine.Common;
+using PEngine.Common.Data;
 using PEngine.Common.Data.Maps;
 using PEngine.Game.Content;
 using static Core;
@@ -21,10 +23,10 @@ namespace PEngine.Game.Components.World.Entities
             : base(map)
         { }
 
-        protected void LoadTexture(string characterTextureFile)
+        protected void LoadTexture(string characterTextureFileId)
         {
-            _texture = Controller.ProjectContent
-                .LoadDirect<Texture2D>($"textures/characters/{characterTextureFile}.png");
+            var textureFile = Project.ActiveProject.GetFile(characterTextureFileId, ProjectFileType.TextureCharacter);
+            _texture = Controller.ProjectContent.LoadDirect<Texture2D>(textureFile.path);
         }
 
         protected override Rectangle GetTextureRectangle()

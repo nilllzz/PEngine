@@ -5,6 +5,7 @@ using PEngine.Common.Data.Maps;
 using PEngine.Common.Interop;
 using PEngine.Game.Content;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using static Core;
 
@@ -24,8 +25,9 @@ namespace PEngine.Game.Components.World
             {
                 if (_texture == null)
                 {
+                    var file = Project.ActiveProject.GetFile(_data.texture, ProjectFileType.TextureTileset);
                     _texture =
-                        Controller.ProjectContent.LoadDirect<Texture2D>($"textures/tiles/{_data.texture}.png");
+                        Controller.ProjectContent.LoadDirect<Texture2D>(file.path);
                 }
                 return _texture;
             }

@@ -15,6 +15,32 @@ namespace PEngine.Common.Data
         [JsonIgnore]
         public string FileName { get; private set; }
 
+        public string id;
+
+        protected abstract string GetDefaultFileName(string id);
+
+        private static string GetValidFilePath(T resource, string id)
+        {
+            var rootDir = GetResourceRootDirectory(resource);
+
+            var n = 0;
+            while (true)
+            {
+                var pathId = id;
+                if (n > 0)
+                {
+                    pathId += n;
+                }
+                var path = resource.GetDefaultFileName(pathId);
+                var fullPath = Path.GetFullPath(Path.Combine(rootDir, path));
+                if (!File.Exists(fullPath))
+                {
+                    return path;
+                }
+                n++;
+            }
+        }
+
         private static T GetResourceInstance()
         {
             var type = typeof(T);
@@ -53,10 +79,11 @@ namespace PEngine.Common.Data
             return loadedResource;
         }
 
-        public static T Create(string filename)
+        public static T Create(string id)
         {
             var resource = Activator.CreateInstance<T>();
-            resource.FileName = filename;
+            resource.FileName = GetValidFilePath(resource, id);
+            resource.id = id;
             return resource;
         }
 

@@ -12,27 +12,21 @@ namespace PEngine.Creator.Components.Game
 {
     internal partial class TilesetEditor : ProjectTabComponent, IEventBusComponent
     {
-        private readonly ProjectEventBus _eventBus;
-        private readonly ProjectItem _item;
         private readonly TilesetData _data;
 
         private TileData _selectedTile;
         private SubtileData _selectedSubtile;
         private bool _tileAddMode = true;
 
-        internal override string FilePath => _item.FilePath;
-        internal override string Identifier => _item.Identifier;
         internal override int IconIndex => ICON_TILESET;
-        internal override ProjectItem ProjectItem => _item;
 
-        internal TilesetEditor(ProjectEventBus eventBus, TilesetData data, ProjectItem item)
+        internal TilesetEditor(ProjectEventBus eventBus, ProjectFileData file, TilesetData data)
+            : base(eventBus, file)
         {
             InitializeComponent();
 
-            _item = item;
             _data = data;
 
-            _eventBus = eventBus;
             RegisterEvents();
 
             InitData();
@@ -349,12 +343,7 @@ namespace PEngine.Creator.Components.Game
         private void tool_editor_texture_Click(object sender, System.EventArgs e)
         {
             var textureFile = Project.ActiveProject.GetFile(_data.texture, ProjectFileType.TextureTileset);
-
-            _eventBus.RequestItemOpen(new ProjectItem
-            {
-                FileData = textureFile,
-                ItemType = ProjectItemType.Texture,
-            });
+            _eventBus.RequestFileOpen(textureFile);
         }
 
         #endregion
@@ -473,7 +462,7 @@ namespace PEngine.Creator.Components.Game
             _data.Save();
 
             // update id if it changed
-            _item.FileData.id = _data.id;
+            File.id = _data.id;
 
             HasChanges = false;
         }

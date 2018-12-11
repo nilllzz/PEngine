@@ -8,17 +8,23 @@ namespace PEngine.Creator.Components.Projects
     {
         #region Files
 
-        internal event Action<ProjectItem> ItemOpenRequested;
+        internal event Action<ProjectFileData> FileOpenRequested;
         internal event Action<ProjectFileData> FileUpdated;
+        internal event Action<ProjectFileData> FileDeleted;
 
-        internal void RequestItemOpen(ProjectItem item)
+        internal void RequestFileOpen(ProjectFileData file)
         {
-            ItemOpenRequested?.Invoke(item);
+            FileOpenRequested?.Invoke(file);
         }
 
         internal void UpdatedFile(ProjectFileData file)
         {
             FileUpdated?.Invoke(file);
+        }
+
+        internal void DeletedFile(ProjectFileData file)
+        {
+            FileDeleted?.Invoke(file);
         }
 
         #endregion

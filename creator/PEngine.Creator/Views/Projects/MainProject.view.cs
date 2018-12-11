@@ -1,4 +1,5 @@
 ﻿using PEngine.Common;
+using PEngine.Common.Data;
 using PEngine.Common.Data.Maps;
 using PEngine.Creator.Components.Game;
 using PEngine.Creator.Components.Projects;
@@ -72,22 +73,29 @@ namespace PEngine.Creator.Views.Projects
 
         private void RegisterEvents()
         {
-            _eventBus.ItemOpenRequested += _eventBus_ItemOpenRequested;
+            _eventBus.FileOpenRequested += _eventBus_FileOpenRequested;
+            _eventBus.FileDeleted += _eventBus_FileDeleted;
         }
 
         public void UnregisterEvents()
         {
-            _eventBus.ItemOpenRequested -= _eventBus_ItemOpenRequested;
+            _eventBus.FileOpenRequested -= _eventBus_FileOpenRequested;
+            _eventBus.FileDeleted -= _eventBus_FileDeleted;
         }
 
-        private void _eventBus_ItemOpenRequested(ProjectItem item)
+        private void _eventBus_FileDeleted(ProjectFileData file)
+        {
+            CloseFile(file, true);
+        }
+
+        private void _eventBus_FileOpenRequested(ProjectFileData file)
         {
             foreach (var tab in tabs_main.TabPages)
             {
                 if (tab is TabPage tabPage &&
                     tabPage.Controls.Count == 1 &&
                     tabPage.Controls[0] is ProjectTabComponent projComp &&
-                    projComp.Identifier == item.Identifier)
+                    projComp.File.Identifier == file.Identifier)
                 {
                     // select an already existing tab instead of creating a new one
                     tabs_main.SelectTab(tabPage);
@@ -95,25 +103,26 @@ namespace PEngine.Creator.Views.Projects
                 }
             }
 
-            switch (item.ItemType)
+            switch (file.FileType)
             {
-                case ProjectItemType.Map:
+                case ProjectFileType.Map:
                     {
-                        var map = MapData.Load(item.FileData.path);
-                        var editor = new MapEditor(_eventBus, map, item);
+                        var map = MapData.Load(file.path);
+                        var editor = new MapEditor(_eventBus, file, map);
                         OpenTab(editor);
                     }
                     break;
-                case ProjectItemType.Tileset:
+                case ProjectFileType.Tileset:
                     {
-                        var tileset = TilesetData.Load(item.FileData.path);
-                        var editor = new TilesetEditor(_eventBus, tileset, item);
+                        var tileset = TilesetData.Load(file.path);
+                        var editor = new TilesetEditor(_eventBus, file, tileset);
                         OpenTab(editor);
                     }
                     break;
-                case ProjectItemType.Texture:
+                case ProjectFileType.TextureCharacter:
+                case ProjectFileType.TextureTileset:
                     {
-                        var viewer = new TextureViewer(item);
+                        var viewer = new TextureViewer(_eventBus, file);
                         OpenTab(viewer);
                     }
                     break;
@@ -187,14 +196,14 @@ namespace PEngine.Creator.Views.Projects
 
         private void context_tabs_closeallbutthis_Click(object sender, EventArgs e)
         {
-            CloseAllFiles(ActiveComponent?.Identifier);
+            CloseAllFiles(ActiveComponent?.File.Identifier);
         }
 
         private void context_tabs_copypath_Click(object sender, EventArgs e)
         {
             if (ActiveComponent != null)
             {
-                var path = ActiveComponent.FilePath;
+                var path = ActiveComponent.File.FilePath;
                 if (path != null && path.Length > 0)
                 {
                     Clipboard.SetText(Path.GetFullPath(path));
@@ -204,9 +213,9 @@ namespace PEngine.Creator.Views.Projects
 
         private void context_tabs_reveal_Click(object sender, EventArgs e)
         {
-            if (ActiveComponent != null && ActiveComponent.FilePath != null)
+            if (ActiveComponent != null && ActiveComponent.File.FilePath != null)
             {
-                ExplorerHelper.OpenWithFileSelected(ActiveComponent.FilePath);
+                ExplorerHelper.OpenWithFileSelected(ActiveComponent.File.FilePath);
             }
         }
 
@@ -214,9 +223,9 @@ namespace PEngine.Creator.Views.Projects
         {
             if (ActiveComponent != null)
             {
-                if (ActiveComponent.FilePath != null)
+                if (ActiveComponent.CanSave)
                 {
-                    var filename = Path.GetFileName(ActiveComponent.FilePath);
+                    var filename = Path.GetFileName(ActiveComponent.File.FilePath);
                     context_tabs_save.Text = $"Save {filename}";
                     context_tabs_copypath.Enabled = true;
                     context_tabs_reveal.Enabled = true;
@@ -270,7 +279,7 @@ namespace PEngine.Creator.Views.Projects
                 if (tab is TabPage tabPage &&
                     tabPage.Controls.Count == 1 &&
                     tabPage.Controls[0] is ProjectTabComponent projComp &&
-                    projComp.Identifier == component.Identifier)
+                    projComp.File.Identifier == component.File.Identifier)
                 {
                     tabs_main.SelectTab(tabPage);
                     return;
@@ -289,7 +298,7 @@ namespace PEngine.Creator.Views.Projects
                 newTab.Text = title;
             };
             newTab.Controls.Add(component);
-            newTab.ToolTipText = Path.GetFullPath(component.FilePath);
+            newTab.ToolTipText = Path.GetFullPath(component.File.FilePath);
 
             tabs_main.TabPages.Insert(0, newTab);
             tabs_main.SelectTab(newTab);
@@ -326,7 +335,7 @@ namespace PEngine.Creator.Views.Projects
 
             if (affected.Count > 0)
             {
-                var filesText = string.Join("\n", affected.Take(10).Select(c => c.ProjectItem.FileData.path));
+                var filesText = string.Join("\n", affected.Take(10).Select(c => c.File.path));
                 if (affected.Count > 10)
                 {
                     filesText += "\n...\n" + (affected.Count - 10) + " more";
@@ -345,7 +354,7 @@ namespace PEngine.Creator.Views.Projects
                     {
                         comp.HasProjectChanges = false;
                         comp.Save();
-                        _eventBus.UpdatedFile(comp.ProjectItem.FileData);
+                        _eventBus.UpdatedFile(comp.File);
                     }
 
                     // save project after
@@ -376,14 +385,32 @@ namespace PEngine.Creator.Views.Projects
         {
             if (ActiveComponent != null)
             {
-                var result = ActiveComponent.Close();
-                if (result)
+                CloseFile(ActiveComponent.File, false);
+            }
+        }
+
+        internal void CloseFile(ProjectFileData file, bool force)
+        {
+            foreach (var tab in tabs_main.TabPages)
+            {
+                if (tab is TabPage tabPage &&
+                    tabPage.Controls.Count == 1 &&
+                    tabPage.Controls[0] is ProjectTabComponent comp &&
+                    comp.File.id == file.id)
                 {
-                    if (ActiveComponent is IEventBusComponent eventBusComp)
+                    var result = true;
+                    if (!force)
                     {
-                        eventBusComp.UnregisterEvents();
+                        result = comp.Close();
                     }
-                    tabs_main.TabPages.Remove(tabs_main.SelectedTab);
+                    if (result)
+                    {
+                        if (comp is IEventBusComponent eventBusComp)
+                        {
+                            eventBusComp.UnregisterEvents();
+                        }
+                        tabs_main.TabPages.Remove(tabs_main.SelectedTab);
+                    }
                 }
             }
         }
@@ -396,12 +423,12 @@ namespace PEngine.Creator.Views.Projects
                     tabPage.Controls.Count == 1 &&
                     tabPage.Controls[0] is ProjectTabComponent projComp)
                 {
-                    if (except == null || except != projComp.Identifier)
+                    if (except == null || except != projComp.File.Identifier)
                     {
-                        var result = ActiveComponent.Close();
+                        var result = projComp.Close();
                         if (result)
                         {
-                            if (ActiveComponent is IEventBusComponent eventBusComp)
+                            if (projComp is IEventBusComponent eventBusComp)
                             {
                                 eventBusComp.UnregisterEvents();
                             }
@@ -429,11 +456,7 @@ namespace PEngine.Creator.Views.Projects
             var result = form.ShowDialog(this);
             if (result == DialogResult.OK)
             {
-                _eventBus.RequestItemOpen(new ProjectItem
-                {
-                    ItemType = ProjectService.GetItemFromFileType(form.SelectedFile.GetFileType()),
-                    FileData = form.SelectedFile,
-                });
+                _eventBus.RequestFileOpen(form.SelectedFile);
             }
         }
     }

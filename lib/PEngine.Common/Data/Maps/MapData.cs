@@ -2,8 +2,10 @@
 {
     public class MapData : Resource<MapData>
     {
-        public string id;
+        public string name;
         public string tileset;
         public MapTileData[] tiles;
+
+        protected override string GetDefaultFileName(string id) => $"content/{id}.json";
     }
 }

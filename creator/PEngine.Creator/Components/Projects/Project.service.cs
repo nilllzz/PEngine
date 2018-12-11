@@ -7,6 +7,7 @@ using PEngine.Creator.Helpers;
 using PEngine.Creator.Properties;
 using System;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace PEngine.Creator.Components.Projects
@@ -52,17 +53,21 @@ namespace PEngine.Creator.Components.Projects
                 CheckFileExists = true,
                 CheckPathExists = true,
                 InitialDirectory = ProjectsDirectory,
+                FileName = "project",
                 Filter = "Project Files (*.json)|*.json",
                 Multiselect = false
             };
             dialog.CustomPlaces.Add(ProjectsDirectory);
-            dialog.ShowDialog(caller);
-
-            if (dialog.FileName != null && dialog.FileName.Length > 0)
+            var result = dialog.ShowDialog(caller);
+            if (result == DialogResult.OK)
             {
-                var project = new Project(Path.GetDirectoryName(dialog.FileName));
-                return project;
+                if (dialog.FileName != null && dialog.FileName.Length > 0)
+                {
+                    var project = new Project(Path.GetDirectoryName(dialog.FileName));
+                    return project;
+                }
             }
+
             return null;
         }
 
@@ -89,7 +94,8 @@ namespace PEngine.Creator.Components.Projects
             MainForm.Instance.LoadedProject();
         }
 
-        internal static void IncludeFile(Project project, string path, ProjectFileType fileType)
+        // includes an existing file on disk to the project
+        internal static ProjectFileData IncludeExternalFile(Project project, string path, ProjectFileType fileType, ProjectFolderData folder)
         {
             // try and guess the id
             var fileId = Path.GetFileNameWithoutExtension(path);
@@ -102,12 +108,64 @@ namespace PEngine.Creator.Components.Projects
                 id = fileId + n.ToString();
                 file = project.GetFile(id, fileType);
             }
-            project.IncludeFile(new ProjectFileData
+            var newFile = new ProjectFileData
             {
                 id = id,
                 path = path,
                 type = DataHelper.UnparseEnum(fileType),
-            });
+                folderId = folder?.id,
+            };
+            project.IncludeFile(newFile);
+            return newFile;
+        }
+
+        // includes a resource in memory to the project file
+        internal static ProjectFileData IncludeResource<T>(Project project, T resource, ProjectFileType type, ProjectFolderData folder) where T : Resource<T>
+        {
+            var file = new ProjectFileData
+            {
+                id = resource.id,
+                path = resource.FileName,
+                type = DataHelper.UnparseEnum(type),
+                folderId = folder?.id,
+            };
+            project.IncludeFile(file);
+            return file;
+        }
+
+        internal static string GenerateFolderId(Project project, string name)
+        {
+            var folderIdChars = name.ToLower().ToCharArray();
+            for (var i = 0; i < folderIdChars.Length; i++)
+            {
+                if (!Regex.IsMatch(folderIdChars[i].ToString(), "[a-z0-9_-]"))
+                {
+                    folderIdChars[i] = '_';
+                }
+            }
+            var folderId = string.Join("", folderIdChars);
+            var id = folderId;
+            var n = 0;
+            var folder = project.GetFolder(id);
+            while (folder != null)
+            {
+                n++;
+                id = folderId + n.ToString();
+                folder = project.GetFolder(id);
+            }
+            return id;
+        }
+
+        internal static ProjectFolderData CreateFolder(Project project, string name, ProjectFolderData parent)
+        {
+            var id = GenerateFolderId(project, name);
+            var newFolder = new ProjectFolderData
+            {
+                id = id,
+                name = name,
+                parentId = parent?.id,
+            };
+            return newFolder;
         }
 
         internal static Project CreateNew(string targetDir, string name, string author)
@@ -115,64 +173,39 @@ namespace PEngine.Creator.Components.Projects
             var path = GetNewProjectPath(targetDir, name);
             var project = new Project(path);
             project.Create(name, author);
+
+            // create some default folders
+            var mapsFolder = CreateFolder(project, "Maps", null);
+            var scriptsFolder = CreateFolder(project, "Scripts", null);
+            var tilesetsFolder = CreateFolder(project, "Tilesets", null);
+            var contentFolder = CreateFolder(project, "Content", null);
+            var texturesFolder = CreateFolder(project, "Textures", contentFolder);
+            var charactersFolder = CreateFolder(project, "Characters", texturesFolder);
+            var tilesFolder = CreateFolder(project, "Tiles", texturesFolder);
+            foreach (var folder in new[]
+                { mapsFolder, scriptsFolder, tilesetsFolder, contentFolder,
+                  texturesFolder, charactersFolder, tilesFolder })
+            {
+                project.IncludeFolder(folder);
+            }
             project.Save();
             project.Load();
 
             // copy default resources
-            var defaultContent = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources/DefaultProject/Content");
+            var defaultContent = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources/DefaultProject");
             ExplorerHelper.Copy(defaultContent, Path.Combine(project.BaseDirectory, "content"));
 
             // add them to the project
-            IncludeFile(project, "content/textures/tiles/routes.png", ProjectFileType.TextureTileset);
-            IncludeFile(project, "content/textures/characters/player.png", ProjectFileType.TextureCharacter);
+            var routesFile = IncludeExternalFile(project, "content/routes.png", ProjectFileType.TextureTileset, tilesFolder);
+            var playerFile = IncludeExternalFile(project, "content/player.png", ProjectFileType.TextureCharacter, charactersFolder);
 
             // create default data files
-            var defaultTileset = TilesetData.Create("data/tiles/routes.json");
-            defaultTileset.id = "routes";
-            defaultTileset.texture = "routes";
-            defaultTileset.subtiles = new[]
-            {
-                new SubtileData
-                {
-                    id = 0,
-                    behavior = DataHelper.UnparseEnum(SubtileBehavior.Floor),
-                    texture = new[] { 0, 0 }
-                }
-            };
-            defaultTileset.tiles = new[]
-            {
-                new TileData
-                {
-                    id = 0,
-                    subtiles = new[] { 0, 0, 0, 0 }
-                }
-            };
-            project.IncludeFile(new ProjectFileData
-            {
-                type = DataHelper.UnparseEnum(ProjectFileType.Tileset),
-                id = defaultTileset.id,
-                path = defaultTileset.FileName,
-            });
+            var defaultTileset = TilesetService.CreateNew("routes", routesFile);
+            IncludeResource(Project.ActiveProject, defaultTileset, ProjectFileType.Tileset, tilesetsFolder);
             defaultTileset.Save();
 
-            var defaultMap = MapData.Create("data/maps/default.json");
-            defaultMap.id = "default";
-            defaultMap.tileset = defaultTileset.id;
-            defaultMap.tiles = new[]
-            {
-                new MapTileData
-                {
-                    tileId = 0,
-                    pos = new[] { 0, 0 },
-                    size = new[] { 1, 1 },
-                }
-            };
-            project.IncludeFile(new ProjectFileData
-            {
-                type = DataHelper.UnparseEnum(ProjectFileType.Map),
-                id = defaultMap.id,
-                path = defaultMap.FileName,
-            });
+            var defaultMap = MapService.CreateNew("default", defaultTileset, "Default");
+            IncludeResource(Project.ActiveProject, defaultMap, ProjectFileType.Map, mapsFolder);
             defaultMap.Save();
 
             project.Save();
@@ -180,19 +213,20 @@ namespace PEngine.Creator.Components.Projects
             return project;
         }
 
-        internal static ProjectItemType GetItemFromFileType(ProjectFileType type)
+        internal static void ExcludeFile(ProjectFileData file)
         {
-            switch (type)
+            Project.ActiveProject.ExcludeFile(file);
+        }
+
+        internal static void DeleteFile(ProjectFileData file)
+        {
+            Project.ActiveProject.ExcludeFile(file);
+            Project.ActiveProject.Save();
+            var path = Path.Combine(Project.ActiveProject.BaseDirectory, file.path);
+            if (File.Exists(path))
             {
-                case ProjectFileType.Map:
-                    return ProjectItemType.Map;
-                case ProjectFileType.Tileset:
-                    return ProjectItemType.Tileset;
-                case ProjectFileType.TextureTileset:
-                case ProjectFileType.TextureCharacter:
-                    return ProjectItemType.Texture;
+                File.Delete(path);
             }
-            throw new Exception("File type not mapped to item type");
         }
     }
 }

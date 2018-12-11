@@ -1,4 +1,5 @@
-﻿using PEngine.Creator.Forms;
+﻿using PEngine.Common.Data;
+using PEngine.Creator.Forms;
 using PEngine.Creator.Views.Projects;
 using System;
 using System.Windows.Forms;
@@ -12,6 +13,7 @@ namespace PEngine.Creator.Components.Projects
         protected const int ICON_IMAGE = 2;
         protected const int ICON_TILESET = 3;
 
+        protected readonly ProjectEventBus _eventBus;
         private bool _hasChanges;
         private string _title;
 
@@ -46,18 +48,19 @@ namespace PEngine.Creator.Components.Projects
             }
         }
 
-        internal virtual string FilePath => null;
+        internal ProjectFileData File { get; }
         internal virtual int IconIndex => ICON_DOCUMENT;
-        internal virtual string Identifier => null;
         internal virtual bool CanSave => true;
         internal virtual bool CanSaveAs => true;
-        internal virtual ProjectItem ProjectItem => throw new NotImplementedException();
 
         internal event Action<string> TitleChanged;
 
-        internal ProjectTabComponent()
+        internal ProjectTabComponent(ProjectEventBus eventBus, ProjectFileData file)
         {
             InitializeComponent();
+
+            _eventBus = eventBus;
+            File = file;
         }
 
         internal virtual void Save()
@@ -77,7 +80,7 @@ namespace PEngine.Creator.Components.Projects
         {
             if (CanSave && HasChanges)
             {
-                var result = MessageBox.Show($"There are unsaved changes for \n\n\"{FilePath}\"\n\nDo you want save the file before closing?",
+                var result = MessageBox.Show($"There are unsaved changes for \n\n\"{File.id}\"\n\nDo you want save the file before closing?",
                     "PEngine", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
                 switch (result)
                 {

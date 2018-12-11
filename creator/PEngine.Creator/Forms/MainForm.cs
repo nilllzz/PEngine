@@ -151,8 +151,8 @@ namespace PEngine.Creator.Forms
                     menu_file_close.Enabled = true;
                     menu_file_closeall.Enabled = true;
 
-                    menu_file_save.Text = $"Save {Path.GetFileName(comp.FilePath)}";
-                    menu_file_saveas.Text = $"Save {Path.GetFileName(comp.FilePath)} As...";
+                    menu_file_save.Text = $"Save {Path.GetFileName(comp.File.FilePath)}";
+                    menu_file_saveas.Text = $"Save {Path.GetFileName(comp.File.FilePath)} As...";
                 }
             }
             else

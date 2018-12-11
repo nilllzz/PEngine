@@ -1,14 +1,13 @@
 ﻿using PEngine.Common;
+using PEngine.Common.Data;
 using PEngine.Common.Interop;
 using PEngine.Creator.Components.Debug;
 using PEngine.Creator.Components.Game;
-using PEngine.Creator.Components.Projects;
 using PEngine.Creator.Forms;
 using PEngine.Creator.Properties;
 using PEngine.Creator.Views.Projects;
 using System;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace PEngine.Creator.Views.Game
@@ -220,10 +219,10 @@ namespace PEngine.Creator.Views.Game
                     IsConnected = true;
                     break;
                 case Pipeline.EVENT_LOAD_MAP:
-                    AddLoadedResource(ProjectItemType.Map, message.Content);
+                    AddLoadedResource(ProjectFileType.Map, message.Content);
                     break;
                 case Pipeline.EVENT_LOAD_TILESET:
-                    AddLoadedResource(ProjectItemType.Tileset, message.Content);
+                    AddLoadedResource(ProjectFileType.Tileset, message.Content);
                     break;
                 case Pipeline.EVENT_SCENE_CHANGED:
                     SceneChanged(message);
@@ -260,17 +259,17 @@ namespace PEngine.Creator.Views.Game
             MainForm.Instance.SetView(_previousView);
         }
 
-        private void AddLoadedResource(ProjectItemType itemType, string id)
+        private void AddLoadedResource(ProjectFileType fileType, string id)
         {
-            var parent = GetNodeForItemType(itemType);
+            var parent = GetNodeForFileType(fileType);
             var node = new TreeNode(id);
             parent.Nodes.Add(node);
             parent.Expand();
         }
 
-        private TreeNode GetNodeForItemType(ProjectItemType itemType)
+        private TreeNode GetNodeForFileType(ProjectFileType fileType)
         {
-            var text = itemType.ToString();
+            var text = fileType.ToString();
             foreach (var node in tree_resources.Nodes)
             {
                 if (node is TreeNode treeNode && treeNode.Text == text)

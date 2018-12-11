@@ -19,7 +19,7 @@ namespace PEngine.Creator.Forms
 
         private int GetImageIndexForFile(ProjectFileData file)
         {
-            switch (file.GetFileType())
+            switch (file.FileType)
             {
                 case ProjectFileType.Map:
                     return 3;
@@ -41,7 +41,7 @@ namespace PEngine.Creator.Forms
             list_results.Items.Clear();
 
             var term = txt_input.Text.ToLower();
-            var files = Project.ActiveProject.GetFiles();
+            var files = Project.ActiveProject.Files;
             _results = files.Where(f => f.id.ToLower().Contains(term)).ToArray();
             foreach (var result in _results)
             {

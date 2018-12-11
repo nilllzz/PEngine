@@ -9,5 +9,6 @@ namespace PEngine.Common.Data
         public DateTime createdOn;
         public DateTime changedOn;
         public ProjectFileData[] files;
+        public ProjectFolderData[] folders;
     }
 }

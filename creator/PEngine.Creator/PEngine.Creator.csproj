@@ -113,6 +113,7 @@
     <Compile Include="Components\Game\TilesetEditor.Designer.cs">
       <DependentUpon>TilesetEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\Game\Tileset.service.cs" />
     <Compile Include="Components\Logo\Logo.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -123,8 +124,8 @@
     <Compile Include="Components\Projects\Optimizer.cs" />
     <Compile Include="Components\Projects\Project.service.cs" />
     <Compile Include="Components\Projects\ProjectEventBus.cs" />
-    <Compile Include="Components\Projects\ProjectItem.cs" />
-    <Compile Include="Components\Projects\ProjectItemType.cs" />
+    <Compile Include="Components\Projects\ProjectFolderTreeNode.cs" />
+    <Compile Include="Components\Projects\ProjectFileTreeNode.cs" />
     <Compile Include="Components\Projects\ProjectLoadButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -150,6 +151,12 @@
     </Compile>
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\New\NewMapForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\New\NewMapForm.Designer.cs">
+      <DependentUpon>NewMapForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ResizeMapForm.cs">
       <SubType>Form</SubType>
@@ -253,6 +260,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\New\NewMapForm.resx">
+      <DependentUpon>NewMapForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ResizeMapForm.resx">
       <DependentUpon>ResizeMapForm.cs</DependentUpon>
@@ -429,6 +439,9 @@
     <None Include="Resources\Folder%28special%29_5843_32x.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\StatusAnnotations_Warning_16xLG_color.png" />
+    <None Include="Resources\StatusAnnotations_Complete_and_ok_16xLG_color.png" />
+    <None Include="Resources\MapTileLayer_32x.png" />
     <None Include="Resources\mapGrid.png" />
     <None Include="Resources\GridDark_epx.png" />
     <None Include="Resources\Dimension_16xLG.png" />
@@ -442,12 +455,16 @@
     <None Include="Resources\Class_489.png" />
     <None Include="Resources\animation_16xLG.png" />
     <None Include="Resources\ClassIcon.png" />
-    <Content Include="Resources\DefaultProject\content\textures\characters\player.png">
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\collapseAll.png" />
+    <Content Include="Resources\DefaultProject\player.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\DefaultProject\content\textures\tiles\routes.png">
+    <Content Include="Resources\DefaultProject\routes.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\newFolder.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

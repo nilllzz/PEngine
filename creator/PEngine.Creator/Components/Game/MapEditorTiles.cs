@@ -47,11 +47,7 @@ namespace PEngine.Creator.Components.Game
             var file = Project.ActiveProject.GetFile(_data.id, ProjectFileType.Tileset);
             if (file != null)
             {
-                _eventBus.RequestItemOpen(new ProjectItem
-                {
-                    FileData = file,
-                    ItemType = ProjectItemType.Tileset,
-                });
+                _eventBus.RequestFileOpen(file);
             }
         }
 

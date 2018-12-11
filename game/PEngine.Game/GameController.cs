@@ -48,7 +48,7 @@ namespace PEngine.Game
                 Exit();
             }
             ProjectContent = new ContentManager(Services,
-                Path.Combine(ProjectHelper.ProjectPath, "Content"));
+                Path.Combine(ProjectHelper.ProjectPath));
 
             GameInstanceProvider.SetInstance(this);
             ComponentManager.LoadComponents();

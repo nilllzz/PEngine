@@ -42,12 +42,12 @@ namespace PEngine.Creator.Forms
 
             var term = txt_input.Text.ToLower();
             var files = Project.ActiveProject.Files;
-            _results = files.Where(f => f.id.ToLower().Contains(term)).ToArray();
+            _results = files.Where(f => f.name.ToLower().Contains(term)).ToArray();
             foreach (var result in _results)
             {
                 var item = new ListViewItem()
                 {
-                    Text = result.id,
+                    Text = result.name,
                     ImageIndex = GetImageIndexForFile(result),
                 };
                 item.SubItems.Add(new ListViewItem.ListViewSubItem

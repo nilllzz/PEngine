@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GotoForm));
             this.txt_input = new System.Windows.Forms.TextBox();
             this.list_results = new System.Windows.Forms.ListView();
-            this.col_id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.col_name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.col_type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.col_path = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.images_results = new System.Windows.Forms.ImageList(this.components);
@@ -60,7 +60,7 @@
             this.list_results.BackColor = global::PEngine.Creator.Properties.Settings.Default.Color_LightGray;
             this.list_results.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.list_results.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.col_id,
+            this.col_name,
             this.col_type,
             this.col_path});
             this.list_results.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -76,10 +76,10 @@
             this.list_results.View = System.Windows.Forms.View.Details;
             this.list_results.KeyDown += new System.Windows.Forms.KeyEventHandler(this.list_results_KeyDown);
             // 
-            // col_id
+            // col_name
             // 
-            this.col_id.Text = "Id";
-            this.col_id.Width = 154;
+            this.col_name.Text = "Name";
+            this.col_name.Width = 154;
             // 
             // col_type
             // 
@@ -148,7 +148,7 @@
         private System.Windows.Forms.Button btn_close;
         private System.Windows.Forms.Label lbl_results_title;
         private System.Windows.Forms.ImageList images_results;
-        private System.Windows.Forms.ColumnHeader col_id;
+        private System.Windows.Forms.ColumnHeader col_name;
         private System.Windows.Forms.ColumnHeader col_type;
         private System.Windows.Forms.ColumnHeader col_path;
     }

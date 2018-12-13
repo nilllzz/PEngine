@@ -2,6 +2,8 @@
 using PEngine.Common.Data;
 using PEngine.Common.Data.Maps;
 using PEngine.Creator.Components.Game;
+using PEngine.Creator.Components.Game.Maps;
+using PEngine.Creator.Components.Game.Tilesets;
 using PEngine.Creator.Components.Projects;
 using PEngine.Creator.Forms;
 using PEngine.Creator.Helpers;

@@ -1,10 +1,11 @@
 ﻿using PEngine.Common;
 using PEngine.Common.Data.Maps;
+using PEngine.Creator.Properties;
 using System;
 using System.Drawing;
 using System.Linq;
 
-namespace PEngine.Creator.Components.Game
+namespace PEngine.Creator.Components.Game.Maps
 {
     internal static class MapService
     {
@@ -73,6 +74,28 @@ namespace PEngine.Creator.Components.Game
             return map;
         }
 
+        internal static void PlaceEvent(MapData map, MapEventData eventData)
+        {
+            var events = map.events.ToList();
+
+            // replace existing event
+            var existingEvent = events.FirstOrDefault(e => e.pos[0] == eventData.pos[1] && e.pos[1] == eventData.pos[1]);
+            if (existingEvent != null)
+            {
+                events.Remove(existingEvent);
+            }
+
+            events.Add(eventData);
+            map.events = events.ToArray();
+        }
+
+        internal static void ClearEvent(MapData map, MapEventData eventData)
+        {
+            var events = map.events.ToList();
+            events.Remove(eventData);
+            map.events = events.ToArray();
+        }
+
         internal static void PlaceTile(MapData map, MapTileData tile)
         {
             // Be sure to expand the map before using this function!
@@ -128,6 +151,7 @@ namespace PEngine.Creator.Components.Game
             var map = MapData.Create(id);
             map.tileset = tileset.id;
             map.name = name;
+            map.events = new MapEventData[0];
 
             // generate a single starting tile
             if (tileset.tiles.Length > 0)
@@ -144,6 +168,18 @@ namespace PEngine.Creator.Components.Game
             }
 
             return map;
+        }
+
+        internal static Bitmap GetEventTexture(MapEventType eventType)
+        {
+            switch (eventType)
+            {
+                case MapEventType.Warp:
+                    return Resources.eventWarp;
+                case MapEventType.Script:
+                    return Resources.eventScript;
+            }
+            throw new ArgumentException();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace PEngine.Creator.Components.Game
+﻿namespace PEngine.Creator.Components.Game.Maps
 {
     partial class MapEditor
     {
@@ -114,6 +114,7 @@
             this.tool_map_layer_tiles.Name = "tool_map_layer_tiles";
             this.tool_map_layer_tiles.Size = new System.Drawing.Size(23, 22);
             this.tool_map_layer_tiles.Text = "Tiles layer";
+            this.tool_map_layer_tiles.Click += new System.EventHandler(this.tool_map_layer_tiles_Click);
             // 
             // tool_map_layer_objects
             // 
@@ -123,6 +124,7 @@
             this.tool_map_layer_objects.Name = "tool_map_layer_objects";
             this.tool_map_layer_objects.Size = new System.Drawing.Size(23, 22);
             this.tool_map_layer_objects.Text = "Objects layer";
+            this.tool_map_layer_objects.Click += new System.EventHandler(this.tool_map_layer_objects_Click);
             // 
             // tool_map_layer_events
             // 
@@ -132,6 +134,7 @@
             this.tool_map_layer_events.Name = "tool_map_layer_events";
             this.tool_map_layer_events.Size = new System.Drawing.Size(23, 22);
             this.tool_map_layer_events.Text = "Events layer";
+            this.tool_map_layer_events.Click += new System.EventHandler(this.tool_map_layer_events_Click);
             // 
             // tool_map_tool_create
             // 

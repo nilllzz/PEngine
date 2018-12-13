@@ -38,7 +38,11 @@
   <ItemGroup>
     <Compile Include="Data\DataHelper.cs" />
     <Compile Include="Data\DataLoadException.cs" />
+    <Compile Include="Data\Dataset.cs" />
+    <Compile Include="Data\DatasetEntry.cs" />
     <Compile Include="Data\Maps\MapData.cs" />
+    <Compile Include="Data\Maps\MapEventData.cs" />
+    <Compile Include="Data\Maps\MapEventType.cs" />
     <Compile Include="Data\Maps\MapTileData.cs" />
     <Compile Include="Data\Maps\SubtileData.cs" />
     <Compile Include="Data\Maps\SubtileBehavior.cs" />

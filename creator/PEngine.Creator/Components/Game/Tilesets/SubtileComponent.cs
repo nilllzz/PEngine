@@ -5,7 +5,7 @@ using PEngine.Creator.Properties;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace PEngine.Creator.Components.Game
+namespace PEngine.Creator.Components.Game.Tilesets
 {
     internal partial class SubtileComponent : UserControl, IEventBusComponent
     {

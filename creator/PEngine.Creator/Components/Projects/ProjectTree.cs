@@ -13,13 +13,10 @@ namespace PEngine.Creator.Components.Projects
     public partial class ProjectTree : UserControl, IEventBusComponent
     {
         private ProjectEventBus _eventBus;
-        private string[] _expandedFolders = new string[0];
 
         public ProjectTree()
         {
             InitializeComponent();
-
-            tree_main.TreeViewNodeSorter = new ProjectTreeNodeComparer();
         }
 
         #region events
@@ -44,7 +41,7 @@ namespace PEngine.Creator.Components.Projects
         private void _eventBus_FileUpdated(ProjectFileData file)
         {
             // update text
-            var node = FindFileNode(file);
+            var node = tree_main.FindFileNode(file);
             if (node != null)
             {
                 node.UpdateText();
@@ -54,18 +51,6 @@ namespace PEngine.Creator.Components.Projects
         #endregion
 
         #region ui
-
-        private void Tree_main_AfterCollapse(object sender, TreeViewEventArgs e)
-        {
-            UpdateExpandState();
-            ((ProjectTreeNode)e.Node).OnCollapsed();
-        }
-
-        private void Tree_main_AfterExpand(object sender, TreeViewEventArgs e)
-        {
-            UpdateExpandState();
-            ((ProjectTreeNode)e.Node).OnExpanded();
-        }
 
         private void tree_main_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
@@ -128,7 +113,7 @@ namespace PEngine.Creator.Components.Projects
                 {
                     ProjectService.DeleteFile(file);
                     _eventBus.DeletedFile(file);
-                    CreateTree();
+                    tree_main.CreateTree();
                 }
             }
         }
@@ -140,7 +125,7 @@ namespace PEngine.Creator.Components.Projects
 
         private void tool_refresh_Click(object sender, EventArgs e)
         {
-            CreateTree();
+            tree_main.CreateTree();
         }
 
         private void context_folders_add_folder_Click(object sender, EventArgs e)
@@ -178,7 +163,7 @@ namespace PEngine.Creator.Components.Projects
                 if (result == DialogResult.OK)
                 {
                     ProjectService.DeleteFolder(folderNode.Folder);
-                    CreateTree();
+                    tree_main.CreateTree();
                 }
             }
         }
@@ -214,169 +199,8 @@ namespace PEngine.Creator.Components.Projects
             base.OnLoad(e);
             if (Project.ActiveProject != null)
             {
-                CreateTree();
+                tree_main.CreateTree();
             }
-        }
-
-        private void CreateTree()
-        {
-            var previousExpandState = _expandedFolders;
-            var previousSelectedNode = tree_main.SelectedNode;
-
-            tree_main.AfterExpand -= Tree_main_AfterExpand;
-            tree_main.AfterCollapse -= Tree_main_AfterCollapse;
-            tree_main.Nodes.Clear();
-
-            var project = Project.ActiveProject;
-
-            // create folder nodes
-            var root = new ProjectFolderTreeNode(new ProjectFolderData
-            {
-                id = null,
-                name = $"Project '{project.Name}'",
-                parentId = null,
-            });
-
-            void createChildFolders(ProjectFolderTreeNode node)
-            {
-                var folder = node.Folder;
-                var childFolders = project.Folders.Where(f => f.parentId == folder.id);
-                foreach (var childFolder in childFolders)
-                {
-                    var childNode = new ProjectFolderTreeNode(childFolder);
-                    node.Nodes.Add(childNode);
-                    createChildFolders(childNode);
-                }
-            }
-
-            createChildFolders(root);
-            tree_main.Nodes.Add(root);
-
-            // create file nodes
-            foreach (var file in project.Files)
-            {
-                var folderNode = FindFolderNode(file.folderId);
-                if (folderNode != null)
-                {
-                    var fileNode = new ProjectFileTreeNode(file);
-                    folderNode.Nodes.Add(fileNode);
-                }
-            }
-
-            tree_main.AfterExpand += Tree_main_AfterExpand;
-            tree_main.AfterCollapse += Tree_main_AfterCollapse;
-
-            root.Expand();
-            foreach (var expandedFolderId in previousExpandState)
-            {
-                var folderNode = FindFolderNode(expandedFolderId);
-                if (folderNode != null)
-                {
-                    folderNode.Expand();
-                }
-            }
-            UpdateExpandState();
-
-            // select the node that was selected before creating the tree
-            if (previousSelectedNode != null)
-            {
-                if (previousSelectedNode is ProjectFileTreeNode fileSelectedNode)
-                {
-                    tree_main.SelectedNode = FindFileNode(fileSelectedNode.File);
-                }
-                else if (previousSelectedNode is ProjectFolderTreeNode folderSelectedNode)
-                {
-                    tree_main.SelectedNode = FindFolderNode(folderSelectedNode.Folder.id);
-                }
-            }
-
-            // sort tree nodes
-            tree_main.Sort();
-        }
-
-        private void UpdateExpandState()
-        {
-            var expandedFolders = new List<string>();
-            void walkNodes(TreeNode node)
-            {
-                if (node.IsExpanded && node is ProjectFolderTreeNode folderNode)
-                {
-                    expandedFolders.Add(folderNode.Folder.id);
-                }
-                foreach (var childNode in node.Nodes)
-                {
-                    if (childNode is ProjectFolderTreeNode childFolderNode)
-                    {
-                        walkNodes(childFolderNode);
-                    }
-                }
-            }
-            walkNodes(tree_main.Nodes[0]);
-            _expandedFolders = expandedFolders.ToArray();
-        }
-
-        private ProjectFolderTreeNode FindFolderNode(string id, TreeNode node = null)
-        {
-            if (node == null)
-            {
-                // start searching from root
-                return FindFolderNode(id, tree_main.Nodes[0]);
-            }
-
-            if (node is ProjectFolderTreeNode folderNode)
-            {
-                if (folderNode.Folder.id == id)
-                {
-                    return folderNode;
-                }
-                foreach (var child in folderNode.Nodes)
-                {
-                    if (child is ProjectFolderTreeNode childFolderNode)
-                    {
-                        var result = FindFolderNode(id, childFolderNode);
-                        if (result != null)
-                        {
-                            return result;
-                        }
-                    }
-                }
-            }
-
-            return null;
-        }
-
-        private ProjectFileTreeNode FindFileNode(ProjectFileData file, TreeNode node = null)
-        {
-            if (node == null)
-            {
-                // start searching from root
-                return FindFileNode(file, tree_main.Nodes[0]);
-            }
-
-            if (node is ProjectFolderTreeNode folderNode)
-            {
-                foreach (var child in folderNode.Nodes)
-                {
-                    switch (child)
-                    {
-                        case ProjectFileTreeNode fileNode:
-                            if (fileNode.File.id == file.id && fileNode.File.FileType == file.FileType)
-                            {
-                                return fileNode;
-                            }
-                            break;
-                        case ProjectFolderTreeNode childFolderNode:
-                            var result = FindFileNode(file, childFolderNode);
-                            if (result != null)
-                            {
-                                return result;
-                            }
-                            break;
-                    }
-                }
-            }
-
-            return null;
         }
 
         private void OpenFromNode(ProjectTreeNode node)
@@ -411,7 +235,7 @@ namespace PEngine.Creator.Components.Projects
             // operation is "dropping next to the file"
             if (targetNode is ProjectFileTreeNode fileNode)
             {
-                var folderNode = FindFolderNode(fileNode.File.folderId);
+                var folderNode = tree_main.FindFolderNode(fileNode.File.folderId);
                 targetNode = folderNode;
             }
 
@@ -424,8 +248,8 @@ namespace PEngine.Creator.Components.Projects
                 {
                     draggedFolderNode.Folder.parentId = targetFolderNode.Folder.id;
                     Project.ActiveProject.Save();
-                    CreateTree();
-                    var newTargetFolderNode = FindFolderNode(targetFolderNode.Folder.id);
+                    tree_main.CreateTree();
+                    var newTargetFolderNode = tree_main.FindFolderNode(targetFolderNode.Folder.id);
                     if (newTargetFolderNode != null)
                     {
                         newTargetFolderNode.Expand();
@@ -440,8 +264,8 @@ namespace PEngine.Creator.Components.Projects
                 {
                     draggedFileNode.File.folderId = targetFolderNode2.Folder.id;
                     Project.ActiveProject.Save();
-                    CreateTree();
-                    FindFolderNode(targetFolderNode2.Folder.id)?.Expand();
+                    tree_main.CreateTree();
+                    tree_main.FindFolderNode(targetFolderNode2.Folder.id)?.Expand();
                 }
             }
         }
@@ -526,7 +350,7 @@ namespace PEngine.Creator.Components.Projects
             ProjectFolderTreeNode folderNode = null;
             if (selectedNode is ProjectFileTreeNode fileNode)
             {
-                folderNode = FindFolderNode(fileNode.File.folderId);
+                folderNode = tree_main.FindFolderNode(fileNode.File.folderId);
             }
             else if (selectedNode is ProjectFolderTreeNode selectedFolderNode)
             {
@@ -545,9 +369,9 @@ namespace PEngine.Creator.Components.Projects
             var file = ProjectService.IncludeResource(Project.ActiveProject, resource, name, fileType, folderNode.Folder);
             resource.Save();
             Project.ActiveProject.Save();
-            CreateTree();
-            FindFolderNode(folderNode.Folder.id)?.Expand();
-            var fileNode = FindFileNode(file);
+            tree_main.CreateTree();
+            tree_main.FindFolderNode(folderNode.Folder.id)?.Expand();
+            var fileNode = tree_main.FindFileNode(file);
             if (fileNode != null)
             {
                 tree_main.SelectedNode = fileNode;

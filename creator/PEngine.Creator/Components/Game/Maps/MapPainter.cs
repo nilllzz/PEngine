@@ -1,4 +1,5 @@
-﻿using PEngine.Common.Data.Maps;
+﻿using PEngine.Common.Data;
+using PEngine.Common.Data.Maps;
 using PEngine.Creator.Components.Projects;
 using PEngine.Creator.Properties;
 using System;
@@ -7,10 +8,13 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace PEngine.Creator.Components.Game
+namespace PEngine.Creator.Components.Game.Maps
 {
     internal partial class MapPainter : PictureBox, IEventBusComponent
     {
+        private const int TILE_SIZE = 32;
+        private const int EVENT_SIZE = 16;
+
         private readonly ProjectEventBus _eventBus;
         private readonly MapData _data;
 
@@ -21,10 +25,22 @@ namespace PEngine.Creator.Components.Game
         private bool _isMapExpanded = false;
         private bool _isOutdated = false;
         private bool _gridEnabled = false;
+        private MapEditorLayer _activeLayer;
+        private MapEventData _movingEvent;
+        private MapEventType _activeEventType = MapEventType.Warp;
 
         internal Size MapSize { get; private set; }
         internal Point MapOrigin { get; private set; }
         internal MapPainterMode Mode { get; set; } = MapPainterMode.Create;
+        internal MapEditorLayer ActiveLayer
+        {
+            get => _activeLayer;
+            set
+            {
+                _activeLayer = value;
+                RedrawComposite();
+            }
+        }
         internal bool GridEnabled
         {
             get => _gridEnabled;
@@ -68,6 +84,15 @@ namespace PEngine.Creator.Components.Game
             _eventBus.TileRemoved += _eventBus_TileRemoved;
             _eventBus.SubtileUpdated += _eventBus_SubtileUpdated;
             _eventBus.SubtileRemoved += _eventBus_SubtileRemoved;
+            _eventBus.EventTypeChanged += _eventBus_EventTypeChanged;
+        }
+
+        private void _eventBus_EventTypeChanged(MapData map, MapEventType eventType)
+        {
+            if (map.id == _data.id)
+            {
+                _activeEventType = eventType;
+            }
         }
 
         public void UnregisterEvents()
@@ -137,26 +162,61 @@ namespace PEngine.Creator.Components.Game
 
         private void MapPainter_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            switch (ActiveLayer)
             {
-                ExecutePrimaryTileAction(e.Location);
-            }
-            else if (e.Button == MouseButtons.Right)
-            {
-                ExecuteSecondaryTileAction(e.Location);
+                case MapEditorLayer.Tiles:
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        ExecutePrimaryTileAction(e.Location);
+                    }
+                    else if (e.Button == MouseButtons.Right)
+                    {
+                        ExecuteSecondaryTileAction(e.Location);
+                    }
+                    break;
+                case MapEditorLayer.Objects:
+                    break;
+                case MapEditorLayer.Events:
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        _movingEvent = TryPlaceEvent(e.Location);
+                        if (_movingEvent != null)
+                        {
+                            _eventBus.SelectEvent(_data, _movingEvent);
+                        }
+                    }
+                    else if (e.Button == MouseButtons.Right)
+                    {
+                        TryClearEvent(e.Location);
+                    }
+                    break;
             }
         }
 
         private void MapPainter_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            switch (ActiveLayer)
             {
-                ExecutePrimaryTileAction(e.Location);
+                case MapEditorLayer.Tiles:
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        ExecutePrimaryTileAction(e.Location);
+                    }
+                    break;
+                case MapEditorLayer.Objects:
+                    break;
+                case MapEditorLayer.Events:
+                    if (e.Button == MouseButtons.Left && _movingEvent != null)
+                    {
+                        TryMoveEvent(e.Location);
+                    }
+                    break;
             }
         }
 
         private void MapPainter_MouseUp(object sender, MouseEventArgs e)
         {
+            _movingEvent = null;
             _lastTilePainted = null;
         }
 
@@ -198,8 +258,21 @@ namespace PEngine.Creator.Components.Game
             {
                 g.Clear(Color.Transparent);
 
-                // draw layers
+                // draw tiles
                 g.DrawImage(_tileLayer, scaledOrigin);
+                // draw events
+                if (ActiveLayer == MapEditorLayer.Events)
+                {
+                    foreach (var mapEvent in _data.events)
+                    {
+                        var eventTex = MapService.GetEventTexture(mapEvent.EventType);
+                        g.DrawImage(eventTex, new Rectangle(
+                            mapEvent.pos[0] * EVENT_SIZE + scaledOrigin.X,
+                            mapEvent.pos[1] * EVENT_SIZE + scaledOrigin.Y,
+                            EVENT_SIZE,
+                            EVENT_SIZE));
+                    }
+                }
 
                 // draw grid
                 if (_gridEnabled)
@@ -228,11 +301,14 @@ namespace PEngine.Creator.Components.Game
             return composite;
         }
 
-        private Point ScreenToMapCoordinates(Point location, bool includeBounds)
+        private Point ScreenToMapCoordinates(Point location, bool includeBounds, double scale)
         {
+            const int originMultiplier = 32;
+            var originNormal = originMultiplier / scale;
+
             var coordinates = new Point(
-                (int)Math.Floor(location.X / 32d) - MapOrigin.X,
-                (int)Math.Floor(location.Y / 32d) - MapOrigin.Y
+                (int)(Math.Floor(location.X / scale) - MapOrigin.X * originNormal),
+                (int)(Math.Floor(location.Y / scale) - MapOrigin.Y * originNormal)
             );
 
             if (includeBounds)
@@ -261,7 +337,7 @@ namespace PEngine.Creator.Components.Game
 
             // check first to not keep placing tiles on the same location
             // do not factor in the bounds of the map
-            var coordinates = ScreenToMapCoordinates(location, false);
+            var coordinates = ScreenToMapCoordinates(location, false, TILE_SIZE);
             if (_lastTilePainted.HasValue && _lastTilePainted.Value == coordinates)
             {
                 return false;
@@ -279,7 +355,7 @@ namespace PEngine.Creator.Components.Game
                 {
                     return;
                 }
-                var coordinates = ScreenToMapCoordinates(location, true);
+                var coordinates = ScreenToMapCoordinates(location, true, TILE_SIZE);
 
                 MapService.PlaceTile(_data, new MapTileData
                 {
@@ -301,7 +377,7 @@ namespace PEngine.Creator.Components.Game
                 return;
             }
 
-            var coordinates = ScreenToMapCoordinates(location, true);
+            var coordinates = ScreenToMapCoordinates(location, true, TILE_SIZE);
             MapService.ClearTile(_data, coordinates);
 
             UpdateTile(coordinates);
@@ -346,6 +422,58 @@ namespace PEngine.Creator.Components.Game
                     break;
                 case MapPainterMode.Fill:
                     break;
+            }
+        }
+
+        private MapEventData TryPlaceEvent(Point location)
+        {
+            var mapLocation = ScreenToMapCoordinates(location, true, EVENT_SIZE);
+            var existingEvent = _data.events.FirstOrDefault(e => e.pos[0] == mapLocation.X && e.pos[1] == mapLocation.Y);
+
+            // if there is no event at the targeted place, create a new one
+            if (existingEvent == null)
+            {
+                var newEvent = new MapEventData
+                {
+                    name = $"{_activeEventType.ToString()} Event " +
+                        _data.events.Count(e => e.EventType == _activeEventType),
+                    pos = new[] { mapLocation.X, mapLocation.Y },
+                    target = null,
+                    type = DataHelper.UnparseEnum(_activeEventType),
+                };
+                MapService.PlaceEvent(_data, newEvent);
+
+                _eventBus.AddedEvent(_data, newEvent);
+                _eventBus.SelectEvent(_data, newEvent);
+
+                RedrawComposite();
+            }
+
+            return existingEvent;
+        }
+
+        private void TryMoveEvent(Point location)
+        {
+            var mapLocation = ScreenToMapCoordinates(location, true, EVENT_SIZE);
+            if (mapLocation.X != _movingEvent.pos[0] || mapLocation.Y != _movingEvent.pos[1])
+            {
+                _movingEvent.pos = new[] { mapLocation.X, mapLocation.Y };
+                RedrawComposite();
+            }
+        }
+
+        private void TryClearEvent(Point location)
+        {
+            var mapLocation = ScreenToMapCoordinates(location, true, EVENT_SIZE);
+            var existingEvent = _data.events.FirstOrDefault(e => e.pos[0] == mapLocation.X && e.pos[1] == mapLocation.Y);
+
+            if (existingEvent != null)
+            {
+                MapService.ClearEvent(_data, existingEvent);
+
+                _eventBus.RemovedEvent(_data, existingEvent);
+
+                RedrawComposite();
             }
         }
     }

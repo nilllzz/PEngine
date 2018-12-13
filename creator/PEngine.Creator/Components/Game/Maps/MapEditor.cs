@@ -5,7 +5,7 @@ using PEngine.Creator.Components.Projects;
 using PEngine.Creator.Forms;
 using System.Windows.Forms;
 
-namespace PEngine.Creator.Components.Game
+namespace PEngine.Creator.Components.Game.Maps
 {
     internal partial class MapEditor : ProjectTabComponent, IEventBusComponent
     {
@@ -25,6 +25,8 @@ namespace PEngine.Creator.Components.Game
                 return null;
             }
         }
+
+        private MapEditorLayer _activeLayer = MapEditorLayer.Tiles;
 
         internal MapEditor(ProjectEventBus eventBus, ProjectFileData file, MapData data)
             : base(eventBus, file)
@@ -115,6 +117,24 @@ namespace PEngine.Creator.Components.Game
             tool_map_grid.Checked = Painter.GridEnabled;
         }
 
+        private void tool_map_layer_objects_Click(object sender, System.EventArgs e)
+        {
+            _activeLayer = MapEditorLayer.Objects;
+            UpdateLayer();
+        }
+
+        private void tool_map_layer_tiles_Click(object sender, System.EventArgs e)
+        {
+            _activeLayer = MapEditorLayer.Tiles;
+            UpdateLayer();
+        }
+
+        private void tool_map_layer_events_Click(object sender, System.EventArgs e)
+        {
+            _activeLayer = MapEditorLayer.Events;
+            UpdateLayer();
+        }
+
         #endregion
 
         private void InitData()
@@ -124,11 +144,36 @@ namespace PEngine.Creator.Components.Game
 
             panel_map_container.Controls.Add(new MapPainter(_eventBus, _data));
 
-            var tilesetFile = Project.ActiveProject.GetFile(_data.tileset);
-            var tilesetData = TilesetData.Load(tilesetFile.path);
-            var tiles = new MapEditorTiles(_eventBus, _data, tilesetData);
-            tiles.Dock = DockStyle.Fill;
-            split_main.Panel2.Controls.Add(tiles);
+            UpdateLayer();
+        }
+
+        private void UpdateLayer()
+        {
+            tool_map_layer_tiles.Checked = _activeLayer == MapEditorLayer.Tiles;
+            tool_map_layer_objects.Checked = _activeLayer == MapEditorLayer.Objects;
+            tool_map_layer_events.Checked = _activeLayer == MapEditorLayer.Events;
+
+            split_main.Panel2.Controls.Clear();
+            Painter.ActiveLayer = _activeLayer;
+            switch (_activeLayer)
+            {
+                case MapEditorLayer.Tiles:
+                    var tilesetFile = Project.ActiveProject.GetFile(_data.tileset);
+                    var tilesetData = TilesetData.Load(tilesetFile.path);
+                    var tiles = new MapEditorTiles(_eventBus, _data, tilesetData);
+                    tiles.Dock = DockStyle.Fill;
+                    split_main.Panel2.Controls.Add(tiles);
+                    break;
+
+                case MapEditorLayer.Objects:
+                    break;
+
+                case MapEditorLayer.Events:
+                    var events = new MapEditorEvents(_eventBus, _data);
+                    events.Dock = DockStyle.Fill;
+                    split_main.Panel2.Controls.Add(events);
+                    break;
+            }
         }
 
         internal override void Save()

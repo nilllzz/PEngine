@@ -61,38 +61,51 @@
       <DependentUpon>CrispPictureBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\Game\GameProcess.cs" />
-    <Compile Include="Components\Game\Map.service.cs" />
-    <Compile Include="Components\Game\MapEditor.cs">
+    <Compile Include="Components\Game\Maps\Map.service.cs" />
+    <Compile Include="Components\Game\Maps\MapEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\Game\MapEditor.Designer.cs">
+    <Compile Include="Components\Game\Maps\MapEditor.Designer.cs">
       <DependentUpon>MapEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\Game\MapEditorTiles.cs">
+    <Compile Include="Components\Game\Maps\MapEditorEvents.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\Game\MapEditorTiles.Designer.cs">
+    <Compile Include="Components\Game\Maps\MapEditorEvents.Designer.cs">
+      <DependentUpon>MapEditorEvents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Game\Maps\MapEditorLayer.cs" />
+    <Compile Include="Components\Game\Maps\MapEditorTiles.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Game\Maps\MapEditorTiles.Designer.cs">
       <DependentUpon>MapEditorTiles.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\Game\MapHealthStatus.cs" />
-    <Compile Include="Components\Game\MapPainter.cs">
+    <Compile Include="Components\Game\Maps\MapHealthStatus.cs" />
+    <Compile Include="Components\Game\Maps\MapPainter.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Game\MapPainter.Designer.cs">
+    <Compile Include="Components\Game\Maps\MapPainter.Designer.cs">
       <DependentUpon>MapPainter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\Game\MapPainterMode.cs" />
-    <Compile Include="Components\Game\ResourceManager.cs" />
-    <Compile Include="Components\Game\SubtileEditComponent.cs">
+    <Compile Include="Components\Game\Maps\MapPainterMode.cs" />
+    <Compile Include="Components\Game\Maps\WarpEventEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\Game\SubtileEditComponent.Designer.cs">
+    <Compile Include="Components\Game\Maps\WarpEventEditor.Designer.cs">
+      <DependentUpon>WarpEventEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Game\ResourceManager.cs" />
+    <Compile Include="Components\Game\Tilesets\SubtileEditComponent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Game\Tilesets\SubtileEditComponent.Designer.cs">
       <DependentUpon>SubtileEditComponent.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\Game\SubtileComponent.cs">
+    <Compile Include="Components\Game\Tilesets\SubtileComponent.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\Game\SubtileComponent.Designer.cs">
+    <Compile Include="Components\Game\Tilesets\SubtileComponent.Designer.cs">
       <DependentUpon>SubtileComponent.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\Game\TextureViewer.cs">
@@ -101,19 +114,19 @@
     <Compile Include="Components\Game\TextureViewer.Designer.cs">
       <DependentUpon>TextureViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\Game\TileComponent.cs">
+    <Compile Include="Components\Game\Tilesets\TileComponent.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\Game\TileComponent.Designer.cs">
+    <Compile Include="Components\Game\Tilesets\TileComponent.Designer.cs">
       <DependentUpon>TileComponent.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\Game\TilesetEditor.cs">
+    <Compile Include="Components\Game\Tilesets\TilesetEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\Game\TilesetEditor.Designer.cs">
+    <Compile Include="Components\Game\Tilesets\TilesetEditor.Designer.cs">
       <DependentUpon>TilesetEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\Game\Tileset.service.cs" />
+    <Compile Include="Components\Game\Tilesets\Tileset.service.cs" />
     <Compile Include="Components\Logo\Logo.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -140,6 +153,12 @@
     </Compile>
     <Compile Include="Components\Projects\ProjectTreeNode.cs" />
     <Compile Include="Components\Projects\ProjectTreeNodeComparer.cs" />
+    <Compile Include="Components\Projects\ProjectTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Projects\ProjectTreeView.Designer.cs">
+      <DependentUpon>ProjectTreeView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormConsts.cs" />
     <Compile Include="Forms\GotoForm.cs">
       <SubType>Form</SubType>
@@ -164,6 +183,12 @@
     </Compile>
     <Compile Include="Forms\ResizeMapForm.Designer.cs">
       <DependentUpon>ResizeMapForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SelectFileForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SelectFileForm.Designer.cs">
+      <DependentUpon>SelectFileForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\TexturePickerForm.cs">
       <SubType>Form</SubType>
@@ -223,28 +248,34 @@
     <EmbeddedResource Include="Components\Game\CrispPictureBox.resx">
       <DependentUpon>CrispPictureBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\Game\MapEditor.resx">
+    <EmbeddedResource Include="Components\Game\Maps\MapEditor.resx">
       <DependentUpon>MapEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\Game\MapEditorTiles.resx">
+    <EmbeddedResource Include="Components\Game\Maps\MapEditorEvents.resx">
+      <DependentUpon>MapEditorEvents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Game\Maps\MapEditorTiles.resx">
       <DependentUpon>MapEditorTiles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\Game\MapPainter.resx">
+    <EmbeddedResource Include="Components\Game\Maps\MapPainter.resx">
       <DependentUpon>MapPainter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\Game\SubtileComponent.resx">
+    <EmbeddedResource Include="Components\Game\Maps\WarpEventEditor.resx">
+      <DependentUpon>WarpEventEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Game\Tilesets\SubtileComponent.resx">
       <DependentUpon>SubtileComponent.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\Game\SubtileEditComponent.resx">
+    <EmbeddedResource Include="Components\Game\Tilesets\SubtileEditComponent.resx">
       <DependentUpon>SubtileEditComponent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Components\Game\TextureViewer.resx">
       <DependentUpon>TextureViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\Game\TileComponent.resx">
+    <EmbeddedResource Include="Components\Game\Tilesets\TileComponent.resx">
       <DependentUpon>TileComponent.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\Game\TilesetEditor.resx">
+    <EmbeddedResource Include="Components\Game\Tilesets\TilesetEditor.resx">
       <DependentUpon>TilesetEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Components\Logo\Logo.resx">
@@ -255,6 +286,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Components\Projects\ProjectTree.resx">
       <DependentUpon>ProjectTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Projects\ProjectTreeView.resx">
+      <DependentUpon>ProjectTreeView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GotoForm.resx">
       <DependentUpon>GotoForm.cs</DependentUpon>
@@ -267,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ResizeMapForm.resx">
       <DependentUpon>ResizeMapForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SelectFileForm.resx">
+      <DependentUpon>SelectFileForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TexturePickerForm.resx">
       <DependentUpon>TexturePickerForm.cs</DependentUpon>
@@ -458,6 +495,8 @@
     <None Include="Resources\ClassIcon.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\eventWarp.png" />
+    <None Include="Resources\eventScript.png" />
     <None Include="Resources\Rename_6779.png" />
     <None Include="Resources\newMap.png" />
     <None Include="Resources\collapseAll.png" />

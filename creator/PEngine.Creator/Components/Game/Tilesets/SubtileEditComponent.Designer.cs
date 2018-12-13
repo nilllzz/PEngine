@@ -1,4 +1,4 @@
-﻿namespace PEngine.Creator.Components.Game
+﻿namespace PEngine.Creator.Components.Game.Tilesets
 {
     partial class SubtileEditComponent
     {
@@ -39,7 +39,7 @@
             // 
             // combo_behavior
             // 
-            this.combo_behavior.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.combo_behavior.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.combo_behavior.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.combo_behavior.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;

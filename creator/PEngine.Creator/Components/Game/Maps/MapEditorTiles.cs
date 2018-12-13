@@ -1,11 +1,12 @@
 ﻿using PEngine.Common;
 using PEngine.Common.Data;
 using PEngine.Common.Data.Maps;
+using PEngine.Creator.Components.Game.Tilesets;
 using PEngine.Creator.Components.Projects;
 using System;
 using System.Windows.Forms;
 
-namespace PEngine.Creator.Components.Game
+namespace PEngine.Creator.Components.Game.Maps
 {
     internal partial class MapEditorTiles : UserControl, IEventBusComponent
     {

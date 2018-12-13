@@ -7,7 +7,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace PEngine.Creator.Components.Game
+namespace PEngine.Creator.Components.Game.Tilesets
 {
     internal partial class SubtileEditComponent : UserControl, IEventBusComponent
     {

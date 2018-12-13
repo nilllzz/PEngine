@@ -86,10 +86,34 @@ namespace PEngine.Creator.Components.Projects
         #region Maps
 
         internal event Action<MapData> MapUpdated;
+        internal event Action<MapData, MapEventData> EventAdded;
+        internal event Action<MapData, MapEventData> EventRemoved;
+        internal event Action<MapData, MapEventData> EventSelected;
+        internal event Action<MapData, MapEventType> EventTypeChanged;
 
         internal void UpdatedMap(MapData data)
         {
             MapUpdated?.Invoke(data);
+        }
+
+        internal void AddedEvent(MapData parent, MapEventData eventData)
+        {
+            EventAdded?.Invoke(parent, eventData);
+        }
+
+        internal void RemovedEvent(MapData parent, MapEventData eventData)
+        {
+            EventRemoved?.Invoke(parent, eventData);
+        }
+
+        internal void SelectEvent(MapData parent, MapEventData eventData)
+        {
+            EventSelected?.Invoke(parent, eventData);
+        }
+
+        internal void ChangedEventType(MapData parent, MapEventType type)
+        {
+            EventTypeChanged?.Invoke(parent, type);
         }
 
         #endregion

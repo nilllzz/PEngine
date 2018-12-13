@@ -3,6 +3,7 @@ using PEngine.Common.Data;
 using PEngine.Common.Data.Maps;
 using PEngine.Common.Interop;
 using PEngine.Creator.Components.Game;
+using PEngine.Creator.Components.Game.Maps;
 using PEngine.Creator.Properties;
 using System;
 using System.Drawing;

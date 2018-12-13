@@ -1,4 +1,4 @@
-﻿namespace PEngine.Creator.Components.Game
+﻿namespace PEngine.Creator.Components.Game.Tilesets
 {
     partial class TilesetEditor
     {
@@ -121,8 +121,8 @@
             // 
             // panel_subtile_container
             // 
-            this.panel_subtile_container.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.panel_subtile_container.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_subtile_container.AutoScroll = true;
             this.panel_subtile_container.Location = new System.Drawing.Point(-1, 27);
@@ -201,8 +201,8 @@
             // 
             // panel_tiles_container
             // 
-            this.panel_tiles_container.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.panel_tiles_container.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_tiles_container.AutoScroll = true;
             this.panel_tiles_container.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -234,8 +234,8 @@
             // 
             // group_edit_tile
             // 
-            this.group_edit_tile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.group_edit_tile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.group_edit_tile.Controls.Add(this.pic_tile_1);
             this.group_edit_tile.Controls.Add(this.pic_edit_mode);

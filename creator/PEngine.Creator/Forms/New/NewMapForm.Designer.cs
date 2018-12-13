@@ -30,15 +30,15 @@
         {
             this.lbl_title = new System.Windows.Forms.Label();
             this.group_main = new System.Windows.Forms.GroupBox();
-            this.lbl_id = new System.Windows.Forms.Label();
-            this.txt_id = new System.Windows.Forms.TextBox();
-            this.lbl_tileset = new System.Windows.Forms.Label();
-            this.combo_tileset = new System.Windows.Forms.ComboBox();
-            this.btn_cancel = new System.Windows.Forms.Button();
-            this.btn_ok = new System.Windows.Forms.Button();
+            this.pic_id_status = new System.Windows.Forms.PictureBox();
             this.txt_name = new System.Windows.Forms.TextBox();
             this.lbl_name = new System.Windows.Forms.Label();
-            this.pic_id_status = new System.Windows.Forms.PictureBox();
+            this.combo_tileset = new System.Windows.Forms.ComboBox();
+            this.lbl_tileset = new System.Windows.Forms.Label();
+            this.txt_id = new System.Windows.Forms.TextBox();
+            this.lbl_id = new System.Windows.Forms.Label();
+            this.btn_cancel = new System.Windows.Forms.Button();
+            this.btn_ok = new System.Windows.Forms.Button();
             this.pic_title = new System.Windows.Forms.PictureBox();
             this.group_main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_id_status)).BeginInit();
@@ -74,14 +74,50 @@
             this.group_main.TabStop = false;
             this.group_main.Text = "Details";
             // 
-            // lbl_id
+            // pic_id_status
             // 
-            this.lbl_id.AutoSize = true;
-            this.lbl_id.Location = new System.Drawing.Point(59, 60);
-            this.lbl_id.Name = "lbl_id";
-            this.lbl_id.Size = new System.Drawing.Size(20, 15);
-            this.lbl_id.TabIndex = 0;
-            this.lbl_id.Text = "Id:";
+            this.pic_id_status.Image = global::PEngine.Creator.Properties.Resources.StatusAnnotations_Warning_16xLG_color;
+            this.pic_id_status.Location = new System.Drawing.Point(318, 60);
+            this.pic_id_status.Name = "pic_id_status";
+            this.pic_id_status.Size = new System.Drawing.Size(16, 16);
+            this.pic_id_status.TabIndex = 6;
+            this.pic_id_status.TabStop = false;
+            // 
+            // txt_name
+            // 
+            this.txt_name.Location = new System.Drawing.Point(62, 28);
+            this.txt_name.MaxLength = 16;
+            this.txt_name.Name = "txt_name";
+            this.txt_name.Size = new System.Drawing.Size(272, 23);
+            this.txt_name.TabIndex = 0;
+            this.txt_name.TextChanged += new System.EventHandler(this.txt_name_TextChanged);
+            // 
+            // lbl_name
+            // 
+            this.lbl_name.AutoSize = true;
+            this.lbl_name.Location = new System.Drawing.Point(12, 31);
+            this.lbl_name.Name = "lbl_name";
+            this.lbl_name.Size = new System.Drawing.Size(42, 15);
+            this.lbl_name.TabIndex = 4;
+            this.lbl_name.Text = "Name:";
+            // 
+            // combo_tileset
+            // 
+            this.combo_tileset.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.combo_tileset.FormattingEnabled = true;
+            this.combo_tileset.Location = new System.Drawing.Point(62, 86);
+            this.combo_tileset.Name = "combo_tileset";
+            this.combo_tileset.Size = new System.Drawing.Size(272, 23);
+            this.combo_tileset.TabIndex = 2;
+            // 
+            // lbl_tileset
+            // 
+            this.lbl_tileset.AutoSize = true;
+            this.lbl_tileset.Location = new System.Drawing.Point(12, 89);
+            this.lbl_tileset.Name = "lbl_tileset";
+            this.lbl_tileset.Size = new System.Drawing.Size(44, 15);
+            this.lbl_tileset.TabIndex = 2;
+            this.lbl_tileset.Text = "Tileset:";
             // 
             // txt_id
             // 
@@ -93,23 +129,14 @@
             this.txt_id.TabIndex = 1;
             this.txt_id.TextChanged += new System.EventHandler(this.txt_id_TextChanged);
             // 
-            // lbl_tileset
+            // lbl_id
             // 
-            this.lbl_tileset.AutoSize = true;
-            this.lbl_tileset.Location = new System.Drawing.Point(12, 89);
-            this.lbl_tileset.Name = "lbl_tileset";
-            this.lbl_tileset.Size = new System.Drawing.Size(44, 15);
-            this.lbl_tileset.TabIndex = 2;
-            this.lbl_tileset.Text = "Tileset:";
-            // 
-            // combo_tileset
-            // 
-            this.combo_tileset.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.combo_tileset.FormattingEnabled = true;
-            this.combo_tileset.Location = new System.Drawing.Point(62, 86);
-            this.combo_tileset.Name = "combo_tileset";
-            this.combo_tileset.Size = new System.Drawing.Size(272, 23);
-            this.combo_tileset.TabIndex = 3;
+            this.lbl_id.AutoSize = true;
+            this.lbl_id.Location = new System.Drawing.Point(59, 60);
+            this.lbl_id.Name = "lbl_id";
+            this.lbl_id.Size = new System.Drawing.Size(20, 15);
+            this.lbl_id.TabIndex = 0;
+            this.lbl_id.Text = "Id:";
             // 
             // btn_cancel
             // 
@@ -133,33 +160,6 @@
             this.btn_ok.Text = "OK";
             this.btn_ok.UseVisualStyleBackColor = true;
             this.btn_ok.Click += new System.EventHandler(this.btn_ok_Click);
-            // 
-            // txt_name
-            // 
-            this.txt_name.Location = new System.Drawing.Point(62, 28);
-            this.txt_name.MaxLength = 16;
-            this.txt_name.Name = "txt_name";
-            this.txt_name.Size = new System.Drawing.Size(272, 23);
-            this.txt_name.TabIndex = 5;
-            this.txt_name.TextChanged += new System.EventHandler(this.txt_name_TextChanged);
-            // 
-            // lbl_name
-            // 
-            this.lbl_name.AutoSize = true;
-            this.lbl_name.Location = new System.Drawing.Point(12, 31);
-            this.lbl_name.Name = "lbl_name";
-            this.lbl_name.Size = new System.Drawing.Size(42, 15);
-            this.lbl_name.TabIndex = 4;
-            this.lbl_name.Text = "Name:";
-            // 
-            // pic_id_status
-            // 
-            this.pic_id_status.Image = global::PEngine.Creator.Properties.Resources.StatusAnnotations_Warning_16xLG_color;
-            this.pic_id_status.Location = new System.Drawing.Point(318, 60);
-            this.pic_id_status.Name = "pic_id_status";
-            this.pic_id_status.Size = new System.Drawing.Size(16, 16);
-            this.pic_id_status.TabIndex = 6;
-            this.pic_id_status.TabStop = false;
             // 
             // pic_title
             // 

@@ -1,7 +1,7 @@
 ﻿using PEngine.Common.Data;
 using PEngine.Common.Data.Maps;
 
-namespace PEngine.Creator.Components.Game
+namespace PEngine.Creator.Components.Game.Tilesets
 {
     internal static class TilesetService
     {

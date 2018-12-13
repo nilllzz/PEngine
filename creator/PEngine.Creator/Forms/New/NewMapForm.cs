@@ -1,7 +1,7 @@
 ﻿using PEngine.Common;
 using PEngine.Common.Data;
 using PEngine.Common.Data.Maps;
-using PEngine.Creator.Components.Game;
+using PEngine.Creator.Components.Game.Maps;
 using PEngine.Creator.Properties;
 using System;
 using System.Linq;
@@ -32,7 +32,7 @@ namespace PEngine.Creator.Forms.New
             _tilesetFiles = Project.ActiveProject.GetFiles(ProjectFileType.Tileset);
             foreach (var file in _tilesetFiles)
             {
-                combo_tileset.Items.Add(file.id);
+                combo_tileset.Items.Add(file.name);
             }
             combo_tileset.SelectedIndex = 0;
         }

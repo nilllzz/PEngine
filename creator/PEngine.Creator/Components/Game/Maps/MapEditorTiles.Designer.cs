@@ -1,4 +1,4 @@
-﻿namespace PEngine.Creator.Components.Game
+﻿namespace PEngine.Creator.Components.Game.Maps
 {
     partial class MapEditorTiles
     {

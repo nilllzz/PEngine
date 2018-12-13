@@ -41,7 +41,7 @@ namespace PEngine.Creator.Components.Projects
 
         private void context_main_reveal_Click(object sender, System.EventArgs e)
         {
-            ExplorerHelper.OpenInFolder(_filepath);
+            ExplorerHelper.OpenInFolder(Path.GetDirectoryName(_filepath));
         }
 
         private void context_main_remove_Click(object sender, System.EventArgs e)

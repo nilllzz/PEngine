@@ -139,14 +139,14 @@
   <data name="ClassIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ClassIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="newFolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\newFolder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Clearwindowcontent_6304" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Clearwindowcontent_6304.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="method_16xLG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\method_16xLG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="newMap" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\newMap.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="arrow_previous_16xLG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrow_previous_16xLG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -199,8 +199,8 @@
   <data name="FillTool_204" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FillTool_204.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="outdatedOverlay" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\outdatedOverlay.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="collapseAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\collapseAll.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Clearallrequests_8816" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Clearallrequests_8816.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -216,6 +216,9 @@
   </data>
   <data name="new_subtile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\new_subtile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StatusAnnotations_Complete_and_ok_16xLG_color" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\StatusAnnotations_Complete_and_ok_16xLG_color.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Event_594" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Event_594.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -235,6 +238,9 @@
   <data name="Copy_6524" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Copy_6524.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AddExistingItem_6269" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AddExistingItem_6269.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Close_16xLG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Close_16xLG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -244,8 +250,8 @@
   <data name="list_16xLG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\list_16xLG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Select" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Select.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="newFolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\newFolder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="document_16xLG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\document_16xLG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -259,14 +265,20 @@
   <data name="Saveall_6518" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Saveall_6518.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="outdatedOverlay" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\outdatedOverlay.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Select" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Select.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="refresh_16xLG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\refresh_16xLG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="StatusAnnotations_Complete_and_ok_16xLG_color" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\StatusAnnotations_Complete_and_ok_16xLG_color.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="arrow_Next_16xLG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrow_Next_16xLG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AddNewItem_6273" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AddNewItem_6273.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Folder(special)_5843_32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Folder(special)_5843_32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -280,7 +292,7 @@
   <data name="subtile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\subtile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="collapseAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\collapseAll.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Rename_6779" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Rename_6779.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

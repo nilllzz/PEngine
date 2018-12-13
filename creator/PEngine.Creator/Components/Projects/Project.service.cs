@@ -1,12 +1,12 @@
 ﻿using PEngine.Common;
 using PEngine.Common.Data;
-using PEngine.Common.Data.Maps;
 using PEngine.Creator.Components.Game;
 using PEngine.Creator.Forms;
 using PEngine.Creator.Helpers;
 using PEngine.Creator.Properties;
 using System;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -97,40 +97,60 @@ namespace PEngine.Creator.Components.Projects
         // includes an existing file on disk to the project
         internal static ProjectFileData IncludeExternalFile(Project project, string path, ProjectFileType fileType, ProjectFolderData folder)
         {
-            // try and guess the id
-            var fileId = Path.GetFileNameWithoutExtension(path);
-            var id = fileId;
-            var n = 0;
-            var file = project.GetFile(id, fileType);
-            while (file != null)
-            {
-                n++;
-                id = fileId + n.ToString();
-                file = project.GetFile(id, fileType);
-            }
+            // the file's name is the last part of the path
+            var name = Path.GetFileNameWithoutExtension(path);
+            // generate id from that name
+            var id = GenerateFileId(project, name);
+
             var newFile = new ProjectFileData
             {
                 id = id,
+                name = name,
                 path = path,
                 type = DataHelper.UnparseEnum(fileType),
                 folderId = folder?.id,
             };
+
             project.IncludeFile(newFile);
             return newFile;
         }
 
         // includes a resource in memory to the project file
-        internal static ProjectFileData IncludeResource<T>(Project project, T resource, ProjectFileType type, ProjectFolderData folder) where T : Resource<T>
+        internal static ProjectFileData IncludeResource<T>(Project project, T resource, string name, ProjectFileType type, ProjectFolderData folder) where T : Resource<T>
         {
             var file = new ProjectFileData
             {
                 id = resource.id,
+                name = name,
                 path = resource.FileName,
                 type = DataHelper.UnparseEnum(type),
                 folderId = folder?.id,
             };
             project.IncludeFile(file);
             return file;
+        }
+
+        internal static string GenerateFileId(Project project, string suggestion)
+        {
+            var fileIdChars = suggestion.ToLower().ToCharArray();
+            for (var i = 0; i < fileIdChars.Length; i++)
+            {
+                if (!Regex.IsMatch(fileIdChars[i].ToString(), "[a-z0-9_-]"))
+                {
+                    fileIdChars[i] = '_';
+                }
+            }
+            var fileId = string.Join("", fileIdChars);
+            var id = fileId;
+            var n = 0;
+            var file = project.GetFile(id);
+            while (file != null)
+            {
+                n++;
+                id = fileId + n.ToString();
+                file = project.GetFile(id);
+            }
+            return id;
         }
 
         internal static string GenerateFolderId(Project project, string name)
@@ -200,12 +220,14 @@ namespace PEngine.Creator.Components.Projects
             var playerFile = IncludeExternalFile(project, "content/player.png", ProjectFileType.TextureCharacter, charactersFolder);
 
             // create default data files
-            var defaultTileset = TilesetService.CreateNew("routes", routesFile);
-            IncludeResource(Project.ActiveProject, defaultTileset, ProjectFileType.Tileset, tilesetsFolder);
+            var defaultTilesetId = GenerateFileId(project, "routes");
+            var defaultTileset = TilesetService.CreateNew(defaultTilesetId, routesFile);
+            IncludeResource(Project.ActiveProject, defaultTileset, "routes", ProjectFileType.Tileset, tilesetsFolder);
             defaultTileset.Save();
 
-            var defaultMap = MapService.CreateNew("default", defaultTileset, "Default");
-            IncludeResource(Project.ActiveProject, defaultMap, ProjectFileType.Map, mapsFolder);
+            var defaultMapId = GenerateFileId(project, "default");
+            var defaultMap = MapService.CreateNew(defaultMapId, defaultTileset, "Default");
+            IncludeResource(Project.ActiveProject, defaultMap, "default", ProjectFileType.Map, mapsFolder);
             defaultMap.Save();
 
             project.Save();
@@ -218,15 +240,49 @@ namespace PEngine.Creator.Components.Projects
             Project.ActiveProject.ExcludeFile(file);
         }
 
+        private static void DeleteObjects(ProjectFileData[] files, ProjectFolderData[] folders)
+        {
+            // files
+            if (files != null && files.Length > 0)
+            {
+                foreach (var file in files)
+                {
+                    ExcludeFile(file);
+                    var path = Path.Combine(Project.ActiveProject.BaseDirectory, file.path);
+                    if (File.Exists(path))
+                    {
+                        File.Delete(path);
+                    }
+                }
+            }
+            // folders
+            if (folders != null && folders.Length > 0)
+            {
+                foreach (var folder in folders)
+                {
+                    Project.ActiveProject.ExcludeFolder(folder);
+                }
+            }
+
+            if (folders != null && files != null)
+            {
+                Project.ActiveProject.Save();
+            }
+        }
+
         internal static void DeleteFile(ProjectFileData file)
         {
-            Project.ActiveProject.ExcludeFile(file);
-            Project.ActiveProject.Save();
-            var path = Path.Combine(Project.ActiveProject.BaseDirectory, file.path);
-            if (File.Exists(path))
-            {
-                File.Delete(path);
-            }
+            DeleteObjects(new[] { file }, null);
+        }
+
+        // deletes the folder and all containing files and folders
+        internal static void DeleteFolder(ProjectFolderData folder)
+        {
+            var files = Project.ActiveProject.GetFiles(folder, true);
+            var folders = Project.ActiveProject.GetFolders(folder, true);
+            // add the selected folder to the subfolders
+            folders = folders.Concat(new[] { folder }).ToArray();
+            DeleteObjects(files, folders);
         }
     }
 }

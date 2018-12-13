@@ -45,7 +45,7 @@ namespace PEngine.Creator.Forms
                     var tex = img.Clone(new Rectangle(x, y, TextureSize, TextureSize), img.PixelFormat);
                     if (!IsFullyTransparent(tex))
                     {
-                        var pic = new PictureBox
+                        var pic = new CrispPictureBox
                         {
                             Image = tex,
                             Size = new Size(32, 32),
@@ -55,6 +55,7 @@ namespace PEngine.Creator.Forms
                             Padding = new Padding(3),
                         };
                         pic.Click += Pic_Click;
+                        pic.DoubleClick += Pic_DoubleClick;
                         if (x == SelectedTextureRectangle.X && y == SelectedTextureRectangle.Y)
                         {
                             SelectTexture(pic);
@@ -67,6 +68,21 @@ namespace PEngine.Creator.Forms
 
         private void Pic_Click(object sender, EventArgs e)
         {
+            var selectedPic = (PictureBox)sender;
+            SelectTexture(selectedPic);
+        }
+
+        private void Pic_DoubleClick(object sender, EventArgs e)
+        {
+            var selectedPic = (PictureBox)sender;
+            SelectTexture(selectedPic);
+
+            DialogResult = DialogResult.OK;
+            Close();
+        }
+
+        private void SelectTexture(PictureBox box)
+        {
             foreach (var control in panel_textures.Controls)
             {
                 if (control is PictureBox pic)
@@ -74,13 +90,6 @@ namespace PEngine.Creator.Forms
                     pic.BackColor = Color.Transparent;
                 }
             }
-
-            var selectedPic = (PictureBox)sender;
-            SelectTexture(selectedPic);
-        }
-
-        private void SelectTexture(PictureBox box)
-        {
             box.BackColor = Settings.Default.Color_Highlight;
 
             var texturePos = (int[])box.Tag;

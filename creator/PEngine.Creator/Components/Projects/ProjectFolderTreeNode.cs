@@ -8,9 +8,9 @@ namespace PEngine.Creator.Components.Projects
         public bool IsNewNode { get; set; } = false;
 
         public ProjectFolderTreeNode(ProjectFolderData folder)
-            : base(folder.name)
         {
             Folder = folder;
+            UpdateText();
 
             if (folder.id == null)
             {

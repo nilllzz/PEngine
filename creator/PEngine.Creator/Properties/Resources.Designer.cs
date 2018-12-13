@@ -73,6 +73,26 @@ namespace PEngine.Creator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AddExistingItem_6269 {
+            get {
+                object obj = ResourceManager.GetObject("AddExistingItem_6269", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AddNewItem_6273 {
+            get {
+                object obj = ResourceManager.GetObject("AddNewItem_6273", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap animation_16xLG {
             get {
                 object obj = ResourceManager.GetObject("animation_16xLG", resourceCulture);
@@ -453,6 +473,16 @@ namespace PEngine.Creator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap newMap {
+            get {
+                object obj = ResourceManager.GetObject("newMap", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap NewRequest_8796 {
             get {
                 object obj = ResourceManager.GetObject("NewRequest_8796", resourceCulture);
@@ -506,6 +536,16 @@ namespace PEngine.Creator.Properties {
         internal static System.Drawing.Bitmap refresh_16xLG {
             get {
                 object obj = ResourceManager.GetObject("refresh_16xLG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Rename_6779 {
+            get {
+                object obj = ResourceManager.GetObject("Rename_6779", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

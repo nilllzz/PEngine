@@ -35,9 +35,6 @@
             this.tabs_main = new System.Windows.Forms.TabControl();
             this.imagelist_tabs = new System.Windows.Forms.ImageList(this.components);
             this.tool_project = new System.Windows.Forms.ToolStrip();
-            this.tool_project_new = new System.Windows.Forms.ToolStripDropDownButton();
-            this.tool_project_new_map = new System.Windows.Forms.ToolStripMenuItem();
-            this.tool_project_new_tileset = new System.Windows.Forms.ToolStripMenuItem();
             this.tool_save = new System.Windows.Forms.ToolStripButton();
             this.tool_saveall = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -66,7 +63,7 @@
             this.projectTree.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
             this.projectTree.Location = new System.Drawing.Point(0, 0);
             this.projectTree.Name = "projectTree";
-            this.projectTree.Size = new System.Drawing.Size(240, 796);
+            this.projectTree.Size = new System.Drawing.Size(240, 806);
             this.projectTree.TabIndex = 0;
             // 
             // split_main
@@ -86,7 +83,7 @@
             this.split_main.Panel2.Controls.Add(this.tabs_main);
             this.split_main.Panel2.Controls.Add(this.tool_project);
             this.split_main.Panel2MinSize = 100;
-            this.split_main.Size = new System.Drawing.Size(1158, 796);
+            this.split_main.Size = new System.Drawing.Size(1165, 806);
             this.split_main.SplitterDistance = 240;
             this.split_main.TabIndex = 0;
             // 
@@ -97,7 +94,7 @@
             this.tabs_main.Location = new System.Drawing.Point(0, 25);
             this.tabs_main.Name = "tabs_main";
             this.tabs_main.SelectedIndex = 0;
-            this.tabs_main.Size = new System.Drawing.Size(914, 771);
+            this.tabs_main.Size = new System.Drawing.Size(921, 781);
             this.tabs_main.TabIndex = 1;
             this.tabs_main.SelectedIndexChanged += new System.EventHandler(this.tabs_main_SelectedIndexChanged);
             this.tabs_main.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabs_main_MouseClick);
@@ -116,7 +113,6 @@
             this.tool_project.BackColor = global::PEngine.Creator.Properties.Settings.Default.Color_MainGray;
             this.tool_project.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.tool_project.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tool_project_new,
             this.tool_save,
             this.tool_saveall,
             this.toolStripSeparator1,
@@ -124,33 +120,9 @@
             this.tool_project_start});
             this.tool_project.Location = new System.Drawing.Point(0, 0);
             this.tool_project.Name = "tool_project";
-            this.tool_project.Size = new System.Drawing.Size(914, 25);
+            this.tool_project.Size = new System.Drawing.Size(921, 25);
             this.tool_project.TabIndex = 0;
             this.tool_project.Text = "toolStrip1";
-            // 
-            // tool_project_new
-            // 
-            this.tool_project_new.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tool_project_new.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tool_project_new_map,
-            this.tool_project_new_tileset});
-            this.tool_project_new.Image = global::PEngine.Creator.Properties.Resources.NewRequest_8796;
-            this.tool_project_new.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tool_project_new.Name = "tool_project_new";
-            this.tool_project_new.Size = new System.Drawing.Size(29, 22);
-            this.tool_project_new.Text = "New files";
-            // 
-            // tool_project_new_map
-            // 
-            this.tool_project_new_map.Name = "tool_project_new_map";
-            this.tool_project_new_map.Size = new System.Drawing.Size(108, 22);
-            this.tool_project_new_map.Text = "Map";
-            // 
-            // tool_project_new_tileset
-            // 
-            this.tool_project_new_tileset.Name = "tool_project_new_tileset";
-            this.tool_project_new_tileset.Size = new System.Drawing.Size(108, 22);
-            this.tool_project_new_tileset.Text = "Tileset";
             // 
             // tool_save
             // 
@@ -279,7 +251,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.split_main);
             this.Name = "MainProjectView";
-            this.Size = new System.Drawing.Size(1158, 796);
+            this.Size = new System.Drawing.Size(1165, 806);
             this.split_main.Panel1.ResumeLayout(false);
             this.split_main.Panel2.ResumeLayout(false);
             this.split_main.Panel2.PerformLayout();
@@ -312,9 +284,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem context_tabs_copypath;
         private System.Windows.Forms.ToolStripMenuItem context_tabs_reveal;
-        private System.Windows.Forms.ToolStripDropDownButton tool_project_new;
         private System.Windows.Forms.ToolStripDropDownButton tool_project_list;
-        private System.Windows.Forms.ToolStripMenuItem tool_project_new_map;
-        private System.Windows.Forms.ToolStripMenuItem tool_project_new_tileset;
     }
 }

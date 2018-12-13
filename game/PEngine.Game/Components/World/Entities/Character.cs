@@ -25,7 +25,7 @@ namespace PEngine.Game.Components.World.Entities
 
         protected void LoadTexture(string characterTextureFileId)
         {
-            var textureFile = Project.ActiveProject.GetFile(characterTextureFileId, ProjectFileType.TextureCharacter);
+            var textureFile = Project.ActiveProject.GetFile(characterTextureFileId);
             _texture = Controller.ProjectContent.LoadDirect<Texture2D>(textureFile.path);
         }
 

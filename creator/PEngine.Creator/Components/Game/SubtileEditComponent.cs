@@ -68,10 +68,10 @@ namespace PEngine.Creator.Components.Game
 
         private void pic_pick_texture_Click(object sender, EventArgs e)
         {
-            var textureFile = Project.ActiveProject.GetFile(_parent.texture, ProjectFileType.TextureTileset);
+            var textureFile = Project.ActiveProject.GetFile(_parent.texture);
             var texturePicker = new TexturePickerForm
             {
-                TexturePath = ResourceManager.GetFilePath(textureFile),
+                TexturePath = textureFile.FilePath,
                 SelectedTextureRectangle = new Rectangle(_data.texture[0] * 16, _data.texture[1] * 16, 16, 16),
             };
 

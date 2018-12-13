@@ -44,7 +44,7 @@ namespace PEngine.Creator.Components.Game
 
         private void tool_tiles_view_Click(object sender, EventArgs e)
         {
-            var file = Project.ActiveProject.GetFile(_data.id, ProjectFileType.Tileset);
+            var file = Project.ActiveProject.GetFile(_data.id);
             if (file != null)
             {
                 _eventBus.RequestFileOpen(file);

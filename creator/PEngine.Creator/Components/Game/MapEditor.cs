@@ -119,14 +119,12 @@ namespace PEngine.Creator.Components.Game
 
         private void InitData()
         {
-            Title = _data.id;
-
             panel_map_container.Controls.Clear();
             split_main.Panel2.Controls.Clear();
 
             panel_map_container.Controls.Add(new MapPainter(_eventBus, _data));
 
-            var tilesetFile = Project.ActiveProject.GetFile(_data.tileset, ProjectFileType.Tileset);
+            var tilesetFile = Project.ActiveProject.GetFile(_data.tileset);
             var tilesetData = TilesetData.Load(tilesetFile.path);
             var tiles = new MapEditorTiles(_eventBus, _data, tilesetData);
             tiles.Dock = DockStyle.Fill;
@@ -135,13 +133,7 @@ namespace PEngine.Creator.Components.Game
 
         internal override void Save()
         {
-            base.Save();
-
             _data.Save();
-
-            // update id if it changed
-            File.id = _data.id;
-
             HasChanges = false;
         }
     }

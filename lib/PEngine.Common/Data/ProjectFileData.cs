@@ -6,6 +6,7 @@ namespace PEngine.Common.Data
     public sealed class ProjectFileData
     {
         public string id;
+        public string name;
         public string type;
 
         // path the file on disk
@@ -26,5 +27,11 @@ namespace PEngine.Common.Data
 
         [JsonIgnore]
         public string FilePath => Path.Combine(Project.ActiveProject.BaseDirectory, path);
+
+        public override string ToString()
+        {
+            // debug info
+            return $"File {name} ({id})";
+        }
     }
 }

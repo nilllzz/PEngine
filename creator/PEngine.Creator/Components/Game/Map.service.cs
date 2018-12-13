@@ -1,5 +1,4 @@
 ﻿using PEngine.Common;
-using PEngine.Common.Data;
 using PEngine.Common.Data.Maps;
 using System;
 using System.Drawing;
@@ -21,9 +20,9 @@ namespace PEngine.Creator.Components.Game
         internal static Bitmap GenerateTexture(MapData data)
         {
             // load resources
-            var tilesetFile = Project.ActiveProject.GetFile(data.tileset, ProjectFileType.Tileset);
+            var tilesetFile = Project.ActiveProject.GetFile(data.tileset);
             var tileset = TilesetData.Load(tilesetFile.path);
-            var texture = ResourceManager.GetTilesetTexture(tileset);
+            var texture = ResourceManager.GetTilesetTexture(tileset).Texture;
 
             // generate map
             var bounds = GetMapBounds(data);
@@ -106,7 +105,7 @@ namespace PEngine.Creator.Components.Game
         {
             // check if the tileset exists
             // check if all tiles exist in their tileset
-            var tilesetFile = Project.ActiveProject.GetFile(data.tileset, ProjectFileType.Tileset);
+            var tilesetFile = Project.ActiveProject.GetFile(data.tileset);
             if (tilesetFile == null)
             {
                 return MapHealthStatus.MissingTileset;

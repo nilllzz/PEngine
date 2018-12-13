@@ -1,5 +1,6 @@
 ﻿using PEngine.Common;
 using PEngine.Common.Data;
+using PEngine.Creator.Forms.New;
 using PEngine.Creator.Helpers;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ namespace PEngine.Creator.Components.Projects
         public ProjectTree()
         {
             InitializeComponent();
+
+            tree_main.TreeViewNodeSorter = new ProjectTreeNodeComparer();
         }
 
         #region events
@@ -140,6 +143,70 @@ namespace PEngine.Creator.Components.Projects
             CreateTree();
         }
 
+        private void context_folders_add_folder_Click(object sender, EventArgs e)
+        {
+            var folderNode = GetSelectedFolderNode();
+
+            var newFolder = ProjectService.CreateFolder(Project.ActiveProject,
+                "New Folder", folderNode.Folder);
+            var newFolderNode = new ProjectFolderTreeNode(newFolder);
+            newFolderNode.IsNewNode = true;
+            folderNode.Nodes.Add(newFolderNode);
+            folderNode.Expand();
+
+            tree_main.SelectedNode = newFolderNode;
+            newFolderNode.BeginEdit();
+        }
+
+        private void context_folder_add_map_Click(object sender, EventArgs e)
+        {
+            var form = new NewMapForm();
+            var result = form.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                var map = form.CreatedMapData;
+                CreateResource(map, map.name, ProjectFileType.Map);
+            }
+        }
+
+        private void context_folders_delete_Click(object sender, EventArgs e)
+        {
+            if (tree_main.SelectedNode is ProjectFolderTreeNode folderNode)
+            {
+                var result = MessageBox.Show($"'{folderNode.Folder.name}' and all its content will be deleted permanently.",
+                    "Delete Folder", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                if (result == DialogResult.OK)
+                {
+                    ProjectService.DeleteFolder(folderNode.Folder);
+                    CreateTree();
+                }
+            }
+        }
+
+        private void context_folders_rename_Click(object sender, EventArgs e)
+        {
+            if (tree_main.SelectedNode is ProjectFolderTreeNode folderNode)
+            {
+                folderNode.BeginEdit();
+            }
+        }
+
+        private void context_files_rename_Click(object sender, EventArgs e)
+        {
+            if (tree_main.SelectedNode is ProjectFileTreeNode fileNode)
+            {
+                fileNode.BeginEdit();
+            }
+        }
+
+        private void context_folders_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // do not enable editing for the project folder node
+            var enableEditing = tree_main.SelectedNode is ProjectFolderTreeNode folderNode && folderNode.Folder.id != null;
+            context_folders_rename.Enabled = enableEditing;
+            context_folders_delete.Enabled = enableEditing;
+        }
+
         #endregion
 
         protected override void OnLoad(EventArgs e)
@@ -154,11 +221,10 @@ namespace PEngine.Creator.Components.Projects
         private void CreateTree()
         {
             var previousExpandState = _expandedFolders;
+            var previousSelectedNode = tree_main.SelectedNode;
 
             tree_main.AfterExpand -= Tree_main_AfterExpand;
             tree_main.AfterCollapse -= Tree_main_AfterCollapse;
-            tree_main.AfterExpand += Tree_main_AfterExpand;
-            tree_main.AfterCollapse += Tree_main_AfterCollapse;
             tree_main.Nodes.Clear();
 
             var project = Project.ActiveProject;
@@ -197,6 +263,9 @@ namespace PEngine.Creator.Components.Projects
                 }
             }
 
+            tree_main.AfterExpand += Tree_main_AfterExpand;
+            tree_main.AfterCollapse += Tree_main_AfterCollapse;
+
             root.Expand();
             foreach (var expandedFolderId in previousExpandState)
             {
@@ -207,6 +276,22 @@ namespace PEngine.Creator.Components.Projects
                 }
             }
             UpdateExpandState();
+
+            // select the node that was selected before creating the tree
+            if (previousSelectedNode != null)
+            {
+                if (previousSelectedNode is ProjectFileTreeNode fileSelectedNode)
+                {
+                    tree_main.SelectedNode = FindFileNode(fileSelectedNode.File);
+                }
+                else if (previousSelectedNode is ProjectFolderTreeNode folderSelectedNode)
+                {
+                    tree_main.SelectedNode = FindFolderNode(folderSelectedNode.Folder.id);
+                }
+            }
+
+            // sort tree nodes
+            tree_main.Sort();
         }
 
         private void UpdateExpandState()
@@ -356,16 +441,86 @@ namespace PEngine.Creator.Components.Projects
                     draggedFileNode.File.folderId = targetFolderNode2.Folder.id;
                     Project.ActiveProject.Save();
                     CreateTree();
-                    var newTargetFolderNode = FindFolderNode(targetFolderNode2.Folder.id);
-                    if (newTargetFolderNode != null)
-                    {
-                        newTargetFolderNode.Expand();
-                    }
+                    FindFolderNode(targetFolderNode2.Folder.id)?.Expand();
                 }
             }
         }
 
-        private void tool_main_newFolder_Click(object sender, EventArgs e)
+        private void tree_main_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
+        {
+            var node = e.Node;
+            if (node is ProjectFolderTreeNode folderNode)
+            {
+                if (e.CancelEdit ||
+                    (e.Label != null && e.Label.Length == 0) ||
+                    e.Node == null ||
+                    (e.Node != null && e.Node.Text == null) ||
+                    (e.Node != null && e.Node.Text != null && e.Node.Text.Length == 0))
+                {
+                    if (folderNode.IsNewNode)
+                    {
+                        // if an invalid label was entered, delete a new node
+                        folderNode.Remove();
+                    }
+                    else
+                    {
+                        // if it's not new, restore its original text
+                        folderNode.UpdateText();
+                    }
+                    return;
+                }
+
+                var newName = e.Node.Text;
+                if (e.Label != null && e.Label.Length > 0)
+                {
+                    newName = e.Label;
+                }
+
+                folderNode.Folder.name = newName;
+                folderNode.UpdateText();
+
+                if (folderNode.IsNewNode)
+                {
+                    var newId = ProjectService.GenerateFolderId(Project.ActiveProject, newName);
+                    folderNode.Folder.id = newId;
+                    folderNode.IsNewNode = false;
+                    Project.ActiveProject.IncludeFolder(folderNode.Folder);
+                }
+
+                Project.ActiveProject.Save();
+
+                tree_main.SelectedNode = folderNode;
+            }
+            else if (node is ProjectFileTreeNode fileNode)
+            {
+                if (e.CancelEdit ||
+                    (e.Label != null && e.Label.Length == 0) ||
+                    e.Node == null ||
+                    (e.Node != null && e.Node.Text == null) ||
+                    (e.Node != null && e.Node.Text != null && e.Node.Text.Length == 0))
+                {
+                    // restore its original text
+                    fileNode.UpdateText();
+                    return;
+                }
+
+                var newName = e.Node.Text;
+                if (e.Label != null && e.Label.Length > 0)
+                {
+                    newName = e.Label;
+                }
+
+                fileNode.File.name = newName;
+                fileNode.UpdateText();
+
+                Project.ActiveProject.Save();
+
+                _eventBus.UpdatedFile(fileNode.File);
+                tree_main.SelectedNode = fileNode;
+            }
+        }
+
+        private ProjectFolderTreeNode GetSelectedFolderNode()
         {
             var selectedNode = tree_main.SelectedNode;
             ProjectFolderTreeNode folderNode = null;
@@ -381,52 +536,23 @@ namespace PEngine.Creator.Components.Projects
             {
                 folderNode = (ProjectFolderTreeNode)tree_main.Nodes[0];
             }
-
-            var newFolder = ProjectService.CreateFolder(Project.ActiveProject,
-                "New Folder", folderNode.Folder);
-            var newFolderNode = new ProjectFolderTreeNode(newFolder);
-            newFolderNode.IsNewNode = true;
-            folderNode.Nodes.Add(newFolderNode);
-            folderNode.Expand();
-
-            newFolderNode.BeginEdit();
+            return folderNode;
         }
 
-        private void tree_main_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
+        private void CreateResource<T>(T resource, string name, ProjectFileType fileType) where T : Resource<T>
         {
-            var node = e.Node;
-            if (node is ProjectFolderTreeNode folderNode)
+            var folderNode = GetSelectedFolderNode();
+            var file = ProjectService.IncludeResource(Project.ActiveProject, resource, name, fileType, folderNode.Folder);
+            resource.Save();
+            Project.ActiveProject.Save();
+            CreateTree();
+            FindFolderNode(folderNode.Folder.id)?.Expand();
+            var fileNode = FindFileNode(file);
+            if (fileNode != null)
             {
-                if (e.CancelEdit || e.Label == null || e.Label.Length == 0)
-                {
-                    if (folderNode.IsNewNode)
-                    {
-                        // if an invalid label was entered, delete a new node
-                        folderNode.Remove();
-                    }
-                    else
-                    {
-                        // if it's not new, restore its original text
-                        folderNode.UpdateText();
-                    }
-                    return;
-                }
-
-                folderNode.Folder.name = e.Label;
-                folderNode.UpdateText();
-
-                if (folderNode.IsNewNode)
-                {
-                    var newId = ProjectService.GenerateFolderId(Project.ActiveProject, e.Label);
-                    folderNode.Folder.id = newId;
-                    folderNode.IsNewNode = false;
-                    Project.ActiveProject.IncludeFolder(folderNode.Folder);
-                }
-
-                Project.ActiveProject.Save();
-
-                tree_main.SelectedNode = folderNode;
+                tree_main.SelectedNode = fileNode;
             }
+            _eventBus.RequestFileOpen(file);
         }
     }
 }

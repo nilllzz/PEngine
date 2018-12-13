@@ -7,9 +7,9 @@ namespace PEngine.Creator.Components.Projects
         public ProjectFileData File { get; }
 
         public ProjectFileTreeNode(ProjectFileData file)
-            : base(file.id)
         {
             File = file;
+            UpdateText();
 
             switch (File.FileType)
             {
@@ -32,7 +32,7 @@ namespace PEngine.Creator.Components.Projects
 
         public void UpdateText()
         {
-            Text = File.id;
+            Text = File.name;
         }
     }
 }

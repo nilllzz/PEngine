@@ -25,7 +25,7 @@ namespace PEngine.Game.Components.World
             {
                 if (_texture == null)
                 {
-                    var file = Project.ActiveProject.GetFile(_data.texture, ProjectFileType.TextureTileset);
+                    var file = Project.ActiveProject.GetFile(_data.texture);
                     _texture =
                         Controller.ProjectContent.LoadDirect<Texture2D>(file.path);
                 }
@@ -40,7 +40,7 @@ namespace PEngine.Game.Components.World
 
         internal void LoadContent()
         {
-            var file = Project.ActiveProject.GetFile(_id, ProjectFileType.Tileset);
+            var file = Project.ActiveProject.GetFile(_id);
             if (file == null)
             {
                 GamePipeline.Log(LogType.Error, $"File requested for tileset with id {_id} does not exist.");

@@ -318,55 +318,6 @@ namespace PEngine.Creator.Views.Projects
             MainForm.Instance.UpdateMenus();
         }
 
-        internal void SaveProjectFiles()
-        {
-            // saves the project and all files that depend on saving the project
-            var affected = new List<ProjectTabComponent>();
-            foreach (var tab in tabs_main.TabPages)
-            {
-                if (tab is TabPage tabPage &&
-                    tabPage.Controls.Count == 1 &&
-                    tabPage.Controls[0] is ProjectTabComponent projComp &&
-                    projComp.HasProjectChanges)
-                {
-                    affected.Add(projComp);
-                }
-            }
-
-            if (affected.Count > 0)
-            {
-                var filesText = string.Join("\n", affected.Take(10).Select(c => c.File.path));
-                if (affected.Count > 10)
-                {
-                    filesText += "\n...\n" + (affected.Count - 10) + " more";
-                }
-
-                var result = MessageBox.Show("To save changes, your project has to be saved.\n" +
-                    "In addition to that, the project depends on these files being saved first:\n\n" +
-                    filesText +
-                    "\n\nDo you want to proceed?", "Save files", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-
-                if (result == DialogResult.Yes)
-                {
-                    // save all depending files
-                    // reset their project status before
-                    foreach (var comp in affected)
-                    {
-                        comp.HasProjectChanges = false;
-                        comp.Save();
-                        _eventBus.UpdatedFile(comp.File);
-                    }
-
-                    // save project after
-                    Project.ActiveProject.Save();
-                }
-            }
-            else
-            {
-                Project.ActiveProject.Save();
-            }
-        }
-
         internal void SaveActiveFile()
         {
             ActiveComponent?.Save();
@@ -374,7 +325,7 @@ namespace PEngine.Creator.Views.Projects
 
         internal void SaveAllFiles()
         {
-            SaveProjectFiles();
+            Project.ActiveProject.Save();
             foreach (var comp in Components)
             {
                 comp.Save();
@@ -396,7 +347,8 @@ namespace PEngine.Creator.Views.Projects
                 if (tab is TabPage tabPage &&
                     tabPage.Controls.Count == 1 &&
                     tabPage.Controls[0] is ProjectTabComponent comp &&
-                    comp.File.id == file.id)
+                    comp.File.id == file.id &&
+                    comp.File.FileType == file.FileType)
                 {
                     var result = true;
                     if (!force)

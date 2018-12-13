@@ -53,14 +53,47 @@ namespace PEngine.Common
             return _data.files.Where(f => f.FileType == type).ToArray();
         }
 
-        public ProjectFileData GetFile(string id, ProjectFileType type)
+        public ProjectFileData GetFile(string id)
         {
-            return _data.files.FirstOrDefault(f => f.id == id && f.FileType == type);
+            return _data.files.FirstOrDefault(f => f.id == id);
         }
 
         public ProjectFolderData GetFolder(string id)
         {
             return _data.folders.FirstOrDefault(f => f.id == id);
+        }
+
+        public ProjectFileData[] GetFiles(ProjectFolderData parent, bool recursive = true)
+        {
+            var files = _data.files.Where(f => f.folderId == parent.id).ToList();
+
+            if (recursive)
+            {
+                var subFolders = _data.folders.Where(f => f.parentId == parent.id);
+                foreach (var subFolder in subFolders)
+                {
+                    var subfolderFiles = GetFiles(subFolder, true);
+                    files.AddRange(subfolderFiles);
+                }
+            }
+
+            return files.ToArray();
+        }
+
+        public ProjectFolderData[] GetFolders(ProjectFolderData parent, bool recursive = true)
+        {
+            var folders = _data.folders.Where(f => f.parentId == parent.id).ToList();
+
+            if (recursive)
+            {
+                foreach (var folder in _data.folders.Where(f => f.parentId == parent.id))
+                {
+                    var subfolders = GetFolders(folder, true);
+                    folders.AddRange(subfolders);
+                }
+            }
+
+            return folders.ToArray();
         }
 
         public void IncludeFile(ProjectFileData file)
@@ -89,6 +122,12 @@ namespace PEngine.Common
         {
             var files = _data.files.Where(f => f.id != file.id || f.type != file.type);
             _data.files = files.ToArray();
+        }
+
+        public void ExcludeFolder(ProjectFolderData folder)
+        {
+            var folders = _data.folders.Where(f => f.id != folder.id);
+            _data.folders = folders.ToArray();
         }
 
         public void Load()

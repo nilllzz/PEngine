@@ -46,7 +46,7 @@ namespace PEngine.Creator.Components.Debug
         private void LoadMap(string id)
         {
             _id = id;
-            _file = Project.ActiveProject.GetFile(id, ProjectFileType.Map);
+            _file = Project.ActiveProject.GetFile(_id);
 
             panel_container.Controls.Clear();
             _playerControl = null;

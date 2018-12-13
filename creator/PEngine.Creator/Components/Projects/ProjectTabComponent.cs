@@ -1,6 +1,4 @@
 ﻿using PEngine.Common.Data;
-using PEngine.Creator.Forms;
-using PEngine.Creator.Views.Projects;
 using System;
 using System.Windows.Forms;
 
@@ -15,10 +13,6 @@ namespace PEngine.Creator.Components.Projects
 
         protected readonly ProjectEventBus _eventBus;
         private bool _hasChanges;
-        private string _title;
-
-        // if this file gets saved, the project also has to be saved
-        internal bool HasProjectChanges { get; set; }
 
         internal bool HasChanges
         {
@@ -34,17 +28,12 @@ namespace PEngine.Creator.Components.Projects
         {
             get
             {
-                var title = _title;
+                var title = File.name;
                 if (_hasChanges)
                 {
                     title += "*";
                 }
                 return title;
-            }
-            set
-            {
-                _title = value;
-                TitleChanged?.Invoke(Title);
             }
         }
 
@@ -55,24 +44,37 @@ namespace PEngine.Creator.Components.Projects
 
         internal event Action<string> TitleChanged;
 
+        // ctor so the designer doesn't freak out
+        public ProjectTabComponent() { }
+
         internal ProjectTabComponent(ProjectEventBus eventBus, ProjectFileData file)
         {
             InitializeComponent();
 
             _eventBus = eventBus;
+            RegisterEvents();
+
             File = file;
         }
 
-        internal virtual void Save()
+        #region events
+
+        private void RegisterEvents()
         {
-            if (HasProjectChanges)
+            _eventBus.FileUpdated += _eventBus_FileUpdated;
+        }
+
+        private void _eventBus_FileUpdated(ProjectFileData file)
+        {
+            if (file.id == File.id)
             {
-                if (MainForm.Instance.ActiveView is MainProjectView projView)
-                {
-                    projView.SaveProjectFiles();
-                }
+                TitleChanged?.Invoke(Title);
             }
         }
+
+        #endregion
+
+        internal virtual void Save() { }
 
         internal virtual void Discard() { }
 
@@ -80,7 +82,7 @@ namespace PEngine.Creator.Components.Projects
         {
             if (CanSave && HasChanges)
             {
-                var result = MessageBox.Show($"There are unsaved changes for \n\n\"{File.id}\"\n\nDo you want save the file before closing?",
+                var result = MessageBox.Show($"There are unsaved changes for \n\n\"{File.name}\"\n\nDo you want save the file before closing?",
                     "PEngine", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
                 switch (result)
                 {

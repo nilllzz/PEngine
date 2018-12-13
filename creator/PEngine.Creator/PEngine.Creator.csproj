@@ -139,6 +139,7 @@
       <DependentUpon>ProjectTree.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\Projects\ProjectTreeNode.cs" />
+    <Compile Include="Components\Projects\ProjectTreeNodeComparer.cs" />
     <Compile Include="Forms\FormConsts.cs" />
     <Compile Include="Forms\GotoForm.cs">
       <SubType>Form</SubType>
@@ -457,7 +458,11 @@
     <None Include="Resources\ClassIcon.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Rename_6779.png" />
+    <None Include="Resources\newMap.png" />
     <None Include="Resources\collapseAll.png" />
+    <None Include="Resources\AddNewItem_6273.png" />
+    <None Include="Resources\AddExistingItem_6269.png" />
     <Content Include="Resources\DefaultProject\player.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

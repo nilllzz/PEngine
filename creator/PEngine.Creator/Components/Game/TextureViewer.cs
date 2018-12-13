@@ -16,8 +16,6 @@ namespace PEngine.Creator.Components.Game
             InitializeComponent();
 
             LoadTexture();
-
-            Title = File.id;
         }
 
         private void LoadTexture()

@@ -324,25 +324,18 @@ namespace PEngine.Creator.Components.Game
 
         private void tool_editor_properties_Click(object sender, System.EventArgs e)
         {
-            var tilesetProperties = new TilesetProperties(_eventBus, _data);
+            var tilesetProperties = new TilesetProperties(_data);
             var result = tilesetProperties.ShowDialog(MainForm.Instance);
             if (result == DialogResult.OK)
             {
-                if (tilesetProperties.MadeFileChanges)
-                {
-                    HasChanges = true;
-                    InitData();
-                }
-                if (tilesetProperties.MadeProjectChanges)
-                {
-                    HasProjectChanges = true;
-                }
+                _data.texture = tilesetProperties.SelectedTextureFile.id;
+                HasChanges = true;
             }
         }
 
         private void tool_editor_texture_Click(object sender, System.EventArgs e)
         {
-            var textureFile = Project.ActiveProject.GetFile(_data.texture, ProjectFileType.TextureTileset);
+            var textureFile = Project.ActiveProject.GetFile(_data.texture);
             _eventBus.RequestFileOpen(textureFile);
         }
 
@@ -350,8 +343,6 @@ namespace PEngine.Creator.Components.Game
 
         private void InitData()
         {
-            Title = _data.id;
-
             panel_subtile_container.Controls.Clear();
             foreach (var subtile in _data.subtiles)
             {
@@ -457,13 +448,7 @@ namespace PEngine.Creator.Components.Game
 
         internal override void Save()
         {
-            base.Save();
-
             _data.Save();
-
-            // update id if it changed
-            File.id = _data.id;
-
             HasChanges = false;
         }
     }

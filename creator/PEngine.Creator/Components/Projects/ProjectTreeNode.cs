@@ -18,9 +18,7 @@ namespace PEngine.Creator.Components.Projects
         protected int _collapsedIconIndex;
         protected int _expandedIconIndex;
 
-        protected ProjectTreeNode(string text)
-            : base(text)
-        { }
+        protected ProjectTreeNode() { }
 
         //private readonly string _folderPath = null;
 

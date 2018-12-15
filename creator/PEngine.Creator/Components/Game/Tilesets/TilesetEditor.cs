@@ -18,8 +18,6 @@ namespace PEngine.Creator.Components.Game.Tilesets
         private SubtileData _selectedSubtile;
         private bool _tileAddMode = true;
 
-        internal override int IconIndex => ICON_TILESET;
-
         internal TilesetEditor(ProjectEventBus eventBus, ProjectFileData file, TilesetData data)
             : base(eventBus, file)
         {
@@ -343,6 +341,7 @@ namespace PEngine.Creator.Components.Game.Tilesets
 
         private void InitData()
         {
+            SuspendLayout();
             panel_subtile_container.Controls.Clear();
             foreach (var subtile in _data.subtiles)
             {
@@ -364,6 +363,7 @@ namespace PEngine.Creator.Components.Game.Tilesets
             _selectedTile = null;
             UpdateSelectedSubtile();
             UpdateSelectedTile();
+            ResumeLayout();
         }
 
         private void UpdateSelectedSubtile()

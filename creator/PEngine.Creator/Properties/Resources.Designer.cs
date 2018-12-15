@@ -413,6 +413,16 @@ namespace PEngine.Creator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap map_add {
+            get {
+                object obj = ResourceManager.GetObject("map_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap mapGrid {
             get {
                 object obj = ResourceManager.GetObject("mapGrid", resourceCulture);
@@ -666,6 +676,26 @@ namespace PEngine.Creator.Properties {
         internal static System.Drawing.Bitmap tileset {
             get {
                 object obj = ResourceManager.GetObject("tileset", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap zoom_16xLG {
+            get {
+                object obj = ResourceManager.GetObject("zoom_16xLG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ZoomOut_12927 {
+            get {
+                object obj = ResourceManager.GetObject("ZoomOut_12927", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -90,7 +90,7 @@ namespace PEngine.Creator.Forms.New
         private void btn_ok_Click(object sender, EventArgs e)
         {
             var tilesetFile = _tilesetFiles[combo_tileset.SelectedIndex];
-            var tileset = TilesetData.Load(tilesetFile.path);
+            var tileset = TilesetData.Load(tilesetFile);
             var map = MapService.CreateNew(txt_id.Text, tileset, txt_name.Text);
             CreatedMapData = map;
         }

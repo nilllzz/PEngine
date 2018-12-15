@@ -14,17 +14,17 @@ namespace PEngine.Creator.Components.Projects
 
             if (folder.id == null)
             {
-                _collapsedIconIndex = ICON_PROJECT_CLOSED;
-                _expandedIconIndex = ICON_PROJECT_OPEN;
+                _collapsedIconKey = FileIconProvider.ICON_PROJECT_CLOSED;
+                _expandedIconKey = FileIconProvider.ICON_PROJECT_OPEN;
             }
             else
             {
-                _collapsedIconIndex = ICON_FOLDER_CLOSED;
-                _expandedIconIndex = ICON_FOLDER_OPEN;
+                _collapsedIconKey = FileIconProvider.ICON_FOLDER_CLOSED;
+                _expandedIconKey = FileIconProvider.ICON_FOLDER_OPEN;
             }
 
-            ImageIndex = _collapsedIconIndex;
-            SelectedImageIndex = ImageIndex;
+            ImageKey = _collapsedIconKey;
+            SelectedImageKey = ImageKey;
         }
 
         public void UpdateText()

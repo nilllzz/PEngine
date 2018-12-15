@@ -1,6 +1,6 @@
-﻿namespace PEngine.Game.Components.World.Entities
+﻿namespace PEngine.Common.Data.Maps
 {
-    internal enum CharacterFacing
+    public enum ObjectRotation
     {
         Up = 0,
         Left = 1,

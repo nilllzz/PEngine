@@ -1,5 +1,6 @@
 ﻿using PEngine.Common;
 using PEngine.Common.Interop;
+using System;
 using System.IO;
 using static Core;
 
@@ -11,6 +12,11 @@ namespace PEngine.Game
 
         internal static bool LoadProject()
         {
+            if (ProjectPath == null)
+            {
+                ProjectPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "test");
+            }
+
             if (!Directory.Exists(ProjectPath))
             {
                 GamePipeline.Log(LogType.Error, "Project directory does not exist");

@@ -25,7 +25,7 @@ namespace PEngine.Creator.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("238, 238, 242")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Control")]
         public global::System.Drawing.Color Color_MainGray {
             get {
                 return ((global::System.Drawing.Color)(this["Color_MainGray"]));

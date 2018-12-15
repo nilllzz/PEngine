@@ -44,6 +44,7 @@
     <Compile Include="Data\Maps\MapEventData.cs" />
     <Compile Include="Data\Maps\MapEventType.cs" />
     <Compile Include="Data\Maps\MapTileData.cs" />
+    <Compile Include="Data\Maps\ObjectRotation.cs" />
     <Compile Include="Data\Maps\SubtileData.cs" />
     <Compile Include="Data\Maps\SubtileBehavior.cs" />
     <Compile Include="Data\Maps\TileData.cs" />
@@ -53,6 +54,8 @@
     <Compile Include="Data\ProjectFileType.cs" />
     <Compile Include="Data\ProjectFolderData.cs" />
     <Compile Include="Data\Resource.cs" />
+    <Compile Include="Data\World\WorldmapData.cs" />
+    <Compile Include="Data\World\WorldmapEntryData.cs" />
     <Compile Include="Interop\Pipeline.cs" />
     <Compile Include="Interop\LogType.cs" />
     <Compile Include="Project.cs" />

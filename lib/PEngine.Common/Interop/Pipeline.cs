@@ -48,6 +48,8 @@ namespace PEngine.Common.Interop
         public const string EVENT_LOAD_MAP = "LOAD_MAP"; // loaded a map resource
         public const string EVENT_LOAD_TILESET = "LOAD_TILESET"; // loaded a tileset resource
         public const string EVENT_SET_MAP = "SET_MAP"; // changes the active map
+        public const string EVENT_UNLOAD_MAP = "UNLOAD_MAP"; // unloaded a map resource
+        public const string EVENT_UNLOAD_TILESET = "UNLOAD_TILESET";
         // gameplay
         public const string EVENT_PLAYER_MOVED = "PLAYER_MOVED";
         public const string EVENT_SCENE_CHANGED = "SCENE_CHANGED";

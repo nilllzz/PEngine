@@ -28,6 +28,11 @@ namespace PEngine.Game.Components.World.Entities
         }
 
         internal abstract void LoadContent();
+        internal virtual void UnloadContent()
+        {
+            _map = null;
+            _texture.Dispose();
+        }
 
         protected virtual Rectangle GetTextureRectangle()
         {

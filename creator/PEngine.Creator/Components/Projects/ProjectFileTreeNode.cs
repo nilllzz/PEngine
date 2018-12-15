@@ -11,23 +11,11 @@ namespace PEngine.Creator.Components.Projects
             File = file;
             UpdateText();
 
-            switch (File.FileType)
-            {
-                case ProjectFileType.Map:
-                    _collapsedIconIndex = ICON_MAP;
-                    break;
-                case ProjectFileType.Tileset:
-                    _collapsedIconIndex = ICON_TILESET;
-                    break;
-                case ProjectFileType.TextureTileset:
-                case ProjectFileType.TextureCharacter:
-                    _collapsedIconIndex = ICON_IMAGE;
-                    break;
-            }
+            _collapsedIconKey = FileIconProvider.GetIconKey(File.FileType);
 
-            _expandedIconIndex = _collapsedIconIndex;
-            ImageIndex = _collapsedIconIndex;
-            SelectedImageIndex = ImageIndex;
+            _expandedIconKey = _collapsedIconKey;
+            ImageKey = _collapsedIconKey;
+            SelectedImageKey = ImageKey;
         }
 
         public void UpdateText()

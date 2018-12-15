@@ -1,9 +1,11 @@
 ﻿using PEngine.Common;
 using PEngine.Common.Data;
 using PEngine.Common.Data.Maps;
+using PEngine.Common.Data.World;
 using PEngine.Creator.Components.Game;
 using PEngine.Creator.Components.Game.Maps;
 using PEngine.Creator.Components.Game.Tilesets;
+using PEngine.Creator.Components.Game.World;
 using PEngine.Creator.Components.Projects;
 using PEngine.Creator.Forms;
 using PEngine.Creator.Helpers;
@@ -63,6 +65,7 @@ namespace PEngine.Creator.Views.Projects
         internal MainProjectView()
         {
             InitializeComponent();
+            tabs_main.ImageList = FileIconProvider.GetImageList();
 
             _eventBus = new ProjectEventBus();
             RegisterEvents();
@@ -109,14 +112,14 @@ namespace PEngine.Creator.Views.Projects
             {
                 case ProjectFileType.Map:
                     {
-                        var map = MapData.Load(file.path);
+                        var map = MapData.Load(file);
                         var editor = new MapEditor(_eventBus, file, map);
                         OpenTab(editor);
                     }
                     break;
                 case ProjectFileType.Tileset:
                     {
-                        var tileset = TilesetData.Load(file.path);
+                        var tileset = TilesetData.Load(file);
                         var editor = new TilesetEditor(_eventBus, file, tileset);
                         OpenTab(editor);
                     }
@@ -126,6 +129,13 @@ namespace PEngine.Creator.Views.Projects
                     {
                         var viewer = new TextureViewer(_eventBus, file);
                         OpenTab(viewer);
+                    }
+                    break;
+                case ProjectFileType.Worldmap:
+                    {
+                        var worldmap = WorldmapData.Load(file);
+                        var editor = new WorldmapEditor(_eventBus, file, worldmap);
+                        OpenTab(editor);
                     }
                     break;
             }
@@ -258,7 +268,7 @@ namespace PEngine.Creator.Views.Projects
                     tabPage.Controls.Count == 1 &&
                     tabPage.Controls[0] is ProjectTabComponent projComp)
                 {
-                    var image = imagelist_tabs.Images[projComp.IconIndex];
+                    var image = FileIconProvider.GetIcon(projComp.IconKey);
                     var text = tabPage.Text;
 
                     var listItem = new ToolStripMenuItem(text, image);
@@ -291,7 +301,6 @@ namespace PEngine.Creator.Views.Projects
             var newTab = new TabPage
             {
                 Text = component.Title,
-                ImageIndex = component.IconIndex
             };
 
             component.Dock = DockStyle.Fill;
@@ -304,6 +313,7 @@ namespace PEngine.Creator.Views.Projects
 
             tabs_main.TabPages.Insert(0, newTab);
             tabs_main.SelectTab(newTab);
+            newTab.ImageKey = component.IconKey;
 
             TabsChanged();
         }

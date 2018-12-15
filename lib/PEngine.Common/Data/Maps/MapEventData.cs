@@ -20,10 +20,10 @@ namespace PEngine.Common.Data.Maps
         }
 
         [JsonIgnore]
-        public DatasetEntry WarpWalkOutData
+        public DatasetEntry WarpRotationData
         {
-            get => GetData("warpout");
-            set => SetData(value.value, "warpout");
+            get => GetData("warprot");
+            set => SetData(value.value, "warprot");
         }
 
         public bool Equals(MapEventData other)

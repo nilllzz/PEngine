@@ -51,7 +51,7 @@ namespace PEngine.Creator.Components.Debug
 
             panel_container.Controls.Clear();
             _playerControl = null;
-            var data = MapData.Load(_file.path);
+            var data = MapData.Load(_file);
             var map = MapService.GenerateTexture(data);
             _mapControl = new PictureBox
             {

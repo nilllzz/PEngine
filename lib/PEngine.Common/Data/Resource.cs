@@ -68,14 +68,14 @@ namespace PEngine.Common.Data
             }
         }
 
-        public static T Load(string filename)
+        public static T Load(ProjectFileData file)
         {
             var resource = GetResourceInstance();
             var dir = GetResourceRootDirectory(resource);
-            var filePath = Path.Combine(dir, filename);
+            var filePath = Path.Combine(dir, file.path);
             var content = File.ReadAllText(filePath);
             var loadedResource = JsonConvert.DeserializeObject<T>(content);
-            loadedResource.FileName = filename;
+            loadedResource.FileName = file.path;
             return loadedResource;
         }
 

@@ -3,6 +3,7 @@ using PEngine.Common.Data;
 using PEngine.Creator.Components.Game;
 using PEngine.Creator.Components.Game.Maps;
 using PEngine.Creator.Components.Game.Tilesets;
+using PEngine.Creator.Components.Game.World;
 using PEngine.Creator.Forms;
 using PEngine.Creator.Helpers;
 using PEngine.Creator.Properties;
@@ -231,6 +232,11 @@ namespace PEngine.Creator.Components.Projects
             var defaultMap = MapService.CreateNew(defaultMapId, defaultTileset, "Default");
             IncludeResource(Project.ActiveProject, defaultMap, "default", ProjectFileType.Map, mapsFolder);
             defaultMap.Save();
+
+            var defaultWorldId = GenerateFileId(project, "world");
+            var defaultWorld = WorldmapService.CreateNew(defaultWorldId);
+            IncludeResource(Project.ActiveProject, defaultWorld, "World Map", ProjectFileType.Worldmap, null);
+            defaultWorld.Save();
 
             project.Save();
 

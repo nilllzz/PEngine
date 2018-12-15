@@ -98,7 +98,6 @@
     <Compile Include="CommandLineArgParser.cs" />
     <Compile Include="Components\GameboyInputs.cs" />
     <Compile Include="Components\World\Entities\Character.cs" />
-    <Compile Include="Components\World\Entities\CharacterFacing.cs" />
     <Compile Include="Components\World\Entities\Entity.cs" />
     <Compile Include="Components\World\Entities\NPC.cs" />
     <Compile Include="Components\World\Entities\PlayerEntity.cs" />

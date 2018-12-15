@@ -3,6 +3,7 @@ using PEngine.Common.Data;
 using PEngine.Common.Interop;
 using PEngine.Creator.Components.Debug;
 using PEngine.Creator.Components.Game;
+using PEngine.Creator.Components.Projects;
 using PEngine.Creator.Forms;
 using PEngine.Creator.Properties;
 using PEngine.Creator.Views.Projects;
@@ -75,6 +76,8 @@ namespace PEngine.Creator.Views.Game
         internal DebugView()
         {
             InitializeComponent();
+
+            tree_resources.ImageList = FileIconProvider.GetImageList();
         }
 
         #region ui
@@ -227,6 +230,12 @@ namespace PEngine.Creator.Views.Game
                 case Pipeline.EVENT_SCENE_CHANGED:
                     SceneChanged(message);
                     break;
+                case Pipeline.EVENT_UNLOAD_MAP:
+                    RemoveLoadedResource(ProjectFileType.Map, message.Content);
+                    break;
+                case Pipeline.EVENT_UNLOAD_TILESET:
+                    RemoveLoadedResource(ProjectFileType.Tileset, message.Content);
+                    break;
             }
 
             ActiveComponent?.HandlePipelineEvent(message);
@@ -262,15 +271,34 @@ namespace PEngine.Creator.Views.Game
         private void AddLoadedResource(ProjectFileType fileType, string id)
         {
             var parent = GetNodeForFileType(fileType);
-            var node = new TreeNode(id);
-            parent.Nodes.Add(node);
-            parent.Expand();
+            if (!parent.Nodes.ContainsKey(id))
+            {
+                var node = new TreeNode(id);
+                node.ImageKey = FileIconProvider.GetIconKey(fileType);
+                node.SelectedImageKey = node.ImageKey;
+                parent.Nodes.Add(node);
+                parent.Expand();
+                tree_resources.Nodes[0].Expand();
+            }
+        }
+
+        private void RemoveLoadedResource(ProjectFileType fileType, string id)
+        {
+            var parent = GetNodeForFileType(fileType);
+            for (int i = 0; i < parent.Nodes.Count; i++)
+            {
+                var node = parent.Nodes[i];
+                if (node.Text == id)
+                {
+                    parent.Nodes.Remove(node);
+                }
+            }
         }
 
         private TreeNode GetNodeForFileType(ProjectFileType fileType)
         {
-            var text = fileType.ToString();
-            foreach (var node in tree_resources.Nodes)
+            var text = fileType.ToString() + "s";
+            foreach (var node in tree_resources.Nodes[0].Nodes)
             {
                 if (node is TreeNode treeNode && treeNode.Text == text)
                 {
@@ -278,6 +306,8 @@ namespace PEngine.Creator.Views.Game
                 }
             }
             var newNode = new TreeNode(text);
+            newNode.ImageKey = FileIconProvider.ICON_FOLDER_CLOSED;
+            newNode.SelectedImageKey = FileIconProvider.ICON_FOLDER_CLOSED;
             tree_resources.Nodes[0].Nodes.Add(newNode);
             newNode.Expand();
             return newNode;

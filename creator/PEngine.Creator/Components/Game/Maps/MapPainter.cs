@@ -445,6 +445,7 @@ namespace PEngine.Creator.Components.Game.Maps
 
                 _eventBus.AddedEvent(_data, newEvent);
                 _eventBus.SelectEvent(_data, newEvent);
+                _eventBus.UpdatedMap(_data);
 
                 RedrawComposite();
             }
@@ -458,6 +459,8 @@ namespace PEngine.Creator.Components.Game.Maps
             if (mapLocation.X != _movingEvent.pos[0] || mapLocation.Y != _movingEvent.pos[1])
             {
                 _movingEvent.pos = new[] { mapLocation.X, mapLocation.Y };
+                _eventBus.UpdatedMap(_data);
+
                 RedrawComposite();
             }
         }
@@ -472,6 +475,7 @@ namespace PEngine.Creator.Components.Game.Maps
                 MapService.ClearEvent(_data, existingEvent);
 
                 _eventBus.RemovedEvent(_data, existingEvent);
+                _eventBus.UpdatedMap(_data);
 
                 RedrawComposite();
             }

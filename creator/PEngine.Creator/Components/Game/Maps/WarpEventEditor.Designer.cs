@@ -33,7 +33,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.num_y = new System.Windows.Forms.NumericUpDown();
-            this.chk_walkout = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.combo_rot = new System.Windows.Forms.ComboBox();
+            this.btn_pick_position = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.num_x)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_y)).BeginInit();
             this.SuspendLayout();
@@ -65,7 +67,6 @@
             this.num_x.Name = "num_x";
             this.num_x.Size = new System.Drawing.Size(38, 23);
             this.num_x.TabIndex = 1;
-            this.num_x.ValueChanged += new System.EventHandler(this.num_x_ValueChanged);
             // 
             // label2
             // 
@@ -104,33 +105,53 @@
             this.num_y.Name = "num_y";
             this.num_y.Size = new System.Drawing.Size(38, 23);
             this.num_y.TabIndex = 3;
-            this.num_y.ValueChanged += new System.EventHandler(this.num_y_ValueChanged);
             // 
-            // chk_walkout
+            // label4
             // 
-            this.chk_walkout.AutoSize = true;
-            this.chk_walkout.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
-            this.chk_walkout.Location = new System.Drawing.Point(19, 90);
-            this.chk_walkout.Name = "chk_walkout";
-            this.chk_walkout.Size = new System.Drawing.Size(73, 19);
-            this.chk_walkout.TabIndex = 5;
-            this.chk_walkout.Text = "Walk out";
-            this.chk_walkout.UseVisualStyleBackColor = true;
-            this.chk_walkout.CheckedChanged += new System.EventHandler(this.chk_walkout_CheckedChanged);
+            this.label4.AutoSize = true;
+            this.label4.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
+            this.label4.Location = new System.Drawing.Point(3, 93);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(91, 15);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Target Rotation:";
+            // 
+            // combo_rot
+            // 
+            this.combo_rot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.combo_rot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.combo_rot.FormattingEnabled = true;
+            this.combo_rot.Location = new System.Drawing.Point(6, 111);
+            this.combo_rot.Name = "combo_rot";
+            this.combo_rot.Size = new System.Drawing.Size(205, 21);
+            this.combo_rot.TabIndex = 6;
+            // 
+            // btn_pick_position
+            // 
+            this.btn_pick_position.Image = global::PEngine.Creator.Properties.Resources.Select;
+            this.btn_pick_position.Location = new System.Drawing.Point(98, 8);
+            this.btn_pick_position.Name = "btn_pick_position";
+            this.btn_pick_position.Size = new System.Drawing.Size(23, 23);
+            this.btn_pick_position.TabIndex = 7;
+            this.btn_pick_position.UseVisualStyleBackColor = true;
+            this.btn_pick_position.Click += new System.EventHandler(this.btn_pick_position_Click);
             // 
             // WarpEventEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.Controls.Add(this.chk_walkout);
+            this.Controls.Add(this.btn_pick_position);
+            this.Controls.Add(this.combo_rot);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.num_y);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.num_x);
             this.Controls.Add(this.label1);
             this.Name = "WarpEventEditor";
-            this.Size = new System.Drawing.Size(214, 142);
+            this.Size = new System.Drawing.Size(214, 143);
             ((System.ComponentModel.ISupportInitialize)(this.num_x)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_y)).EndInit();
             this.ResumeLayout(false);
@@ -145,6 +166,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown num_y;
-        private System.Windows.Forms.CheckBox chk_walkout;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox combo_rot;
+        private System.Windows.Forms.Button btn_pick_position;
     }
 }

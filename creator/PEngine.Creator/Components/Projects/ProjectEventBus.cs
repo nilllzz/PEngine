@@ -1,5 +1,6 @@
 ﻿using PEngine.Common.Data;
 using PEngine.Common.Data.Maps;
+using PEngine.Common.Data.World;
 using System;
 
 namespace PEngine.Creator.Components.Projects
@@ -114,6 +115,29 @@ namespace PEngine.Creator.Components.Projects
         internal void ChangedEventType(MapData parent, MapEventType type)
         {
             EventTypeChanged?.Invoke(parent, type);
+        }
+
+        #endregion
+
+        #region Worldmap
+
+        internal event Action<WorldmapData, MapData> MapSelected;
+        internal event Action<WorldmapData, MapData> MapMoved;
+        internal event Action<WorldmapData, WorldmapEntryData> WorldmapEntryRemoved;
+
+        internal void SelectedMap(WorldmapData worldmap, MapData map)
+        {
+            MapSelected?.Invoke(worldmap, map);
+        }
+
+        internal void MovedMap(WorldmapData worldmap, MapData map)
+        {
+            MapMoved?.Invoke(worldmap, map);
+        }
+
+        internal void RemovedWorldmapEntry(WorldmapData worldmap, WorldmapEntryData entry)
+        {
+            WorldmapEntryRemoved?.Invoke(worldmap, entry);
         }
 
         #endregion

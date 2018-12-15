@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="Color_MainGray" Type="System.Drawing.Color" Scope="Application">
-      <Value Profile="(Default)">238, 238, 242</Value>
+      <Value Profile="(Default)">Control</Value>
     </Setting>
     <Setting Name="Color_MainText" Type="System.Drawing.Color" Scope="Application">
       <Value Profile="(Default)">Black</Value>

@@ -6,11 +6,6 @@ namespace PEngine.Creator.Components.Projects
 {
     internal partial class ProjectTabComponent : UserControl
     {
-        protected const int ICON_DOCUMENT = 0;
-        protected const int ICON_MAP = 1;
-        protected const int ICON_IMAGE = 2;
-        protected const int ICON_TILESET = 3;
-
         protected readonly ProjectEventBus _eventBus;
         private bool _hasChanges;
 
@@ -38,7 +33,7 @@ namespace PEngine.Creator.Components.Projects
         }
 
         internal ProjectFileData File { get; }
-        internal virtual int IconIndex => ICON_DOCUMENT;
+        internal string IconKey => FileIconProvider.GetIconKey(File.FileType);
         internal virtual bool CanSave => true;
         internal virtual bool CanSaveAs => true;
 

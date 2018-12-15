@@ -22,7 +22,7 @@ namespace PEngine.Creator.Components.Game.Maps
         {
             // load resources
             var tilesetFile = Project.ActiveProject.GetFile(data.tileset);
-            var tileset = TilesetData.Load(tilesetFile.path);
+            var tileset = TilesetData.Load(tilesetFile);
             var texture = ResourceManager.GetTilesetTexture(tileset).Texture;
 
             // generate map
@@ -134,7 +134,7 @@ namespace PEngine.Creator.Components.Game.Maps
                 return MapHealthStatus.MissingTileset;
             }
 
-            var tileset = TilesetData.Load(tilesetFile.path);
+            var tileset = TilesetData.Load(tilesetFile);
             foreach (var tile in data.tiles)
             {
                 if (!tileset.tiles.Any(t => t.id == tile.tileId))
@@ -152,6 +152,7 @@ namespace PEngine.Creator.Components.Game.Maps
             map.tileset = tileset.id;
             map.name = name;
             map.events = new MapEventData[0];
+            map.fillTileId = null;
 
             // generate a single starting tile
             if (tileset.tiles.Length > 0)

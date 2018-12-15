@@ -16,10 +16,7 @@
             Y = y;
         }
 
-        internal static Double2D Zero()
-        {
-            return new Double2D(0, 0);
-        }
+        internal static Double2D Zero => new Double2D(0, 0);
 
         public static Double2D operator +(Double2D left, Double2D right)
         {

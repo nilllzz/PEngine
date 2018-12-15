@@ -17,7 +17,7 @@ namespace PEngine.Game.Components.World.Entities
         protected int _walkCycleFrame = 0;
         private int _walkCycleDelay = WALK_CYCLE_DELAY;
 
-        internal CharacterFacing Facing { get; set; }
+        internal ObjectRotation Facing { get; set; }
 
         protected Character(Map map)
             : base(map)
@@ -58,27 +58,32 @@ namespace PEngine.Game.Components.World.Entities
             }
         }
 
-        protected bool CanWalk()
+        protected Double2D GetForwardPosition()
         {
-            // TODO: check for entities
-            // TODO: multiple maps
             var checkPos = Position;
             switch (Facing)
             {
-                case CharacterFacing.Up:
+                case ObjectRotation.Up:
                     checkPos += new Double2D(0, -1);
                     break;
-                case CharacterFacing.Left:
+                case ObjectRotation.Left:
                     checkPos += new Double2D(-1, 0);
                     break;
-                case CharacterFacing.Down:
+                case ObjectRotation.Down:
                     checkPos += new Double2D(0, 1);
                     break;
-                case CharacterFacing.Right:
+                case ObjectRotation.Right:
                     checkPos += new Double2D(1, 0);
                     break;
             }
-            var tile = _map.GetSubtileInfo(checkPos);
+            return checkPos;
+        }
+
+        protected bool CanWalk()
+        {
+            // TODO: check for entities
+            var checkPos = GetForwardPosition();
+            var tile = _map.World.GetSubtileInfo(checkPos);
             if (tile.HasValue)
             {
                 if (tile.Value.Behavior == SubtileBehavior.Floor ||

@@ -6,5 +6,6 @@
         Tileset,
         TextureTileset,
         TextureCharacter,
+        Worldmap,
     }
 }

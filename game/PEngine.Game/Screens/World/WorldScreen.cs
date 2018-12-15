@@ -7,10 +7,11 @@ namespace PEngine.Game.Screens.World
 {
     internal class WorldScreen : Screen
     {
-        internal const float SPRITE_LAYER_MAP = 0;
-        internal const float SPRITE_LAYER_ANIMATIONS = 0.1f;
-        internal const float SPRITE_LAYER_ENTITY = 0.2f;
-        internal const float SPRITE_LAYER_PLAYER = 0.3f;
+        internal const float SPRITE_LAYER_MAP_FILL = 0f;
+        internal const float SPRITE_LAYER_MAP = 0.1f;
+        internal const float SPRITE_LAYER_ANIMATIONS = 0.2f;
+        internal const float SPRITE_LAYER_ENTITY = 0.3f;
+        internal const float SPRITE_LAYER_PLAYER = 0.4f;
 
         private SpriteBatch _batch;
         private Components.World.World _world;
@@ -20,7 +21,8 @@ namespace PEngine.Game.Screens.World
             _batch = new SpriteBatch(Controller.GraphicsDevice);
 
             _world = new Components.World.World();
-            _world.LoadMap(CommandLineArgParser.StartMap ?? "default");
+            _world.LoadContent();
+            _world.ChangeMap(CommandLineArgParser.StartMap ?? "default");
         }
 
         internal override void UnloadContent()
@@ -31,7 +33,7 @@ namespace PEngine.Game.Screens.World
         internal override void Draw(GameTime gameTime)
         {
             // draw map
-            _batch.Begin(sortMode: SpriteSortMode.FrontToBack);
+            _batch.Begin(sortMode: SpriteSortMode.FrontToBack, samplerState: SamplerState.PointWrap);
 
             // draw default background
             _batch.DrawRectangle(Controller.ClientRectangle, new Color(53, 53, 53));

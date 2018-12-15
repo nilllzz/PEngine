@@ -8,7 +8,6 @@ namespace PEngine.Creator.Components.Game
     internal partial class TextureViewer : ProjectTabComponent
     {
         internal override bool CanSave => false;
-        internal override int IconIndex => ICON_IMAGE;
 
         internal TextureViewer(ProjectEventBus eventBus, ProjectFileData file)
             : base(eventBus, file)

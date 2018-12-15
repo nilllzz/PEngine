@@ -127,12 +127,23 @@
       <DependentUpon>TilesetEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\Game\Tilesets\Tileset.service.cs" />
+    <Compile Include="Components\Game\World\Worldmap.service.cs" />
+    <Compile Include="Components\Game\World\WorldmapEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Game\World\WorldmapEditor.Designer.cs">
+      <DependentUpon>WorldmapEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Game\World\WorldmapEntry.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Components\Logo\Logo.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Components\Logo\Logo.Designer.cs">
       <DependentUpon>Logo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\Projects\FileIconProvider.cs" />
     <Compile Include="Components\Projects\IEventBusComponent.cs" />
     <Compile Include="Components\Projects\Optimizer.cs" />
     <Compile Include="Components\Projects\Project.service.cs" />
@@ -178,6 +189,12 @@
     <Compile Include="Forms\New\NewMapForm.Designer.cs">
       <DependentUpon>NewMapForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\PickMapPositionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PickMapPositionForm.Designer.cs">
+      <DependentUpon>PickMapPositionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ResizeMapForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,6 +213,12 @@
     <Compile Include="Forms\TexturePickerForm.Designer.cs">
       <DependentUpon>TexturePickerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\TilePickerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TilePickerForm.Designer.cs">
+      <DependentUpon>TilePickerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\TilesetProperties.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -206,6 +229,11 @@
     <Compile Include="Helpers\ExplorerHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\FileIcons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FileIcons.resx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Base.view.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -278,6 +306,12 @@
     <EmbeddedResource Include="Components\Game\Tilesets\TilesetEditor.resx">
       <DependentUpon>TilesetEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Components\Game\World\WorldmapEditor.resx">
+      <DependentUpon>WorldmapEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Game\World\WorldmapEntry.resx">
+      <DependentUpon>WorldmapEntry.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\Logo\Logo.resx">
       <DependentUpon>Logo.cs</DependentUpon>
     </EmbeddedResource>
@@ -299,6 +333,9 @@
     <EmbeddedResource Include="Forms\New\NewMapForm.resx">
       <DependentUpon>NewMapForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PickMapPositionForm.resx">
+      <DependentUpon>PickMapPositionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ResizeMapForm.resx">
       <DependentUpon>ResizeMapForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -308,8 +345,15 @@
     <EmbeddedResource Include="Forms\TexturePickerForm.resx">
       <DependentUpon>TexturePickerForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TilePickerForm.resx">
+      <DependentUpon>TilePickerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\TilesetProperties.resx">
       <DependentUpon>TilesetProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\FileIcons.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FileIcons.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -495,6 +539,18 @@
     <None Include="Resources\ClassIcon.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\map_add.png" />
+    <None Include="Resources\ZoomOut_12927.png" />
+    <None Include="Resources\zoom_16xLG.png" />
+    <None Include="Resources\file_texture.png" />
+    <None Include="Resources\folder_open.png" />
+    <None Include="Resources\project_open.png" />
+    <None Include="Resources\file_world.png" />
+    <None Include="Resources\file_tileset.png" />
+    <None Include="Resources\folder_closed.png" />
+    <None Include="Resources\project_closed.png" />
+    <None Include="Resources\file_map.png" />
+    <None Include="Resources\file_generic.png" />
     <None Include="Resources\eventWarp.png" />
     <None Include="Resources\eventScript.png" />
     <None Include="Resources\Rename_6779.png" />

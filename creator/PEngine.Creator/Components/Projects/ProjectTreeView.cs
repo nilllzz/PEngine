@@ -17,6 +17,7 @@ namespace PEngine.Creator.Components.Projects
         {
             InitializeComponent();
             TreeViewNodeSorter = new ProjectTreeNodeComparer();
+            ImageList = FileIconProvider.GetImageList();
         }
 
         private void Tree_main_AfterCollapse(object sender, TreeViewEventArgs e)

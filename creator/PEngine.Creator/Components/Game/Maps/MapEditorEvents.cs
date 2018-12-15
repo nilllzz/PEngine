@@ -154,7 +154,7 @@ namespace PEngine.Creator.Components.Game.Maps
                 Control eventProps = new Panel();
                 if (_selectedEvent.EventType == MapEventType.Warp)
                 {
-                    eventProps = new WarpEventEditor(_selectedEvent);
+                    eventProps = new WarpEventEditor(_eventBus, _map, _selectedEvent);
                 }
                 else if (_selectedEvent.EventType == MapEventType.Script)
                 {

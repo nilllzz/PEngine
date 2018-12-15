@@ -3,6 +3,7 @@ using PEngine.Common.Data;
 using PEngine.Common.Data.Maps;
 using PEngine.Creator.Components.Projects;
 using PEngine.Creator.Forms;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace PEngine.Creator.Components.Game.Maps
@@ -10,8 +11,6 @@ namespace PEngine.Creator.Components.Game.Maps
     internal partial class MapEditor : ProjectTabComponent, IEventBusComponent
     {
         private readonly MapData _data;
-
-        internal override int IconIndex => ICON_MAP;
 
         private MapPainter Painter
         {
@@ -159,7 +158,7 @@ namespace PEngine.Creator.Components.Game.Maps
             {
                 case MapEditorLayer.Tiles:
                     var tilesetFile = Project.ActiveProject.GetFile(_data.tileset);
-                    var tilesetData = TilesetData.Load(tilesetFile.path);
+                    var tilesetData = TilesetData.Load(tilesetFile);
                     var tiles = new MapEditorTiles(_eventBus, _data, tilesetData);
                     tiles.Dock = DockStyle.Fill;
                     split_main.Panel2.Controls.Add(tiles);
@@ -180,6 +179,25 @@ namespace PEngine.Creator.Components.Game.Maps
         {
             _data.Save();
             HasChanges = false;
+        }
+
+        private void tool_map_fill_tile_Click(object sender, System.EventArgs e)
+        {
+            var tilesetFile = Project.ActiveProject.GetFile(_data.tileset);
+            var tileset = TilesetData.Load(tilesetFile);
+            var picker = new TilePickerForm(tilesetFile.name, tileset);
+
+            if (_data.fillTileId.HasValue)
+            {
+                picker.SelectedTile = tileset.tiles.FirstOrDefault(t => t.id == _data.fillTileId.Value);
+            }
+
+            var result = picker.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                _data.fillTileId = picker.SelectedTile.id;
+                HasChanges = true;
+            }
         }
     }
 }

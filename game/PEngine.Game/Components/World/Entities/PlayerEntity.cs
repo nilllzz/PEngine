@@ -1,4 +1,5 @@
-﻿using PEngine.Common.Interop;
+﻿using PEngine.Common.Data.Maps;
+using PEngine.Common.Interop;
 using PEngine.Game.Screens.World;
 using System;
 using System.Linq;
@@ -15,10 +16,10 @@ namespace PEngine.Game.Components.World.Entities
         private bool _isBlocked = false;
         private float _blockedTime = 0f;
 
-        internal PlayerEntity(Map map)
-            : base(map)
+        internal PlayerEntity()
+            : base(null)
         {
-            Facing = CharacterFacing.Down;
+            Facing = ObjectRotation.Down;
             _spriteLayer = WorldScreen.SPRITE_LAYER_PLAYER;
 
             Controller.StdIn.PipelineItemArrived += StdIn_PipelineItemArrived;
@@ -29,8 +30,8 @@ namespace PEngine.Game.Components.World.Entities
             if (message.Event == Pipeline.EVENT_PLAYER_MOVED)
             {
                 var coordinates = message.Content.Split(',').Select(c => int.Parse(c)).ToArray();
-                Position = new Double2D(coordinates[0], coordinates[1]);
-                Facing = CharacterFacing.Down;
+                Position = new Double2D(coordinates[0] + _map.WorldOffset.X, coordinates[1] + _map.WorldOffset.Y);
+                Facing = ObjectRotation.Down;
                 WritePlayerPosition();
             }
         }
@@ -65,32 +66,34 @@ namespace PEngine.Game.Components.World.Entities
                     _walking = false;
                     switch (Facing)
                     {
-                        case CharacterFacing.Up:
-                        case CharacterFacing.Down:
+                        case ObjectRotation.Up:
+                        case ObjectRotation.Down:
                             Position.Y = (float)Math.Round(Position.Y);
                             break;
-                        case CharacterFacing.Left:
-                        case CharacterFacing.Right:
+                        case ObjectRotation.Left:
+                        case ObjectRotation.Right:
                             Position.X = (float)Math.Round(Position.X);
                             break;
                     }
 
                     WritePlayerPosition();
+                    TriggerWalkEvent();
+                    _map.World.UpdateWorldmaps(true);
                 }
                 else
                 {
                     switch (Facing)
                     {
-                        case CharacterFacing.Up:
+                        case ObjectRotation.Up:
                             Position.Y -= WALK_SPEED;
                             break;
-                        case CharacterFacing.Left:
+                        case ObjectRotation.Left:
                             Position.X -= WALK_SPEED;
                             break;
-                        case CharacterFacing.Down:
+                        case ObjectRotation.Down:
                             Position.Y += WALK_SPEED;
                             break;
-                        case CharacterFacing.Right:
+                        case ObjectRotation.Right:
                             Position.X += WALK_SPEED;
                             break;
                     }
@@ -99,22 +102,22 @@ namespace PEngine.Game.Components.World.Entities
 
             if (!_walking)
             {
-                CharacterFacing? facing = null;
+                ObjectRotation? facing = null;
                 if (GameboyInputs.DownDown())
                 {
-                    facing = CharacterFacing.Down;
+                    facing = ObjectRotation.Down;
                 }
                 else if (GameboyInputs.UpDown())
                 {
-                    facing = CharacterFacing.Up;
+                    facing = ObjectRotation.Up;
                 }
                 if (GameboyInputs.LeftDown())
                 {
-                    facing = CharacterFacing.Left;
+                    facing = ObjectRotation.Left;
                 }
                 else if (GameboyInputs.RightDown())
                 {
-                    facing = CharacterFacing.Right;
+                    facing = ObjectRotation.Right;
                 }
                 if (facing.HasValue)
                 {
@@ -133,6 +136,7 @@ namespace PEngine.Game.Components.World.Entities
                         {
                             _isBlocked = true;
                             _blockedTime = 1f;
+                            TriggerBlockedWarp();
                         }
                     }
                 }
@@ -143,7 +147,39 @@ namespace PEngine.Game.Components.World.Entities
 
         internal void WritePlayerPosition()
         {
-            GamePipeline.Write(Pipeline.EVENT_PLAYER_MOVED, (int)Position.X + "," + (int)Position.Y);
+            GamePipeline.Write(Pipeline.EVENT_PLAYER_MOVED,
+                (int)(Position.X - _map.WorldOffset.X) + "," + (int)(Position.Y - _map.WorldOffset.Y));
+        }
+
+        private void TriggerBlockedWarp()
+        {
+            // triggers warps in walls the player walked against (side/down doors)
+            var checkPos = GetForwardPosition();
+            var e = _map.GetMapEvent(checkPos);
+            if (e != null)
+            {
+                _map.World.ExecuteEvent(e);
+            }
+        }
+
+        private void TriggerWalkEvent()
+        {
+            var e = _map.GetMapEvent(Position);
+            if (e != null)
+            {
+                _map.World.ExecuteEvent(e);
+            }
+        }
+
+        internal void WalkForward()
+        {
+            _walkDistance = 1f;
+            _walking = true;
+        }
+
+        internal void SetMap(Map map)
+        {
+            _map = map;
         }
     }
 }

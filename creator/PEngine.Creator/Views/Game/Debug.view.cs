@@ -143,6 +143,7 @@ namespace PEngine.Creator.Views.Game
             ActiveComponent = null;
             txt_log.Text = "";
             Status = "Waiting for process...";
+            StatusColor = Color.FromArgb(14, 99, 156);
 
             tree_resources.Nodes.Clear();
             tree_resources.Nodes.Add("Game");

@@ -15,7 +15,7 @@ namespace PEngine.Creator.Components.Projects
             {
                 var xFile = x as ProjectFileTreeNode;
                 var yFile = y as ProjectFileTreeNode;
-                return yFile.File.id.CompareTo(xFile.File.id);
+                return xFile.File.name.CompareTo(yFile.File.name);
             }
             else if (!xIsFile && yIsFile)
             {

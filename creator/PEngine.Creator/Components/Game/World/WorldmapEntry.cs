@@ -11,6 +11,8 @@ namespace PEngine.Creator.Components.Game.World
 {
     internal class WorldmapEntry : CrispPictureBox, IEventBusComponent
     {
+        private static int _colorCounter = 0;
+
         private readonly WorldmapData _parent;
         private readonly MapData _map;
         private readonly ProjectEventBus _eventBus;
@@ -48,10 +50,12 @@ namespace PEngine.Creator.Components.Game.World
             var mapFile = Project.ActiveProject.GetFile(Entry.mapId);
             _map = MapData.Load(mapFile);
 
-            Image = MapService.GenerateTexture(_map);
+            Image = GenerateTexture();
 
             ResetPositioning();
             UpdateEntryBounds();
+
+            _colorCounter++;
         }
 
         #region events
@@ -85,6 +89,9 @@ namespace PEngine.Creator.Components.Game.World
                 var unit = 16 * Zoom;
                 if (Math.Abs(diff.X) >= unit || Math.Abs(diff.Y) >= unit)
                 {
+                    var p = (Panel)Parent;
+                    var test = p.AutoScrollPosition;
+
                     // x
                     {
                         var movedX = (int)(diff.X / unit);
@@ -189,13 +196,74 @@ namespace PEngine.Creator.Components.Game.World
         internal void ResetPositioning()
         {
             Size = new Size((int)(Image.Width * Zoom), (int)(Image.Height * Zoom));
-            Location = new Point((int)(Entry.bounds[0] * Zoom * 16), (int)(Entry.bounds[1] * Zoom * 16));
+
+            var offset = Point.Empty;
+            if (Parent is Panel container)
+            {
+                offset = container.AutoScrollPosition;
+            }
+            Location = new Point((int)(Entry.bounds[0] * Zoom * 16 + offset.X),
+                (int)(Entry.bounds[1] * Zoom * 16 + offset.Y));
         }
 
         internal void UpdateEntryBounds()
         {
             Entry.bounds[2] = Image.Width / 16;
             Entry.bounds[3] = Image.Height / 16;
+        }
+
+        private Bitmap GenerateTexture()
+        {
+            var baseTexture = MapService.GenerateTexture(_map);
+            using (var g = Graphics.FromImage(baseTexture))
+            {
+                g.DrawRectangle(GetColoredPen(),
+                    new Rectangle(0, 0,
+                        baseTexture.Width - 2,
+                        baseTexture.Height - 2));
+            }
+            return baseTexture;
+        }
+
+        private static Pen GetColoredPen()
+        {
+            switch (_colorCounter % 16)
+            {
+                case 0:
+                    return Pens.Yellow;
+                case 1:
+                    return Pens.Red;
+                case 2:
+                    return Pens.Green;
+                case 3:
+                    return Pens.Blue;
+                case 4:
+                    return Pens.Purple;
+                case 5:
+                    return Pens.LimeGreen;
+                case 6:
+                    return Pens.Silver;
+                case 7:
+                    return Pens.Brown;
+                case 8:
+                    return Pens.Azure;
+                case 9:
+                    return Pens.Fuchsia;
+                case 10:
+                    return Pens.Pink;
+                case 11:
+                    return Pens.DarkGreen;
+                case 12:
+                    return Pens.Aquamarine;
+                case 13:
+                    return Pens.White;
+                case 14:
+                    return Pens.Lavender;
+                case 15:
+                    return Pens.Beige;
+            }
+            // fallback
+            return Pens.Black;
         }
     }
 }

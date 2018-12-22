@@ -30,28 +30,30 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tool_main = new System.Windows.Forms.ToolStrip();
+            this.tool_refresh = new System.Windows.Forms.ToolStripButton();
+            this.tool_collapse = new System.Windows.Forms.ToolStripButton();
             this.context_folders = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.context_folders_add = new System.Windows.Forms.ToolStripMenuItem();
+            this.context_folders_add_existing = new System.Windows.Forms.ToolStripMenuItem();
+            this.context_folders_add_folder = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.context_folder_add_map = new System.Windows.Forms.ToolStripMenuItem();
+            this.context_files_new_tileset = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.context_folders_rename = new System.Windows.Forms.ToolStripMenuItem();
+            this.context_folders_delete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.context_folders_reveal = new System.Windows.Forms.ToolStripMenuItem();
             this.context_files = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.context_files_open = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tool_refresh = new System.Windows.Forms.ToolStripButton();
-            this.tool_collapse = new System.Windows.Forms.ToolStripButton();
-            this.tree_main = new PEngine.Creator.Components.Projects.ProjectTreeView();
-            this.context_folders_add_existing = new System.Windows.Forms.ToolStripMenuItem();
-            this.context_folders_add_folder = new System.Windows.Forms.ToolStripMenuItem();
-            this.context_folder_add_map = new System.Windows.Forms.ToolStripMenuItem();
-            this.context_folders_rename = new System.Windows.Forms.ToolStripMenuItem();
-            this.context_folders_delete = new System.Windows.Forms.ToolStripMenuItem();
-            this.context_folders_reveal = new System.Windows.Forms.ToolStripMenuItem();
             this.context_files_rename = new System.Windows.Forms.ToolStripMenuItem();
             this.context_files_delete = new System.Windows.Forms.ToolStripMenuItem();
             this.context_files_exclude = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.context_files_reveal = new System.Windows.Forms.ToolStripMenuItem();
+            this.tree_main = new PEngine.Creator.Components.Projects.ProjectTreeView();
+            this.context_files_new_script = new System.Windows.Forms.ToolStripMenuItem();
             this.tool_main.SuspendLayout();
             this.context_folders.SuspendLayout();
             this.context_files.SuspendLayout();
@@ -69,6 +71,26 @@
             this.tool_main.Size = new System.Drawing.Size(326, 25);
             this.tool_main.TabIndex = 1;
             // 
+            // tool_refresh
+            // 
+            this.tool_refresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tool_refresh.Image = global::PEngine.Creator.Properties.Resources.refresh_16xLG;
+            this.tool_refresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tool_refresh.Name = "tool_refresh";
+            this.tool_refresh.Size = new System.Drawing.Size(23, 22);
+            this.tool_refresh.Text = "Refresh";
+            this.tool_refresh.Click += new System.EventHandler(this.tool_refresh_Click);
+            // 
+            // tool_collapse
+            // 
+            this.tool_collapse.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tool_collapse.Image = global::PEngine.Creator.Properties.Resources.collapseAll;
+            this.tool_collapse.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tool_collapse.Name = "tool_collapse";
+            this.tool_collapse.Size = new System.Drawing.Size(23, 22);
+            this.tool_collapse.Text = "Collapse All";
+            this.tool_collapse.Click += new System.EventHandler(this.tool_collapse_Click);
+            // 
             // context_folders
             // 
             this.context_folders.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -79,7 +101,7 @@
             this.toolStripSeparator5,
             this.context_folders_reveal});
             this.context_folders.Name = "context_containers";
-            this.context_folders.Size = new System.Drawing.Size(167, 104);
+            this.context_folders.Size = new System.Drawing.Size(181, 126);
             this.context_folders.Opening += new System.ComponentModel.CancelEventHandler(this.context_folders_Opening);
             // 
             // context_folders_add
@@ -88,25 +110,82 @@
             this.context_folders_add_existing,
             this.context_folders_add_folder,
             this.toolStripSeparator4,
-            this.context_folder_add_map});
+            this.context_folder_add_map,
+            this.context_files_new_tileset,
+            this.context_files_new_script});
             this.context_folders_add.Name = "context_folders_add";
-            this.context_folders_add.Size = new System.Drawing.Size(166, 22);
+            this.context_folders_add.Size = new System.Drawing.Size(180, 22);
             this.context_folders_add.Text = "Add...";
+            // 
+            // context_folders_add_existing
+            // 
+            this.context_folders_add_existing.Image = global::PEngine.Creator.Properties.Resources.AddExistingItem_6269;
+            this.context_folders_add_existing.Name = "context_folders_add_existing";
+            this.context_folders_add_existing.Size = new System.Drawing.Size(180, 22);
+            this.context_folders_add_existing.Text = "Existing Item...";
+            this.context_folders_add_existing.Click += new System.EventHandler(this.context_folders_add_existing_Click);
+            // 
+            // context_folders_add_folder
+            // 
+            this.context_folders_add_folder.Image = global::PEngine.Creator.Properties.Resources.newFolder;
+            this.context_folders_add_folder.Name = "context_folders_add_folder";
+            this.context_folders_add_folder.Size = new System.Drawing.Size(180, 22);
+            this.context_folders_add_folder.Text = "New Folder";
+            this.context_folders_add_folder.Click += new System.EventHandler(this.context_folders_add_folder_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(147, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            // 
+            // context_folder_add_map
+            // 
+            this.context_folder_add_map.Image = global::PEngine.Creator.Properties.Resources.newMap;
+            this.context_folder_add_map.Name = "context_folder_add_map";
+            this.context_folder_add_map.Size = new System.Drawing.Size(180, 22);
+            this.context_folder_add_map.Text = "Map";
+            this.context_folder_add_map.Click += new System.EventHandler(this.context_folder_add_map_Click);
+            // 
+            // context_files_new_tileset
+            // 
+            this.context_files_new_tileset.Name = "context_files_new_tileset";
+            this.context_files_new_tileset.Size = new System.Drawing.Size(180, 22);
+            this.context_files_new_tileset.Text = "Tileset";
+            this.context_files_new_tileset.Click += new System.EventHandler(this.context_files_new_tileset_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(163, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            // 
+            // context_folders_rename
+            // 
+            this.context_folders_rename.Image = global::PEngine.Creator.Properties.Resources.Rename_6779;
+            this.context_folders_rename.Name = "context_folders_rename";
+            this.context_folders_rename.Size = new System.Drawing.Size(180, 22);
+            this.context_folders_rename.Text = "Rename";
+            this.context_folders_rename.Click += new System.EventHandler(this.context_folders_rename_Click);
+            // 
+            // context_folders_delete
+            // 
+            this.context_folders_delete.Image = global::PEngine.Creator.Properties.Resources.Clearallrequests_8816;
+            this.context_folders_delete.Name = "context_folders_delete";
+            this.context_folders_delete.Size = new System.Drawing.Size(180, 22);
+            this.context_folders_delete.Text = "Delete";
+            this.context_folders_delete.Click += new System.EventHandler(this.context_folders_delete_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(163, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
+            // 
+            // context_folders_reveal
+            // 
+            this.context_folders_reveal.Image = global::PEngine.Creator.Properties.Resources.folder_Open_16xLG;
+            this.context_folders_reveal.Name = "context_folders_reveal";
+            this.context_folders_reveal.Size = new System.Drawing.Size(180, 22);
+            this.context_folders_reveal.Text = "Reveal in Explorer";
+            this.context_folders_reveal.Click += new System.EventHandler(this.context_folders_reveal_Click);
             // 
             // context_files
             // 
@@ -133,103 +212,6 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(180, 6);
             // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(180, 6);
-            // 
-            // tool_refresh
-            // 
-            this.tool_refresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tool_refresh.Image = global::PEngine.Creator.Properties.Resources.refresh_16xLG;
-            this.tool_refresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tool_refresh.Name = "tool_refresh";
-            this.tool_refresh.Size = new System.Drawing.Size(23, 22);
-            this.tool_refresh.Text = "Refresh";
-            this.tool_refresh.Click += new System.EventHandler(this.tool_refresh_Click);
-            // 
-            // tool_collapse
-            // 
-            this.tool_collapse.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tool_collapse.Image = global::PEngine.Creator.Properties.Resources.collapseAll;
-            this.tool_collapse.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tool_collapse.Name = "tool_collapse";
-            this.tool_collapse.Size = new System.Drawing.Size(23, 22);
-            this.tool_collapse.Text = "Collapse All";
-            this.tool_collapse.Click += new System.EventHandler(this.tool_collapse_Click);
-            // 
-            // tree_main
-            // 
-            this.tree_main.AllowDrop = true;
-            this.tree_main.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tree_main.BackColor = global::PEngine.Creator.Properties.Settings.Default.Color_LightGray;
-            this.tree_main.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tree_main.FileTypeFilter = new PEngine.Common.Data.ProjectFileType[0];
-            this.tree_main.FullRowSelect = true;
-            this.tree_main.HideSelection = false;
-            this.tree_main.LabelEdit = true;
-            this.tree_main.Location = new System.Drawing.Point(0, 28);
-            this.tree_main.Name = "tree_main";
-            this.tree_main.ShowLines = false;
-            this.tree_main.Size = new System.Drawing.Size(326, 568);
-            this.tree_main.Sorted = true;
-            this.tree_main.TabIndex = 0;
-            this.tree_main.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.tree_main_AfterLabelEdit);
-            this.tree_main.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.tree_main_ItemDrag);
-            this.tree_main.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tree_main_NodeMouseClick);
-            this.tree_main.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tree_main_NodeMouseDoubleClick);
-            this.tree_main.DragDrop += new System.Windows.Forms.DragEventHandler(this.tree_main_DragDrop);
-            this.tree_main.DragEnter += new System.Windows.Forms.DragEventHandler(this.tree_main_DragEnter);
-            // 
-            // context_folders_add_existing
-            // 
-            this.context_folders_add_existing.Image = global::PEngine.Creator.Properties.Resources.AddExistingItem_6269;
-            this.context_folders_add_existing.Name = "context_folders_add_existing";
-            this.context_folders_add_existing.Size = new System.Drawing.Size(150, 22);
-            this.context_folders_add_existing.Text = "Existing Item...";
-            // 
-            // context_folders_add_folder
-            // 
-            this.context_folders_add_folder.Image = global::PEngine.Creator.Properties.Resources.newFolder;
-            this.context_folders_add_folder.Name = "context_folders_add_folder";
-            this.context_folders_add_folder.Size = new System.Drawing.Size(150, 22);
-            this.context_folders_add_folder.Text = "New Folder";
-            this.context_folders_add_folder.Click += new System.EventHandler(this.context_folders_add_folder_Click);
-            // 
-            // context_folder_add_map
-            // 
-            this.context_folder_add_map.Image = global::PEngine.Creator.Properties.Resources.newMap;
-            this.context_folder_add_map.Name = "context_folder_add_map";
-            this.context_folder_add_map.Size = new System.Drawing.Size(150, 22);
-            this.context_folder_add_map.Text = "Map";
-            this.context_folder_add_map.Click += new System.EventHandler(this.context_folder_add_map_Click);
-            // 
-            // context_folders_rename
-            // 
-            this.context_folders_rename.Image = global::PEngine.Creator.Properties.Resources.Rename_6779;
-            this.context_folders_rename.Name = "context_folders_rename";
-            this.context_folders_rename.Size = new System.Drawing.Size(166, 22);
-            this.context_folders_rename.Text = "Rename";
-            this.context_folders_rename.Click += new System.EventHandler(this.context_folders_rename_Click);
-            // 
-            // context_folders_delete
-            // 
-            this.context_folders_delete.Image = global::PEngine.Creator.Properties.Resources.Clearallrequests_8816;
-            this.context_folders_delete.Name = "context_folders_delete";
-            this.context_folders_delete.Size = new System.Drawing.Size(166, 22);
-            this.context_folders_delete.Text = "Delete";
-            this.context_folders_delete.Click += new System.EventHandler(this.context_folders_delete_Click);
-            // 
-            // context_folders_reveal
-            // 
-            this.context_folders_reveal.Image = global::PEngine.Creator.Properties.Resources.folder_Open_16xLG;
-            this.context_folders_reveal.Name = "context_folders_reveal";
-            this.context_folders_reveal.Size = new System.Drawing.Size(166, 22);
-            this.context_folders_reveal.Text = "Reveal in Explorer";
-            this.context_folders_reveal.Click += new System.EventHandler(this.context_folders_reveal_Click);
-            // 
             // context_files_rename
             // 
             this.context_files_rename.Image = global::PEngine.Creator.Properties.Resources.Rename_6779;
@@ -254,6 +236,11 @@
             this.context_files_exclude.Text = "Exclude from Project";
             this.context_files_exclude.Click += new System.EventHandler(this.context_files_exclude_Click);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(180, 6);
+            // 
             // context_files_reveal
             // 
             this.context_files_reveal.Image = global::PEngine.Creator.Properties.Resources.folder_Open_16xLG;
@@ -261,6 +248,40 @@
             this.context_files_reveal.Size = new System.Drawing.Size(183, 22);
             this.context_files_reveal.Text = "Reveal in Explorer";
             this.context_files_reveal.Click += new System.EventHandler(this.context_files_reveal_Click);
+            // 
+            // tree_main
+            // 
+            this.tree_main.AllowDrop = true;
+            this.tree_main.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tree_main.BackColor = global::PEngine.Creator.Properties.Settings.Default.Color_LightGray;
+            this.tree_main.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tree_main.FileTypeFilter = new PEngine.Common.Data.ProjectFileType[0];
+            this.tree_main.FullRowSelect = true;
+            this.tree_main.HideSelection = false;
+            this.tree_main.ImageIndex = 0;
+            this.tree_main.LabelEdit = true;
+            this.tree_main.Location = new System.Drawing.Point(0, 28);
+            this.tree_main.Name = "tree_main";
+            this.tree_main.SelectedImageIndex = 0;
+            this.tree_main.ShowLines = false;
+            this.tree_main.Size = new System.Drawing.Size(326, 568);
+            this.tree_main.Sorted = true;
+            this.tree_main.TabIndex = 0;
+            this.tree_main.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.tree_main_AfterLabelEdit);
+            this.tree_main.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.tree_main_ItemDrag);
+            this.tree_main.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tree_main_NodeMouseClick);
+            this.tree_main.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tree_main_NodeMouseDoubleClick);
+            this.tree_main.DragDrop += new System.Windows.Forms.DragEventHandler(this.tree_main_DragDrop);
+            this.tree_main.DragEnter += new System.Windows.Forms.DragEventHandler(this.tree_main_DragEnter);
+            // 
+            // context_files_new_script
+            // 
+            this.context_files_new_script.Name = "context_files_new_script";
+            this.context_files_new_script.Size = new System.Drawing.Size(180, 22);
+            this.context_files_new_script.Text = "Script";
+            this.context_files_new_script.Click += new System.EventHandler(this.context_files_new_script_Click);
             // 
             // ProjectTree
             // 
@@ -304,5 +325,7 @@
         private System.Windows.Forms.ToolStripMenuItem context_folders_delete;
         private System.Windows.Forms.ToolStripMenuItem context_folders_rename;
         private System.Windows.Forms.ToolStripMenuItem context_files_rename;
+        private System.Windows.Forms.ToolStripMenuItem context_files_new_tileset;
+        private System.Windows.Forms.ToolStripMenuItem context_files_new_script;
     }
 }

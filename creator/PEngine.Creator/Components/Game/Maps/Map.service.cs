@@ -124,28 +124,6 @@ namespace PEngine.Creator.Components.Game.Maps
             map.tiles = tiles.ToArray();
         }
 
-        internal static MapHealthStatus CheckHealth(MapData data)
-        {
-            // check if the tileset exists
-            // check if all tiles exist in their tileset
-            var tilesetFile = Project.ActiveProject.GetFile(data.tileset);
-            if (tilesetFile == null)
-            {
-                return MapHealthStatus.MissingTileset;
-            }
-
-            var tileset = TilesetData.Load(tilesetFile);
-            foreach (var tile in data.tiles)
-            {
-                if (!tileset.tiles.Any(t => t.id == tile.tileId))
-                {
-                    return MapHealthStatus.InvalidTileIdUsed;
-                }
-            }
-
-            return MapHealthStatus.Healthy;
-        }
-
         internal static MapData CreateNew(string id, TilesetData tileset, string name)
         {
             var map = MapData.Create(id);

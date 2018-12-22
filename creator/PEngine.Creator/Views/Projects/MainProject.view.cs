@@ -4,6 +4,7 @@ using PEngine.Common.Data.Maps;
 using PEngine.Common.Data.World;
 using PEngine.Creator.Components.Game;
 using PEngine.Creator.Components.Game.Maps;
+using PEngine.Creator.Components.Game.Scripts;
 using PEngine.Creator.Components.Game.Tilesets;
 using PEngine.Creator.Components.Game.World;
 using PEngine.Creator.Components.Projects;
@@ -14,7 +15,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace PEngine.Creator.Views.Projects
@@ -135,6 +135,12 @@ namespace PEngine.Creator.Views.Projects
                     {
                         var worldmap = WorldmapData.Load(file);
                         var editor = new WorldmapEditor(_eventBus, file, worldmap);
+                        OpenTab(editor);
+                    }
+                    break;
+                case ProjectFileType.Script:
+                    {
+                        var editor = new ScriptEditor(_eventBus, file);
                         OpenTab(editor);
                     }
                     break;

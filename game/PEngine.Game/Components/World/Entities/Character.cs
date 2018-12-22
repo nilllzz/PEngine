@@ -91,6 +91,21 @@ namespace PEngine.Game.Components.World.Entities
                 {
                     return true;
                 }
+                else if (tile.Value.Behavior == SubtileBehavior.LedgeDown &&
+                    Facing == ObjectRotation.Down)
+                {
+                    return true;
+                }
+                else if (tile.Value.Behavior == SubtileBehavior.LedgeLeft &&
+                    Facing == ObjectRotation.Left)
+                {
+                    return true;
+                }
+                else if (tile.Value.Behavior == SubtileBehavior.LedgeRight &&
+                    Facing == ObjectRotation.Right)
+                {
+                    return true;
+                }
             }
             return false;
         }

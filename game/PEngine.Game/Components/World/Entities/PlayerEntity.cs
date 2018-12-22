@@ -129,8 +129,19 @@ namespace PEngine.Game.Components.World.Entities
                     {
                         if (CanWalk())
                         {
+                            var checkPos = GetForwardPosition();
+                            var tile = _map.World.GetSubtileInfo(checkPos);
+                            if (tile.Value.Behavior == SubtileBehavior.LedgeDown ||
+                                tile.Value.Behavior == SubtileBehavior.LedgeLeft ||
+                                tile.Value.Behavior == SubtileBehavior.LedgeRight)
+                            {
+                                _walkDistance = 2f;
+                            }
+                            else
+                            {
+                                _walkDistance = 1f;
+                            }
                             _walking = true;
-                            _walkDistance = 1f;
                         }
                         else
                         {

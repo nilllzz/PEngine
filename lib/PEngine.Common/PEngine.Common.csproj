@@ -49,6 +49,11 @@
     <Compile Include="Data\Maps\SubtileBehavior.cs" />
     <Compile Include="Data\Maps\TileData.cs" />
     <Compile Include="Data\Maps\TilesetData.cs" />
+    <Compile Include="Data\Pokemon\ExperienceType.cs" />
+    <Compile Include="Data\Pokemon\MovesetEntryData.cs" />
+    <Compile Include="Data\Pokemon\PokemonData.cs" />
+    <Compile Include="Data\Pokemon\PokemonGenderNominalRatio.cs" />
+    <Compile Include="Data\Pokemon\PokemonSpritePalette.cs" />
     <Compile Include="Data\ProjectData.cs" />
     <Compile Include="Data\ProjectFileData.cs" />
     <Compile Include="Data\ProjectFileType.cs" />

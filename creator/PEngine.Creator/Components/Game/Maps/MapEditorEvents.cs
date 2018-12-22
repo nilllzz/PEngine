@@ -84,7 +84,10 @@ namespace PEngine.Creator.Components.Game.Maps
         private void btn_event_target_select_Click(object sender, EventArgs e)
         {
             var selectFileForm = new SelectFileForm();
-            selectFileForm.FileTypeFilter = new[] { ProjectFileType.Map };
+            selectFileForm.FileTypeFilter =
+                _selectedEvent.EventType == MapEventType.Warp ?
+                new[] { ProjectFileType.Map } :
+                new[] { ProjectFileType.Script };
             var result = selectFileForm.ShowDialog(this);
             if (result == DialogResult.OK)
             {
@@ -158,7 +161,7 @@ namespace PEngine.Creator.Components.Game.Maps
                 }
                 else if (_selectedEvent.EventType == MapEventType.Script)
                 {
-
+                    eventProps = new ScriptEventEditor();
                 }
 
                 if (_selectedEvent.target != null)

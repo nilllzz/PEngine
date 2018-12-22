@@ -33,16 +33,11 @@
             this.tool_map_layer_objects = new System.Windows.Forms.ToolStripButton();
             this.tool_map_layer_events = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tool_map_tool_create = new System.Windows.Forms.ToolStripButton();
-            this.tool_map_tool_erase = new System.Windows.Forms.ToolStripButton();
-            this.tool_map_tool_pick = new System.Windows.Forms.ToolStripButton();
-            this.tool_map_tool_fill = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tool_map_resize = new System.Windows.Forms.ToolStripButton();
             this.tool_map_grid = new System.Windows.Forms.ToolStripButton();
+            this.tool_map_fill_tile = new System.Windows.Forms.ToolStripButton();
             this.split_main = new System.Windows.Forms.SplitContainer();
             this.panel_map_container = new System.Windows.Forms.Panel();
-            this.tool_map_fill_tile = new System.Windows.Forms.ToolStripButton();
             this.tool_map.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.split_main)).BeginInit();
             this.split_main.Panel1.SuspendLayout();
@@ -58,11 +53,6 @@
             this.tool_map_layer_objects,
             this.tool_map_layer_events,
             this.toolStripSeparator1,
-            this.tool_map_tool_create,
-            this.tool_map_tool_erase,
-            this.tool_map_tool_pick,
-            this.tool_map_tool_fill,
-            this.toolStripSeparator2,
             this.tool_map_resize,
             this.tool_map_grid,
             this.tool_map_fill_tile});
@@ -109,53 +99,6 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // tool_map_tool_create
-            // 
-            this.tool_map_tool_create.Checked = true;
-            this.tool_map_tool_create.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tool_map_tool_create.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tool_map_tool_create.Image = global::PEngine.Creator.Properties.Resources.Select;
-            this.tool_map_tool_create.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tool_map_tool_create.Name = "tool_map_tool_create";
-            this.tool_map_tool_create.Size = new System.Drawing.Size(23, 22);
-            this.tool_map_tool_create.Text = "Tile Add Mode";
-            this.tool_map_tool_create.Click += new System.EventHandler(this.tool_map_tool_create_Click);
-            // 
-            // tool_map_tool_erase
-            // 
-            this.tool_map_tool_erase.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tool_map_tool_erase.Image = global::PEngine.Creator.Properties.Resources.EraseTool_203;
-            this.tool_map_tool_erase.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tool_map_tool_erase.Name = "tool_map_tool_erase";
-            this.tool_map_tool_erase.Size = new System.Drawing.Size(23, 22);
-            this.tool_map_tool_erase.Text = "Tile Erase Mode";
-            this.tool_map_tool_erase.Click += new System.EventHandler(this.tool_map_tool_erase_Click);
-            // 
-            // tool_map_tool_pick
-            // 
-            this.tool_map_tool_pick.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tool_map_tool_pick.Image = global::PEngine.Creator.Properties.Resources.ColorSelectionTool_202;
-            this.tool_map_tool_pick.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tool_map_tool_pick.Name = "tool_map_tool_pick";
-            this.tool_map_tool_pick.Size = new System.Drawing.Size(23, 22);
-            this.tool_map_tool_pick.Text = "Tile Pick Mode";
-            this.tool_map_tool_pick.Click += new System.EventHandler(this.tool_map_tool_pick_Click);
-            // 
-            // tool_map_tool_fill
-            // 
-            this.tool_map_tool_fill.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tool_map_tool_fill.Image = global::PEngine.Creator.Properties.Resources.FillTool_204;
-            this.tool_map_tool_fill.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tool_map_tool_fill.Name = "tool_map_tool_fill";
-            this.tool_map_tool_fill.Size = new System.Drawing.Size(23, 22);
-            this.tool_map_tool_fill.Text = "Tile Fill Mode";
-            this.tool_map_tool_fill.Click += new System.EventHandler(this.tool_map_tool_fill_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
             // tool_map_resize
             // 
             this.tool_map_resize.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -175,6 +118,16 @@
             this.tool_map_grid.Size = new System.Drawing.Size(23, 22);
             this.tool_map_grid.Text = "Overlay Grid";
             this.tool_map_grid.Click += new System.EventHandler(this.tool_map_grid_Click);
+            // 
+            // tool_map_fill_tile
+            // 
+            this.tool_map_fill_tile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tool_map_fill_tile.Image = global::PEngine.Creator.Properties.Resources.grid_Web_16xLG;
+            this.tool_map_fill_tile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tool_map_fill_tile.Name = "tool_map_fill_tile";
+            this.tool_map_fill_tile.Size = new System.Drawing.Size(23, 22);
+            this.tool_map_fill_tile.Text = "Pick fill tile";
+            this.tool_map_fill_tile.Click += new System.EventHandler(this.tool_map_fill_tile_Click);
             // 
             // split_main
             // 
@@ -199,16 +152,6 @@
             this.panel_map_container.Name = "panel_map_container";
             this.panel_map_container.Size = new System.Drawing.Size(500, 431);
             this.panel_map_container.TabIndex = 0;
-            // 
-            // tool_map_fill_tile
-            // 
-            this.tool_map_fill_tile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tool_map_fill_tile.Image = global::PEngine.Creator.Properties.Resources.grid_Web_16xLG;
-            this.tool_map_fill_tile.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tool_map_fill_tile.Name = "tool_map_fill_tile";
-            this.tool_map_fill_tile.Size = new System.Drawing.Size(23, 22);
-            this.tool_map_fill_tile.Text = "Pick fill tile";
-            this.tool_map_fill_tile.Click += new System.EventHandler(this.tool_map_fill_tile_Click);
             // 
             // MapEditor
             // 
@@ -238,11 +181,6 @@
         private System.Windows.Forms.ToolStripButton tool_map_layer_events;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton tool_map_resize;
-        private System.Windows.Forms.ToolStripButton tool_map_tool_create;
-        private System.Windows.Forms.ToolStripButton tool_map_tool_erase;
-        private System.Windows.Forms.ToolStripButton tool_map_tool_pick;
-        private System.Windows.Forms.ToolStripButton tool_map_tool_fill;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton tool_map_grid;
         private System.Windows.Forms.ToolStripButton tool_map_fill_tile;
     }

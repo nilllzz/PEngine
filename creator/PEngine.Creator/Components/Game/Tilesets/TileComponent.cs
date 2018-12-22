@@ -92,9 +92,9 @@ namespace PEngine.Creator.Components.Game.Tilesets
 
         private void context_tile_duplicate_Click(object sender, System.EventArgs e)
         {
-            if (_parent.tiles.Length >= ProjectService.MAX_TILES_IN_SET)
+            if (_parent.tiles.Length >= TilesetService.MAX_TILES_IN_SET)
             {
-                MessageBox.Show($"One tileset can only contain up to {ProjectService.MAX_TILES_IN_SET} tiles.\n\nRemove an existing tile to add a new one.",
+                MessageBox.Show($"One tileset can only contain up to {TilesetService.MAX_TILES_IN_SET} tiles.\n\nRemove an existing tile to add a new one.",
                     "Tileset", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }

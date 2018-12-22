@@ -17,9 +17,6 @@ namespace PEngine.Creator.Components.Projects
 {
     internal static class ProjectService
     {
-        internal const int MAX_TILES_IN_SET = 64;
-        internal const int MAX_SUBTILES_IN_SET = 64;
-
         internal static string ProjectsDirectory => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "projects");
 
         internal static void CheckCreateProjectsDirectory()
@@ -58,7 +55,7 @@ namespace PEngine.Creator.Components.Projects
                 InitialDirectory = ProjectsDirectory,
                 FileName = "project",
                 Filter = "Project Files (*.json)|*.json",
-                Multiselect = false
+                Multiselect = false,
             };
             dialog.CustomPlaces.Add(ProjectsDirectory);
             var result = dialog.ShowDialog(caller);
@@ -100,6 +97,40 @@ namespace PEngine.Creator.Components.Projects
         // includes an existing file on disk to the project
         internal static ProjectFileData IncludeExternalFile(Project project, string path, ProjectFileType fileType, ProjectFolderData folder)
         {
+            // try and copy the file into the project directory if it's an absolute path
+            if (Path.IsPathRooted(path))
+            {
+                // check if the file is already in the project dir
+                // in that case, just include it
+                if (path.ToLower().StartsWith(project.BaseDirectory.ToLower()))
+                {
+                    path = path.Substring(project.BaseDirectory.Length);
+                    while (path.StartsWith("/") || path.StartsWith("\\"))
+                    {
+                        path = path.Substring(1);
+                    }
+                    // check that this file is not already in the project
+                    var existingFile = project.Files.FirstOrDefault(f => f.path.ToLower() == path.ToLower());
+                    if (existingFile != null)
+                    {
+                        return existingFile;
+                    }
+                }
+                else
+                {
+                    var targetFilePath = GenerateFileName(project, path);
+
+                    // copy the file
+                    File.Copy(path, targetFilePath);
+
+                    path = targetFilePath.Substring(project.BaseDirectory.Length);
+                    while (path.StartsWith("/") || path.StartsWith("\\"))
+                    {
+                        path = path.Substring(1);
+                    }
+                }
+            }
+
             // the file's name is the last part of the path
             var name = Path.GetFileNameWithoutExtension(path);
             // generate id from that name
@@ -154,6 +185,31 @@ namespace PEngine.Creator.Components.Projects
                 file = project.GetFile(id);
             }
             return id;
+        }
+
+        internal static string GenerateFileName(Project project, string path)
+        {
+            var fileName = Path.GetFileNameWithoutExtension(path);
+            var extension = Path.GetExtension(path);
+
+            // find a valid target file path
+            var fileExists = false;
+            var targetFilePath = "";
+            var n = 0;
+
+            do
+            {
+                var numeric = "";
+                if (n > 0)
+                {
+                    numeric = n.ToString();
+                }
+                targetFilePath = Path.Combine(project.BaseDirectory, fileName) + numeric + extension;
+                fileExists = File.Exists(targetFilePath);
+                n++;
+            } while (fileExists);
+
+            return targetFilePath;
         }
 
         internal static string GenerateFolderId(Project project, string name)

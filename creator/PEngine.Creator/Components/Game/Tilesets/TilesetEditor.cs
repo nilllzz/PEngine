@@ -237,9 +237,9 @@ namespace PEngine.Creator.Components.Game.Tilesets
 
         private void tool_subtiles_add_Click(object sender, System.EventArgs e)
         {
-            if (_data.subtiles.Length >= ProjectService.MAX_SUBTILES_IN_SET)
+            if (_data.subtiles.Length >= TilesetService.MAX_SUBTILES_IN_SET)
             {
-                MessageBox.Show($"One tileset can only contain up to {ProjectService.MAX_SUBTILES_IN_SET} subtiles.\n\nRemove an existing subtile to add a new one.",
+                MessageBox.Show($"One tileset can only contain up to {TilesetService.MAX_SUBTILES_IN_SET} subtiles.\n\nRemove an existing subtile to add a new one.",
                     "Tileset", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
@@ -261,9 +261,9 @@ namespace PEngine.Creator.Components.Game.Tilesets
 
         private void tool_editor_add_tile_Click(object sender, System.EventArgs e)
         {
-            if (_data.tiles.Length >= ProjectService.MAX_TILES_IN_SET)
+            if (_data.tiles.Length >= TilesetService.MAX_TILES_IN_SET)
             {
-                MessageBox.Show($"One tileset can only contain up to {ProjectService.MAX_TILES_IN_SET} tiles.\n\nRemove an existing tile to add a new one.",
+                MessageBox.Show($"One tileset can only contain up to {TilesetService.MAX_TILES_IN_SET} tiles.\n\nRemove an existing tile to add a new one.",
                     "Tileset", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }

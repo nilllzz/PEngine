@@ -53,6 +53,10 @@
       <Project>{087378ee-7591-47ce-979f-6824fc0606ef}</Project>
       <Name>GameDevCommon</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\lib\kolben\Kolben\Kolben.csproj">
+      <Project>{ed665f9b-07f4-4415-bd72-a728cf1ea909}</Project>
+      <Name>Kolben</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\lib\PEngine.Common\PEngine.Common.csproj">
       <Project>{7f780d3f-a10a-41f4-9a01-b5261dede4e2}</Project>
       <Name>PEngine.Common</Name>
@@ -97,6 +101,11 @@
   <ItemGroup>
     <Compile Include="CommandLineArgParser.cs" />
     <Compile Include="Components\GameboyInputs.cs" />
+    <Compile Include="Components\Scripting\ApiClasses\ApiClass.cs" />
+    <Compile Include="Components\Scripting\ApiClasses\ApiClassAttribute.cs" />
+    <Compile Include="Components\Scripting\ParamHelper.cs" />
+    <Compile Include="Components\Scripting\Prototypes\PlayerPrototype.cs" />
+    <Compile Include="Components\Scripting\ScriptManager.cs" />
     <Compile Include="Components\World\Entities\Character.cs" />
     <Compile Include="Components\World\Entities\Entity.cs" />
     <Compile Include="Components\World\Entities\NPC.cs" />

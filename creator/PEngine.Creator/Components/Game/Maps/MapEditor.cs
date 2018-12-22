@@ -78,38 +78,6 @@ namespace PEngine.Creator.Components.Game.Maps
             }
         }
 
-        private void tool_map_tool_create_Click(object sender, System.EventArgs e)
-        {
-            Painter.Mode = MapPainterMode.Create;
-            UpdateCheckedToolStates();
-        }
-
-        private void tool_map_tool_erase_Click(object sender, System.EventArgs e)
-        {
-            Painter.Mode = MapPainterMode.Erase;
-            UpdateCheckedToolStates();
-        }
-
-        private void tool_map_tool_pick_Click(object sender, System.EventArgs e)
-        {
-            Painter.Mode = MapPainterMode.Pick;
-            UpdateCheckedToolStates();
-        }
-
-        private void tool_map_tool_fill_Click(object sender, System.EventArgs e)
-        {
-            Painter.Mode = MapPainterMode.Fill;
-            UpdateCheckedToolStates();
-        }
-
-        private void UpdateCheckedToolStates()
-        {
-            tool_map_tool_create.Checked = Painter.Mode == MapPainterMode.Create;
-            tool_map_tool_erase.Checked = Painter.Mode == MapPainterMode.Erase;
-            tool_map_tool_pick.Checked = Painter.Mode == MapPainterMode.Pick;
-            tool_map_tool_fill.Checked = Painter.Mode == MapPainterMode.Fill;
-        }
-
         private void tool_map_grid_Click(object sender, System.EventArgs e)
         {
             Painter.GridEnabled = !Painter.GridEnabled;
@@ -159,7 +127,7 @@ namespace PEngine.Creator.Components.Game.Maps
                 case MapEditorLayer.Tiles:
                     var tilesetFile = Project.ActiveProject.GetFile(_data.tileset);
                     var tilesetData = TilesetData.Load(tilesetFile);
-                    var tiles = new MapEditorTiles(_eventBus, _data, tilesetData);
+                    var tiles = new MapEditorTiles(_eventBus, _data, tilesetData, Painter);
                     tiles.Dock = DockStyle.Fill;
                     split_main.Panel2.Controls.Add(tiles);
                     break;

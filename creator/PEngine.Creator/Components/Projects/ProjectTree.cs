@@ -1,10 +1,12 @@
 ﻿using PEngine.Common;
 using PEngine.Common.Data;
+using PEngine.Creator.Components.Game.Scripts;
 using PEngine.Creator.Forms.New;
 using PEngine.Creator.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -190,6 +192,58 @@ namespace PEngine.Creator.Components.Projects
             var enableEditing = tree_main.SelectedNode is ProjectFolderTreeNode folderNode && folderNode.Folder.id != null;
             context_folders_rename.Enabled = enableEditing;
             context_folders_delete.Enabled = enableEditing;
+        }
+
+        private void context_files_new_tileset_Click(object sender, EventArgs e)
+        {
+            var form = new NewTilesetForm();
+            var result = form.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                var tileset = form.CreatedTileset;
+                CreateResource(tileset, form.ChosenName, ProjectFileType.Tileset);
+            }
+        }
+
+        private void context_folders_add_existing_Click(object sender, EventArgs e)
+        {
+            var form = new ImportExistingForm();
+            var result = form.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                var fileType = form.SelectedFileType;
+                if (fileType.HasValue)
+                {
+                    var filePath = form.SelectedFilePath;
+                    var folderNode = GetSelectedFolderNode();
+                    var file = ProjectService.IncludeExternalFile(Project.ActiveProject, filePath, fileType.Value, folderNode.Folder);
+                    Project.ActiveProject.Save();
+                    tree_main.CreateTree();
+                    tree_main.FindFolderNode(folderNode.Folder.id)?.Expand();
+                    var fileNode = tree_main.FindFileNode(file);
+                    if (fileNode != null)
+                    {
+                        tree_main.SelectedNode = fileNode;
+                    }
+                    _eventBus.RequestFileOpen(file);
+                }
+            }
+        }
+
+        private void context_files_new_script_Click(object sender, EventArgs e)
+        {
+            var form = new NewScriptForm();
+            var result = form.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                var folderNode = GetSelectedFolderNode();
+                var name = form.SelectedName;
+
+                ScriptsService.CreateNew(name, folderNode.Folder);
+                Project.ActiveProject.Save();
+                tree_main.CreateTree();
+                tree_main.FindFolderNode(folderNode.Folder.id)?.Expand();
+            }
         }
 
         #endregion

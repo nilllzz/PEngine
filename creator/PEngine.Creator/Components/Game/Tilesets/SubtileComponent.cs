@@ -98,9 +98,9 @@ namespace PEngine.Creator.Components.Game.Tilesets
 
         private void context_subtile_duplicate_Click(object sender, System.EventArgs e)
         {
-            if (_parent.subtiles.Length >= ProjectService.MAX_SUBTILES_IN_SET)
+            if (_parent.subtiles.Length >= TilesetService.MAX_SUBTILES_IN_SET)
             {
-                MessageBox.Show($"One tileset can only contain up to {ProjectService.MAX_SUBTILES_IN_SET} subtiles.\n\nRemove an existing subtile to add a new one.",
+                MessageBox.Show($"One tileset can only contain up to {TilesetService.MAX_SUBTILES_IN_SET} subtiles.\n\nRemove an existing subtile to add a new one.",
                     "Tileset", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }

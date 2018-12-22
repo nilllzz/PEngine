@@ -89,6 +89,12 @@
       <DependentUpon>MapPainter.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\Game\Maps\MapPainterMode.cs" />
+    <Compile Include="Components\Game\Maps\ScriptEventEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Game\Maps\ScriptEventEditor.Designer.cs">
+      <DependentUpon>ScriptEventEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\Game\Maps\WarpEventEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -96,6 +102,13 @@
       <DependentUpon>WarpEventEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\Game\ResourceManager.cs" />
+    <Compile Include="Components\Game\Scripts\ScriptEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Game\Scripts\ScriptEditor.Designer.cs">
+      <DependentUpon>ScriptEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Game\Scripts\Scripts.service.cs" />
     <Compile Include="Components\Game\Tilesets\SubtileEditComponent.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -183,11 +196,29 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\New\ImportExistingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\New\ImportExistingForm.Designer.cs">
+      <DependentUpon>ImportExistingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\New\NewMapForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\New\NewMapForm.Designer.cs">
       <DependentUpon>NewMapForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\New\NewScriptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\New\NewScriptForm.Designer.cs">
+      <DependentUpon>NewScriptForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\New\NewTilesetForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\New\NewTilesetForm.Designer.cs">
+      <DependentUpon>NewTilesetForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\PickMapPositionForm.cs">
       <SubType>Form</SubType>
@@ -291,6 +322,9 @@
     <EmbeddedResource Include="Components\Game\Maps\WarpEventEditor.resx">
       <DependentUpon>WarpEventEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Components\Game\Scripts\ScriptEditor.resx">
+      <DependentUpon>ScriptEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\Game\Tilesets\SubtileComponent.resx">
       <DependentUpon>SubtileComponent.cs</DependentUpon>
     </EmbeddedResource>
@@ -330,8 +364,17 @@
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\New\ImportExistingForm.resx">
+      <DependentUpon>ImportExistingForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\New\NewMapForm.resx">
       <DependentUpon>NewMapForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\New\NewScriptForm.resx">
+      <DependentUpon>NewScriptForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\New\NewTilesetForm.resx">
+      <DependentUpon>NewTilesetForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PickMapPositionForm.resx">
       <DependentUpon>PickMapPositionForm.cs</DependentUpon>
@@ -539,6 +582,8 @@
     <None Include="Resources\ClassIcon.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\script_32xLG.png" />
+    <None Include="Resources\file_script.png" />
     <None Include="Resources\map_add.png" />
     <None Include="Resources\ZoomOut_12927.png" />
     <None Include="Resources\zoom_16xLG.png" />

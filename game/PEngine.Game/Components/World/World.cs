@@ -5,6 +5,7 @@ using PEngine.Common.Data;
 using PEngine.Common.Data.Maps;
 using PEngine.Common.Data.World;
 using PEngine.Common.Interop;
+using PEngine.Game.Components.Scripting;
 using PEngine.Game.Components.World.Entities;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +20,14 @@ namespace PEngine.Game.Components.World
         private WorldmapData _worldmap;
 
         internal Map ActiveMap { get; private set; }
+        internal ScriptManager ScriptManager { get; private set; }
 
         internal void LoadContent()
         {
             var worldmapFile = Project.ActiveProject.GetFiles(ProjectFileType.Worldmap)[0];
             _worldmap = WorldmapData.Load(worldmapFile);
+
+            ScriptManager = new ScriptManager();
 
             _playerEntity = new PlayerEntity();
             _playerEntity.Position = new Double2D(37, 30);
@@ -82,40 +86,64 @@ namespace PEngine.Game.Components.World
 
         internal void UpdateWorldmaps(bool changeMaps)
         {
-            // load new maps or dispose of unneeded ones
-            var playerRect = new Rectangle((int)_playerEntity.Position.X - 6, (int)_playerEntity.Position.Y - 6, 13, 13);
-            foreach (var mapEntry in _worldmap.entries)
+            if (_worldmap.entries.All(e => e.mapId != ActiveMap.Id))
             {
-                if (mapEntry.mapId != ActiveMap.Id)
+                // if the current map is not on the worldmap, unload all maps (except the active one)
+                for (var i = 0; i < _loadedMaps.Count; i++)
                 {
-                    var entryRect = new Rectangle(
-                        mapEntry.bounds[0],
-                        mapEntry.bounds[1],
-                        mapEntry.bounds[2],
-                        mapEntry.bounds[3]);
-                    var loadedMap = _loadedMaps.FirstOrDefault(l => l.Id == mapEntry.mapId);
-
-                    if (playerRect.Intersects(entryRect))
+                    if (_loadedMaps[i].Id != ActiveMap.Id)
                     {
-                        if (loadedMap == null)
-                        {
-                            var map = new Map(this, mapEntry.mapId);
-                            map.LoadContent();
-                            _loadedMaps.Add(map);
-                        }
-
-                        // move player to new map if desired
-                        if (changeMaps && entryRect.Contains(new Point((int)_playerEntity.Position.X, (int)_playerEntity.Position.Y)))
-                        {
-                            ChangeMap(mapEntry.mapId);
-                        }
+                        _loadedMaps[i].UnloadContent();
+                        _loadedMaps.RemoveAt(i);
+                        i--;
                     }
-                    else
+                }
+            }
+            else
+            {
+                // if it is a worldmap, unload all non-worldmap maps
+                var nonWorldmapMaps = _loadedMaps.Where(l => _worldmap.entries.All(e => e.mapId != l.Id)).ToArray();
+                foreach (var nonWorldmapMap in nonWorldmapMaps)
+                {
+                    nonWorldmapMap.UnloadContent();
+                    _loadedMaps.Remove(nonWorldmapMap);
+                }
+
+                // load new maps or dispose of unneeded ones
+                var playerRect = new Rectangle((int)_playerEntity.Position.X - 6, (int)_playerEntity.Position.Y - 6, 13, 13);
+                foreach (var mapEntry in _worldmap.entries)
+                {
+                    if (mapEntry.mapId != ActiveMap.Id)
                     {
-                        if (loadedMap != null)
+                        var entryRect = new Rectangle(
+                            mapEntry.bounds[0],
+                            mapEntry.bounds[1],
+                            mapEntry.bounds[2],
+                            mapEntry.bounds[3]);
+                        var loadedMap = _loadedMaps.FirstOrDefault(l => l.Id == mapEntry.mapId);
+
+                        if (playerRect.Intersects(entryRect))
                         {
-                            loadedMap.UnloadContent();
-                            _loadedMaps.Remove(loadedMap);
+                            if (loadedMap == null)
+                            {
+                                var map = new Map(this, mapEntry.mapId);
+                                map.LoadContent();
+                                _loadedMaps.Add(map);
+                            }
+
+                            // move player to new map if desired
+                            if (changeMaps && entryRect.Contains(new Point((int)_playerEntity.Position.X, (int)_playerEntity.Position.Y)))
+                            {
+                                ChangeMap(mapEntry.mapId);
+                            }
+                        }
+                        else
+                        {
+                            if (loadedMap != null)
+                            {
+                                loadedMap.UnloadContent();
+                                _loadedMaps.Remove(loadedMap);
+                            }
                         }
                     }
                 }

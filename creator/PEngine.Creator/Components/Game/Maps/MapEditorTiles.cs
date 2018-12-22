@@ -13,13 +13,15 @@ namespace PEngine.Creator.Components.Game.Maps
         private readonly ProjectEventBus _eventBus;
         private readonly MapData _parent;
         private readonly TilesetData _data;
+        private readonly MapPainter _painter;
 
-        internal MapEditorTiles(ProjectEventBus eventBus, MapData parent, TilesetData data)
+        internal MapEditorTiles(ProjectEventBus eventBus, MapData parent, TilesetData data, MapPainter painter)
         {
             InitializeComponent();
 
             _parent = parent;
             _data = data;
+            _painter = painter;
 
             _eventBus = eventBus;
             RegisterEvents();
@@ -63,6 +65,40 @@ namespace PEngine.Creator.Components.Game.Maps
                 var tileComp = new TileComponent(_eventBus, _data, tileData);
                 panel_tiles_container.Controls.Add(tileComp);
             }
+
+            UpdateCheckedToolStates();
+        }
+
+        private void tool_map_tool_create_Click(object sender, EventArgs e)
+        {
+            _painter.Mode = MapPainterMode.Create;
+            UpdateCheckedToolStates();
+        }
+
+        private void tool_map_tool_erase_Click(object sender, EventArgs e)
+        {
+            _painter.Mode = MapPainterMode.Erase;
+            UpdateCheckedToolStates();
+        }
+
+        private void tool_map_tool_pick_Click(object sender, EventArgs e)
+        {
+            _painter.Mode = MapPainterMode.Pick;
+            UpdateCheckedToolStates();
+        }
+
+        private void tool_map_tool_fill_Click(object sender, EventArgs e)
+        {
+            _painter.Mode = MapPainterMode.Fill;
+            UpdateCheckedToolStates();
+        }
+
+        private void UpdateCheckedToolStates()
+        {
+            tool_map_tool_create.Checked = _painter.Mode == MapPainterMode.Create;
+            tool_map_tool_erase.Checked = _painter.Mode == MapPainterMode.Erase;
+            tool_map_tool_pick.Checked = _painter.Mode == MapPainterMode.Pick;
+            tool_map_tool_fill.Checked = _painter.Mode == MapPainterMode.Fill;
         }
     }
 }

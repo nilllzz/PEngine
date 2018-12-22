@@ -12,6 +12,7 @@ namespace PEngine.Creator.Components.Projects
         internal event Action<ProjectFileData> FileOpenRequested;
         internal event Action<ProjectFileData> FileUpdated;
         internal event Action<ProjectFileData> FileDeleted;
+        internal event Action<ProjectFileData> TextureUpdated;
 
         internal void RequestFileOpen(ProjectFileData file)
         {
@@ -26,6 +27,11 @@ namespace PEngine.Creator.Components.Projects
         internal void DeletedFile(ProjectFileData file)
         {
             FileDeleted?.Invoke(file);
+        }
+
+        internal void UpdatedTexture(ProjectFileData file)
+        {
+
         }
 
         #endregion

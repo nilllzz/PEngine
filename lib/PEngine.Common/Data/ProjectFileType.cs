@@ -7,5 +7,7 @@
         TextureTileset,
         TextureCharacter,
         Worldmap,
+        Script,
+        Monster,
     }
 }

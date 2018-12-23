@@ -261,9 +261,10 @@ namespace PEngine.Creator.Components.Projects
             var texturesFolder = CreateFolder(project, "Textures", contentFolder);
             var charactersFolder = CreateFolder(project, "Characters", texturesFolder);
             var tilesFolder = CreateFolder(project, "Tiles", texturesFolder);
+            var monsterFolder = CreateFolder(project, "Monsters", null);
             foreach (var folder in new[]
                 { mapsFolder, scriptsFolder, tilesetsFolder, contentFolder,
-                  texturesFolder, charactersFolder, tilesFolder })
+                  texturesFolder, charactersFolder, tilesFolder, monsterFolder })
             {
                 project.IncludeFolder(folder);
             }

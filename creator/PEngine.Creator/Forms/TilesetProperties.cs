@@ -40,7 +40,7 @@ namespace PEngine.Creator.Forms
         private void combo_texture_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             SelectedTextureFile = _textureFiles[combo_texture.SelectedIndex];
-            var texture = ResourceManager.BitmapFromFile(SelectedTextureFile.FilePath);
+            var texture = ResourceManager.BitmapFromFile(SelectedTextureFile);
             pic_texture_preview.Image = texture;
         }
     }

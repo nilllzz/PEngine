@@ -1,4 +1,4 @@
-﻿namespace PEngine.Common.Data.Pokemon
+﻿namespace PEngine.Common.Data.Monsters
 {
     public enum ExperienceType
     {

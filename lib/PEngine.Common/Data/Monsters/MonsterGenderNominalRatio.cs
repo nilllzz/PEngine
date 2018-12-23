@@ -1,6 +1,6 @@
-﻿namespace PEngine.Common.Data.Pokemon
+﻿namespace PEngine.Common.Data.Monsters
 {
-    public enum PokemonGenderNominalRatio
+    public enum MonsterGenderNominalRatio
     {
         Genderless, // forced genderless
         Male, // forced male

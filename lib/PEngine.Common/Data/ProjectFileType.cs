@@ -9,5 +9,6 @@
         Worldmap,
         Script,
         Monster,
+        TextureMonster,
     }
 }

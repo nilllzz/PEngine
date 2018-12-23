@@ -13,6 +13,7 @@ namespace PEngine.Creator.Components.Projects
         public const string ICON_TILESET = "tileset";
         public const string ICON_WORLDMAP = "worldmap";
         public const string ICON_SCRIPT = "script";
+        public const string ICON_MONSTER = "monster";
 
         public const string ICON_FOLDER_OPEN = "folder-open";
         public const string ICON_FOLDER_CLOSED = "folder-closed";
@@ -33,6 +34,7 @@ namespace PEngine.Creator.Components.Projects
             _list.Images.Add(ICON_WORLDMAP, FileIcons.file_world);
             _list.Images.Add(ICON_TILESET, FileIcons.file_tileset);
             _list.Images.Add(ICON_SCRIPT, FileIcons.file_script);
+            _list.Images.Add(ICON_MONSTER, FileIcons.file_monster);
             // folders
             _list.Images.Add(ICON_FOLDER_OPEN, FileIcons.folder_open);
             _list.Images.Add(ICON_FOLDER_CLOSED, FileIcons.folder_closed);
@@ -50,11 +52,14 @@ namespace PEngine.Creator.Components.Projects
                     return ICON_TILESET;
                 case ProjectFileType.TextureTileset:
                 case ProjectFileType.TextureCharacter:
+                case ProjectFileType.TextureMonster:
                     return ICON_TEXTURE;
                 case ProjectFileType.Worldmap:
                     return ICON_WORLDMAP;
                 case ProjectFileType.Script:
                     return ICON_SCRIPT;
+                case ProjectFileType.Monster:
+                    return ICON_MONSTER;
             }
             return ICON_GENERIC;
         }

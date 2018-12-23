@@ -1,4 +1,5 @@
-﻿using PEngine.Creator.Components.Game;
+﻿using PEngine.Common.Data;
+using PEngine.Creator.Components.Game;
 using PEngine.Creator.Helpers;
 using PEngine.Creator.Properties;
 using System;
@@ -12,7 +13,7 @@ namespace PEngine.Creator.Forms
         // input
         internal int TextureSize { get; set; } = 16;
         internal bool SkipEmpty { get; set; } = true;
-        internal string TexturePath { get; set; }
+        internal ProjectFileData TextureFile { get; set; }
 
         // output
         internal Rectangle SelectedTextureRectangle { get; set; }
@@ -26,9 +27,9 @@ namespace PEngine.Creator.Forms
         {
             base.OnShown(e);
 
-            if (TexturePath == null)
+            if (TextureFile == null)
             {
-                throw new Exception("TexturePath has to be set");
+                throw new Exception("TextureFile has to be set");
             }
             if (TextureSize <= 0)
             {
@@ -36,7 +37,7 @@ namespace PEngine.Creator.Forms
             }
 
             // load texture
-            var img = ResourceManager.BitmapFromFile(TexturePath);
+            var img = ResourceManager.BitmapFromFile(TextureFile);
             // generate textures and show them
             for (var y = 0; y < img.Height; y += TextureSize)
             {
@@ -117,7 +118,7 @@ namespace PEngine.Creator.Forms
 
         private void btn_reveal_Click(object sender, EventArgs e)
         {
-            ExplorerHelper.OpenWithFileSelected(TexturePath);
+            ExplorerHelper.OpenWithFileSelected(TextureFile.FilePath);
         }
     }
 }

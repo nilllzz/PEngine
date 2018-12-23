@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace PEngine.Common.Data.Pokemon
+namespace PEngine.Common.Data.Monsters
 {
-    public class PokemonData : Resource<PokemonData>
+    public class MonsterData : Resource<MonsterData>
     {
         public int number;
         public string name;
@@ -17,13 +17,17 @@ namespace PEngine.Common.Data.Pokemon
         public int catchRate;
         public double wildFleeRate; // 0-1, chance of trying to flee in a wild battle
 
+        public string texture;
+
         public MovesetEntryData[] moves;
-        public PokemonSpritePalette palette;
+        public MonsterSpritePalette palette;
+        public EvolutionData[] evolutions;
+        public DexData dex;
 
         protected override string GetDefaultFileName(string id) => $"content/{id}.json";
 
         [JsonIgnore]
-        public PokemonGenderNominalRatio GenderRatio => DataHelper.ParseEnum<PokemonGenderNominalRatio>(gender);
+        public MonsterGenderNominalRatio GenderRatio => DataHelper.ParseEnum<MonsterGenderNominalRatio>(gender);
         [JsonIgnore]
         public ExperienceType ExperienceType => DataHelper.ParseEnum<ExperienceType>(experienceType);
     }

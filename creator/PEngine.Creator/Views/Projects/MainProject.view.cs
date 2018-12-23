@@ -1,9 +1,11 @@
 ﻿using PEngine.Common;
 using PEngine.Common.Data;
 using PEngine.Common.Data.Maps;
+using PEngine.Common.Data.Monsters;
 using PEngine.Common.Data.World;
 using PEngine.Creator.Components.Game;
 using PEngine.Creator.Components.Game.Maps;
+using PEngine.Creator.Components.Game.Monsters;
 using PEngine.Creator.Components.Game.Scripts;
 using PEngine.Creator.Components.Game.Tilesets;
 using PEngine.Creator.Components.Game.World;
@@ -126,6 +128,7 @@ namespace PEngine.Creator.Views.Projects
                     break;
                 case ProjectFileType.TextureCharacter:
                 case ProjectFileType.TextureTileset:
+                case ProjectFileType.TextureMonster:
                     {
                         var viewer = new TextureViewer(_eventBus, file);
                         OpenTab(viewer);
@@ -141,6 +144,13 @@ namespace PEngine.Creator.Views.Projects
                 case ProjectFileType.Script:
                     {
                         var editor = new ScriptEditor(_eventBus, file);
+                        OpenTab(editor);
+                    }
+                    break;
+                case ProjectFileType.Monster:
+                    {
+                        var monsterData = MonsterData.Load(file);
+                        var editor = new MonsterEditor(_eventBus, file, monsterData);
                         OpenTab(editor);
                     }
                     break;

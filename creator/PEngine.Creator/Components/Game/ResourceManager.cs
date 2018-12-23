@@ -3,7 +3,9 @@ using PEngine.Common.Data;
 using PEngine.Common.Data.Maps;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace PEngine.Creator.Components.Game
 {
@@ -31,7 +33,7 @@ namespace PEngine.Creator.Components.Game
 
         private void LoadTexture()
         {
-            Texture = ResourceManager.BitmapFromFile(_file.FilePath);
+            Texture = ResourceManager.BitmapFromFile(_file);
             _subTextures.Clear();
         }
 
@@ -58,9 +60,9 @@ namespace PEngine.Creator.Components.Game
         private static readonly Dictionary<string, LoadedTexture> _textureCache =
             new Dictionary<string, LoadedTexture>();
 
-        internal static Bitmap BitmapFromFile(string filepath)
+        internal static Bitmap BitmapFromFile(ProjectFileData file)
         {
-            var bytes = File.ReadAllBytes(filepath);
+            var bytes = File.ReadAllBytes(file.FilePath);
             using (var ms = new MemoryStream(bytes))
             {
                 return new Bitmap(ms);
@@ -100,6 +102,37 @@ namespace PEngine.Creator.Components.Game
                 tilesetTexture.AddSubTexture(key, texture);
             }
             return texture;
+        }
+
+        internal static Color[] GetPixels(Bitmap bmp, Rectangle? rect = null)
+        {
+            // use entire bmp as default
+            if (!rect.HasValue)
+            {
+                rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+            }
+
+            // pin data and marshal into byte arr
+            var data = bmp.LockBits(rect.Value, ImageLockMode.ReadOnly, bmp.PixelFormat);
+            var length = data.Stride * data.Height;
+
+            var bytes = new byte[length];
+
+            Marshal.Copy(data.Scan0, bytes, 0, length);
+            bmp.UnlockBits(data);
+
+            // convert bytes to colors
+            var colors = new Color[bytes.Length / 4];
+            for (var i = 0; i < colors.Length; i++)
+            {
+                var idx = i * 4;
+                var a = bytes[idx + 3];
+                var r = bytes[idx + 2];
+                var g = bytes[idx + 1];
+                var b = bytes[idx];
+                colors[i] = Color.FromArgb(a, r, g, b);
+            }
+            return colors;
         }
     }
 }

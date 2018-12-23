@@ -143,6 +143,16 @@ namespace PEngine.Creator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap arrow_Sync_16xLG {
+            get {
+                object obj = ResourceManager.GetObject("arrow_Sync_16xLG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Class_489 {
             get {
                 object obj = ResourceManager.GetObject("Class_489", resourceCulture);
@@ -556,6 +566,16 @@ namespace PEngine.Creator.Properties {
         internal static System.Drawing.Bitmap properties_16xLG {
             get {
                 object obj = ResourceManager.GetObject("properties_16xLG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Redirectedrequest_10297 {
+            get {
+                object obj = ResourceManager.GetObject("Redirectedrequest_10297", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

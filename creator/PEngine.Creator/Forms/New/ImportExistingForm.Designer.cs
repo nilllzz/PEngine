@@ -32,6 +32,7 @@
             this.lbl_file = new System.Windows.Forms.Label();
             this.btn_select_file = new System.Windows.Forms.Button();
             this.group_type = new System.Windows.Forms.GroupBox();
+            this.radio_texture_monster = new System.Windows.Forms.RadioButton();
             this.radio_texture_character = new System.Windows.Forms.RadioButton();
             this.radio_texture_tileset = new System.Windows.Forms.RadioButton();
             this.btn_cancel = new System.Windows.Forms.Button();
@@ -57,16 +58,15 @@
             this.lbl_file.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
             this.lbl_file.Location = new System.Drawing.Point(50, 12);
             this.lbl_file.Name = "lbl_file";
-            this.lbl_file.Size = new System.Drawing.Size(275, 32);
+            this.lbl_file.Size = new System.Drawing.Size(421, 56);
             this.lbl_file.TabIndex = 1;
             this.lbl_file.Text = "<No File Selected>";
-            this.lbl_file.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btn_select_file
             // 
             this.btn_select_file.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_select_file.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
-            this.btn_select_file.Location = new System.Drawing.Point(331, 17);
+            this.btn_select_file.Location = new System.Drawing.Point(477, 17);
             this.btn_select_file.Name = "btn_select_file";
             this.btn_select_file.Size = new System.Drawing.Size(26, 23);
             this.btn_select_file.TabIndex = 2;
@@ -80,16 +80,29 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.group_type.BackColor = global::PEngine.Creator.Properties.Settings.Default.Color_LightGray;
+            this.group_type.Controls.Add(this.radio_texture_monster);
             this.group_type.Controls.Add(this.radio_texture_character);
             this.group_type.Controls.Add(this.radio_texture_tileset);
             this.group_type.Enabled = false;
             this.group_type.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
-            this.group_type.Location = new System.Drawing.Point(12, 50);
+            this.group_type.Location = new System.Drawing.Point(12, 71);
             this.group_type.Name = "group_type";
-            this.group_type.Size = new System.Drawing.Size(345, 83);
+            this.group_type.Size = new System.Drawing.Size(491, 102);
             this.group_type.TabIndex = 3;
             this.group_type.TabStop = false;
             this.group_type.Text = "File Type";
+            // 
+            // radio_texture_monster
+            // 
+            this.radio_texture_monster.AutoSize = true;
+            this.radio_texture_monster.Location = new System.Drawing.Point(6, 72);
+            this.radio_texture_monster.Name = "radio_texture_monster";
+            this.radio_texture_monster.Size = new System.Drawing.Size(110, 19);
+            this.radio_texture_monster.TabIndex = 2;
+            this.radio_texture_monster.TabStop = true;
+            this.radio_texture_monster.Text = "Monster Texture";
+            this.radio_texture_monster.UseVisualStyleBackColor = true;
+            this.radio_texture_monster.CheckedChanged += new System.EventHandler(this.radio_texture_monster_CheckedChanged);
             // 
             // radio_texture_character
             // 
@@ -120,7 +133,7 @@
             this.btn_cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_cancel.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
-            this.btn_cancel.Location = new System.Drawing.Point(282, 139);
+            this.btn_cancel.Location = new System.Drawing.Point(428, 179);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(75, 23);
             this.btn_cancel.TabIndex = 4;
@@ -132,7 +145,7 @@
             this.btn_ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_ok.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btn_ok.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
-            this.btn_ok.Location = new System.Drawing.Point(201, 139);
+            this.btn_ok.Location = new System.Drawing.Point(347, 179);
             this.btn_ok.Name = "btn_ok";
             this.btn_ok.Size = new System.Drawing.Size(75, 23);
             this.btn_ok.TabIndex = 5;
@@ -144,7 +157,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = global::PEngine.Creator.Properties.Settings.Default.Color_MainGray;
-            this.ClientSize = new System.Drawing.Size(369, 174);
+            this.ClientSize = new System.Drawing.Size(515, 214);
             this.Controls.Add(this.btn_ok);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.group_type);
@@ -174,5 +187,6 @@
         private System.Windows.Forms.RadioButton radio_texture_tileset;
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.Button btn_ok;
+        private System.Windows.Forms.RadioButton radio_texture_monster;
     }
 }

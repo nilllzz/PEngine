@@ -117,5 +117,26 @@ namespace PEngine.Creator.Properties {
                 this["GameScale"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 15.75pt")]
+        public global::System.Drawing.Font Font_H3 {
+            get {
+                return ((global::System.Drawing.Font)(this["Font_H3"]));
+            }
+            set {
+                this["Font_H3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Consolas, 9.75pt")]
+        public global::System.Drawing.Font Font_Monospace {
+            get {
+                return ((global::System.Drawing.Font)(this["Font_Monospace"]));
+            }
+        }
     }
 }

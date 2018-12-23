@@ -19,6 +19,10 @@ namespace PEngine.Creator.Forms.New
                 {
                     return ProjectFileType.TextureCharacter;
                 }
+                else if (radio_texture_monster.Checked)
+                {
+                    return ProjectFileType.TextureMonster;
+                }
                 return null;
             }
         }
@@ -65,6 +69,8 @@ namespace PEngine.Creator.Forms.New
                 lbl_file.Text = "<No File Selected>";
             }
             group_type.Enabled = SelectedFilePath != null;
+
+            btn_ok.Enabled = SelectedFileType.HasValue;
         }
 
         private void radio_texture_tileset_CheckedChanged(object sender, EventArgs e)
@@ -73,6 +79,11 @@ namespace PEngine.Creator.Forms.New
         }
 
         private void radio_texture_character_CheckedChanged(object sender, EventArgs e)
+        {
+            btn_ok.Enabled = SelectedFileType.HasValue;
+        }
+
+        private void radio_texture_monster_CheckedChanged(object sender, EventArgs e)
         {
             btn_ok.Enabled = SelectedFileType.HasValue;
         }

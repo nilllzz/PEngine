@@ -1,4 +1,4 @@
-﻿namespace PEngine.Common.Data.Pokemon
+﻿namespace PEngine.Common.Data.Monsters
 {
     // part of a pokemon's level up/tm/breeding learnset
     public class MovesetEntryData

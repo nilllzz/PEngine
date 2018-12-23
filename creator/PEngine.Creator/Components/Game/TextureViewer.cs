@@ -19,7 +19,7 @@ namespace PEngine.Creator.Components.Game
 
         private void LoadTexture()
         {
-            pic_texture.Image = ResourceManager.BitmapFromFile(File.FilePath);
+            pic_texture.Image = ResourceManager.BitmapFromFile(File);
             pic_texture.SizeMode = PictureBoxSizeMode.Normal;
         }
 

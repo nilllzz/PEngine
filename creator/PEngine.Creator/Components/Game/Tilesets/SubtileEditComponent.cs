@@ -71,7 +71,7 @@ namespace PEngine.Creator.Components.Game.Tilesets
             var textureFile = Project.ActiveProject.GetFile(_parent.texture);
             var texturePicker = new TexturePickerForm
             {
-                TexturePath = textureFile.FilePath,
+                TextureFile = textureFile,
                 SelectedTextureRectangle = new Rectangle(_data.texture[0] * 16, _data.texture[1] * 16, 16, 16),
             };
 

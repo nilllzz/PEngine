@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -52,6 +53,17 @@
       <DependentUpon>MapPreview.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\Debug\TransparentControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Fieldset\EnumField.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Fieldset\FieldSource.cs" />
+    <Compile Include="Components\Fieldset\IFieldSet.cs" />
+    <Compile Include="Components\Fieldset\IntField.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Fieldset\TextField.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Components\Game\CrispPictureBox.cs">
@@ -100,6 +112,13 @@
     </Compile>
     <Compile Include="Components\Game\Maps\WarpEventEditor.Designer.cs">
       <DependentUpon>WarpEventEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Game\Monsters\Monster.service.cs" />
+    <Compile Include="Components\Game\Monsters\MonsterEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Game\Monsters\MonsterEditor.Designer.cs">
+      <DependentUpon>MonsterEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\Game\ResourceManager.cs" />
     <Compile Include="Components\Game\Scripts\ScriptEditor.cs">
@@ -321,6 +340,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Components\Game\Maps\WarpEventEditor.resx">
       <DependentUpon>WarpEventEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Game\Monsters\MonsterEditor.resx">
+      <DependentUpon>MonsterEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Components\Game\Scripts\ScriptEditor.resx">
       <DependentUpon>ScriptEditor.cs</DependentUpon>
@@ -582,6 +604,8 @@
     <None Include="Resources\ClassIcon.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Redirectedrequest_10297.png" />
+    <None Include="Resources\file_monster.png" />
     <None Include="Resources\script_32xLG.png" />
     <None Include="Resources\file_script.png" />
     <None Include="Resources\map_add.png" />
@@ -603,6 +627,7 @@
     <None Include="Resources\collapseAll.png" />
     <None Include="Resources\AddNewItem_6273.png" />
     <None Include="Resources\AddExistingItem_6269.png" />
+    <None Include="Resources\arrow_Sync_16xLG.png" />
     <Content Include="Resources\DefaultProject\player.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

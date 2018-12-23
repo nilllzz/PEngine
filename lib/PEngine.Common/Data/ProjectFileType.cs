@@ -10,5 +10,6 @@
         Script,
         Monster,
         TextureMonster,
+        Dex,
     }
 }

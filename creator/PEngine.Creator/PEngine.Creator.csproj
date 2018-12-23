@@ -55,6 +55,9 @@
     <Compile Include="Components\Debug\TransparentControl.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Components\Fieldset\DecimalField.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Components\Fieldset\EnumField.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -604,6 +607,7 @@
     <None Include="Resources\ClassIcon.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\file_dex.png" />
     <None Include="Resources\Redirectedrequest_10297.png" />
     <None Include="Resources\file_monster.png" />
     <None Include="Resources\script_32xLG.png" />

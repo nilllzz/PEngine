@@ -2,6 +2,7 @@
 using PEngine.Common.Data.Monsters;
 using PEngine.Creator.Components.Fieldset;
 using PEngine.Creator.Components.Projects;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace PEngine.Creator.Components.Game.Monsters
     internal partial class MonsterEditor : ProjectTabComponent, IEventBusComponent, IFieldSet
     {
         private readonly MonsterData _data;
+        private DexData _dex;
+        private DexEntryData _dexEntry;
         private bool _isFrontView = true;
 
         internal MonsterEditor(ProjectEventBus eventBus, ProjectFileData file, MonsterData data)
@@ -87,20 +90,55 @@ namespace PEngine.Creator.Components.Game.Monsters
 
         private void InitData()
         {
+            _dex = MonsterService.GetDex();
+            _dexEntry = MonsterService.GetOrCreateDexEntry(_dex, _data, out var created);
+            if (created)
+            {
+                HasChanges = true;
+            }
+
+            // --- header ---
             lbl_name.Text = _data.name;
             lbl_number.Text = "# " + _data.number.ToString().PadLeft(3, '0');
 
+            // --- info page ---
             txt_name.FieldSource = new FieldSource<string>(this, _data, "name", false);
             num_number.FieldSource = new FieldSource<int>(this, _data, "number", false);
-
             enum_gender.EnumType = typeof(MonsterGenderNominalRatio);
             enum_gender.FieldSource = new FieldSource<string>(this, _data, "gender", false);
 
             enum_type1.EnumType = typeof(MonsterType);
             enum_type1.FieldSource = new FieldSource<string>(this, _data, "type1", false);
-
             enum_type2.EnumType = typeof(MonsterType);
             enum_type2.FieldSource = new FieldSource<string>(this, _data, "type2", false);
+
+            enum_exp_type.EnumType = typeof(ExperienceType);
+            enum_exp_type.FieldSource = new FieldSource<string>(this, _data, "experienceType", false);
+            num_exp_yield.FieldSource = new FieldSource<int>(this, _data, "experienceYield", false);
+
+            num_catchrate.FieldSource = new FieldSource<int>(this, _data, "catchRate", false);
+            num_fleerate.FieldSource = new FieldSource<decimal>(this, _data, "wildFleeRate", false);
+
+            // --- dex page ---
+            num_regional_number.FieldSource = new FieldSource<int>(this, _dexEntry, "regionalNumber", false);
+            txt_species.FieldSource = new FieldSource<string>(this, _dexEntry, "species", false);
+            num_height.FieldSource = new FieldSource<decimal>(this, _dexEntry, "height", false);
+            num_weight.FieldSource = new FieldSource<decimal>(this, _dexEntry, "weight", false);
+
+            // dex text
+            var dexTextLines = _dexEntry.text
+                .Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                .ToList();
+            while (dexTextLines.Count < 6)
+            {
+                dexTextLines.Add("PUT TEXT HERE");
+            }
+            txt_dextext_page1_line1.Text = dexTextLines[0];
+            txt_dextext_page1_line2.Text = dexTextLines[1];
+            txt_dextext_page1_line3.Text = dexTextLines[2];
+            txt_dextext_page2_line1.Text = dexTextLines[3];
+            txt_dextext_page2_line2.Text = dexTextLines[4];
+            txt_dextext_page2_line3.Text = dexTextLines[5];
         }
 
         private void UpdateImage()
@@ -140,8 +178,22 @@ namespace PEngine.Creator.Components.Game.Monsters
         internal override void Save()
         {
             _data.Save();
+            _dex.Save();
             HasChanges = false;
             InitData();
+        }
+
+        private void dextext_changed(object sender, EventArgs e)
+        {
+            var compiledText = txt_dextext_page1_line1.Text + "\n" +
+                txt_dextext_page1_line2.Text + "\n" +
+                txt_dextext_page1_line3.Text + "\n\n" +
+                txt_dextext_page2_line1.Text + "\n" +
+                txt_dextext_page2_line2.Text + "\n" +
+                txt_dextext_page2_line3.Text;
+            _dexEntry.text = compiledText;
+
+            HasChanges = true;
         }
     }
 }

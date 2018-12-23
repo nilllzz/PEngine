@@ -12,7 +12,7 @@ namespace PEngine.Creator.Forms
 {
     internal partial class MainForm : Form
     {
-        internal static MainForm Instance => (MainForm)ActiveForm;
+        internal static MainForm Instance { get; private set; }
 
         internal BaseView ActiveView
         {
@@ -53,6 +53,8 @@ namespace PEngine.Creator.Forms
         internal MainForm()
         {
             InitializeComponent();
+
+            Instance = this;
 
             // load main view
             var view = new WelcomeView();

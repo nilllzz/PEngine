@@ -10,6 +10,9 @@ namespace PEngine.Creator.Components.Projects
         public const string ICON_GENERIC = "generic";
         public const string ICON_MAP = "map";
         public const string ICON_TEXTURE = "texture";
+        public const string ICON_TEXTURE_TILESET = "texture-tileset";
+        public const string ICON_TEXTURE_CHARACTER = "texture-character";
+        public const string ICON_TEXTURE_MONSTER = "texture-monster";
         public const string ICON_TILESET = "tileset";
         public const string ICON_WORLDMAP = "worldmap";
         public const string ICON_SCRIPT = "script";
@@ -37,6 +40,9 @@ namespace PEngine.Creator.Components.Projects
             _list.Images.Add(ICON_SCRIPT, FileIcons.file_script);
             _list.Images.Add(ICON_MONSTER, FileIcons.file_monster);
             _list.Images.Add(ICON_DEX, FileIcons.file_dex);
+            _list.Images.Add(ICON_TEXTURE_TILESET, FileIcons.file_texture_tileset);
+            _list.Images.Add(ICON_TEXTURE_MONSTER, FileIcons.file_texture_monster);
+            _list.Images.Add(ICON_TEXTURE_CHARACTER, FileIcons.file_texture_character);
             // folders
             _list.Images.Add(ICON_FOLDER_OPEN, FileIcons.folder_open);
             _list.Images.Add(ICON_FOLDER_CLOSED, FileIcons.folder_closed);
@@ -53,9 +59,11 @@ namespace PEngine.Creator.Components.Projects
                 case ProjectFileType.Tileset:
                     return ICON_TILESET;
                 case ProjectFileType.TextureTileset:
+                    return ICON_TEXTURE_TILESET;
                 case ProjectFileType.TextureCharacter:
+                    return ICON_TEXTURE_CHARACTER;
                 case ProjectFileType.TextureMonster:
-                    return ICON_TEXTURE;
+                    return ICON_TEXTURE_MONSTER;
                 case ProjectFileType.Worldmap:
                     return ICON_WORLDMAP;
                 case ProjectFileType.Script:

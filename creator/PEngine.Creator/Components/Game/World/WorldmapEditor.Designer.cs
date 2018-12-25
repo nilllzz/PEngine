@@ -28,9 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WorldmapEditor));
             this.panel_world_container = new System.Windows.Forms.Panel();
             this.tool_main = new System.Windows.Forms.ToolStrip();
             this.tool_main_add_map = new System.Windows.Forms.ToolStripButton();
+            this.tool_main_zoom_in = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tool_main_zoom_0 = new System.Windows.Forms.ToolStripButton();
+            this.tool_main_zoom_out = new System.Windows.Forms.ToolStripButton();
             this.tool_main.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,7 +56,11 @@
             this.tool_main.BackColor = global::PEngine.Creator.Properties.Settings.Default.Color_MainGray;
             this.tool_main.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.tool_main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tool_main_add_map});
+            this.tool_main_add_map,
+            this.toolStripSeparator1,
+            this.tool_main_zoom_out,
+            this.tool_main_zoom_0,
+            this.tool_main_zoom_in});
             this.tool_main.Location = new System.Drawing.Point(0, 0);
             this.tool_main.Name = "tool_main";
             this.tool_main.Size = new System.Drawing.Size(741, 25);
@@ -67,6 +76,42 @@
             this.tool_main_add_map.Text = "Add map";
             this.tool_main_add_map.ToolTipText = "Add an existing map to this worldmap";
             this.tool_main_add_map.Click += new System.EventHandler(this.tool_main_add_map_Click);
+            // 
+            // tool_main_zoom_in
+            // 
+            this.tool_main_zoom_in.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tool_main_zoom_in.Image = global::PEngine.Creator.Properties.Resources.zoom_16xLG;
+            this.tool_main_zoom_in.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tool_main_zoom_in.Name = "tool_main_zoom_in";
+            this.tool_main_zoom_in.Size = new System.Drawing.Size(23, 22);
+            this.tool_main_zoom_in.Text = "Zoom in";
+            this.tool_main_zoom_in.Click += new System.EventHandler(this.tool_main_zoom_in_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tool_main_zoom_0
+            // 
+            this.tool_main_zoom_0.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tool_main_zoom_0.Image = ((System.Drawing.Image)(resources.GetObject("tool_main_zoom_0.Image")));
+            this.tool_main_zoom_0.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tool_main_zoom_0.Name = "tool_main_zoom_0";
+            this.tool_main_zoom_0.Size = new System.Drawing.Size(33, 22);
+            this.tool_main_zoom_0.Text = "25%";
+            this.tool_main_zoom_0.ToolTipText = "Reset Zoom";
+            this.tool_main_zoom_0.Click += new System.EventHandler(this.tool_main_zoom_0_Click);
+            // 
+            // tool_main_zoom_out
+            // 
+            this.tool_main_zoom_out.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tool_main_zoom_out.Image = global::PEngine.Creator.Properties.Resources.ZoomOut_12927;
+            this.tool_main_zoom_out.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tool_main_zoom_out.Name = "tool_main_zoom_out";
+            this.tool_main_zoom_out.Size = new System.Drawing.Size(23, 22);
+            this.tool_main_zoom_out.Text = "Zoom out";
+            this.tool_main_zoom_out.Click += new System.EventHandler(this.tool_main_zoom_out_Click);
             // 
             // WorldmapEditor
             // 
@@ -87,5 +132,9 @@
         private System.Windows.Forms.Panel panel_world_container;
         private System.Windows.Forms.ToolStrip tool_main;
         private System.Windows.Forms.ToolStripButton tool_main_add_map;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton tool_main_zoom_out;
+        private System.Windows.Forms.ToolStripButton tool_main_zoom_0;
+        private System.Windows.Forms.ToolStripButton tool_main_zoom_in;
     }
 }

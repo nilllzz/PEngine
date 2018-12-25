@@ -217,10 +217,11 @@ namespace PEngine.Creator.Components.Game.World
             var baseTexture = MapService.GenerateTexture(_map);
             using (var g = Graphics.FromImage(baseTexture))
             {
-                g.DrawRectangle(GetColoredPen(),
+                var p = new Pen(GetColoredPen().Brush, 10);
+                g.DrawRectangle(p,
                     new Rectangle(0, 0,
-                        baseTexture.Width - 2,
-                        baseTexture.Height - 2));
+                        baseTexture.Width - 1,
+                        baseTexture.Height - 1));
             }
             return baseTexture;
         }
@@ -230,37 +231,29 @@ namespace PEngine.Creator.Components.Game.World
             switch (_colorCounter % 16)
             {
                 case 0:
+                case 8:
                     return Pens.Yellow;
                 case 1:
+                case 9:
                     return Pens.Red;
                 case 2:
+                case 10:
                     return Pens.Green;
                 case 3:
+                case 11:
                     return Pens.Blue;
                 case 4:
+                case 12:
                     return Pens.Purple;
                 case 5:
+                case 13:
                     return Pens.LimeGreen;
                 case 6:
+                case 14:
                     return Pens.Silver;
                 case 7:
-                    return Pens.Brown;
-                case 8:
-                    return Pens.Azure;
-                case 9:
-                    return Pens.Fuchsia;
-                case 10:
-                    return Pens.Pink;
-                case 11:
-                    return Pens.DarkGreen;
-                case 12:
-                    return Pens.Aquamarine;
-                case 13:
-                    return Pens.White;
-                case 14:
-                    return Pens.Lavender;
                 case 15:
-                    return Pens.Beige;
+                    return Pens.Brown;
             }
             // fallback
             return Pens.Black;

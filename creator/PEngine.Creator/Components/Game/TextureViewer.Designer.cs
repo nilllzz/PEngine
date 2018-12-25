@@ -33,15 +33,18 @@
             this.btn_reveal = new System.Windows.Forms.Button();
             this.pic_texture = new PEngine.Creator.Components.Game.CrispPictureBox();
             this.tooltip_main = new System.Windows.Forms.ToolTip(this.components);
+            this.lbl_type = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pic_texture)).BeginInit();
             this.SuspendLayout();
             // 
             // chk_stretch
             // 
+            this.chk_stretch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chk_stretch.AutoSize = true;
-            this.chk_stretch.Location = new System.Drawing.Point(3, 7);
+            this.chk_stretch.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
+            this.chk_stretch.Location = new System.Drawing.Point(375, 6);
             this.chk_stretch.Name = "chk_stretch";
-            this.chk_stretch.Size = new System.Drawing.Size(107, 17);
+            this.chk_stretch.Size = new System.Drawing.Size(114, 19);
             this.chk_stretch.TabIndex = 0;
             this.chk_stretch.Text = "Stretch to screen";
             this.chk_stretch.UseVisualStyleBackColor = true;
@@ -68,13 +71,25 @@
             this.pic_texture.Location = new System.Drawing.Point(3, 30);
             this.pic_texture.Name = "pic_texture";
             this.pic_texture.Size = new System.Drawing.Size(515, 376);
+            this.pic_texture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pic_texture.TabIndex = 2;
             this.pic_texture.TabStop = false;
+            // 
+            // lbl_type
+            // 
+            this.lbl_type.AutoSize = true;
+            this.lbl_type.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
+            this.lbl_type.Location = new System.Drawing.Point(3, 7);
+            this.lbl_type.Name = "lbl_type";
+            this.lbl_type.Size = new System.Drawing.Size(48, 15);
+            this.lbl_type.TabIndex = 3;
+            this.lbl_type.Text = "<Type>";
             // 
             // TextureViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lbl_type);
             this.Controls.Add(this.pic_texture);
             this.Controls.Add(this.btn_reveal);
             this.Controls.Add(this.chk_stretch);
@@ -92,5 +107,6 @@
         private System.Windows.Forms.Button btn_reveal;
         private CrispPictureBox pic_texture;
         private System.Windows.Forms.ToolTip tooltip_main;
+        private System.Windows.Forms.Label lbl_type;
     }
 }

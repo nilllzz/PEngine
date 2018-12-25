@@ -16,6 +16,7 @@ namespace PEngine.Creator.Components.Game.Monsters
         private DexData _dex;
         private DexEntryData _dexEntry;
         private bool _isFrontView = true;
+        private bool _triggerChanged = false;
 
         internal MonsterEditor(ProjectEventBus eventBus, ProjectFileData file, MonsterData data)
             : base(eventBus, file)
@@ -97,6 +98,8 @@ namespace PEngine.Creator.Components.Game.Monsters
                 HasChanges = true;
             }
 
+            _triggerChanged = false;
+
             // --- header ---
             lbl_name.Text = _data.name;
             lbl_number.Text = "# " + _data.number.ToString().PadLeft(3, '0');
@@ -139,6 +142,8 @@ namespace PEngine.Creator.Components.Game.Monsters
             txt_dextext_page2_line1.Text = dexTextLines[3];
             txt_dextext_page2_line2.Text = dexTextLines[4];
             txt_dextext_page2_line3.Text = dexTextLines[5];
+
+            _triggerChanged = true;
         }
 
         private void UpdateImage()
@@ -191,9 +196,12 @@ namespace PEngine.Creator.Components.Game.Monsters
                 txt_dextext_page2_line1.Text + "\n" +
                 txt_dextext_page2_line2.Text + "\n" +
                 txt_dextext_page2_line3.Text;
-            _dexEntry.text = compiledText;
 
-            HasChanges = true;
+            if (_dexEntry.text != compiledText && _triggerChanged)
+            {
+                _dexEntry.text = compiledText;
+                HasChanges = true;
+            }
         }
     }
 }

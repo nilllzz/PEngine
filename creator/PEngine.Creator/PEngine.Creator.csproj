@@ -607,6 +607,9 @@
     <None Include="Resources\ClassIcon.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\file_texture_tileset.png" />
+    <None Include="Resources\file_texture_monster.png" />
+    <None Include="Resources\file_texture_character.png" />
     <None Include="Resources\file_dex.png" />
     <None Include="Resources\Redirectedrequest_10297.png" />
     <None Include="Resources\file_monster.png" />

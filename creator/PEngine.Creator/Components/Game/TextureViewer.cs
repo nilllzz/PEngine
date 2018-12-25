@@ -14,13 +14,20 @@ namespace PEngine.Creator.Components.Game
         {
             InitializeComponent();
 
-            LoadTexture();
+            InitData();
         }
 
-        private void LoadTexture()
+        private void InitData()
         {
             pic_texture.Image = ResourceManager.BitmapFromFile(File);
             pic_texture.SizeMode = PictureBoxSizeMode.Normal;
+
+            var type = File.FileType.ToString();
+            if (type.ToLower().StartsWith("texture"))
+            {
+                type = type.Remove(0, "texture".Length);
+            }
+            lbl_type.Text = "Type: " + type;
         }
 
         #region ui

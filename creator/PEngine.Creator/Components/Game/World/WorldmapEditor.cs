@@ -11,6 +11,9 @@ namespace PEngine.Creator.Components.Game.World
 {
     internal partial class WorldmapEditor : ProjectTabComponent, IEventBusComponent
     {
+        private const double MIN_ZOOM = 0.1;
+        private const double MAX_ZOOM = 2;
+
         private readonly WorldmapData _data;
 
         private double _zoom = 0.5;
@@ -79,10 +82,78 @@ namespace PEngine.Creator.Components.Game.World
 
         #region ui
 
+        private void tool_main_add_map_Click(object sender, System.EventArgs e)
+        {
+            var selectFileForm = new SelectFileForm();
+            selectFileForm.FileTypeFilter = new[] { ProjectFileType.Map };
+            var result = selectFileForm.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                var selectedFile = selectFileForm.SelectedFile;
+                var mapData = MapData.Load(selectedFile);
+                // check that the map is not already on the world map
+                if (Entries.All(en => en.Entry.mapId != mapData.id))
+                {
+                    var mapEntryData = new WorldmapEntryData
+                    {
+                        mapId = mapData.id,
+                        bounds = new[] { 0, 0, 0, 0 }
+                    };
+
+                    WorldmapService.AddEntry(_data, mapEntryData);
+                    var mapEntry = new WorldmapEntry(_eventBus, _data, mapEntryData, _zoom);
+                    panel_world_container.Controls.Add(mapEntry);
+
+                    while (!WorldmapService.IsValidPosition(_data, mapEntryData))
+                    {
+                        mapEntryData.bounds[0]++;
+                    }
+                    mapEntry.ResetPositioning();
+                    mapEntry.UpdateEntryBounds();
+                }
+            }
+        }
+
+        private void tool_main_zoom_in_Click(object sender, System.EventArgs e)
+        {
+            UpdateZoom(_zoom + 0.1);
+        }
+
+        private void tool_main_zoom_out_Click(object sender, System.EventArgs e)
+        {
+            UpdateZoom(_zoom - 0.1);
+        }
+
+        private void tool_main_zoom_0_Click(object sender, System.EventArgs e)
+        {
+            UpdateZoom(0.5);
+        }
+
+        private void UpdateZoom(double zoom)
+        {
+            _zoom = zoom;
+            if (_zoom < MIN_ZOOM)
+            {
+                _zoom = MIN_ZOOM;
+            }
+            else if (_zoom > MAX_ZOOM)
+            {
+                _zoom = MAX_ZOOM;
+            }
+
+            tool_main_zoom_0.Text = (_zoom * 100).ToString() + "%";
+
+            foreach (var entry in Entries)
+            {
+                entry.Zoom = _zoom;
+            }
+        }
+
         #endregion
 
         private void InitData()
         {
+            UpdateZoom(0.5);
             panel_world_container.Controls.Clear();
             foreach (var mapEntryData in _data.entries)
             {
@@ -121,38 +192,6 @@ namespace PEngine.Creator.Components.Game.World
                 foreach (var entry in Entries)
                 {
                     entry.ResetPositioning();
-                }
-            }
-        }
-
-        private void tool_main_add_map_Click(object sender, System.EventArgs e)
-        {
-            var selectFileForm = new SelectFileForm();
-            selectFileForm.FileTypeFilter = new[] { ProjectFileType.Map };
-            var result = selectFileForm.ShowDialog(this);
-            if (result == DialogResult.OK)
-            {
-                var selectedFile = selectFileForm.SelectedFile;
-                var mapData = MapData.Load(selectedFile);
-                // check that the map is not already on the world map
-                if (Entries.All(en => en.Entry.mapId != mapData.id))
-                {
-                    var mapEntryData = new WorldmapEntryData
-                    {
-                        mapId = mapData.id,
-                        bounds = new[] { 0, 0, 0, 0 }
-                    };
-
-                    WorldmapService.AddEntry(_data, mapEntryData);
-                    var mapEntry = new WorldmapEntry(_eventBus, _data, mapEntryData, _zoom);
-                    panel_world_container.Controls.Add(mapEntry);
-
-                    while (!WorldmapService.IsValidPosition(_data, mapEntryData))
-                    {
-                        mapEntryData.bounds[0]++;
-                    }
-                    mapEntry.ResetPositioning();
-                    mapEntry.UpdateEntryBounds();
                 }
             }
         }

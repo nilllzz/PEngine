@@ -36,6 +36,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -122,6 +125,13 @@
     </Compile>
     <Compile Include="Components\Game\Monsters\MonsterEditor.Designer.cs">
       <DependentUpon>MonsterEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Game\Monsters\MonsterSprite.service.cs" />
+    <Compile Include="Components\Game\Monsters\PaletteComponent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Game\Monsters\PaletteComponent.Designer.cs">
+      <DependentUpon>PaletteComponent.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\Game\ResourceManager.cs" />
     <Compile Include="Components\Game\Scripts\ScriptEditor.cs">
@@ -229,6 +239,12 @@
     </Compile>
     <Compile Include="Forms\New\NewMapForm.Designer.cs">
       <DependentUpon>NewMapForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\New\NewMonsterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\New\NewMonsterForm.Designer.cs">
+      <DependentUpon>NewMonsterForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\New\NewScriptForm.cs">
       <SubType>Form</SubType>
@@ -347,6 +363,9 @@
     <EmbeddedResource Include="Components\Game\Monsters\MonsterEditor.resx">
       <DependentUpon>MonsterEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Components\Game\Monsters\PaletteComponent.resx">
+      <DependentUpon>PaletteComponent.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\Game\Scripts\ScriptEditor.resx">
       <DependentUpon>ScriptEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -451,6 +470,7 @@
     <EmbeddedResource Include="Views\Projects\Welcome.view.resx">
       <DependentUpon>Welcome.view.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -607,6 +627,9 @@
     <None Include="Resources\ClassIcon.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\file_texture_monster1.png" />
+    <None Include="Resources\star_16xLG.png" />
+    <None Include="Resources\Open_6529.png" />
     <None Include="Resources\file_texture_tileset.png" />
     <None Include="Resources\file_texture_monster.png" />
     <None Include="Resources\file_texture_character.png" />

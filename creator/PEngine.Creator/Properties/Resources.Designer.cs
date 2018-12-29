@@ -333,6 +333,16 @@ namespace PEngine.Creator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap file_texture_monster {
+            get {
+                object obj = ResourceManager.GetObject("file_texture_monster", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap FillTool_204 {
             get {
                 object obj = ResourceManager.GetObject("FillTool_204", resourceCulture);
@@ -543,6 +553,16 @@ namespace PEngine.Creator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Open_6529 {
+            get {
+                object obj = ResourceManager.GetObject("Open_6529", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap outdatedOverlay {
             get {
                 object obj = ResourceManager.GetObject("outdatedOverlay", resourceCulture);
@@ -636,6 +656,16 @@ namespace PEngine.Creator.Properties {
         internal static System.Drawing.Bitmap Select {
             get {
                 object obj = ResourceManager.GetObject("Select", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap star_16xLG {
+            get {
+                object obj = ResourceManager.GetObject("star_16xLG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

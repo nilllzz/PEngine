@@ -118,15 +118,12 @@ namespace PEngine.Creator.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 15.75pt")]
         public global::System.Drawing.Font Font_H3 {
             get {
                 return ((global::System.Drawing.Font)(this["Font_H3"]));
-            }
-            set {
-                this["Font_H3"] = value;
             }
         }
         
@@ -136,6 +133,17 @@ namespace PEngine.Creator.Properties {
         public global::System.Drawing.Font Font_Monospace {
             get {
                 return ((global::System.Drawing.Font)(this["Font_Monospace"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection UsedPalettes {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["UsedPalettes"]));
+            }
+            set {
+                this["UsedPalettes"] = value;
             }
         }
     }

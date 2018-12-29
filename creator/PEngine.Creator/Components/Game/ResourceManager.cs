@@ -24,9 +24,11 @@ namespace PEngine.Creator.Components.Game
             _file = file;
             LoadTexture();
 
-            _fileWatcher = new FileSystemWatcher();
-            _fileWatcher.Path = Path.GetDirectoryName(_file.FilePath);
-            _fileWatcher.Filter = Path.GetFileName(_file.FilePath);
+            _fileWatcher = new FileSystemWatcher
+            {
+                Path = Path.GetDirectoryName(_file.FilePath),
+                Filter = Path.GetFileName(_file.FilePath)
+            };
 
             _fileWatcher.Changed += OnChanged;
         }

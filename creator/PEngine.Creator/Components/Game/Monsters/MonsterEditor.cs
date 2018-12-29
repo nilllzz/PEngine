@@ -1,7 +1,9 @@
-﻿using PEngine.Common.Data;
+﻿using PEngine.Common;
+using PEngine.Common.Data;
 using PEngine.Common.Data.Monsters;
 using PEngine.Creator.Components.Fieldset;
 using PEngine.Creator.Components.Projects;
+using PEngine.Creator.Forms;
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -17,6 +19,7 @@ namespace PEngine.Creator.Components.Game.Monsters
         private DexEntryData _dexEntry;
         private bool _isFrontView = true;
         private bool _triggerChanged = false;
+        private bool _isShiny = false;
 
         internal MonsterEditor(ProjectEventBus eventBus, ProjectFileData file, MonsterData data)
             : base(eventBus, file)
@@ -40,6 +43,12 @@ namespace PEngine.Creator.Components.Game.Monsters
         public void UnregisterEvents()
         {
 
+        }
+
+        private void OnPaletteChanged()
+        {
+            HasChanges = true;
+            InitData();
         }
 
         #endregion
@@ -85,6 +94,44 @@ namespace PEngine.Creator.Components.Game.Monsters
             }
 
             lbl_gender_expl.Text = $"M: {(male * 100).ToString("0.0")}% F: {(female * 100).ToString("0.0")}%";
+        }
+
+        private void btn_import_texture_Click(object sender, EventArgs e)
+        {
+            var file = MonsterSpriteService.ImportMonsterTexture(_data);
+            if (file != null)
+            {
+                _data.texture = file.id;
+                HasChanges = true;
+                UpdateImage();
+                MonsterSpriteService.RecordUsedPalette(_data.name, _data.palette);
+            }
+        }
+
+        private void btn_select_texture_Click(object sender, EventArgs e)
+        {
+            var pickFileDialog = new SelectFileForm();
+            pickFileDialog.FileTypeFilter = new[] { ProjectFileType.TextureMonster };
+            var result = pickFileDialog.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                var file = pickFileDialog.SelectedFile;
+                _data.texture = file.id;
+                HasChanges = true;
+                UpdateImage();
+            }
+        }
+
+        private void chk_shiny_CheckedChanged(object sender, EventArgs e)
+        {
+            _isShiny = chk_shiny.Checked;
+            UpdateImage();
+        }
+
+        private void btn_view_texture_Click(object sender, EventArgs e)
+        {
+            var file = Project.ActiveProject.GetFile(_data.texture);
+            _eventBus.RequestFileOpen(file);
         }
 
         #endregion
@@ -143,7 +190,16 @@ namespace PEngine.Creator.Components.Game.Monsters
             txt_dextext_page2_line2.Text = dexTextLines[4];
             txt_dextext_page2_line3.Text = dexTextLines[5];
 
+            palette_normal.SetData(_data.palette, false);
+            palette_shiny.SetData(_data.palette, true);
+            palette_normal.PaletteChanged -= OnPaletteChanged;
+            palette_shiny.PaletteChanged -= OnPaletteChanged;
+            palette_normal.PaletteChanged += OnPaletteChanged;
+            palette_shiny.PaletteChanged += OnPaletteChanged;
+
             _triggerChanged = true;
+
+            UpdateImage();
         }
 
         private void UpdateImage()
@@ -158,7 +214,8 @@ namespace PEngine.Creator.Components.Game.Monsters
             {
                 var maps = new ColorMap[4];
                 var placeholderColors = MonsterService.GetPlaceholderColors(texture);
-                var paletteColors = _data.palette.normal.Select(n => Color.FromArgb(n[0], n[1], n[2])).ToArray();
+                var palette = _isShiny ? _data.palette.shiny : _data.palette.normal;
+                var paletteColors = palette.Select(n => Color.FromArgb(n[0], n[1], n[2])).ToArray();
                 for (var i = 0; i < maps.Length; i++)
                 {
                     maps[i] = new ColorMap

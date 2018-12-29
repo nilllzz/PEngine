@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.btn_switch_view = new System.Windows.Forms.Button();
             this.toolTip_main = new System.Windows.Forms.ToolTip(this.components);
             this.lbl_exp_type = new System.Windows.Forms.Label();
             this.lbl_exp_yield = new System.Windows.Forms.Label();
@@ -39,6 +38,11 @@
             this.lbl_name_edit = new System.Windows.Forms.Label();
             this.lbl_catchrate = new System.Windows.Forms.Label();
             this.lbl_fleerate = new System.Windows.Forms.Label();
+            this.btn_import_texture = new System.Windows.Forms.Button();
+            this.btn_select_texture = new System.Windows.Forms.Button();
+            this.btn_switch_view = new System.Windows.Forms.Button();
+            this.chk_shiny = new System.Windows.Forms.CheckBox();
+            this.btn_view_texture = new System.Windows.Forms.Button();
             this.tabs_main = new System.Windows.Forms.TabControl();
             this.tab_info = new System.Windows.Forms.TabPage();
             this.panel_info = new System.Windows.Forms.Panel();
@@ -58,6 +62,8 @@
             this.txt_name = new PEngine.Creator.Components.Fieldset.TextField();
             this.tab_dex = new System.Windows.Forms.TabPage();
             this.panel_dex = new System.Windows.Forms.Panel();
+            this.lbl_weight_unit = new System.Windows.Forms.Label();
+            this.lbl_height_unit = new System.Windows.Forms.Label();
             this.group_dex_text = new System.Windows.Forms.GroupBox();
             this.panel_dextext_page2 = new System.Windows.Forms.Panel();
             this.txt_dextext_page2_line3 = new System.Windows.Forms.TextBox();
@@ -78,12 +84,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lbl_regional_number = new System.Windows.Forms.Label();
             this.tab_texture = new System.Windows.Forms.TabPage();
+            this.panel_texture = new System.Windows.Forms.Panel();
+            this.palette_shiny = new PEngine.Creator.Components.Game.Monsters.PaletteComponent();
+            this.palette_normal = new PEngine.Creator.Components.Game.Monsters.PaletteComponent();
             this.tab_moves = new System.Windows.Forms.TabPage();
             this.lbl_number = new System.Windows.Forms.Label();
             this.lbl_name = new System.Windows.Forms.Label();
             this.pic_monster = new PEngine.Creator.Components.Game.CrispPictureBox();
-            this.lbl_height_unit = new System.Windows.Forms.Label();
-            this.lbl_weight_unit = new System.Windows.Forms.Label();
             this.tabs_main.SuspendLayout();
             this.tab_info.SuspendLayout();
             this.panel_info.SuspendLayout();
@@ -102,19 +109,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.num_weight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_height)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_regional_number)).BeginInit();
+            this.tab_texture.SuspendLayout();
+            this.panel_texture.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_monster)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btn_switch_view
-            // 
-            this.btn_switch_view.Image = global::PEngine.Creator.Properties.Resources.arrow_Sync_16xLG;
-            this.btn_switch_view.Location = new System.Drawing.Point(121, 92);
-            this.btn_switch_view.Name = "btn_switch_view";
-            this.btn_switch_view.Size = new System.Drawing.Size(23, 23);
-            this.btn_switch_view.TabIndex = 2;
-            this.toolTip_main.SetToolTip(this.btn_switch_view, "Switch View");
-            this.btn_switch_view.UseVisualStyleBackColor = true;
-            this.btn_switch_view.Click += new System.EventHandler(this.btn_switch_view_Click);
             // 
             // lbl_exp_type
             // 
@@ -195,6 +193,68 @@
             this.lbl_fleerate.TabIndex = 16;
             this.lbl_fleerate.Text = "Flee Rate:";
             this.toolTip_main.SetToolTip(this.lbl_fleerate, "How likely it is for this monster to flee in battle. 0 means it never flees.");
+            // 
+            // btn_import_texture
+            // 
+            this.btn_import_texture.Image = global::PEngine.Creator.Properties.Resources.Open_6529;
+            this.btn_import_texture.Location = new System.Drawing.Point(257, 17);
+            this.btn_import_texture.Name = "btn_import_texture";
+            this.btn_import_texture.Size = new System.Drawing.Size(129, 23);
+            this.btn_import_texture.TabIndex = 6;
+            this.btn_import_texture.Text = "Import Texture";
+            this.btn_import_texture.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip_main.SetToolTip(this.btn_import_texture, "Import a texture from disk");
+            this.btn_import_texture.UseVisualStyleBackColor = true;
+            this.btn_import_texture.Click += new System.EventHandler(this.btn_import_texture_Click);
+            // 
+            // btn_select_texture
+            // 
+            this.btn_select_texture.Image = global::PEngine.Creator.Properties.Resources.ColorSelectionTool_202;
+            this.btn_select_texture.Location = new System.Drawing.Point(257, 46);
+            this.btn_select_texture.Name = "btn_select_texture";
+            this.btn_select_texture.Size = new System.Drawing.Size(129, 23);
+            this.btn_select_texture.TabIndex = 5;
+            this.btn_select_texture.Text = "Pick Texture";
+            this.btn_select_texture.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip_main.SetToolTip(this.btn_select_texture, "Pick a texture file from the project");
+            this.btn_select_texture.UseVisualStyleBackColor = true;
+            this.btn_select_texture.Click += new System.EventHandler(this.btn_select_texture_Click);
+            // 
+            // btn_switch_view
+            // 
+            this.btn_switch_view.Image = global::PEngine.Creator.Properties.Resources.arrow_Sync_16xLG;
+            this.btn_switch_view.Location = new System.Drawing.Point(121, 92);
+            this.btn_switch_view.Name = "btn_switch_view";
+            this.btn_switch_view.Size = new System.Drawing.Size(23, 23);
+            this.btn_switch_view.TabIndex = 2;
+            this.toolTip_main.SetToolTip(this.btn_switch_view, "Switch between front and back sprite");
+            this.btn_switch_view.UseVisualStyleBackColor = true;
+            this.btn_switch_view.Click += new System.EventHandler(this.btn_switch_view_Click);
+            // 
+            // chk_shiny
+            // 
+            this.chk_shiny.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chk_shiny.Image = global::PEngine.Creator.Properties.Resources.star_16xLG;
+            this.chk_shiny.Location = new System.Drawing.Point(121, 70);
+            this.chk_shiny.Name = "chk_shiny";
+            this.chk_shiny.Size = new System.Drawing.Size(23, 23);
+            this.chk_shiny.TabIndex = 7;
+            this.toolTip_main.SetToolTip(this.chk_shiny, "Switch between shiny and normal sprite");
+            this.chk_shiny.UseVisualStyleBackColor = true;
+            this.chk_shiny.CheckedChanged += new System.EventHandler(this.chk_shiny_CheckedChanged);
+            // 
+            // btn_view_texture
+            // 
+            this.btn_view_texture.Image = global::PEngine.Creator.Properties.Resources.file_texture_monster;
+            this.btn_view_texture.Location = new System.Drawing.Point(257, 86);
+            this.btn_view_texture.Name = "btn_view_texture";
+            this.btn_view_texture.Size = new System.Drawing.Size(129, 23);
+            this.btn_view_texture.TabIndex = 7;
+            this.btn_view_texture.Text = "View Texture";
+            this.btn_view_texture.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip_main.SetToolTip(this.btn_view_texture, "View the currently selected texture");
+            this.btn_view_texture.UseVisualStyleBackColor = true;
+            this.btn_view_texture.Click += new System.EventHandler(this.btn_view_texture_Click);
             // 
             // tabs_main
             // 
@@ -481,6 +541,26 @@
             this.panel_dex.Size = new System.Drawing.Size(710, 442);
             this.panel_dex.TabIndex = 0;
             // 
+            // lbl_weight_unit
+            // 
+            this.lbl_weight_unit.AutoSize = true;
+            this.lbl_weight_unit.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
+            this.lbl_weight_unit.Location = new System.Drawing.Point(238, 95);
+            this.lbl_weight_unit.Name = "lbl_weight_unit";
+            this.lbl_weight_unit.Size = new System.Drawing.Size(47, 15);
+            this.lbl_weight_unit.TabIndex = 10;
+            this.lbl_weight_unit.Text = "Pounds";
+            // 
+            // lbl_height_unit
+            // 
+            this.lbl_height_unit.AutoSize = true;
+            this.lbl_height_unit.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
+            this.lbl_height_unit.Location = new System.Drawing.Point(238, 69);
+            this.lbl_height_unit.Name = "lbl_height_unit";
+            this.lbl_height_unit.Size = new System.Drawing.Size(69, 15);
+            this.lbl_height_unit.TabIndex = 9;
+            this.lbl_height_unit.Text = "Feet, Inches";
+            // 
             // group_dex_text
             // 
             this.group_dex_text.Controls.Add(this.panel_dextext_page2);
@@ -738,12 +818,42 @@
             // 
             // tab_texture
             // 
+            this.tab_texture.Controls.Add(this.panel_texture);
             this.tab_texture.Location = new System.Drawing.Point(4, 22);
             this.tab_texture.Name = "tab_texture";
             this.tab_texture.Size = new System.Drawing.Size(710, 442);
             this.tab_texture.TabIndex = 2;
             this.tab_texture.Text = "Texture";
             this.tab_texture.UseVisualStyleBackColor = true;
+            // 
+            // panel_texture
+            // 
+            this.panel_texture.AutoScroll = true;
+            this.panel_texture.BackColor = global::PEngine.Creator.Properties.Settings.Default.Color_MainGray;
+            this.panel_texture.Controls.Add(this.btn_view_texture);
+            this.panel_texture.Controls.Add(this.palette_shiny);
+            this.panel_texture.Controls.Add(this.btn_select_texture);
+            this.panel_texture.Controls.Add(this.btn_import_texture);
+            this.panel_texture.Controls.Add(this.palette_normal);
+            this.panel_texture.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel_texture.Location = new System.Drawing.Point(0, 0);
+            this.panel_texture.Name = "panel_texture";
+            this.panel_texture.Size = new System.Drawing.Size(710, 442);
+            this.panel_texture.TabIndex = 0;
+            // 
+            // palette_shiny
+            // 
+            this.palette_shiny.Location = new System.Drawing.Point(6, 155);
+            this.palette_shiny.Name = "palette_shiny";
+            this.palette_shiny.Size = new System.Drawing.Size(233, 143);
+            this.palette_shiny.TabIndex = 1;
+            // 
+            // palette_normal
+            // 
+            this.palette_normal.Location = new System.Drawing.Point(6, 6);
+            this.palette_normal.Name = "palette_normal";
+            this.palette_normal.Size = new System.Drawing.Size(233, 143);
+            this.palette_normal.TabIndex = 0;
             // 
             // tab_moves
             // 
@@ -759,7 +869,7 @@
             this.lbl_number.AutoSize = true;
             this.lbl_number.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::PEngine.Creator.Properties.Settings.Default, "Font_H3", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.lbl_number.Font = global::PEngine.Creator.Properties.Settings.Default.Font_H3;
-            this.lbl_number.Location = new System.Drawing.Point(152, 46);
+            this.lbl_number.Location = new System.Drawing.Point(152, 40);
             this.lbl_number.Name = "lbl_number";
             this.lbl_number.Size = new System.Drawing.Size(67, 30);
             this.lbl_number.TabIndex = 3;
@@ -769,7 +879,7 @@
             // 
             this.lbl_name.AutoSize = true;
             this.lbl_name.Font = global::PEngine.Creator.Properties.Settings.Default.Font_H2;
-            this.lbl_name.Location = new System.Drawing.Point(148, 9);
+            this.lbl_name.Location = new System.Drawing.Point(152, 3);
             this.lbl_name.Name = "lbl_name";
             this.lbl_name.Size = new System.Drawing.Size(124, 37);
             this.lbl_name.TabIndex = 1;
@@ -786,30 +896,11 @@
             this.pic_monster.TabStop = false;
             this.pic_monster.Paint += new System.Windows.Forms.PaintEventHandler(this.pic_monster_Paint);
             // 
-            // lbl_height_unit
-            // 
-            this.lbl_height_unit.AutoSize = true;
-            this.lbl_height_unit.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
-            this.lbl_height_unit.Location = new System.Drawing.Point(238, 69);
-            this.lbl_height_unit.Name = "lbl_height_unit";
-            this.lbl_height_unit.Size = new System.Drawing.Size(69, 15);
-            this.lbl_height_unit.TabIndex = 9;
-            this.lbl_height_unit.Text = "Feet, Inches";
-            // 
-            // lbl_weight_unit
-            // 
-            this.lbl_weight_unit.AutoSize = true;
-            this.lbl_weight_unit.Font = global::PEngine.Creator.Properties.Settings.Default.Font_Status;
-            this.lbl_weight_unit.Location = new System.Drawing.Point(238, 95);
-            this.lbl_weight_unit.Name = "lbl_weight_unit";
-            this.lbl_weight_unit.Size = new System.Drawing.Size(47, 15);
-            this.lbl_weight_unit.TabIndex = 10;
-            this.lbl_weight_unit.Text = "Pounds";
-            // 
             // MonsterEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chk_shiny);
             this.Controls.Add(this.tabs_main);
             this.Controls.Add(this.lbl_number);
             this.Controls.Add(this.btn_switch_view);
@@ -843,6 +934,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.num_weight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_height)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_regional_number)).EndInit();
+            this.tab_texture.ResumeLayout(false);
+            this.panel_texture.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pic_monster)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -906,5 +999,12 @@
         private System.Windows.Forms.Label lbl_dextext_page1;
         private System.Windows.Forms.Label lbl_weight_unit;
         private System.Windows.Forms.Label lbl_height_unit;
+        private System.Windows.Forms.Button btn_select_texture;
+        private System.Windows.Forms.Button btn_import_texture;
+        private System.Windows.Forms.Panel panel_texture;
+        private PaletteComponent palette_shiny;
+        private PaletteComponent palette_normal;
+        private System.Windows.Forms.CheckBox chk_shiny;
+        private System.Windows.Forms.Button btn_view_texture;
     }
 }

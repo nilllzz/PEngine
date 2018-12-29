@@ -98,8 +98,12 @@ namespace PEngine.Common.Data
                 Directory.CreateDirectory(folder);
             }
 
-            var content = JsonConvert.SerializeObject(this);
-            File.WriteAllText(filePath, content);
+            File.WriteAllText(filePath, ToString());
+        }
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
         }
     }
 }
